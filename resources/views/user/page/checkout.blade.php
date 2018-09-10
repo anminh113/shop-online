@@ -11,6 +11,8 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/base.css" data-rel-css="" />
 <!-- CSS for each example: -->
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/example2.css" data-rel-css="" />
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+
 @endsection
 @section('content')
    

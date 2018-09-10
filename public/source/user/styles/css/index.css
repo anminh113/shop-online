@@ -3,3 +3,53 @@
 	visibility: hidden;
 	opacity: 0;
 }
+.top_bar {
+    width: 100%;
+    height: 25px;
+    background: #fafafa;
+    border-bottom: solid 1px rgba(0,0,0,0.05);
+    z-index: 2;
+}
+.top_bar_contact_item {
+    font-size: 12px;
+    font-weight: 0px;
+    line-height: 26px;
+    margin-right: 40px;
+}
+
+.top_bar_contact_item a {
+    font-size: 12px;
+    font-weight: 0;
+    line-height: 26px;
+    color: #000;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.top_bar_icon {
+    display: inline-block;
+    margin-right: 14px;
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    -o-transform: translateY(-2px);
+    transform: translateY(-2px);
+}
+
+.standard_dropdown li .fix {
+    display: table;
+    font-size: 12px;
+	line-height: 26px;
+
+}
+
+.top_bar_user .fix {
+	display: table;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 83px;
+
+}

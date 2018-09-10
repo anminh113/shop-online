@@ -4,6 +4,8 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/product_responsive.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/product_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+
 @endsection
 @section('content')
 

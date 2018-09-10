@@ -1,4 +1,4 @@
- <!-- Header -->
+<!-- Header -->
 <header class="header">
     <!-- Top Bar -->
     <div class="top_bar">
@@ -6,24 +6,29 @@
             <div class="row">
                 <div class="col d-flex flex-row">
                     <div class="top_bar_contact_item">
-                        <div class="top_bar_icon"><img src="source/user/images/phone.png" alt=""></div>+84 169 718 6707</div>
+                        +84 169 718 6707</div>
                     <div class="top_bar_contact_item">
-                        <div class="top_bar_icon"><img src="source/user/images/mail.png" alt=""></div><a href="mailto:anminh113@gmail.com">anminh113@gmail.com</a></div>
+                        <a href="mailto:anminh113@gmail.com">anminh113@gmail.com</a></div>
                     <div class="top_bar_content ml-auto">
-                        <div class="top_bar_menu">
-                        <ul class="standard_dropdown top_bar_dropdown">
-                            <li>
-                                <a href="#">Bán hàng cùng CyberZone<i class="fas fa-chevron-down"></i></a>
-                             
-                            </li>
-                           
-                        </ul>
-                    </div>
-                        <div class="top_bar_user">
-                            <div class="user_icon"><img src="source/user/images/user.svg" alt=""></div>
+                        <div class="top_bar_contact_item">
+                            Bán hàng cùng CyberZone</div>
+                        <div class="top_bar_contact_item">
+                            <a href="mailto:anminh113@gmail.com">anminh113@gmail.com</a></div>
 
-                            <div><a href="register">Đăng Ký</a></div>
-                            <div><a href="login">Đăng Nhập</a></div>
+                        <div class="top_bar_menu">
+                            <ul class="standard_dropdown top_bar_dropdown">
+                                <li>
+                                    <a class="fix" href="#">Bán hàng cùng CyberZone</a>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="top_bar_user">
+                            <div class="user_icon"></div>
+
+                            <div><a class="fix" href="register">Đăng Ký</a></div>
+                            <div><a class="fix" href="login">Đăng Nhập</a></div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +72,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <button type="submit" class="header_search_button trans_300" value="Submit"><img src="source/user/images/search.png" alt=""></button>
+                                    <button type="submit" class="header_search_button trans_300" value="Submit"><img
+                                            src="source/user/images/search.png" alt=""></button>
                                 </form>
                             </div>
                         </div>
@@ -125,36 +131,17 @@
                                                 <li><a href="#">Intel Core i7<i class="fas fa-chevron-right"></i></a></li>
                                                 <li><a href="#">Intel Core i9<i class="fas fa-chevron-right"></i></a></li>
                                             </ul>
-                                            <li class="hassubs">
-                                                <a href="#">RAM<i class="fas fa-chevron-right"></i></a>
-                                                <ul>
-                                                    <li><a href="#">RAM G.SKILL<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">RAM ADATA<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">RAM KINGMAX<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">RAM KINGSTON<i class="fas fa-chevron-right"></i></a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="hassubs">
-                                                <a href="#">Bo Mạch Chủ<i class="fas fa-chevron-right"></i></a>
-                                                <ul>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                </ul>
-                                            </li>
-                                        </li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Màn Hình Máy Tính<i class="fas fa-chevron-right"></i></a></li>
-                                <li class="hassubs">
-                                    <a href="#">Ổ Cứng SSD/HDD<i class="fas fa-chevron-right"></i></a>
-                                    <ul>
                                         <li class="hassubs">
-                                            <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
+                                            <a href="#">RAM<i class="fas fa-chevron-right"></i></a>
+                                            <ul>
+                                                <li><a href="#">RAM G.SKILL<i class="fas fa-chevron-right"></i></a></li>
+                                                <li><a href="#">RAM ADATA<i class="fas fa-chevron-right"></i></a></li>
+                                                <li><a href="#">RAM KINGMAX<i class="fas fa-chevron-right"></i></a></li>
+                                                <li><a href="#">RAM KINGSTON<i class="fas fa-chevron-right"></i></a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="hassubs">
+                                            <a href="#">Bo Mạch Chủ<i class="fas fa-chevron-right"></i></a>
                                             <ul>
                                                 <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
                                                 <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
@@ -162,20 +149,39 @@
                                                 <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    </ul>
                                 </li>
-                                <li><a href="#">Chuột, Bàn phím, Webcam<i class="fas fa-chevron-right"></i></a></li>
-                                <li><a href="#">Tai Nghe & Loa<i class="fas fa-chevron-right"></i></a></li>
+                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                            </ul>
+                            </li>
+                            <li><a href="#">Màn Hình Máy Tính<i class="fas fa-chevron-right"></i></a></li>
+                            <li class="hassubs">
+                                <a href="#">Ổ Cứng SSD/HDD<i class="fas fa-chevron-right"></i></a>
+                                <ul>
+                                    <li class="hassubs">
+                                        <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
+                                        <ul>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Chuột, Bàn phím, Webcam<i class="fas fa-chevron-right"></i></a></li>
+                            <li><a href="#">Tai Nghe & Loa<i class="fas fa-chevron-right"></i></a></li>
                             </ul>
                         </div>
                         <!-- Main Nav Menu -->
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a href="index">Trang Chủ<i class="fas fa-chevron-down"></i></a></li>
-                            <!--     <li class="hassubs">
+                                <!--     <li class="hassubs">
                                     <a href="#"><i class="fas fa-chevron-down"></i></a>
                                     <ul>
                                         <li>
@@ -191,7 +197,7 @@
                                         <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
                                     </ul>
                                 </li> -->
-                              <!--   <li class="hassubs">
+                                <!--   <li class="hassubs">
                                     <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
                                     <ul>
                                         <li>
@@ -220,7 +226,7 @@
                                     </ul>
                                 </li> -->
                                 <!-- <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li> -->
-                                <li><a href="contact.html">Liên hệ  <i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="contact.html">Liên hệ <i class="fas fa-chevron-down"></i></a></li>
                             </ul>
                         </div>
                         <!-- Menu Trigger -->
@@ -270,7 +276,7 @@
                             <li class="page_menu_item">
                                 <a href="index.html">Trang chủ<i class="fa fa-angle-down"></i></a>
                             </li>
-                        <!--     <li class="page_menu_item has-children">
+                            <!--     <li class="page_menu_item has-children">
                                 <a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
                                 <ul class="page_menu_selection">
                                     <li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
@@ -288,7 +294,7 @@
                                     <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
                                 </ul>
                             </li> -->
-                          <!--   <li class="page_menu_item has-children">
+                            <!--   <li class="page_menu_item has-children">
                                 <a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
                                 <ul class="page_menu_selection">
                                     <li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>

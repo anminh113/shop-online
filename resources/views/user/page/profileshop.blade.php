@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/shop_responsive.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/profileshop.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+
 <style type="text/css">
 .bar-verygood {
     width: 60%;

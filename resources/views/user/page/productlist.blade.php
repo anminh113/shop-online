@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/shop_styles.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/shop_responsive.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+
 @endsection
 @section('content')
 
