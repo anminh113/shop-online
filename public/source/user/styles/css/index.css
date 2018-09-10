@@ -1,0 +1,5 @@
+.cat_menu_show ul
+{
+	visibility: hidden;
+	opacity: 0;
+}

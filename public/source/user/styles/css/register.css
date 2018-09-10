@@ -1,0 +1,76 @@
+.register {
+    padding-bottom: 35px;
+}
+
+.viewed_title_register {
+    margin-bottom: 30px;
+    border-bottom: solid 1px #dadada;
+}
+
+.register_title_button {
+    width: 100%;
+    display: inline-block;
+    border: none;
+    font-size: 18px;
+    color: #FFFFFF;
+    outline: none;
+    cursor: pointer;
+}
+
+
+.btn-googleplus {
+    background: #E93F2E;
+    border-radius: 0;
+    width: 100%;
+    color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #b72213;
+    display: inline-block;
+    border: none;
+    font-size: 18px;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-googleplus:link,
+.btn-googleplus:visited {
+	border-radius: 5px;
+    color: #fff;
+}
+
+.btn-googleplus:active,
+.btn-googleplus:hover {
+    border-radius: 5px;
+    background: #b72213;
+    color: #fff;
+}
+
+.btn-facebook{
+	border-radius: 5px;
+    background: #3B5998;
+    border-radius: 0;
+    color: #fff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #263961;
+    width: 100%;
+    display: inline-block;
+    border: none;
+    font-size: 18px;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-facebook:link,
+.btn-facebook:visited {
+	border-radius: 5px;
+    color: #fff;
+}
+
+.btn-facebook:active,
+.btn-facebook:hover{
+    background: #263961;
+    color: #fff;
+}
+
