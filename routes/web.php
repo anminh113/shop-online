@@ -71,7 +71,27 @@ Route::get('index-admin', [
     'uses'=>'PageController@getIndexAdmin'
 ]);
 
+Route::get('category-admin', [
+    'as'=>'danh-muc-admin',
+    'uses'=>'PageController@getCategoryAdmin'   
+]);
+
 Route::get('product-admin', [
     'as'=>'san-pham-admin',
     'uses'=>'PageController@getProductAdmin'
+]);
+
+Route::get('product-detail-admin', [
+    'as'=>'chi-tiet-san-pham-admin',
+    'uses'=>'PageController@getProductDetailAdmin'
+]);
+
+Route::get('edit-product-detail-admin', [
+    'as'=>'sua-chi-tiet-san-pham-admin',
+    'uses'=>'PageController@getEditProductDetailAdmin'
+]);
+
+Route::get('add-product-detail-admin', [
+    'as'=>'them-chi-tiet-san-pham-admin',
+    'uses'=>'PageController@getAddProductDetailAdmin'
 ]);

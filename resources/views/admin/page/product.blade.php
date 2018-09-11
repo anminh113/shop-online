@@ -1,7 +1,7 @@
 @extends('admin/master')
 
 @section('head')
-
+<link rel="stylesheet" href="source/admin/assets/css/product.css">
 @endsection
 
 @section('content')
@@ -53,7 +53,7 @@
                     <div class="product_grid_border"></div>
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -68,7 +68,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -83,7 +83,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -98,7 +98,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -113,7 +113,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -128,7 +128,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -143,7 +143,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -158,7 +158,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -173,7 +173,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -188,7 +188,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -203,7 +203,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -218,7 +218,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='detail-product.html';">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
@@ -242,6 +242,6 @@
 <!-- END MAIN -->
 @endsection
 
-@section('head')
+@section('footer')
 
 @endsection

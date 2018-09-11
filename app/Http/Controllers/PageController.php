@@ -51,6 +51,22 @@
             return view('admin/page.product');
         }
 
+        public function getCategoryAdmin(){
+            return view('admin/page.categoryadmin');
+        }
+
+        public function getProductDetailAdmin(){
+            return view('admin/page.productdetail');
+        }
+
+        public function getEditProductDetailAdmin(){
+            return view('admin/page.editproductdetail');
+        }
+
+        public function getAddProductDetailAdmin(){
+            return view('admin/page.addproductdetail');
+        }
+
     }
 
 ?>
