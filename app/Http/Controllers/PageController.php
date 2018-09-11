@@ -4,6 +4,8 @@
     use Illuminate\Http\Request;
 
     class PageController extends Controller{
+        
+        //User
         public function getIndex(){
             return view('user/page.trangchu');
         }
@@ -39,6 +41,16 @@
         public function getCheckOut(){
             return view('user/page.checkout');
         }
+
+        //Admin
+        public function getIndexAdmin(){
+            return view('admin/page.trangchu');
+        }
+
+        public function getProductAdmin(){
+            return view('admin/page.product');
+        }
+
     }
 
 ?>

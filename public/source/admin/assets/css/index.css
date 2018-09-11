@@ -1,0 +1,57 @@
+@media screen and (max-width: 992px) {
+    .navbar-default .brand {
+        display: block;
+    }
+}
+@media screen and (max-width: 320px) {
+    .navbar-default .brand {
+        display: none;
+    }
+    .navbar-btn {
+    	display: none;
+	    float: left;
+	    padding: 0px 0;
+	}
+	#wrapper #sidebar-nav, #wrapper .main {
+    padding-top: 2px;
+	}
+}
+
+.navbar-default .brand {
+    padding: 15px 17px;
+}
+.metric .icon{
+	background-color: #00CEC1;
+}
+
+.carousel-inner>.item>a>img,
+.carousel-inner>.item>img,
+.img-responsive,
+.thumbnail a>img,
+.thumbnail>img {
+    display: block;
+    max-width: 78%;
+    height: auto;
+}
+
+#wrapper .sidebar {
+    background-color: #314253;
+}
+
+.sidebar .nav>li>a:focus,
+.sidebar .nav>li>a.active {
+    color: #00CEC1;
+    background-color: #55E7B;
+    border-left-color: #00CEC1;
+}
+
+.sidebar .nav>li>a:hover i,
+.sidebar .nav>li>a:focus i,
+.sidebar .nav>li>a.active i {
+    color: #00CEC1;
+}
+
+
+/*.sidebar .nav > li > a:hover, .sidebar .nav > li > a:focus, .sidebar .nav > li > a.active{
+	color: #000;
+}*/

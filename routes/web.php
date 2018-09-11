@@ -61,3 +61,17 @@ Route::get('check-out', [
     'as'=>'check-out',
     'uses'=>'PageController@getCheckOut'
 ]);
+
+
+
+//Admin
+
+Route::get('index-admin', [
+    'as'=>'trang-chu-admin',
+    'uses'=>'PageController@getIndexAdmin'
+]);
+
+Route::get('product-admin', [
+    'as'=>'san-pham-admin',
+    'uses'=>'PageController@getProductAdmin'
+]);

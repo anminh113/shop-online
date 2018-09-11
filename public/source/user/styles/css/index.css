@@ -51,5 +51,7 @@
     font-size: 12px;
     font-weight: 300;
     line-height: 83px;
-
+}
+.top_bar_menu {
+    display: table-cell;
 }

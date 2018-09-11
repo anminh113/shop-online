@@ -37,7 +37,10 @@
                         <span style="font-size: 21px"> -5%</span>
                     </div>
                     <div class="product_text">
-                        Kiến trúc "Zen" kiến trúc lõi x86 hiệu suất cao của AMD mang lại cải tiến hơn 52% về hướng dẫn mỗi chu kỳ trên lõi AMD thế hệ trước, mà không cần tăng công suất. Được sản xuất với quy trình 14nm, "Zen" kết hợp những ý tưởng mới nhất về phương pháp thiết kế có năng suất và công suất thấp để tạo ra một cấu trúc cân bằng và linh hoạt ngay tại nhà trên máy tính để bàn
+                        Kiến trúc "Zen" kiến trúc lõi x86 hiệu suất cao của AMD mang lại cải tiến hơn 52% về hướng dẫn
+                        mỗi chu kỳ trên lõi AMD thế hệ trước, mà không cần tăng công suất. Được sản xuất với quy trình
+                        14nm, "Zen" kết hợp những ý tưởng mới nhất về phương pháp thiết kế có năng suất và công suất
+                        thấp để tạo ra một cấu trúc cân bằng và linh hoạt ngay tại nhà trên máy tính để bàn
                     </div>
                     <div class="order_info d-flex flex-row">
                         <form action="#">
@@ -81,7 +84,8 @@
                             <!-- Char. Item -->
                             <div class="col-lg-4 col-md-6 char_col">
                                 <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png" alt=""></div>
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png"
+                                            alt=""></div>
                                     <div class="char_content">
                                         <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500.000₫ trở lên</div>
                                     </div>
@@ -90,23 +94,25 @@
                             <!-- Char. Item -->
                             <div class="col-lg-4 col-md-6 char_col">
                                 <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-protect-50.png" alt=""></div>
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-protect-50.png"
+                                            alt=""></div>
                                     <div class="char_content">
                                         <div class="char_subtitle">Thanh toán bảo mật</div>
                                     </div>
                                 </div>
                             </div>
-                                <!-- Char. Item -->
+                            <!-- Char. Item -->
                             <div class="col-lg-4 col-md-6 char_col">
                                 <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-update-50.png" alt=""></div>
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-update-50.png"
+                                            alt=""></div>
                                     <div class="char_content">
                                         <!-- <div class="char_title">Free Delivery</div> -->
                                         <div class="char_subtitle">Chính sách đổi trả</div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -125,32 +131,71 @@
                             <h3 class="viewed_title">Tổng Quan Sản Phẩm</h3>
                         </div>
                         <div class="space15">&nbsp;</div>
-                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</div>
+                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et
+                            malesuada</div>
                         <div class="single_post_text">
-                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus, eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
+                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus
+                                velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus,
+                                eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur
+                                elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam
+                                mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus
+                                mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
                             <div class="single_post_quote text-center">
-                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat. Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png" alt=""></div>
+                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque
+                                    sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat.
+                                    Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png"
+                                        alt=""></div>
                                 <div class="quote_name">Liam Neeson</div>
                             </div>
-                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare, blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis
+                                non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare,
+                                blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per
+                                conubia nostra, per inceptos himenaeos. </p>
                         </div>
-                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</div>
+                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et
+                            malesuada</div>
                         <div class="single_post_text">
-                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus, eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
+                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus
+                                velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus,
+                                eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur
+                                elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam
+                                mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus
+                                mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
                             <div class="single_post_quote text-center">
-                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat. Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png" alt=""></div>
+                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque
+                                    sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat.
+                                    Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png"
+                                        alt=""></div>
                                 <div class="quote_name">Liam Neeson</div>
                             </div>
-                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare, blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis
+                                non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare,
+                                blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per
+                                conubia nostra, per inceptos himenaeos. </p>
                         </div>
-                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et malesuada</div>
+                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et
+                            malesuada</div>
                         <div class="single_post_text">
-                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus, eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
+                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus
+                                velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus,
+                                eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur
+                                elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam
+                                mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus
+                                mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
                             <div class="single_post_quote text-center">
-                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat. Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png" alt=""></div>
+                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque
+                                    sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat.
+                                    Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png"
+                                        alt=""></div>
                                 <div class="quote_name">Liam Neeson</div>
                             </div>
-                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare, blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis
+                                non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare,
+                                blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per
+                                conubia nostra, per inceptos himenaeos. </p>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-5 order-lg-2 order-md-1 order-1 ">
@@ -233,7 +278,8 @@
                                     <div class="space15">&nbsp;</div>
                                 </li>
                             </ul>
-                            <button type="button" class="button product_title_button" data-toggle="modal" data-target="#information">Xem thông số chi tiết</button>
+                            <button type="button" class="button product_title_button" data-toggle="modal" data-target="#information">Xem
+                                thông số chi tiết</button>
                             <div class="space15">&nbsp;</div>
                         </div>
                     </div>
@@ -347,7 +393,7 @@
         </div>
     </div>
 </div>
-    <!-- Brands -->
+<!-- Brands -->
 <div class="brands">
     <div class="container">
         <div class="row">
@@ -356,27 +402,34 @@
                     <!-- Brands Slider -->
                     <div class="owl-carousel owl-theme brands_slider">
                         <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_intel.png" style="width: 140px; height: 70px;" alt=""></div>
+                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_intel.png"
+                                    style="width: 140px; height: 70px;" alt=""></div>
                         </div>
                         <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_amd.png" style="width: 160px; height: 200px;" alt=""></div>
+                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_amd.png"
+                                    style="width: 160px; height: 200px;" alt=""></div>
                         </div>
                         <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_msi.png" style="width: 150px; height: 45px;" alt=""></div>
+                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_msi.png"
+                                    style="width: 150px; height: 45px;" alt=""></div>
                         </div>
                         <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_asus.png" style="width: 150px; height: 45px;" alt=""></div>
+                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_asus.png"
+                                    style="width: 150px; height: 45px;" alt=""></div>
                         </div>
                         <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_gigabyte.jpg" style="width: 180px; height: 70px;" alt=""></div>
+                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_gigabyte.jpg"
+                                    style="width: 180px; height: 70px;" alt=""></div>
                         </div>
                         <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/razer-logo.png" style="width: 180px; height: 225px;" alt=""></div>
+                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/razer-logo.png"
+                                    style="width: 180px; height: 225px;" alt=""></div>
                         </div>
                         <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_corsair.png" style="width: 250px; height: 100px;" alt=""></div>
+                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_corsair.png"
+                                    style="width: 250px; height: 100px;" alt=""></div>
                         </div>
-                        
+
                     </div>
                     <!-- Brands Slider Navigation -->
                     <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
@@ -387,7 +440,7 @@
     </div>
 </div>
 <!-- Newsletter -->
-<div class="newsletter">
+{{-- <div class="newsletter">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -410,7 +463,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Modal -->
 <div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -613,7 +666,6 @@
     </div>
 </div>
 @endsection
-
 
 @section('footer')
 <script src="source/user/js/product_custom.js"></script>

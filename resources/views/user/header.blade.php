@@ -10,26 +10,30 @@
                     <div class="top_bar_contact_item">
                         <a href="mailto:anminh113@gmail.com">anminh113@gmail.com</a></div>
                     <div class="top_bar_content ml-auto">
-                        <div class="top_bar_contact_item">
-                            Bán hàng cùng CyberZone</div>
-                        <div class="top_bar_contact_item">
-                            <a href="mailto:anminh113@gmail.com">anminh113@gmail.com</a></div>
-
+                            {{-- <div class="top_bar_contact_item">+84 169 718 6707</div> --}}
+                                  
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
                                     <a class="fix" href="#">Bán hàng cùng CyberZone</a>
-
                                 </li>
-
                             </ul>
                         </div>
-                        <div class="top_bar_user">
-                            <div class="user_icon"></div>
-
-                            <div><a class="fix" href="register">Đăng Ký</a></div>
-                            <div><a class="fix" href="login">Đăng Nhập</a></div>
-                        </div>
+                        <div class="top_bar_menu">
+                                <ul class="standard_dropdown top_bar_dropdown">
+                                    <li>
+                                        <a class="fix" href="register">Đăng Ký</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="top_bar_menu">
+                                    <ul class="standard_dropdown top_bar_dropdown">
+                                        <li>
+                                            <a class="fix" href="login">Đăng Nhập</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                       
                     </div>
                 </div>
             </div>

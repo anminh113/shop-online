@@ -1,0 +1,181 @@
+.test input[type="file"] {
+    display: block;
+}
+
+.upload input[type="file"] {
+    display: none;
+}
+
+
+.buttonload {
+    background-color: #2E4254;
+    /* Green background */
+    border: none;
+    /* Remove borders */
+    color: white;
+    /* White text */
+    padding: 6px 12px;
+    /* Some padding */
+    font-size: 14px;
+    /* Set a font-size */
+}
+
+
+/* Add a right margin to each icon */
+
+.buttonload i .fa {
+    margin-left: -12px;
+    margin-right: 8px;
+}
+
+
+.column label {
+    float: left;
+    width: 33.33333333%;
+    padding-top: 10px;
+    padding-right: 15px;
+}
+
+.column label img {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 125px;
+    cursor: pointer;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.column label img:hover {
+    opacity: 1;
+}
+
+
+.column1 {
+    /*display: none;*/
+    float: left;
+    width: 33.33333333%;
+    padding-top: 10px;
+    padding-right: 15px;
+}
+
+.column1 img {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 125px;
+    cursor: pointer;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.column1 img:hover {
+    opacity: 1;
+}
+
+.image_selected,
+#expandedImg {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% + 15px);
+    height: 353px;
+    -webkit-transform: translateX(-15px);
+    -moz-transform: translateX(-15px);
+    -ms-transform: translateX(-15px);
+    -o-transform: translateX(-15px);
+    transform: translateX(-15px);
+    overflow: hidden;
+}
+
+.image-column {
+    width: calc(100% + 15px);
+    transform: translateX(-15px);
+}
+
+
+.text-table {
+    padding: 6px 12px 6px 12px;
+}
+
+
+.form-style-4 label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-style-4 label>span {
+    display: inline-block;
+    float: left;
+    width: 150px;
+}
+
+.form-style-4 input[type=text],
+.form-style-4 input[type=email] {
+    background: transparent;
+    border: none;
+    padding: 6px 12px 6px 12px;
+    outline: none;
+}
+
+
+.form-style-4 textarea:focus,
+.form-style-4 input[type=text]:focus,
+.form-style-4 input[type=email]:focus,
+.form-style-4 input[type=email] :focus {
+    border-bottom: 1px dashed #2E4254;
+}
+
+.form-style-4 input[type=submit],
+.form-style-4 input[type=button] {
+    background: #576E86;
+    border: none;
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    color: #A8BACE;
+}
+
+.form-style-4 input[type=submit]:hover,
+.form-style-4 input[type=button]:hover {
+    background: #394D61;
+}
+
+
+
+@media screen and (max-width: 992px) {
+    .image_selected,
+    #expandedImg {
+        height: 523px;
+    }
+    .column label img {
+        height: 203px;
+    }
+    .column1 img {
+        height: 203px;
+    }
+}
