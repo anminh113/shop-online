@@ -3,8 +3,17 @@
 @section('head')
 <link rel="stylesheet" href="source/admin/assets/css/product.css">
 @endsection
-
 @section('content')
+@section('sidebar')
+<li><a href="index-admin" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+<li><a href="category-admin" class="active"><i class="lnr lnr-code"></i> <span>Category</span></a></li>
+<li><a href="product-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Product</span></a></li>
+<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
+<li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
+<li><a href="tables.html" class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>
+<li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li>
+<li><a href="icons.html" class=""><i class="lnr lnr-linearicons"></i> <span>Icons</span></a></li>
+@endsection
 <!-- MAIN -->
 <div class="main">
     <ul class="breadcrumb">
@@ -21,142 +30,66 @@
                     <h3>Category1</h3>
                 </div>
                 <div class="panel-body">
-                    <button class="accordion">Section 1</button>
-                    <div class="panelaccordion">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Steve</td>
-                                    <td>Jobs</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Simon</td>
-                                    <td>Philips</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Jane</td>
-                                    <td>Doe</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <button class="accordion">Section 2</button>
-                    <div class="panelaccordion">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Steve</td>
-                                    <td>Jobs</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Simon</td>
-                                    <td>Philips</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Jane</td>
-                                    <td>Doe</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <button class="accordion">Section 3</button>
-                    <div class="panelaccordion">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Steve</td>
-                                    <td>Jobs</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Simon</td>
-                                    <td>Philips</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Jane</td>
-                                    <td>Doe</td>
-                                    <td><a href="detail-product.html" class=""><span>@steve</span></a></td>
-                                    <td>
-                                        <label class="fancy-checkbox">
-                                            <input type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="space10">&nbsp;</div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-primary btn-block">Button Block</button>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
                         </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-warning btn-block">Button Block</button>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
                         </div>
                     </div>
                 </div>
@@ -169,28 +102,69 @@
         <div class="container-fluid">
             <div class="panel">
                 <div class="panel-heading">
-                    <h3>Category2</h3>
+                    <h3>Category1</h3>
                 </div>
                 <div class="panel-body">
-                    <button class="accordion">Section 1</button>
-                    <div class="panelaccordion">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                    <button class="accordion">Section 2</button>
-                    <div class="panelaccordion">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                    <button class="accordion">Section 3</button>
-                    <div class="panelaccordion">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                    <div class="space10">&nbsp;</div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-primary btn-block">Button Block</button>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
                         </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-warning btn-block">Button Block</button>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price">$2250</div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
                         </div>
                     </div>
                 </div>
@@ -198,25 +172,15 @@
         </div>
     </div>
     <!-- END MAIN CONTENT -->
+   
 </div>
 <!-- END MAIN -->
 @endsection
 
 @section('footer')
+
 <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active1");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        });
-    }
-    </script>
+    
+</script>
 @endsection
        

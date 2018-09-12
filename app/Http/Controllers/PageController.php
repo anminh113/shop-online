@@ -1,13 +1,55 @@
 <?php
     namespace App\Http\Controllers;
-
     use Illuminate\Http\Request;
-
+    use GuzzleHttp\Client;
+    use GuzzleHttp\Promise;
+    use Illuminate\Support\Facades\Log;
+ 
     class PageController extends Controller{
         
         //User
+
         public function getIndex(){
-            return view('user/page.trangchu');
+            //get json
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET', 'http://172.16.198.84:3000/customers');
+            $data = json_decode($res->getBody()->getContents(), true);
+            //end get json
+
+            //post data json
+            $datajson=array(
+                "customerId" => "5b962d37738558095492b988",
+                "storeName" => "Máy tính Phong Vũ",
+                "location" => "Hồ Chí Minh",
+                "phoneNumber" => "0909159753",
+                'categories' => [
+                    [
+                        'categoryId'     => '5b974fb26153321ffc61b828'
+                    ],
+                    [
+                        'categoryId'     => '5b974fbf6153321ffc61b829'
+                    ]
+                ]);
+     
+             $jsonData =json_encode($datajson);
+             $json_url = "http://172.16.198.84:3000/stores";
+             $ch = curl_init( $json_url );
+             $options = array(
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                 CURLOPT_POSTFIELDS => $jsonData
+             );
+             curl_setopt_array( $ch, $options );
+             $result =  curl_exec($ch);
+             print_r($result);
+            //  exit();
+             Log::info($result);
+             curl_close($ch);
+
+             //end post json
+
+
+            return view('user/page.trangchu', compact('data'));
         }
 
         public function getProduct(){

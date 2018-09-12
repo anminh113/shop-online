@@ -13,7 +13,15 @@
 		@include('admin/header')
 		<!-- END NAVBAR -->
 		<!-- LEFT SIDEBAR -->
-		@include('admin/leftsidebar')
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						@include('admin/leftsidebar')
+					</ul>
+				</nav>
+			</div>
+		</div>
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN -->
         @yield('content')

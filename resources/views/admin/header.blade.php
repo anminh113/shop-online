@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="brand">
-        <a href="#"><img src="source/admin/assets/img/primary_transparent.png"  alt="CyberZone Logo" class="img-responsive logo btn-toggle-fullwidth"></a>
+        <a href="index-admin"><img src="source/admin/assets/img/primary_transparent.png"  alt="CyberZone Logo" class="img-responsive logo "></a>
     </div>
     <div class="navbar-btn">
-        <button type="button" class=" btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+        <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
     </div>
     <div class="container-fluid">	
         <div id="navbar-menu">
