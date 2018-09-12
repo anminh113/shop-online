@@ -20,6 +20,13 @@
                             </ul>
                         </div>
                         <div class="top_bar_menu">
+                            <ul class="standard_dropdown top_bar_dropdown">
+                                <li>
+                                    <a class="fix" href="#">Tài khoản Duy Huỳnh</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="top_bar_menu">
                                 <ul class="standard_dropdown top_bar_dropdown">
                                     <li>
                                         <a class="fix" href="register">Đăng Ký</a>

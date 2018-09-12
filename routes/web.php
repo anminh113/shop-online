@@ -62,6 +62,11 @@ Route::get('check-out', [
     'uses'=>'PageController@getCheckOut'
 ]);
 
+Route::get('profile-user', [
+    'as'=>'profile-user',
+    'uses'=>'PageController@getProfileUser'
+]);
+
 
 
 //Admin

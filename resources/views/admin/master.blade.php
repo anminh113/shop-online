@@ -17,7 +17,7 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						@include('admin/leftsidebar')
+						@yield('sidebar')
 					</ul>
 				</nav>
 			</div>

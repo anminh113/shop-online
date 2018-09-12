@@ -17,34 +17,34 @@
             //end get json
 
             //post data json
-            $datajson=array(
-                "customerId" => "5b962d37738558095492b988",
-                "storeName" => "Máy tính Phong Vũ",
-                "location" => "Hồ Chí Minh",
-                "phoneNumber" => "0909159753",
-                'categories' => [
-                    [
-                        'categoryId'     => '5b974fb26153321ffc61b828'
-                    ],
-                    [
-                        'categoryId'     => '5b974fbf6153321ffc61b829'
-                    ]
-                ]);
+
+            // $datajson=array(
+            //     "customerId" => "5b962d37738558095492b988",
+            //     "storeName" => "Máy tính Phong Vũ",
+            //     "location" => "Hồ Chí Minh",
+            //     "phoneNumber" => "0909159753",
+            //     'categories' => [
+            //         [
+            //             'categoryId'     => '5b974fb26153321ffc61b828'
+            //         ],
+            //         [
+            //             'categoryId'     => '5b974fbf6153321ffc61b829'
+            //         ]
+            //     ]);
      
-             $jsonData =json_encode($datajson);
-             $json_url = "http://172.16.198.84:3000/stores";
-             $ch = curl_init( $json_url );
-             $options = array(
-                 CURLOPT_RETURNTRANSFER => true,
-                 CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                 CURLOPT_POSTFIELDS => $jsonData
-             );
-             curl_setopt_array( $ch, $options );
-             $result =  curl_exec($ch);
-             print_r($result);
-            //  exit();
-             Log::info($result);
-             curl_close($ch);
+            //  $jsonData =json_encode($datajson);
+            //  $json_url = "http://172.16.198.84:3000/stores";
+            //  $ch = curl_init( $json_url );
+            //  $options = array(
+            //      CURLOPT_RETURNTRANSFER => true,
+            //      CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            //      CURLOPT_POSTFIELDS => $jsonData
+            //  );
+            //  curl_setopt_array( $ch, $options );
+            //  $result =  curl_exec($ch);
+            //  print_r($result);
+            //  Log::info($result);
+            //  curl_close($ch);
 
              //end post json
 
@@ -83,6 +83,12 @@
         public function getCheckOut(){
             return view('user/page.checkout');
         }
+
+        public function getProfileUser(){
+            return view('user/page.profileuser');
+        }
+
+        
 
         //Admin
         public function getIndexAdmin(){
