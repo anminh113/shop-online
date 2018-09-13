@@ -11,9 +11,9 @@
 
         public function getIndex(){
             //get json
-            $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET', 'http://172.16.198.84:3000/customers');
-            $data = json_decode($res->getBody()->getContents(), true);
+            // $client = new \GuzzleHttp\Client();
+            // $res = $client->request('GET', 'http://172.16.198.84:3000/customers');
+            // $data = json_decode($res->getBody()->getContents(), true);
             //end get json
 
             //post data json

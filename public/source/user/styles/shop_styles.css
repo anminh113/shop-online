@@ -140,7 +140,7 @@ h6::selection
 }
 .form-control
 {
-	color: #db5246;
+	/* color: #db5246; */
 }
 section
 {
@@ -148,6 +148,29 @@ section
 	position: relative;
 	box-sizing: border-box;
 }
+
+
+.btn-save{
+	border-color:#EA5900;
+	color: #EA5900;
+}
+.btn-save:hover{
+	border-color:#fff;
+	color: #fff;
+	background-color: #EA5900;
+}
+
+.btn-change{
+	border-color:#008798;
+	color: #008798;
+}
+.btn-change:hover{
+	border-color:#fff;
+	color: #fff;
+	background-color: #008798;
+}
+
+
 .clear
 {
 	clear: both;
@@ -223,7 +246,7 @@ section
 	height: 130% !important;
 }
 .nopadding
-{
+{	
 	padding: 0px !important;
 }
 .button
@@ -231,7 +254,7 @@ section
 	display: inline-block;
 	background: #0e8ce4;
 	border-radius: 5px;
-	height: 48px;
+	height: auto;
 	-webkit-transition: all 200ms ease;
 	-moz-transition: all 200ms ease;
 	-ms-transition: all 200ms ease;
@@ -2151,7 +2174,7 @@ select option
 	margin-bottom: 18px;
 	margin-top: -10px;
 }
-.footer .logo
+/* .footer .logo
 {
 	top: auto;
 	-webkit-transform: transform: none;
@@ -2159,7 +2182,7 @@ select option
     -ms-transform: transform: none;
     -o-transform: transform: none;
     transform: none;
-}
+} */
 .footer .logo a
 {
 	color: #000000;
