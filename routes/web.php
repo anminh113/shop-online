@@ -67,6 +67,11 @@ Route::get('profile-user', [
     'uses'=>'PageController@getProfileUser'
 ]);
 
+Route::get('profile-user-shop', [
+    'as'=>'profile-user-shop',
+    'uses'=>'PageController@getProfileUserShop'
+]);
+
 
 
 //Admin

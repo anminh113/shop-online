@@ -39,160 +39,134 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
             <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="openCity(event, 'sanpham');">
-                <div class=" tablink bottombar w3-padding border-red text-center">Quản lý tài khoản</div>
+                <div class=" tablink bottombar w3-padding border-red text-center">Danh sách yêu thích(4)</div>
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
             <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="openCity(event, 'hoso');">
-                <div class=" tablink bottombar w3-padding text-center">Đơn hàng của tôi</div>
+                <div class=" tablink bottombar w3-padding text-center">Gian hàng đã theo dõi</div>
             </a>
         </div>
-        <div class="col-lg-5 col-md-4 col-sm-6 col-6">
-                <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user-shop';">
-                    <div class=" tablink  w3-padding border-red text-center">Sản phẩm yêu thích & Gian hàng đang theo dõi</div>
-                </a>
-            </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user';">
+                <div class=" tablink  w3-padding border-red text-center">Thông tin cá nhân</div>
+            </a>
+        </div>
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
-                    <div class="row">
-                        <!-- Char. Item -->
-                        <div class="col-lg-6 col-md-6 char_col">
-                            <div class="char_item " style="height: 235px;">
-                                <div class="char_title_top"><b>Personal Profile </b><span>|</span> <a href=""
-                                        data-toggle="modal" data-target="#informationuser">Chỉnh Sửa</a></div>
-                                <div class="d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_content">
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px">Duy
-                                            Huynh</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px">anminh113@gmail.com</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Char. Item -->
-                        <div class="col-lg-6 col-md-6 char_col">
-                            <div class="char_item " style="height: 235px;">
-                                <div class="char_title_top"><b>Address Book </b><span>|</span> <a href="" data-toggle="modal"
-                                        data-target="#information">Chỉnh Sửa</a></div>
-                                <div class="d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_content">
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px; color:#878F90">DEFAULT
-                                            SHIPPING ADDRESS</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px"><b>Huỳnh
-                                                Khắc Duy</b> </div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">32-34
-                                            đường số 3 - khu TĐC - ĐHYD, KV4 - P.An khánh - Q.Ninh kiều</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">Cần
-                                            Thơ - Quận Ninh Kiều - Phường An Khánh</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">01697186707</div>
 
+                    <div class="order">
+                        <div class="order-info">SEICOO STORE</div>
+                        <div class="order-item">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="item-main item-main-mini">
+                                        <div>
+                                            <div class="text title item-title">Chuột quang
+                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
+                                            <p class="text desc"></p>
+                                            <p class="text desc bold"></p>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-3">
+                                    <div class="item-quantity">
+                                        <div class="price"><span><span class="currPrice">618.652.000đ</span></span>
+                                            <div class="originPrice">
+                                                <span class="origin-price-value">772.350₫</span> <span class="promotion">-20%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="item-status item-capsule">
+                                        <div class="price">
+                                            <button type="button" class="btn btn-outline-warning btn-save" style="width: 125px;font-size: 14px">Thêm
+                                                vào giỏ</button>
+                                            <div style="margin-bottom: 10px "></div>
+                                            <button type="button" class="btn btn-outline-danger " style="width: 125px;font-size: 14px">Xóa</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
+                    <div class="space10">&nbsp;</div>
+                    <div class="order">
+                        <div class="order-info">SEICOO STORE</div>
+                        <div class="order-item">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="item-main item-main-mini">
+                                        <div>
+                                            <div class="text title item-title">Chuột quang
+                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
+                                            <p class="text desc"></p>
+                                            <p class="text desc bold"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="item-quantity">
+                                        <div class="price"><span><span class="currPrice">618.652.000đ</span></span>
+                                            {{-- <div class="originPrice">
+                                                <span class="origin-price-value">772.350₫</span> <span class="promotion">-20%</span>
+                                            </div> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="item-status item-capsule">
+                                        <div class="price">
+                                            <button type="button" class="btn btn-outline-warning btn-save" style="width: 125px;font-size: 14px">Thêm
+                                                vào giỏ</button>
+                                            <div style="margin-bottom: 10px "></div>
+                                            <button type="button" class="btn btn-outline-danger " style="width: 125px;font-size: 14px">Xóa</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
             <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
 
                     <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span>Sản phẩm</div>
-                        
-                        <div class="panel order-item">
+                        <div class="order-info">
                             <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
+                                <div class="col-lg-3">SEICOO STORE</div>
+                                <div class="col-lg-3"></div>
                                 <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
+
                                 </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017</div>
-                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="order-item">
+                            <div class="row">
+                               
+
                             </div>
                         </div>
                     </div>
                     <div class="space10">&nbsp;</div>
-                    <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>2</span>Sản phẩm</div>
-                        <div class=" panel order-item ">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017</div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="item-main item-main-mini">
-                                            <div>
-                                                <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                    KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                                <p class="text desc"></p>
-                                                <p class="text desc bold"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                    class="text">&nbsp;1</span></span></div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="item-status item-capsule">
-                                            <p class="capsule">Đã huỷ đơn</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="item-info">Đã giao ngày 20 thg 11 2017</div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div class="space15">&nbsp;</div>
-                  
+                    
+
+
                 </div>
             </div>
         </div>
@@ -350,7 +324,8 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+{{-- <div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -658,7 +633,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 @endsection
 

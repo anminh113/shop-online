@@ -88,6 +88,10 @@
             return view('user/page.profileuser');
         }
 
+        public function getProfileUserShop(){
+            return view('user/page.profileusershop');
+        }
+
         
 
         //Admin

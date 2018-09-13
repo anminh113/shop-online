@@ -6,6 +6,9 @@
 a, a:hover{
     color: #008496;
 }
+.btn-change:hover a:hover {
+  color: #fff;
+}
 
 .viewed_title {
     margin-bottom: 0px;
