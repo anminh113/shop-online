@@ -72,9 +72,14 @@ Route::get('profile-user-shop', [
     'uses'=>'PageController@getProfileUserShop'
 ]);
 
+// Đăng nhập admin
+Route::get('login-admin', [
+    'as'=>'login-admin',
+    'uses'=>'PageController@getLoginAdmin'
+]);
 
 
-//Admin
+//Admin gian hàng
 
 Route::get('index-admin', [
     'as'=>'trang-chu-admin',
@@ -109,4 +114,11 @@ Route::get('add-product-detail-admin', [
 Route::get('review-admin', [
     'as'=>'xem-danh-gia',
     'uses'=>'PageController@getReview'
+]);
+
+//Admin hệ thống
+
+Route::get('admin', [
+    'as'=>'trang chu admin he thong',
+    'uses'=>'PageController@getAdmin'
 ]);

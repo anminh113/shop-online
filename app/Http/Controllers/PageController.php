@@ -92,9 +92,14 @@
             return view('user/page.profileusershop');
         }
 
+        // Đăng nhập admin
+        public function getLoginAdmin(){
+            return view('admin/page.loginadmin');
+        }
+
         
 
-        //Admin
+        //Admin gian hàng
         public function getIndexAdmin(){
             return view('admin/page.trangchu');
         }
@@ -122,6 +127,12 @@
         public function getReview(){
             return view('admin/page.reviewadmin');
         }
+
+        //Admin hệ thống
+        public function getAdmin(){
+            return view('admin/page.admin');
+        }
+
 
     }
 

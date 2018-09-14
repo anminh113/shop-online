@@ -58,7 +58,7 @@ $("document").ready(function() {
                 var settings1 = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "https://api.imgur.com/3/album/oZhPW2y/add",
+                    "url": "https://api.imgur.com/3/album/OXLigJs/add",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
@@ -136,7 +136,7 @@ $("document").ready(function() {
                 var settings1 = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "https://api.imgur.com/3/album/oZhPW2y/add",
+                    "url": "https://api.imgur.com/3/album/OXLigJs/add",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
@@ -214,7 +214,7 @@ $("document").ready(function() {
                 var settings1 = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "https://api.imgur.com/3/album/oZhPW2y/add",
+                    "url": "https://api.imgur.com/3/album/OXLigJs/add",
                     "method": "POST",
                     "headers": {
                         "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
@@ -238,7 +238,7 @@ function deleteFromImgur() {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://api.imgur.com/3/album/oZhPW2y/image/" + idImage,
+        "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
         "method": "GET",
         "headers": {
             "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"

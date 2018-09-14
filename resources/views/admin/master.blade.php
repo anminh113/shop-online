@@ -18,21 +18,21 @@
 				<nav>
 
 					{{-- Admin --}}
-					<ul class="nav">
-						<li><a href="index-admin" id="index--admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
+					{{-- <ul class="nav">
+						<li><a href="admin" id="admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
 						<li><a href="category-admin" id="category-admin" class=""><i class="lnr lnr-code"></i> <span>Danh mục</span></a></li>
 						<li><a href="product-admin" id="product-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Sản phẩm</span></a></li>
 						<li><a href="review-admin" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>
-					</ul>
+					</ul> --}}
 
 
 					{{-- Người bán hàng --}}
-					{{-- <ul class="nav">
+					<ul class="nav">
 							<li><a href="index-admin" id="index-admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
 							<li><a href="category-admin" id="category-admin" class=""><i class="lnr lnr-code"></i> <span>Danh mục</span></a></li>
 							<li><a href="product-admin" id="product-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Sản phẩm</span></a></li>
 							<li><a href="review-admin" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>
-					</ul> --}}
+					</ul>
 
 
 				</nav>
