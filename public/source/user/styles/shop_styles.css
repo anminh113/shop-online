@@ -2393,3 +2393,15 @@ select option
     margin-right: 8px;
     text-decoration: line-through;
 }
+.product-shop{
+	width: 100%;
+	padding-top: 0px; 
+     padding-bottom: 0px; 
+}
+.text-type-product div a{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

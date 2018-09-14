@@ -98,7 +98,7 @@
                 <div class="characteristics">
 
                     <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span>Sản phẩm</div>
+                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span> Sản phẩm</div>
                         
                         <div class="panel order-item">
                             <div class="row">
@@ -132,7 +132,7 @@
                     </div>
                     <div class="space10">&nbsp;</div>
                     <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>2</span>Sản phẩm</div>
+                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>2</span> Sản phẩm</div>
                         <div class=" panel order-item ">
                             <div class="row">
                                 <div class="col-lg-2">

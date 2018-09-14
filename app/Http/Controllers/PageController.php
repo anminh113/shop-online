@@ -119,6 +119,10 @@
             return view('admin/page.addproductdetail');
         }
 
+        public function getReview(){
+            return view('admin/page.reviewadmin');
+        }
+
     }
 
 ?>

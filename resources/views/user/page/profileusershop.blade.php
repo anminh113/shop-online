@@ -147,26 +147,239 @@
                     <div class="order">
                         <div class="order-info">
                             <div class="row">
-                                <div class="col-lg-3">SEICOO STORE</div>
-                                <div class="col-lg-3"></div>
-                                <div class="col-lg-4">
-
+                                <div class="col-lg-6 text-left">SEICOO STORE</div>
+                                <div class="col-lg-6 text-right" style="font-size: 12px;">
+                                    ĐANG THEO DÕI <span>|</span> <a href="profileshop">THAM QUAN</a>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="order-item">
                             <div class="row">
-                               
-
+                                <div class="col-lg-2">
+                                    <!-- Product Item -->
+                                    <div class="product_item is_new product-shop">
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                src="source/user/images/new_5.jpg" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price">$2250</div>
+                                            <div class="product_name">
+                                                <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                            </div>
+                                        </div>
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-25%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <!-- Product Item -->
+                                    <div class="product_item discount product-shop">
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                src="source/user/images/featured_1.png" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price">$225<span>$300</span></div>
+                                            <div class="product_name text-type-product">
+                                                <div><a href="#" tabindex="0" class="text-type-product">Huawei MediaPad
+                                                        Huawei MediaPad Huawei MediaPad </a></div>
+                                            </div>
+                                        </div>
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-25%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <!-- Product Item -->
+                                    <div class="product_item product-shop">
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                src="source/user/images/featured_1.png" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price">$225<span>$300</span></div>
+                                            <div class="product_name">
+                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                            </div>
+                                        </div>
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-25%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <!-- Product Item -->
+                                    <div class="product_item product-shop">
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                src="source/user/images/featured_1.png" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price">$225<span>$300</span></div>
+                                            <div class="product_name">
+                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                            </div>
+                                        </div>
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-25%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <!-- Product Item -->
+                                    <div class="product_item product-shop">
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                src="source/user/images/featured_1.png" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price">$225<span>$300</span></div>
+                                            <div class="product_name">
+                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                            </div>
+                                        </div>
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-25%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <!-- Product Item -->
+                                    <div class="product_item product-shop">
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                src="source/user/images/featured_1.png" alt=""></div>
+                                        <div class="product_content">
+                                            <div class="product_price">$225<span>$300</span></div>
+                                            <div class="product_name">
+                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                            </div>
+                                        </div>
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-25%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="space10">&nbsp;</div>
-                    
-
-
+                    <div class="order">
+                            <div class="order-info">
+                                <div class="row">
+                                    <div class="col-lg-6 text-left">SEICOO STORE</div>
+                                    <div class="col-lg-6 text-right" style="font-size: 12px;">
+                                        ĐANG THEO DÕI <span>|</span> <a href="profileshop">THAM QUAN</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order-item">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <!-- Product Item -->
+                                        <div class="product_item is_new product-shop">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                    src="source/user/images/new_5.jpg" alt=""></div>
+                                            <div class="product_content">
+                                                <div class="product_price">$2250</div>
+                                                <div class="product_name">
+                                                    <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                                </div>
+                                            </div>
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-25%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <!-- Product Item -->
+                                        <div class="product_item discount product-shop">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                    src="source/user/images/featured_1.png" alt=""></div>
+                                            <div class="product_content">
+                                                <div class="product_price">$225<span>$300</span></div>
+                                                <div class="product_name text-type-product">
+                                                    <div><a href="#" tabindex="0" class="text-type-product">Huawei MediaPad
+                                                            Huawei MediaPad Huawei MediaPad </a></div>
+                                                </div>
+                                            </div>
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-25%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <!-- Product Item -->
+                                        <div class="product_item product-shop">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                    src="source/user/images/featured_1.png" alt=""></div>
+                                            <div class="product_content">
+                                                <div class="product_price">$225<span>$300</span></div>
+                                                <div class="product_name">
+                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                                </div>
+                                            </div>
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-25%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <!-- Product Item -->
+                                        <div class="product_item product-shop">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                    src="source/user/images/featured_1.png" alt=""></div>
+                                            <div class="product_content">
+                                                <div class="product_price">$225<span>$300</span></div>
+                                                <div class="product_name">
+                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                                </div>
+                                            </div>
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-25%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <!-- Product Item -->
+                                        <div class="product_item product-shop">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                    src="source/user/images/featured_1.png" alt=""></div>
+                                            <div class="product_content">
+                                                <div class="product_price">$225<span>$300</span></div>
+                                                <div class="product_name">
+                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                                </div>
+                                            </div>
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-25%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <!-- Product Item -->
+                                        <div class="product_item product-shop">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
+                                                    src="source/user/images/featured_1.png" alt=""></div>
+                                            <div class="product_content">
+                                                <div class="product_price">$225<span>$300</span></div>
+                                                <div class="product_name">
+                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
+                                                </div>
+                                            </div>
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-25%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space10">&nbsp;</div>
                 </div>
             </div>
         </div>
@@ -325,7 +538,8 @@
 </div>
 <!-- Modal -->
 
-{{-- <div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

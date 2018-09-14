@@ -105,3 +105,8 @@ Route::get('add-product-detail-admin', [
     'as'=>'them-chi-tiet-san-pham-admin',
     'uses'=>'PageController@getAddProductDetailAdmin'
 ]);
+
+Route::get('review-admin', [
+    'as'=>'xem-danh-gia',
+    'uses'=>'PageController@getReview'
+]);

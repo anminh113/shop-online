@@ -16,9 +16,25 @@
 		<div id="sidebar-nav" class="sidebar">
 			<div class="sidebar-scroll">
 				<nav>
+
+					{{-- Admin --}}
 					<ul class="nav">
-						@yield('sidebar')
+						<li><a href="index-admin" id="index--admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
+						<li><a href="category-admin" id="category-admin" class=""><i class="lnr lnr-code"></i> <span>Danh mục</span></a></li>
+						<li><a href="product-admin" id="product-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Sản phẩm</span></a></li>
+						<li><a href="review-admin" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>
 					</ul>
+
+
+					{{-- Người bán hàng --}}
+					{{-- <ul class="nav">
+							<li><a href="index-admin" id="index-admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
+							<li><a href="category-admin" id="category-admin" class=""><i class="lnr lnr-code"></i> <span>Danh mục</span></a></li>
+							<li><a href="product-admin" id="product-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Sản phẩm</span></a></li>
+							<li><a href="review-admin" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>
+					</ul> --}}
+
+
 				</nav>
 			</div>
 		</div>

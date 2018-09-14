@@ -6,16 +6,7 @@
 
 @section('content')
 
-@section('sidebar')
-    <li><a href="index-admin" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-    <li><a href="category-admin" class=""><i class="lnr lnr-code"></i> <span>Category</span></a></li>
-    <li><a href="product-admin" class="active"><i class="lnr lnr-chart-bars"></i> <span>Product</span></a></li>
-    <li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
-    <li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
-    <li><a href="tables.html" class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>
-    <li><a href="typography.html" class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li>
-    <li><a href="icons.html" class=""><i class="lnr lnr-linearicons"></i> <span>Icons</span></a></li>
-@endsection
+
 <!-- MAIN -->
 <div class="main">
     <!-- MAIN CONTENT -->
@@ -205,6 +196,10 @@
 <script src="source/admin/assets/scripts/iziToast.min.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 <script src="source/admin/assets/scripts/upload.js"></script>
+<script>
+        var element = document.getElementById("product-admin");
+        element.classList.add("active");
+</script>
 <script type="text/javascript">
     function imgshow(imgs) {
         var expandImg = document.getElementById("expandedImg");
