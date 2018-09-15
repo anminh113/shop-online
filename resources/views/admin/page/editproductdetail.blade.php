@@ -161,13 +161,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-5">
                             <div class="space10">&nbsp;</div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-7">
                             <div class="space10">&nbsp;</div>
-                            <button type="button" class="btn btn-default">Default</button>
-                            <button type="button" class="btn btn-primary">Primary</button>
+                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='';">Lưu</button>
+                            {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='';">Thêm sản phẩm</button> --}}
                         </div>
                     </div>
                 </div>

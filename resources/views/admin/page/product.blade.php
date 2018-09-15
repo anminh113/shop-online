@@ -235,6 +235,7 @@
                             <div class="space10">&nbsp;</div>
                         </div>
                     </div>
+                    <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button>
                 </div>
             </div>
         </div>

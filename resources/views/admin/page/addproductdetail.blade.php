@@ -92,7 +92,6 @@
                                     <tr>
                                         <th>Tên</th>
                                         <th>Thông số</th>
-                                        
                                     </tr>
                                 </thead> -->
                                 <tbody>
@@ -176,11 +175,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-5">
                             <div class="space10">&nbsp;</div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-7">
                             <div class="space10">&nbsp;</div>
+                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button>
+                            {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button> --}}
                         </div>
                     </div>
                 </div>

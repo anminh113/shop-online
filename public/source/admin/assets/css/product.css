@@ -288,3 +288,22 @@ textarea {
     right: 20px;
     top: 32%;
 }
+.btn-save{
+	border-color:#EA5900;
+	color: #EA5900;
+}
+.btn-save:hover{
+	border-color:#fff;
+	color: #fff;
+	background-color: #EA5900;
+}
+
+.btn-change{
+	border-color:#008798;
+	color: #008798;
+}
+.btn-change:hover{
+	border-color:#fff;
+	color: #fff;
+	background-color: #008798;
+}

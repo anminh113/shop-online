@@ -18,11 +18,28 @@
         <div class="container-fluid">
             <div class="panel">
                 <div class="panel-heading">
-                    <h3>Category1</h3>
+                    <h3>Danh mục hệ thống</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
+                        @foreach ($data['categories'] as $item)
                         <div class="col-lg-3 col-md-6">
+                            <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product_border"></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                </div>
+                                <div class="product_content">
+                                    <div class="product_price"></div>
+                                    <div class="product_name">
+                                        <div><a href="#" tabindex="0">{{$item['categoryName']}}</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space10">&nbsp;</div>
+                        </div>
+                        @endforeach
+                        {{-- <div class="col-lg-3 col-md-6">
                             <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
@@ -66,22 +83,7 @@
                                 </div>
                             </div>
                             <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -93,11 +95,29 @@
         <div class="container-fluid">
             <div class="panel">
                 <div class="panel-heading">
-                    <h3>Category1</h3>
+                    <h3>Danh mục người dùng</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
+                            @foreach ($result['datatext'] as $da)
+                           
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product-type" onclick="window.location='product-detail-admin';">
+                                    <div class="product_border"></div>
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                        <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
+                                    </div>
+                                    <div class="product_content">
+                                        <div class="product_price"></div>
+                                        <div class="product_name">
+                                        <div><a href="#" tabindex="0">  {{$da['category']['categoryName']}}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space10">&nbsp;</div>
+                            </div>
+                            @endforeach
+                        {{-- <div class="col-lg-3 col-md-6">
                             <div class="product-type" onclick="window.location='product-detail-admin';">
                                 <div class="product_border"></div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
@@ -141,22 +161,7 @@
                                 </div>
                             </div>
                             <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
