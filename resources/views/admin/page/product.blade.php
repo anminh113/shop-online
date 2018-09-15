@@ -69,7 +69,7 @@
                                         @endforeach
                                     </div>
                                     <div class="product_content">
-                                    <div class="product_price">{{$item['price']}}</div>
+                                    <div class="product_price">{{$item['price']}} VND</div>
                                         <div class="product_name">
                                         <div><a href="#" tabindex="0">{{$item['productName']}}</a></div>
                                         </div>
