@@ -54,186 +54,30 @@
                 <div class="panel-body">
                     <div class="product_grid_border"></div>
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                        @foreach ($data['products'] as $item )
+                            <div class="col-lg-3 col-md-6">
+                                <div class="product-type" onclick="window.location='product-detail-admin';">
+                                    <div class="product_border"></div>
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                        @foreach ($result['datatext'] as $da )
+                                            @foreach ($da['images'] as $da1)   
+                                                @if($item['productId']== $da1['productId']) 
+                                                    <img src= {{$da1["imageURL"]}}   width="215" height="215" alt="">
+                                                    @break
+                                                @endif
+                                            @endforeach 
+                                        @endforeach
+                                    </div>
+                                    <div class="product_content">
+                                    <div class="product_price">{{$item['price']}}</div>
+                                        <div class="product_name">
+                                        <div><a href="#" tabindex="0">{{$item['productName']}}</a></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="space10">&nbsp;</div>
                             </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$225<span>$300</span></div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" onclick="window.location='product-detail-admin';">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                    <img src="source/admin/assets/img/profile-bg.png" width="215" height="215" alt="">
-                                </div>
-                                <div class="product_content">
-                                    <div class="product_price">$2250</div>
-                                    <div class="product_name">
-                                        <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                        </div>
+                        @endforeach
                     </div>
                     <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button>
                 </div>
