@@ -11,159 +11,111 @@
 <div class="main">
     <!-- MAIN CONTENT -->
     <div class="main-content">
-        <div class="container-fluid">
-            <div class="panel panel-headline">
-                <div class="panel-heading text-right">
-                    <h2 class="panel-title">Bàn phím cơ Fuhlen M87s Blue Kailh đen</h2>
-                    <p class="panel-subtitle">
-                        <ul class="breadcrumb">
-                            <li><a href="#">Chuột</a></li>
-                            <li>Mã sản phẩm: XXX</li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <form id="imgur" class="upload">
-                            <input type="file" id="file-upload1" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
-                            <input type="file" id="file-upload2" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
-                            <input type="file" id="file-upload3" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
-                        </form>
-                        <div class="col-lg-5 col-md-5">
-                            <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
-                                <div class="image_selected" id="image_selected">
-                                    <img id="expandedImg" src="https://i.imgur.com/9rv7nCf.jpg" style="width:100%">
-                                </div>
-                                <div class="image-column">
-                                    <div class="column1" id="column1">
-                                        <!-- <label for="file-upload1" id="label1" class="custom-file-upload"><i class="lnr lnr-sync"></i></label> -->
-                                        <img id="test1" src="https://i.imgur.com/9rv7nCf.jpg" style="width:100%" onclick="imgshow(this);">
-                                    </div>
-                                    <div class="column1" id="column2">
-                                        <!-- <label for="file-upload2" id="label2" class="custom-file-upload"><i class="lnr lnr-sync"></i></label> -->
-                                        <img id="test2" src="https://i.imgur.com/cRvQ900.jpg" style="width:100%" onclick="imgshow(this);">
-                                    </div>
-                                    <div class="column1" id="column3">
-                                        <!-- <label for="file-upload3" id="label3" class="custom-file-upload"><i class="lnr lnr-sync"></i></label> -->
-                                        <img id="test3" src="https://i.imgur.com/semuiGA.jpg" style="width:100%" onclick="imgshow(this);">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7">
-                            <div class="space10">&nbsp;</div>
-                            <label for="basic" style="font-size: 19px">Giá sản phẩm: </label>
-                            <div id="giasp">
-                                <span style="font-size: 20px">99.000.000 VND</span>
-                                <br>
-                                <span style="font-size: 18px; text-decoration: line-through;">100.000.000 VND</span>
-                                <span style="font-size: 20px"> -5%</span>
-                            </div>
-                            <div class="space15">&nbsp;</div>
-                            <label for="basic" style="font-size: 19px">Thông số kỹ thuật:</label>
-                            <div class="space10">&nbsp;</div>
-                            <table class="table form-style-4">
-                                <!--    <thead>
-                                    <tr>
-                                        <th>Tên</th>
-                                        <th>Thông số</th>
-                                        
-                                    </tr>
-                                </thead> -->
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">23Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        @foreach ($result['data'] as $item)
+            <div class="container-fluid">
+                <div class="panel panel-headline">
+                    <div class="panel-heading text-right">
+                    <h2 class="panel-title">{{$item['product']['productName']}}</h2>
+                        <p class="panel-subtitle">
+                            <ul class="breadcrumb">
+                                <li>{{$item['product']['productType']['productTypeName']}}</li>
+                                {{-- <li>Mã sản phẩm: XXX</li> --}}
+                            </ul>
+                        </p>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="space10">&nbsp;</div>
-                            <div class="space15">&nbsp;</div>
-                            <label for="basic">Tổng quan sản phẩm:</label>
-                            <p style="margin-left: 10px">Laptop Asus A510UA-EJ870T (Gold) thiết kế nhỏ gọn, vẻ ngoài năng động, phong cách đơn giản nhưng lại cực kỳ thời trang và tinh tế, cùng với vỏ ngoài phủ tông màu gold sang trọng tạo điểm nhấn cho máy. Màn hình 15.6 hiển thị hình ảnh sống động, sắc nét, cực kỳ chi tiết, độ tương phản tốt, không gây mỏi mắt, màu sắc cũng hết sức trung thực và đẹp mắt. Người dùng có thể tận hưởng những giây phút giải trí thú vị, đặc biệt là khi coi phim, xem video, hay đọc báo và lướt web giải trí sau những giờ làm việc mệt mỏi. </p>
-                            <p style="margin-left: 10px">Laptop Asus A510UA-EJ870T (Gold) thiết kế nhỏ gọn, vẻ ngoài năng động, phong cách đơn giản nhưng lại cực kỳ thời trang và tinh tế, cùng với vỏ ngoài phủ tông màu gold sang trọng tạo điểm nhấn cho máy. Màn hình 15.6 hiển thị hình ảnh sống động, sắc nét, cực kỳ chi tiết, độ tương phản tốt, không gây mỏi mắt, màu sắc cũng hết sức trung thực và đẹp mắt. Người dùng có thể tận hưởng những giây phút giải trí thú vị, đặc biệt là khi coi phim, xem video, hay đọc báo và lướt web giải trí sau những giờ làm việc mệt mỏi. </p>
+                    <div class="panel-body">
+                        <div class="row">
+                            {{-- <form id="imgur" class="upload">
+                                <input type="file" id="file-upload1" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
+                                <input type="file" id="file-upload2" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
+                                <input type="file" id="file-upload3" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
+                            </form> --}}
+                            <div class="col-lg-5 col-md-5">
+                                <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
+                                    <div class="image_selected" id="image_selected">
+                                        @foreach ($result1['datatext'] as $da )
+                                            @foreach ($da['images'] as $da1)   
+                                                    <img id="expandedImg" src={{$da1["imageURL"]}} style="width:100%">
+                                                    @break
+                                            @endforeach 
+                                        @endforeach
+                                        {{-- <img id="expandedImg" src="https://i.imgur.com/9rv7nCf.jpg" style="width:100%"> --}}
+
+                                    </div>
+                                    <div class="image-column">
+                                        @foreach ($result1['datatext'] as $da )
+                                            @foreach ($da['images'] as $da1)  
+                                            <div class="column1" id="column1">
+                                                <img id="test1" src={{$da1["imageURL"]}} style="width:100%" onclick="imgshow(this);">
+                                            </div>
+                                            @endforeach 
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- 4.999 -(4.999*5/100) --}}
+                            <div class="col-lg-7 col-md-7">
+                                <div class="space10">&nbsp;</div>
+                                <label for="basic" style="font-size: 19px">Giá sản phẩm: </label>
+                                <div id="giasp">
+                                    <span style="font-size: 20px" id="price">{{$item['product']['price']}} VND</span>
+                                    <br>
+                                    <span style="font-size: 18px; text-decoration: line-through;">{{$item['product']['price']}} VND</span>
+                                    <span style="font-size: 20px"> -{{$item['product']['saleOff']['discount']}}%</span>
+                                </div>
+                                <div class="space15">&nbsp;</div>
+                                <label for="basic" style="font-size: 19px">Thông số kỹ thuật:</label>
+                                <div class="space10">&nbsp;</div>
+                                <table class="table form-style-4">
+                                    <!--    <thead>
+                                        <tr>
+                                            <th>Tên</th>
+                                            <th>Thông số</th>
+                                            
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        @foreach ($item['product']['specifications'] as $item1)
+                                            <tr>
+                                                <td>
+                                                <div class="text-table">{{$item1['title']}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-table">{{$item1['value']}}</div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="space10">&nbsp;</div>
-                            <button type="button" class="btn btn-default" onclick="window.location='edit-product-detail-admin';">Default</button>
-                            <button type="button" class="btn btn-primary">Primary</button>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="space10">&nbsp;</div>
+                                <div class="space15">&nbsp;</div>
+                                <label for="basic"><h3>Tổng quan sản phẩm:</h3> </label>
+                                @foreach ($item['product']['overviews'] as $item2)
+                                    @if ( count($item2['title']) === 1)
+                                     <div></div>
+                                    @else
+                                        <b style="margin-left: 10px">{{$item2['title']}} </b>
+                                    @endif
+
+                                    <p style="margin-left: 10px">{{$item2['value']}}</p>
+
+                                @endforeach
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="space10">&nbsp;</div>
+                                <button type="button" class="btn btn-default" onclick="window.location='edit-product-detail-admin';">Default</button>
+                                <button type="button" class="btn btn-primary">Primary</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
     <!-- END MAIN CONTENT -->
 </div>
@@ -174,10 +126,12 @@
 <script src="source/admin/assets/scripts/iziToast.min.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 <script src="source/admin/assets/scripts/detail-product.js"></script>
+
 <script>
         var element = document.getElementById("product-admin");
         element.classList.add("active");
 </script>
+
 <script type="text/javascript">
     function imgshow(imgs) {
         var expandImg = document.getElementById("expandedImg");
@@ -186,6 +140,7 @@
         expandImg.parentElement.style.display = "block";
     }
 </script>
+
 <script type="text/javascript">
     jQuery.each(jQuery('textarea[data-autoresize]'), function() {
         var offset = this.offsetHeight - this.clientHeight;
@@ -195,6 +150,11 @@
         };
         jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
     });
+</script>
+
+<script>
+        var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}'/100) );
+        document.getElementById('price').innerHTML = a.toPrecision(4)+" VND";
 </script>
 @endsection
       

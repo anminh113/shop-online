@@ -161,19 +161,27 @@
                 
             }
             $result = compact('datatext');
-            // dd($result);
+          
             return view('admin/page.categoryadmin', compact('data','result')); 
         }
 
         public function getProductDetailAdmin(){
+            $data = array();
+            $datatext = array();
             //get json san pham theo ID san pham
             $client1 = new \GuzzleHttp\Client();
             $res = $client1->request('GET',PageController::getUrl('products/5b9b4269f6edbe19140898ac') );
-            $data = json_decode($res->getBody()->getContents(), true);
-           //  dd($data);
+            $data[] = json_decode($res->getBody()->getContents(), true);
             //end get json
+            $result = compact('data');
 
-            return view('admin/page.productdetail');
+            $res2 = $client1->request('GET',PageController::getUrl('productimages/product/5b9b4269f6edbe19140898ac'));
+            $datatext[] = json_decode($res2->getBody()->getContents(), true);
+            $result1 = compact('datatext');
+
+            // dd($result);
+
+            return view('admin/page.productdetail', compact('result','result1'));
         }
 
         public function getEditProductDetailAdmin(){
