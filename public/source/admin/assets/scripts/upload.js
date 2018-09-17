@@ -33,6 +33,8 @@ $("document").ready(function() {
                 "data": formData,
                 beforeSend: function(xhr) {
                     console.log("Uploading");
+                   
+
                     $('#test1').remove();
                     $('#label1').append('<div class="buttonload" id="loader1"><i class="fa fa-circle-o-notch fa-spin"></i> Đang tải...</div>');
                 },
@@ -44,6 +46,7 @@ $("document").ready(function() {
                     $('#loader1').remove();
                     $('#label1').append('<img id="test1" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                     $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
+                    $("#imgur1").append('<input type="text" id="img1" value="'+res.data.link+'" hidden>');
 
                 },
                 error: function() {
@@ -122,7 +125,7 @@ $("document").ready(function() {
                     $('#loader2').remove();
                     $('#label2').append('<img id="test2" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                     $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
-
+                    $("#imgur2").append('<input type="text" id="img2" value="'+res.data.link+'" hidden>');
                 },
                 error: function() {
                     alert("Failed ");
@@ -200,7 +203,7 @@ $("document").ready(function() {
                     $('#loader3').remove();
                     $('#label3').append('<img id="test3" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                     $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
-
+                    $("#imgur3").append('<input type="text" id="img3" value="'+res.data.link+'" hidden>');
                 },
                 error: function() {
                     alert("Failed ");

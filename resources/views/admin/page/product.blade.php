@@ -24,8 +24,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
-                            <h3 class="panel-title">Striped Row</h3>
-                            <div class="space10">&nbsp;</div>
+                          
+                                <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button>
+                          
+                           
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="panel-title">
@@ -81,7 +83,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button>
+                    {{-- <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button> --}}
                 </div>
             </div>
         </div>

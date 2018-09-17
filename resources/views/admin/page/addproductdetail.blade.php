@@ -43,26 +43,29 @@
                             <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
                                 <div class="image_selected" id="image_selected">
                                     <img id="expandedImg" src="http://placehold.it/1000x1000/cccccc/000000" style="width:100%">
-                                   
+
                                 </div>
                                 <div class="image-column">
                                     <div class="column">
                                         <label for="file-upload1" id="label1" class="custom-file-upload">
                                             <img id="test1" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%"
                                                 onclick="imgshow(this);"> </label>
-                                                <input type="text" id="test1" value="" hidden>
-                                            
+                                        <div style="hidden" id="imgur1"></div>
+
+
                                     </div>
                                     <div class="column">
                                         <label for="file-upload2" id="label2" class="custom-file-upload">
                                             <img id="test2" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%"
                                                 onclick="imgshow(this);"> </label>
+                                        <div style="hidden" id="imgur2"></div>
                                     </div>
                                     <div class="column">
                                         <label for="file-upload3" id="label3" class="custom-file-upload">
                                             <img id="test3" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%"
                                                 onclick="imgshow(this);">
                                         </label>
+                                        <div style="hidden" id="imgur3"></div>
                                     </div>
 
                                 </div>
@@ -95,12 +98,13 @@
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Tổng quan sản phẩm:</label>
                             <div id="titleproduct">
-                                <input type="text" class="form-control" placeholder="Tiêu đề">
+                                <input type="text" id="title1" class="form-control" placeholder="Tiêu đề">
                                 <div class="space10">&nbsp;</div>
-                                <textarea class="form-control" style=" box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>
+                                <textarea class="form-control" id="value1" style=" box-sizing: border-box; resize: none;"
+                                    placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>
                             </div>
                             <div class="space10">&nbsp;</div>
-                            <input type="button" id="add" class="btn btn-outline- btn-change" value="Thêm thông tin sản phẩm" />
+                            <input type="button" id="add" class="btn btn-outline- btn-change" style="width: 100%;" value="Thêm thông tin sản phẩm" />
                         </div>
                     </div>
                     <div class="row">
@@ -111,7 +115,7 @@
                             <div class="space10">&nbsp;</div>
                             <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm
                                 sản phẩm</button>
-                               
+
                             {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='add-product-detail-admin';">Thêm
                                 sản phẩm</button> --}}
                         </div>
@@ -142,15 +146,20 @@
     $(function () {
         var i = 1;
         $("#add").click(function () {
+            i = i+1;
+            console.log(i);
             $("#titleproduct").append('<div class="space10">&nbsp;</div>');
-            $("#titleproduct").append('<input type="text" class="form-control" placeholder="Tiêu đề">');
+            $("#titleproduct").append('<input type="text" id="title'+i+'" class="form-control" placeholder="Tiêu đề">');
             $("#titleproduct").append('<div class="space10">&nbsp;</div>');
-            $("#titleproduct").append('<textarea class="form-control" style="box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>');
+            $("#titleproduct").append(
+                '<textarea class="form-control" id="value'+i+'" style="box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>'
+            );
         })
     });
+
 </script>
 
-{{-- change image when click --}}
+{{-- change image when click image --}}
 <script type="text/javascript">
     function imgshow(imgs) {
         var expandImg = document.getElementById("expandedImg");
@@ -165,7 +174,6 @@
 <script type="text/javascript">
     jQuery.each(jQuery('textarea[data-autoresize]'), function () {
         var offset = this.offsetHeight - this.clientHeight;
-
         var resizeTextarea = function (el) {
             jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
         };
@@ -173,10 +181,9 @@
             resizeTextarea(this);
         }).removeAttr('data-autoresize');
     });
-
 </script>
 
-{{-- add data category where storeID --}}
+{{-- get data category where storeID --}}
 <script>
     var json_data_category = "{{$data_category}}";
     var json_data_product_type = "{{$data_product_type}}";
@@ -194,7 +201,7 @@
 
 </script>
 
-{{-- add data productType where category --}}
+{{-- get data productType where category --}}
 <script>
     $('#category').change(function () {
         var option = $(this).find('option:selected').val();
@@ -207,7 +214,6 @@
             var html1 = '<option value="">- Chọn loại thông số kỹ thuật -</option>';
             var len = data['productTypes'].length;
             for (var i = 0; i < len; i++) {
-                // console.log(data['categories'][i]['categoryName']);
                 $("#producttype option").remove();
                 html += '<option value="' + json_data_product_type_specificationtypes + '/' + data[
                     'productTypes'][i]['productTypeId'] + '">' + data['productTypes'][i][
@@ -221,7 +227,7 @@
 
 </script>
 
-{{-- add data specificationType where producttype --}}
+{{-- get data specificationType where productType --}}
 <script>
     $('#producttype').change(function () {
         var option = $(this).find('option:selected').val();
@@ -237,21 +243,14 @@
                     test_data += '<td> <div class="text-table">' + value['title'] +
                         '</div> </td>';
                     test_data +=
-                        '<td><input type="text" class="form-control" placeholder="' +
-                        value['title'] + '"></td>';
-                    // test_data += '<td class="text-right"><div class="checkbox checkbox-info text-center"><input type="checkbox" id="checkItem' + count + '" name="idch" value="'+value.idch+'"><label for="checkItem' + count + '"> </label></div></td>';
+                        '<td><input type="text" class="form-control" placeholder="Nhập ' +
+                        value['title'] + '... "></td>';
                     test_data += '</tr>';
                 });
                 $('#myTable').append(test_data);
             });
         });
     });
-
 </script>
-
-
-
-
-
 
 @endsection

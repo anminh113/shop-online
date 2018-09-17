@@ -308,3 +308,15 @@ textarea {
 	color: #fff;
 	background-color: #008798;
 }
+.panel .panel-heading button {
+    padding: 6px 22px;
+    border-color:#EA5900;
+    background-color: auto; 
+    border: auto;
+    outline: none;
+}
+.panel .panel-heading button:hover{
+	border-color:#fff;
+	color: #fff;
+	background-color: #EA5900;
+}
