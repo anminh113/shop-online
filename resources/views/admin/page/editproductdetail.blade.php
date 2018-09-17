@@ -1,7 +1,9 @@
 @extends('admin/master')
 
 @section('head')
-<link rel="stylesheet" href="source/admin/assets/css/detail-product.css">
+{{-- <link rel="stylesheet" href="source/admin/assets/css/detail-product.css"> --}}
+<link href="{{ URL::asset('source/admin/assets/css/detail-product.css') }}" rel="stylesheet" type="text/css" >
+
 @endsection
 
 @section('content')
@@ -180,9 +182,9 @@
 @endsection
 
 @section('footer')
-<script src="source/admin/assets/scripts/iziToast.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/iziToast.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-<script src="source/admin/assets/scripts/detail-product.js"></script>
+<script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/detail-product.js') }}"></script>
 <script>
         var element = document.getElementById("product-admin");
         element.classList.add("active");

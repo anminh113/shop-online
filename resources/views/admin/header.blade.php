@@ -1,6 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="brand">
-        <a href="index-admin"><img src="source/admin/assets/img/primary_transparent.png"  alt="CyberZone Logo" class="img-responsive logo "></a>
+        
+        <a href="index-admin"><img src="{{ asset('source/admin/assets/img/primary_transparent.png') }}"  alt="CyberZone Logo" class="img-responsive logo "></a>
     </div>
     <div class="navbar-btn">
         <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
@@ -24,7 +25,7 @@
                 </li>
                 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="source/admin/assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('source/admin/assets/img/user.png')}}" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                         <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>

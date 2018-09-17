@@ -1,7 +1,8 @@
 @extends('admin/master')
 
 @section('head')
-<link rel="stylesheet" href="source/admin/assets/css/product.css">
+<link href="{{ URL::asset('source/admin/assets/css/product.css') }}" rel="stylesheet" type="text/css" >
+
 <style type="text/css">
     .bar-verygood {
         width: 60%;

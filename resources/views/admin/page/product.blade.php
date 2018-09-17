@@ -1,7 +1,9 @@
 @extends('admin/master')
 
 @section('head')
-<link rel="stylesheet" href="source/admin/assets/css/product.css">
+{{-- <link rel="stylesheet" href="source/admin/assets/css/product.css"> --}}
+<link href="{{ URL::asset('source/admin/assets/css/product.css') }}" rel="stylesheet" type="text/css" >
+
 @endsection
 
 @section('content')
@@ -56,7 +58,7 @@
                     <div class="row">
                         @foreach ($data['products'] as $item )
                             <div class="col-lg-3 col-md-6">
-                                <div class="product-type" onclick="window.location='product-detail-admin';">
+                                <div class="product-type" onclick="window.location='{{route('chi-tiet-san-pham-admin',$item['productId'])}}';">
                                     <div class="product_border"></div>
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                         @foreach ($result['datatext'] as $da )

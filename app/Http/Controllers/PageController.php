@@ -106,6 +106,8 @@
             return view('user/page.profileusershop');
         }
 
+        //End user
+
         // Đăng nhập admin
         public function getLoginAdmin(){
             return view('admin/page.loginadmin');
@@ -126,7 +128,6 @@
             //  dd($data);
              //end get json
 
-            //  http://172.16.198.84:3000/productimages/product/5b9b4350f6edbe19140898ad
 
             $datatext = array();
             for ($i=0;  $i < count($data['products']); $i++){
@@ -166,23 +167,26 @@
             return view('admin/page.categoryadmin', compact('data','result')); 
         }
 
-        public function getProductDetailAdmin(){
+        public function getProductDetailAdmin(Request $req){
             $data = array();
             $datatext = array();
             //get json san pham theo ID san pham
-            $client1 = new \GuzzleHttp\Client();
-            $res = $client1->request('GET',PageController::getUrl('products/5b9b4269f6edbe19140898ac') );
+
+            //get thong tin san pham
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
-            //end get json
-            $result = compact('data');
+            $resultdata = compact('data');
 
-            $res2 = $client1->request('GET',PageController::getUrl('productimages/product/5b9b4269f6edbe19140898ac'));
-            $datatext[] = json_decode($res2->getBody()->getContents(), true);
-            $result1 = compact('datatext');
+            //get anh san pham
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
+            $datatext[] = json_decode($res->getBody()->getContents(), true);
+            $resultimg = compact('datatext');
 
+             //end get json
             // dd($result);
 
-            return view('admin/page.productdetail', compact('result','result1'));
+            return view('admin/page.productdetail', compact('resultdata','resultimg'));
         }
 
         public function getEditProductDetailAdmin(){

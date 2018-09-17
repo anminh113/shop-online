@@ -1,7 +1,8 @@
 @extends('admin/master')
 
 @section('head')
-<link rel="stylesheet" href="source/admin/assets/css/detail-product.css">
+<link href="{{ URL::asset('source/admin/assets/css/detail-product.css') }}" rel="stylesheet" type="text/css" >
+
 @endsection
 
 @section('content')
@@ -11,7 +12,7 @@
 <div class="main">
     <!-- MAIN CONTENT -->
     <div class="main-content">
-        @foreach ($result['data'] as $item)
+        @foreach ($resultdata['data'] as $item)
             <div class="container-fluid">
                 <div class="panel panel-headline">
                     <div class="panel-heading text-right">
@@ -25,36 +26,29 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            {{-- <form id="imgur" class="upload">
-                                <input type="file" id="file-upload1" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
-                                <input type="file" id="file-upload2" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
-                                <input type="file" id="file-upload3" class=" imgur btn btn-default btn-file" accept="image/*" data-max-size="5000" />
-                            </form> --}}
+                           
                             <div class="col-lg-5 col-md-5">
                                 <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
                                     <div class="image_selected" id="image_selected">
-                                        @foreach ($result1['datatext'] as $da )
+                                        @foreach ($resultimg['datatext'] as $da )
                                             @foreach ($da['images'] as $da1)   
                                                     <img id="expandedImg" src={{$da1["imageURL"]}} style="width:100%">
                                                     @break
                                             @endforeach 
                                         @endforeach
-                                        {{-- <img id="expandedImg" src="https://i.imgur.com/9rv7nCf.jpg" style="width:100%"> --}}
 
                                     </div>
                                     <div class="image-column">
-                                        @foreach ($result1['datatext'] as $da )
+                                        @foreach ($resultimg['datatext'] as $da )
                                             @foreach ($da['images'] as $da1)  
                                             <div class="column1" id="column1">
                                                 <img id="test1" src={{$da1["imageURL"]}} style="width:100%" onclick="imgshow(this);">
                                             </div>
                                             @endforeach 
                                         @endforeach
-
                                     </div>
                                 </div>
                             </div>
-                            {{-- 4.999 -(4.999*5/100) --}}
                             <div class="col-lg-7 col-md-7">
                                 <div class="space10">&nbsp;</div>
                                 <label for="basic" style="font-size: 19px">Giá sản phẩm: </label>
@@ -68,13 +62,6 @@
                                 <label for="basic" style="font-size: 19px">Thông số kỹ thuật:</label>
                                 <div class="space10">&nbsp;</div>
                                 <table class="table form-style-4">
-                                    <!--    <thead>
-                                        <tr>
-                                            <th>Tên</th>
-                                            <th>Thông số</th>
-                                            
-                                        </tr>
-                                    </thead> -->
                                     <tbody>
                                         @foreach ($item['product']['specifications'] as $item1)
                                             <tr>
@@ -101,9 +88,7 @@
                                     @else
                                         <b style="margin-left: 10px">{{$item2['title']}} </b>
                                     @endif
-
                                     <p style="margin-left: 10px">{{$item2['value']}}</p>
-
                                 @endforeach
                             </div>
                             <div class="col-lg-6">
@@ -123,9 +108,10 @@
 @endsection
 
 @section('footer')
-<script src="source/admin/assets/scripts/iziToast.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/iziToast.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-<script src="source/admin/assets/scripts/detail-product.js"></script>
+<script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/detail-product.js') }}"></script>
+
 
 <script>
         var element = document.getElementById("product-admin");
@@ -153,8 +139,8 @@
 </script>
 
 <script>
-        var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}'/100) );
-        document.getElementById('price').innerHTML = a.toPrecision(4)+" VND";
+    var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}'/100) );
+    document.getElementById('price').innerHTML = a.toPrecision(4)+" VND";
 </script>
 @endsection
       

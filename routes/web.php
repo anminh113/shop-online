@@ -96,7 +96,7 @@ Route::get('product-admin', [
     'uses'=>'PageController@getProductAdmin'
 ]);
 
-Route::get('product-detail-admin', [
+Route::get('product-detail-admin/{id}', [
     'as'=>'chi-tiet-san-pham-admin',
     'uses'=>'PageController@getProductDetailAdmin'
 ]);
