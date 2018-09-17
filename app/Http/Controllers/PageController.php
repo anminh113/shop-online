@@ -149,7 +149,6 @@
             $data = json_decode($res->getBody()->getContents(), true);
             //end get json
 
-            
             //get storeId
             $res1 = $client1->request('GET',PageController::getUrl('stores/5b989eb9a6bce5234c9522ea'));
             $data1 = json_decode($res1->getBody()->getContents(), true);
@@ -194,8 +193,10 @@
         }
 
         public function getAddProductDetailAdmin(){
-
-            return view('admin/page.addproductdetail');
+            $data_category = PageController::getUrl('categories');
+            $data_product_type = PageController::getUrl('producttypes/category');
+            $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+            return view('admin/page.addproductdetail',compact('data_category','data_product_type','data_product_type_specificationtypes'));
         }
 
         public function getReview(){

@@ -1,7 +1,7 @@
 @extends('admin/master')
 
 @section('head')
-<link href="{{ URL::asset('source/admin/assets/css/detail-product.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ URL::asset('source/admin/assets/css/detail-product.css') }}" rel="stylesheet" type="text/css">
 
 @endsection
 
@@ -22,7 +22,7 @@
                             <p class="panel-subtitle">
                                 <ul class="breadcrumb">
                                     <!-- <li><a href="#">Chuột</a></li> -->
-                                    <li>Mã sản phẩm: XXX</li>
+                                    {{-- <li>Mã sản phẩm: XXX</li> --}}
                                 </ul>
                             </p>
                         </div>
@@ -30,32 +30,41 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                    
+
                         <form id="imgur">
-                            <input type="file" id="file-upload1" class=" imgur btn btn-default btn-file" style="display:none" accept="image/*" data-max-size="5000" />
-                            <input type="file" id="file-upload2" class=" imgur btn btn-default btn-file" style="display:none" accept="image/*" data-max-size="5000" />
-                            <input type="file" id="file-upload3" class=" imgur btn btn-default btn-file" style="display:none" accept="image/*" data-max-size="5000" />
+                            <input type="file" id="file-upload1" class=" imgur btn btn-default btn-file" style="display:none"
+                                accept="image/*" data-max-size="5000" />
+                            <input type="file" id="file-upload2" class=" imgur btn btn-default btn-file" style="display:none"
+                                accept="image/*" data-max-size="5000" />
+                            <input type="file" id="file-upload3" class=" imgur btn btn-default btn-file" style="display:none"
+                                accept="image/*" data-max-size="5000" />
                         </form>
                         <div class="col-lg-5 col-md-5">
                             <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
                                 <div class="image_selected" id="image_selected">
                                     <img id="expandedImg" src="http://placehold.it/1000x1000/cccccc/000000" style="width:100%">
+                                   
                                 </div>
                                 <div class="image-column">
                                     <div class="column">
                                         <label for="file-upload1" id="label1" class="custom-file-upload">
-                                            <img id="test1" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%" onclick="imgshow(this);"> </label>
+                                            <img id="test1" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%"
+                                                onclick="imgshow(this);"> </label>
+                                                <input type="text" id="test1" value="" hidden>
+                                            
                                     </div>
                                     <div class="column">
                                         <label for="file-upload2" id="label2" class="custom-file-upload">
-                                            <img id="test2" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%" onclick="imgshow(this);"> </label>
+                                            <img id="test2" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%"
+                                                onclick="imgshow(this);"> </label>
                                     </div>
                                     <div class="column">
                                         <label for="file-upload3" id="label3" class="custom-file-upload">
-                                            <img id="test3" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%" onclick="imgshow(this);">
+                                            <img id="test3" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%"
+                                                onclick="imgshow(this);">
                                         </label>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -67,112 +76,31 @@
                             </div>
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Chọn danh mục sản phẩm:</label>
-                            <select class="form-control">
-                                <option value="mozarella">Chọn danh mục</option>
-                                <option value="cheese">RAM</option>
-                                <option value="tomatoes">CPU</option>
-                                <option value="mozarella">Mozzarella</option>
-                                <option value="mushrooms">Mushrooms</option>
-                                <option value="pepperoni">Pepperoni</option>
-                                <option value="onions">Onions</option>
+                            <select class="form-control" id="category">
+                                <option value="">- Chọn danh mục -</option>
+
                             </select>
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Thông số kỹ thuật:</label>
-                            <select class="form-control">
-                                <option value="mozarella">Chọn loại thông số kỹ thuật</option>
-                                <option value="cheese">RAM</option>
-                                <option value="tomatoes">CPU</option>
-                                <option value="mozarella">Mozzarella</option>
-                                <option value="mushrooms">Mushrooms</option>
-                                <option value="pepperoni">Pepperoni</option>
-                                <option value="onions">Onions</option>
+                            <select class="form-control" id="producttype">
+                                {{-- <option value="">Chọn loại thông số kỹ thuật</option> --}}
+
                             </select>
                             <div class="space15">&nbsp;</div>
-                            <table class="table form-style-4">
-                                <!--    <thead>
-                                    <tr>
-                                        <th>Tên</th>
-                                        <th>Thông số</th>
-                                    </tr>
-                                </thead> -->
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">23Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">1Simon</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" placeholder="text field">
-                                        </td>
-                                    </tr>
+                            <table class="table form-style-4" id="table">
+                                <tbody id="myTable">
+
                                 </tbody>
                             </table>
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Tổng quan sản phẩm:</label>
-                            <textarea class="form-control" style=" box-sizing: border-box; resize: none;" placeholder="Thông tin thêm " data-autoresize rows="4"></textarea>
+                            <div id="titleproduct">
+                                <input type="text" class="form-control" placeholder="Tiêu đề">
+                                <div class="space10">&nbsp;</div>
+                                <textarea class="form-control" style=" box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>
+                            </div>
+                            <div class="space10">&nbsp;</div>
+                            <input type="button" id="add" class="btn btn-outline- btn-change" value="Thêm thông tin sản phẩm" />
                         </div>
                     </div>
                     <div class="row">
@@ -181,8 +109,11 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="space10">&nbsp;</div>
-                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button>
-                            {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button> --}}
+                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm
+                                sản phẩm</button>
+                               
+                            {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='add-product-detail-admin';">Thêm
+                                sản phẩm</button> --}}
                         </div>
                     </div>
                 </div>
@@ -195,15 +126,31 @@
 @endsection
 
 @section('footer')
-<script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/iziToast.min.js') }}"></script>
 
+<script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/iziToast.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/upload.js') }}"></script>
 
 <script>
-        var element = document.getElementById("product-admin");
-        element.classList.add("active");
+    var element = document.getElementById("product-admin");
+    element.classList.add("active");
+
 </script>
+
+
+<script>
+    $(function () {
+        var i = 1;
+        $("#add").click(function () {
+            $("#titleproduct").append('<div class="space10">&nbsp;</div>');
+            $("#titleproduct").append('<input type="text" class="form-control" placeholder="Tiêu đề">');
+            $("#titleproduct").append('<div class="space10">&nbsp;</div>');
+            $("#titleproduct").append('<textarea class="form-control" style="box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>');
+        })
+    });
+</script>
+
+{{-- change image when click --}}
 <script type="text/javascript">
     function imgshow(imgs) {
         var expandImg = document.getElementById("expandedImg");
@@ -211,15 +158,100 @@
         expandImg.src = imgs.src;
         expandImg.parentElement.style.display = "block";
     }
+
 </script>
+
+{{-- auto height textarea --}}
 <script type="text/javascript">
-    jQuery.each(jQuery('textarea[data-autoresize]'), function() {
+    jQuery.each(jQuery('textarea[data-autoresize]'), function () {
         var offset = this.offsetHeight - this.clientHeight;
 
-        var resizeTextarea = function(el) {
+        var resizeTextarea = function (el) {
             jQuery(el).css('height', 'auto').css('height', el.scrollHeight + offset);
         };
-        jQuery(this).on('keyup input', function() { resizeTextarea(this); }).removeAttr('data-autoresize');
+        jQuery(this).on('keyup input', function () {
+            resizeTextarea(this);
+        }).removeAttr('data-autoresize');
     });
+
 </script>
-@endsection      
+
+{{-- add data category where storeID --}}
+<script>
+    var json_data_category = "{{$data_category}}";
+    var json_data_product_type = "{{$data_product_type}}";
+    $.getJSON(json_data_category, function (data) {
+        $('#table tbody tr').remove();
+        var html = '';
+        var len = data['categories'].length;
+        for (var i = 0; i < len; i++) {
+            // console.log(data['categories'][i]['categoryName']);
+            html += '<option value="' + json_data_product_type + '/' + data['categories'][i]['categoryId'] +
+                '">' + data['categories'][i]['categoryName'] + '</option>';
+        }
+        $('#category').append(html);
+    });
+
+</script>
+
+{{-- add data productType where category --}}
+<script>
+    $('#category').change(function () {
+        var option = $(this).find('option:selected').val();
+        var json_data_product_type_specificationtypes = '{{$data_product_type_specificationtypes}}';
+        $('#table tbody tr').remove();
+        // get data
+        $.getJSON(option, function (data) {
+            $('#table tbody tr').remove();
+            var html = '';
+            var html1 = '<option value="">- Chọn loại thông số kỹ thuật -</option>';
+            var len = data['productTypes'].length;
+            for (var i = 0; i < len; i++) {
+                // console.log(data['categories'][i]['categoryName']);
+                $("#producttype option").remove();
+                html += '<option value="' + json_data_product_type_specificationtypes + '/' + data[
+                    'productTypes'][i]['productTypeId'] + '">' + data['productTypes'][i][
+                    'productTypeName'
+                ] + '</option>';
+            }
+            $('#producttype').append(html1);
+            $('#producttype').append(html);
+        });
+    });
+
+</script>
+
+{{-- add data specificationType where producttype --}}
+<script>
+    $('#producttype').change(function () {
+        var option = $(this).find('option:selected').val();
+        // get data
+        $(document).ready(function () {
+            // get data json
+            $.getJSON(option, function (data) {
+                var test_data = '';
+                var len = data['specificationType']['specificationTitle'].length;
+                $('#table tbody tr').remove();
+                $.each(data['specificationType']['specificationTitle'], function (key, value) {
+                    test_data += '<tr>';
+                    test_data += '<td> <div class="text-table">' + value['title'] +
+                        '</div> </td>';
+                    test_data +=
+                        '<td><input type="text" class="form-control" placeholder="' +
+                        value['title'] + '"></td>';
+                    // test_data += '<td class="text-right"><div class="checkbox checkbox-info text-center"><input type="checkbox" id="checkItem' + count + '" name="idch" value="'+value.idch+'"><label for="checkItem' + count + '"> </label></div></td>';
+                    test_data += '</tr>';
+                });
+                $('#myTable').append(test_data);
+            });
+        });
+    });
+
+</script>
+
+
+
+
+
+
+@endsection

@@ -64,7 +64,7 @@
                                         @foreach ($result['datatext'] as $da )
                                             @foreach ($da['images'] as $da1)   
                                                 @if($item['productId']== $da1['productId']) 
-                                                    <img src= {{$da1["imageURL"]}}   width="215" height="215" alt="">
+                                                    <img src= {{$da1["imageURL"]}}  width="215" height="215" alt="">
                                                     @break
                                                 @endif
                                             @endforeach 
