@@ -10,8 +10,8 @@
                     <div class="top_bar_contact_item">
                         <a href="mailto:anminh113@gmail.com">anminh113@gmail.com</a></div>
                     <div class="top_bar_content ml-auto">
-                            {{-- <div class="top_bar_contact_item">+84 169 718 6707</div> --}}
-                                  
+                        {{-- <div class="top_bar_contact_item">+84 169 718 6707</div> --}}
+
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
@@ -27,20 +27,20 @@
                             </ul>
                         </div>
                         <div class="top_bar_menu">
-                                <ul class="standard_dropdown top_bar_dropdown">
-                                    <li>
-                                        <a class="fix" href="register">Đăng Ký</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="top_bar_menu">
-                                    <ul class="standard_dropdown top_bar_dropdown">
-                                        <li>
-                                            <a class="fix" href="login">Đăng Nhập</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                       
+                            <ul class="standard_dropdown top_bar_dropdown">
+                                <li>
+                                    <a class="fix" href="register">Đăng Ký</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="top_bar_menu">
+                            <ul class="standard_dropdown top_bar_dropdown">
+                                <li>
+                                    <a class="fix" href="login">Đăng Nhập</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -90,8 +90,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- Wishlist -->
+               
                 <div class="col-lg-3 col-9 order-lg-3 order-2 text-lg-left text-right">
+                     <!-- Wishlist -->
                     <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                         <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist_icon"><img src="source/user/images/heart.png" alt=""></div>
@@ -100,23 +101,23 @@
                                 <div class="wishlist_count">115</div>
                             </div>
                         </div>
-                        <!-- Cart -->
-                        <div class="cart" onclick="window.location='cart';">
-                            <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                    @if(Session::has('cart'))
-                                <div class="cart_icon">
-                                    <img src="source/user/images/cart.png" alt="">
-                                    <div class="cart_count"><span>
+                    <!-- Cart -->
+                    <div class="cart" onclick="window.location='cart';">
+                        <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                            @if(Session::has('cart'))
+                            <div class="cart_icon">
+                                <img src="source/user/images/cart.png" alt="">
+                                <div class="cart_count"><span>
                                         {{Session('cart')->totalQty}}
                                     </span></div>
-                                </div>
-                                <div class="cart_content">
-                                    <div class="cart_text"><a href="cart"></a></div>
-                                    <div class="cart_price">${{Session('cart')->totalPrice}}</div>
-                                </div>
-                                @endif
                             </div>
+                            <div class="cart_content">
+                                <div class="cart_text"><a href="cart"></a></div>
+                                <div class="cart_price">{{Session('cart')->totalPrice}} VND</div>
+                            </div>
+                            @endif
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@
         public static function getUrl($text)
         {
             // $urlAPI = "http://172.16.198.84:3000/".$text;
-            $urlAPI = "http://localhost:3000/".$text;
+            $urlAPI = "http://172.16.238.133:3000/".$text;
             return $urlAPI;
         }
 
@@ -77,15 +77,26 @@
             $res = $client->request('GET',PageController::getUrl('productimages/product/'.$id.''));
             $datatext[] = json_decode($res->getBody()->getContents(), true);
 
-            // dd($datatext[0]['images'][0]['imageURL']);
-
-
             $oldCart = Session('cart')?Session::get('cart'):null;
             $cart = new Cart($oldCart);
             // dd($id);
             $cart->add($data[0]['product'], $id, $datatext[0]['images'][0]['imageURL']);
             $req->session()->put('cart', $cart);
             return redirect()->back();
+        }
+
+        public function getDelToCart($id){
+            $oldCart = Session('cart')?Session::get('cart'):null;
+            $cart = new Cart($oldCart);
+            $cart->removeItem($id);
+            if(count($cart->items)>0){
+                Session::put('cart', $cart);
+                return redirect()->back();
+            }else{
+                Session::forget('cart');
+                return redirect('index');
+            }
+            
         }
 
         public function getProduct(){
@@ -105,7 +116,6 @@
                  $data2 = $data['products'][$i]['productId'];
                  $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
                  $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                 
              }
              $result = compact('datatext');
              // dd($result);

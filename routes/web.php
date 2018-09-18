@@ -23,6 +23,11 @@ Route::get('addtocart/{id}', [
     'uses'=>'PageController@getAddToCart'
 ]);
 
+Route::get('deltocart/{id}', [
+    'as'=>'xoa-gio-hang',
+    'uses'=>'PageController@getDelToCart'
+]);
+
 Route::get('index', [
     'as'=>'trang-chu',
     'uses'=>'PageController@getIndex'

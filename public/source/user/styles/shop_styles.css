@@ -1482,6 +1482,7 @@ select option
 .product_name
 {
 	margin-top: 4px;
+	height: 80px;
 	overflow: hidden;
 }
 .product_name div
@@ -1491,7 +1492,6 @@ select option
 }
 .product_name div a
 {
-	font-size: 14px;
 	font-weight: 400;
 	color: #000000;
 	white-space: nowrap;
@@ -1500,6 +1500,17 @@ select option
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
+	margin: 8px 0;
+    font-size: 13px;
+    white-space: inherit;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-left: 29px;
+    margin-right: 25px;
 }
 .product_name div a:hover
 {
