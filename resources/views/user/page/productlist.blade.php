@@ -103,23 +103,36 @@
                             </div>
                             <div class="product_grid">
                                 <div class="product_grid_border"></div>
-                                <!-- Product Item -->
-                                <div class="product_item is_new">
-                                    <div class="product_border"></div>
-                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="source/user/images/new_5.jpg" alt=""></div>
-                                    <div class="product_content">
-                                        <div class="product_price">$2250</div>
-                                        <div class="product_name">
-                                            <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                @foreach ($data['products'] as $item )
+                                    <!-- Product Item -->
+                                    <div class="product_item ">
+                                        <div class="product_border"></div>
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                @foreach ($result['datatext'] as $da )
+                                                @foreach ($da['images'] as $da1)   
+                                                    @if($item['productId']== $da1['productId']) 
+                                                    <img src={{$da1["imageURL"]}} width="115" height="115" alt="">
+                                                        
+                                                        @break
+                                                    @endif
+                                                @endforeach 
+                                            @endforeach
                                         </div>
+                                        <div class="product_content">
+                                            <div class="product_price">{{$item['price']}} VND</div>
+                                            <div class="product_name">
+                                                <div><a href="{{route('chi-tiet-san-pham-admin',$item['productId'])}}" tabindex="0">{{$item['productName']}}</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-25%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                        <a href="{{route('gio-hang',$item['productId'])}}" class="product_cart_button">Add to Cart</a>
                                     </div>
-                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                    <ul class="product_marks">
-                                        <li class="product_mark product_discount">-25%</li>
-                                        <li class="product_mark product_new">new</li>
-                                    </ul>
-                                </div>
-                                <!-- Product Item -->
+                                @endforeach
+                                {{-- <!-- Product Item -->
                                 <div class="product_item discount">
                                     <div class="product_border"></div>
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="source/user/images/featured_1.png" alt=""></div>
@@ -422,7 +435,7 @@
                                         <li class="product_mark product_discount">-25%</li>
                                         <li class="product_mark product_new">new</li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                             <!-- Shop Page Navigation -->
                             <div class="shop_page_nav d-flex flex-row">

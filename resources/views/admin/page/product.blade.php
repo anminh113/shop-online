@@ -31,25 +31,15 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="panel-title">
-                                <select class="form-control">
-                                    <option value="cheese">Cheese</option>
-                                    <option value="tomatoes">Tomatoes</option>
-                                    <option value="mozarella">Mozzarella</option>
-                                    <option value="mushrooms">Mushrooms</option>
-                                    <option value="pepperoni">Pepperoni</option>
-                                    <option value="onions">Onions</option>
+                                <select class="form-control" id="category">
+                                        <option value="">- Chọn danh mục -</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="panel-title">
-                                <select class="form-control">
-                                    <option value="cheese">Cheese</option>
-                                    <option value="tomatoes">Tomatoes</option>
-                                    <option value="mozarella">Mozzarella</option>
-                                    <option value="mushrooms">Mushrooms</option>
-                                    <option value="pepperoni">Pepperoni</option>
-                                    <option value="onions">Onions</option>
+                                <select class="form-control" id="producttype">
+                                    
                                 </select>
                             </div>
                         </div>
@@ -95,8 +85,51 @@
 
 @section('footer')
 <script>
-        var element = document.getElementById("product-admin");
-        element.classList.add("active");
+    var element = document.getElementById("product-admin");
+    element.classList.add("active");
+</script>
+
+{{-- get data category where storeID --}}
+<script>
+    var json_data_category = "{{$data_category}}";
+    var json_data_product_type = "{{$data_product_type}}";
+    $.getJSON(json_data_category, function (data) {
+        $('#table tbody tr').remove();
+        var html = '';
+        var len = data['categories'].length;
+        for (var i = 0; i < len; i++) {
+            // console.log(data['categories'][i]['categoryName']);
+            html += '<option value="' + json_data_product_type + '/' + data['categories'][i]['categoryId'] +
+                '">' + data['categories'][i]['categoryName'] + '</option>';
+        }
+        $('#category').append(html);
+    });
+</script>
+    
+{{-- get data productType where category --}}
+<script>
+    $('#category').change(function () {
+        var option = $(this).find('option:selected').val();
+        var json_data_product_type_specificationtypes = '{{$data_product_type_specificationtypes}}';
+        $('#table tbody tr').remove();
+        // get data
+        $.getJSON(option, function (data) {
+            $('#table tbody tr').remove();
+            var html = '';
+            var html1 = '<option value="">- Chọn loại thông số kỹ thuật -</option>';
+            var len = data['productTypes'].length;
+            for (var i = 0; i < len; i++) {
+                $("#producttype option").remove();
+                html += '<option value="' + json_data_product_type_specificationtypes + '/' + data[
+                    'productTypes'][i]['productTypeId'] + '">' + data['productTypes'][i][
+                    'productTypeName'
+                ] + '</option>';
+            }
+            $('#producttype').append(html1);
+            $('#producttype').append(html);
+        });
+    });
+    
 </script>
 
 @endsection

@@ -103,14 +103,18 @@
                         <!-- Cart -->
                         <div class="cart" onclick="window.location='cart';">
                             <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                    @if(Session::has('cart'))
                                 <div class="cart_icon">
                                     <img src="source/user/images/cart.png" alt="">
-                                    <div class="cart_count"><span>10</span></div>
+                                    <div class="cart_count"><span>
+                                        {{Session('cart')->totalQty}}
+                                    </span></div>
                                 </div>
                                 <div class="cart_content">
                                     <div class="cart_text"><a href="cart"></a></div>
-                                    <div class="cart_price">$85</div>
+                                    <div class="cart_price">${{Session('cart')->totalPrice}}</div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>

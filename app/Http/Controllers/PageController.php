@@ -1,6 +1,8 @@
 <?php
     namespace App\Http\Controllers;
     use View, Input, Redirect;
+    use App\Cart;
+    use Session;
     use Illuminate\Http\Request;
     // use GuzzleHttp\Psr7\Request;
     use GuzzleHttp\Client;
@@ -27,7 +29,7 @@
             // $text = ;
             $res = $client->request('GET', PageController::getUrl('customers'));
             $data = json_decode($res->getBody()->getContents(), true);
-            dd($data);
+            // dd($data);
             // end get json
 
             //post data json
@@ -47,7 +49,7 @@
             //     ]);
      
             //  $jsonData =json_encode($datajson);
-            //  $json_url = "http://172.16.198.84:3000/stores";
+            //  $json_url = PageController::getUrl('test');
             //  $ch = curl_init( $json_url );
             //  $options = array(
             //      CURLOPT_RETURNTRANSFER => true,
@@ -56,7 +58,8 @@
             //  );
             //  curl_setopt_array( $ch, $options );
             //  $result =  curl_exec($ch);
-            //  print_r($result);
+            //  dd($result);
+            //  exit();
             //  Log::info($result);
             //  curl_close($ch);
 
@@ -65,13 +68,51 @@
 
             return view('user/page.trangchu', compact('data'));
         }
+        
+        public function getAddToCart(Request $req ,$id){
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('products/'.$id.'') );
+            $data[] = json_decode($res->getBody()->getContents(), true);
+
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$id.''));
+            $datatext[] = json_decode($res->getBody()->getContents(), true);
+
+            // dd($datatext[0]['images'][0]['imageURL']);
+
+
+            $oldCart = Session('cart')?Session::get('cart'):null;
+            $cart = new Cart($oldCart);
+            // dd($id);
+            $cart->add($data[0]['product'], $id, $datatext[0]['images'][0]['imageURL']);
+            $req->session()->put('cart', $cart);
+            return redirect()->back();
+        }
 
         public function getProduct(){
             return view('user/page.product');
         }
 
         public function getProductList(){
-            return view('user/page.productlist');
+             //get json san pham theo gian hang
+             $client1 = new \GuzzleHttp\Client();
+             $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
+             $data = json_decode($res->getBody()->getContents(), true);
+             //  dd($data);
+
+             //end get json
+             $datatext = array();
+             for ($i=0;  $i < count($data['products']); $i++){
+                 $data2 = $data['products'][$i]['productId'];
+                 $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                 $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                 
+             }
+             $result = compact('datatext');
+             // dd($result);
+
+          
+
+            return view('user/page.productlist',compact('data','result'));
         }
 
         public function getRegister(){
@@ -87,7 +128,15 @@
         }
 
         public function getCart(){
-            return view('user/page.cart');
+                $oldCart = Session::get('cart');
+                $cart = new Cart($oldCart);
+                // dd($cart);
+                $product_cart = $cart->items;
+                // dd($product_cart);
+
+                // $view->with(['cart'=>Session::get('cart'), 'product_cart'=>$cart->items, 'totalPrice'=>$cart->totalPrice, 'totalQty'=>$cart->totalQty]);
+           
+            return view('user/page.cart',compact('product_cart'));
         }
 
         public function getCheckCart(){
@@ -121,25 +170,29 @@
         }
 
         public function getProductAdmin(){
-             //get json san pham theo gian hang
-             $client1 = new \GuzzleHttp\Client();
-             $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
-             $data = json_decode($res->getBody()->getContents(), true);
-            //  dd($data);
-             //end get json
+                //get json san pham theo gian hang
+                $client1 = new \GuzzleHttp\Client();
+                $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
+                $data = json_decode($res->getBody()->getContents(), true);
+                //  dd($data);
+                //end get json
 
 
-            $datatext = array();
-            for ($i=0;  $i < count($data['products']); $i++){
-                $data2 = $data['products'][$i]['productId'];
-                $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-                $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                
-            }
-            $result = compact('datatext');
-            // dd($result);
+                $datatext = array();
+                for ($i=0;  $i < count($data['products']); $i++){
+                    $data2 = $data['products'][$i]['productId'];
+                    $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                    
+                }
+                $result = compact('datatext');
+                // dd($result);
 
-            return view('admin/page.product', compact('data','result'));
+                $data_category = PageController::getUrl('categories');
+                $data_product_type = PageController::getUrl('producttypes/category');
+                $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+
+            return view('admin/page.product', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
         }
 
         public function getCategoryAdmin(){
@@ -202,6 +255,31 @@
         public function getReview(){
             return view('admin/page.reviewadmin');
         }
+        public function getDiscount(){
+                //get json san pham theo gian hang
+                $client1 = new \GuzzleHttp\Client();
+                $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
+                $data = json_decode($res->getBody()->getContents(), true);
+                //  dd($data);
+
+                //end get json
+                $datatext = array();
+                for ($i=0;  $i < count($data['products']); $i++){
+                    $data2 = $data['products'][$i]['productId'];
+                    $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                    
+                }
+                $result = compact('datatext');
+                // dd($result);
+
+                $data_category = PageController::getUrl('categories');
+                $data_product_type = PageController::getUrl('producttypes/category');
+                $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+
+            return view('admin/page.discountadmin', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+        }
+      
 
         //Admin hệ thống
         public function getAdmin(){

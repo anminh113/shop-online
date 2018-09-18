@@ -8,6 +8,7 @@
 <link href="{{ URL::asset('source/admin/assets/vendor/linearicons/style.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ URL::asset('source/admin/assets/vendor/chartist/css/chartist-custom.css') }}" rel="stylesheet" type="text/css" >
 
+
 {{-- <link rel="stylesheet" href="source/admin/assets/vendor/bootstrap/css/bootstrap.min.css"> --}}
 {{-- <link rel="stylesheet" href="source/admin/assets/vendor/font-awesome/css/font-awesome.min.css"> --}}
 {{-- <link rel="stylesheet" href="source/admin/assets/vendor/linearicons/style.css"> --}}
@@ -35,3 +36,4 @@
 {{-- <link rel="icon" type="image/png" sizes="96x96" href="source/admin/assets/img/icon.png"> --}}
 <link href="{{ URL::asset('source/admin/assets/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" >
 {{-- <link rel="stylesheet" href="source/admin/assets/css/iziToast.min.css"> --}}
+<script type="text/javascript" src="{{ URL::asset('source/admin/assets/vendor/jquery/jquery.min.js') }}"></script>

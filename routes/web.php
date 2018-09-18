@@ -17,6 +17,12 @@ Route::get('/', function () {
 
 // User
 
+
+Route::get('addtocart/{id}', [
+    'as'=>'gio-hang',
+    'uses'=>'PageController@getAddToCart'
+]);
+
 Route::get('index', [
     'as'=>'trang-chu',
     'uses'=>'PageController@getIndex'
@@ -114,6 +120,11 @@ Route::get('add-product-detail-admin', [
 Route::get('review-admin', [
     'as'=>'xem-danh-gia',
     'uses'=>'PageController@getReview'
+]);
+
+Route::get('discount-admin', [
+    'as'=>'discount-admin',
+    'uses'=>'PageController@getDiscount'
 ]);
 
 //Admin hệ thống

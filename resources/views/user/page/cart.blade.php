@@ -43,28 +43,33 @@
                                 </div>
                             </li>
                             <hr>
+
+                            @if(Session::has('cart'))
+                            <?php $i =0 ?>
+                            @foreach ($product_cart as $item)
+                            <?php $i=$i+1?>
                             <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img src="source/user/images/shopping_cart.jpg" alt=""></div>
+                                <div class="cart_item_image"><img src="{{$item['img']}}" alt=""></div>
                                 <div class="cart_item_info ">
                                     <div class="cart_item_name cart_info_col">
                                         <div class="row">
                                             <div class="col-lg-5">
-                                                <div class="cart_item_text">Bộ vi xử lý/ CPU Pentium G5500 (3.8GHz)</div>
+                                                <div class="cart_item_text">{{$item['item']['productName']}}</div>
                                             </div>
                                             <div class="col-lg-2">
-                                                <div class="cart_item_text">$2000</div>
+                                                <div class="cart_item_text">{{$item['item']['price']}}</div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="cart_item_text">
                                                     <div class="input-group">
                                                         <span class="input-group-btn">
-                                                    <div   class="btn btn-number" data-type="minus" data-field="quant[1]">
+                                                    <div   class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]">
                                                     <i class="fas fa-minus"></i>
                                                     </div>
                                                 </span>
-                                                        <input type="text" name="quant[1]" style="width: 50px;height: 38px" class="form-control input-number" value="1" min="1" max="100">
+                                                        <input type="text" name="quant[<?php echo $i?>]" style="width: 50px;height: 38px" class="form-control input-number text-center" value="1" min="1" max="100">
                                                         <span class="input-group-btn">
-                                                    <div  class="btn  btn-number" data-type="plus" data-field="quant[1]">
+                                                    <div  class="btn  btn-number" data-type="plus" data-field="quant[<?php echo $i?>]">
                                                         <i class="fas fa-plus"></i>
                                                     </div>
                                                 </span>
@@ -79,113 +84,10 @@
                                 </div>
                             </li>
                             <hr>
-                            <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img src="source/user/images/shopping_cart.jpg" alt=""></div>
-                                <div class="cart_item_info ">
-                                    <div class="cart_item_name cart_info_col">
-                                        <div class="row">
-                                            <div class="col-lg-5">
-                                                <div class="cart_item_text">Bộ vi xử lý/ CPU Pentium G5500 (3.8GHz)</div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="cart_item_text">
-                                                    <div class="input-group">
-                                                        <span class="input-group-btn">
-                                                    <div   class="btn btn-number" data-type="minus" data-field="quant[2]">
-                                                    <i class="fas fa-minus"></i>
-                                                    </div>
-                                                </span>
-                                                        <input type="text" name="quant[2]" style="width: 50px;height: 38px" class="form-control input-number" value="1" min="1" max="100">
-                                                        <span class="input-group-btn">
-                                                    <div  class="btn  btn-number" data-type="plus" data-field="quant[2]">
-                                                        <i class="fas fa-plus"></i>
-                                                    </div>
-                                                </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <hr>
-                            <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img src="source/user/images/shopping_cart.jpg" alt=""></div>
-                                <div class="cart_item_info ">
-                                    <div class="cart_item_name cart_info_col">
-                                        <div class="row">
-                                            <div class="col-lg-5">
-                                                <div class="cart_item_text">Bộ vi xử lý/ CPU Pentium G5500 (3.8GHz)</div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="cart_item_text">
-                                                    <div class="input-group">
-                                                        <span class="input-group-btn">
-                                                    <div   class="btn btn-number" data-type="minus" data-field="quant[3]">
-                                                    <i class="fas fa-minus"></i>
-                                                    </div>
-                                                </span>
-                                                        <input type="text" name="quant[3]" style="width: 50px;height: 38px" class="form-control input-number" value="1" min="1" max="100">
-                                                        <span class="input-group-btn">
-                                                    <div  class="btn  btn-number" data-type="plus" data-field="quant[3]">
-                                                        <i class="fas fa-plus"></i>
-                                                    </div>
-                                                </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <hr>
-                            <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img src="source/user/images/shopping_cart.jpg" alt=""></div>
-                                <div class="cart_item_info ">
-                                    <div class="cart_item_name cart_info_col">
-                                        <div class="row">
-                                            <div class="col-lg-5">
-                                                <div class="cart_item_text">Bộ vi xử lý/ CPU Pentium G5500 (3.8GHz)</div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="cart_item_text">
-                                                    <div class="input-group">
-                                                        <span class="input-group-btn">
-                                                    <div   class="btn btn-number" data-type="minus" data-field="quant[4]">
-                                                    <i class="fas fa-minus"></i>
-                                                    </div>
-                                                </span>
-                                                        <input type="text" name="quant[4]" style="width: 50px;height: 38px" class="form-control input-number" value="1" min="1" max="100">
-                                                        <span class="input-group-btn">
-                                                    <div  class="btn  btn-number" data-type="plus" data-field="quant[4]">
-                                                        <i class="fas fa-plus"></i>
-                                                    </div>
-                                                </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
+                            @endif
+
+
                         </ul>
                     </div>
                     <!-- Order Total -->
