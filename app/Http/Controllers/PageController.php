@@ -69,7 +69,7 @@
             return view('user/page.trangchu', compact('data'));
         }
         
-        public function getAddToCart(Request $req ,$id){
+        public function getAddToCart(Request $req, $id){
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET',PageController::getUrl('products/'.$id.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
@@ -79,14 +79,14 @@
 
             $oldCart = Session('cart')?Session::get('cart'):null;
             $cart = new Cart($oldCart);
-            // dd($id);
+            // dd($data[0]['product']);
             $cart->add($data[0]['product'], $id, $datatext[0]['images'][0]['imageURL']);
             $req->session()->put('cart', $cart);
             return redirect()->back();
         }
 
         public function getDelToCart($id){
-            $oldCart = Session('cart')?Session::get('cart'):null;
+            $oldCart = Session('cart') ? Session::get('cart'):null;
             $cart = new Cart($oldCart);
             $cart->removeItem($id);
             if(count($cart->items)>0){
@@ -94,13 +94,28 @@
                 return redirect()->back();
             }else{
                 Session::forget('cart');
-                return redirect('index');
+                return redirect('productlist');
             }
             
         }
 
-        public function getProduct(){
-            return view('user/page.product');
+        public function getProduct(Request $req){
+            $data = array();
+            $datatext = array();
+            //get json san pham theo ID san pham
+
+            //get thong tin san pham
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
+            $data[] = json_decode($res->getBody()->getContents(), true);
+            $resultdata = compact('data');
+
+            //get anh san pham
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
+            $datatext[] = json_decode($res->getBody()->getContents(), true);
+            $resultimg = compact('datatext');
+
+            return view('user/page.product',compact('resultdata','resultimg'));
         }
 
         public function getProductList(){
@@ -108,7 +123,7 @@
              $client1 = new \GuzzleHttp\Client();
              $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
              $data = json_decode($res->getBody()->getContents(), true);
-             //  dd($data);
+            //   dd($data);
 
              //end get json
              $datatext = array();
@@ -118,6 +133,7 @@
                  $datatext[] = json_decode($res2->getBody()->getContents(), true);
              }
              $result = compact('datatext');
+
              // dd($result);
 
           
@@ -138,15 +154,19 @@
         }
 
         public function getCart(){
-                $oldCart = Session::get('cart');
-                $cart = new Cart($oldCart);
-                // dd($cart);
-                $product_cart = $cart->items;
-                // dd($product_cart);
+            // $data = array();
+            //get json san pham theo ID san pham
 
-                // $view->with(['cart'=>Session::get('cart'), 'product_cart'=>$cart->items, 'totalPrice'=>$cart->totalPrice, 'totalQty'=>$cart->totalQty]);
-           
-            return view('user/page.cart',compact('product_cart'));
+            //get thong tin san pham
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('deliveryprices') );
+            $data = json_decode($res->getBody()->getContents(), true);
+            // $resultdata = compact('data');
+
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            $product_cart = $cart->items;           
+            return view('user/page.cart',compact('product_cart','data'));
         }
 
         public function getCheckCart(){

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="{{asset(' ')}}">
     @include('user/head')
     @yield('head')
 </head>

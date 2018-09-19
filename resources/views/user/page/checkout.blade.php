@@ -15,11 +15,6 @@
 
 @endsection
 @section('content')
-   
-
-
-
-
     <!-- Cart -->
     <div class="cart_section">
         <div class="container">

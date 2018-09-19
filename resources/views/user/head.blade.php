@@ -10,3 +10,5 @@
 <link rel="stylesheet" type="text/css" href="source/user/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="source/user/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="source/user/plugins/OwlCarousel2-2.2.1/animate.css">
+<script src="source/user/js/jquery-3.3.1.min.js"></script>
+

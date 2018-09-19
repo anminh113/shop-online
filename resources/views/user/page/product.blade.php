@@ -9,6 +9,7 @@
 @endsection
 @section('content')
 
+@foreach ($resultdata['data'] as $item)
 <!-- Single Product -->
 <div class="single_product">
     <div class="container">
@@ -16,31 +17,34 @@
             <!-- Images -->
             <div class="col-lg-2 order-lg-1 order-2">
                 <ul class="image_list">
-                    <li data-image="https://i.imgur.com/9rv7nCf.jpg"><img src="https://i.imgur.com/9rv7nCf.jpg" alt=""></li>
-                    <li data-image="https://i.imgur.com/cRvQ900.jpg"><img src="https://i.imgur.com/cRvQ900.jpg" alt=""></li>
-                    <li data-image="https://i.imgur.com/semuiGA.jpg"><img src="https://i.imgur.com/semuiGA.jpg" alt=""></li>
+                        @foreach ($resultimg['datatext'] as $da )
+                        @foreach ($da['images'] as $da1)  
+                        <li data-image={{$da1["imageURL"]}}><img src={{$da1["imageURL"]}} alt=""></li>
+                        @endforeach 
+                    @endforeach
                 </ul>
             </div>
             <!-- Selected Image -->
             <div class="col-lg-5 order-lg-2 order-1">
-                <div class="image_selected"><img src="https://i.imgur.com/9rv7nCf.jpg" alt=""></div>
+                    @foreach ($resultimg['datatext'] as $da )
+                    @foreach ($da['images'] as $da1)   
+                    <div class="image_selected"><img src={{$da1["imageURL"]}} alt=""></div>
+                            @break
+                    @endforeach 
+                @endforeach
             </div>
             <!-- Description -->
             <div class="col-lg-5 order-3">
                 <div class="product_description">
-                    <div class="product_category">Laptops</div>
-                    <div class="product_name">Bộ vi xử lý/ CPU AMD Ryzen 5 2400G (3.6/3.9GHz)</div>
-                    <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i></div>
+                    <div class="product_category">{{$item['product']['productType']['productTypeName']}}</div>
+                    <div class="product_name">{{$item['product']['productName']}}</div>
                     <div class="product_price">
-                        <span class="text-danger" style="font-size: 22px">99.000.000 VND</span>
-                        <span style="font-size: 16px; text-decoration: line-through;">100.000.000 VND</span>
-                        <span style="font-size: 21px"> -5%</span>
+                        <span class="text-danger" style="font-size: 22px" id="price">{{$item['product']['price']}}₫</span>
+                        <span style="font-size: 16px; text-decoration: line-through;">{{$item['product']['price']}}₫</span>
+                        <span style="font-size: 21px"> -{{$item['product']['saleOff']['discount']}}%</span>
                     </div>
                     <div class="product_text">
-                        Kiến trúc "Zen" kiến trúc lõi x86 hiệu suất cao của AMD mang lại cải tiến hơn 52% về hướng dẫn
-                        mỗi chu kỳ trên lõi AMD thế hệ trước, mà không cần tăng công suất. Được sản xuất với quy trình
-                        14nm, "Zen" kết hợp những ý tưởng mới nhất về phương pháp thiết kế có năng suất và công suất
-                        thấp để tạo ra một cấu trúc cân bằng và linh hoạt ngay tại nhà trên máy tính để bàn
+                            {{$item['product']['overviews'][0]['value']}}...
                     </div>
                     <div class="order_info d-flex flex-row">
                         <form action="#">
@@ -54,24 +58,11 @@
                                         <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
                                     </div>
                                 </div>
-                                <!-- Product Color -->
-                                <!-- <ul class="product_color">
-                                <li>
-                                    <span>Color: </span>
-                                    <div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
-                                    <div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
-
-                                    <ul class="color_list">
-                                        <li><div class="color_mark" style="background: #999999;"></div></li>
-                                        <li><div class="color_mark" style="background: #b19c83;"></div></li>
-                                        <li><div class="color_mark" style="background: #000000;"></div></li>
-                                    </ul>
-                                </li>
-                            </ul> -->
+                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                               
                             </div>
                             <div class="button_container">
-                                <button type="button" class="button cart_button">Add to Cart</button>
-                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                <a href="{{route('gio-hang',$item['product']['productId'])}}" class="btn btn-outline-info btn-change" style="font-size: 16px; width: 80%; bottom: 2px">Thêm vào giỏ</a>
                             </div>
                         </form>
                     </div>
@@ -130,73 +121,20 @@
                         <div class="viewed_title_container">
                             <h3 class="viewed_title">Tổng Quan Sản Phẩm</h3>
                         </div>
-                        <div class="space15">&nbsp;</div>
-                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et
-                            malesuada</div>
-                        <div class="single_post_text">
-                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus
-                                velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus,
-                                eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur
-                                elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam
-                                mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus
-                                mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
-                            <div class="single_post_quote text-center">
-                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque
-                                    sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat.
-                                    Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png"
-                                        alt=""></div>
-                                <div class="quote_name">Liam Neeson</div>
-                            </div>
-                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis
-                                non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare,
-                                blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per
-                                conubia nostra, per inceptos himenaeos. </p>
-                        </div>
-                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et
-                            malesuada</div>
-                        <div class="single_post_text">
-                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus
-                                velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus,
-                                eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur
-                                elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam
-                                mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus
-                                mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
-                            <div class="single_post_quote text-center">
-                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque
-                                    sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat.
-                                    Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png"
-                                        alt=""></div>
-                                <div class="quote_name">Liam Neeson</div>
-                            </div>
-                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis
-                                non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare,
-                                blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per
-                                conubia nostra, per inceptos himenaeos. </p>
-                        </div>
-                        <div class="single_post_title">Vivamus sed nunc in arcu cursus mollis quis et orci. Interdum et
-                            malesuada</div>
-                        <div class="single_post_text">
-                            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus
-                                velit id urna vehicula, nec maximus est sollicitudin. Praesent at tempus lectus,
-                                eleifend blandit felis. Fusce augue arcu, consequat a nisl aliquet, consectetur
-                                elementum turpis. Donec iaculis lobortis nisl, et viverra risus imperdiet eu. Etiam
-                                mollis posuere elit non sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Nunc quis arcu a magna sodales venenatis. Integer non diam sit amet magna luctus
-                                mollis ac eu nisi. In accumsan tellus ut dapibus blandit.</p>
-                            <div class="single_post_quote text-center">
-                                <div class="quote_text"><img src="source/user/images/quote.png" alt=""> Quisque
-                                    sagittis non ex eget vestibulum. Sed nec ultrices dui. Cras et sagittis erat.
-                                    Maecenas pulvinar, turpis in dictum tincidunt, dolor nibh lacinia lacus. <img src="source/user/images/quote.png"
-                                        alt=""></div>
-                                <div class="quote_name">Liam Neeson</div>
-                            </div>
-                            <p>Praesent ac magna sed massa euismod congue vitae vitae risus. Nulla lorem augue, mollis
-                                non est et, eleifend elementum ante. Nunc id pharetra magna. Praesent vel orci ornare,
-                                blandit mi sed, aliquet nisi. Class aptent taciti sociosqu ad litora torquent per
-                                conubia nostra, per inceptos himenaeos. </p>
-                        </div>
+                          <div class="space15">&nbsp;</div>
+
+                        @foreach ($item['product']['overviews'] as $item2)
+                            @if ( count($item2['title']) === 1)
+                                
+                            @else
+                                <div class="single_post_title">{{$item2['title']}}</div>
+                            @endif
+                                <div class="single_post_text">
+                                        <p>{{$item2['value']}}</p>
+                                    </div>
+                        @endforeach 
+
+
                     </div>
                     <div class="col-lg-5 col-md-5 order-lg-2 order-md-1 order-1 ">
                         <div class="viewed_title_container">
@@ -205,80 +143,30 @@
                         <div class="space15">&nbsp;</div>
                         <div class="container">
                             <ul>
+
+                                <?php $i = 1?>
+                                @foreach ($item['product']['specifications'] as $item1)
+                                <?php $i = $i + 1?>
                                 <li>
                                     <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
                                         <div class="product_title">
-                                            <p>Price Price Price Price Price Price Price Price</p>
+                                            <p>{{$item1['title']}}</p>
                                         </div>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
                                         <div class="product_title">
-                                            <p>$2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000</p>
+                                            <p>{{$item1['value']}}</p>
                                         </div>
                                     </div>
                                     <div class="space15">&nbsp;</div>
                                 </li>
-                                <li>
-                                    <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                        <div class="product_title">
-                                            <p>Price Price </p>
-                                        </div>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <div class="product_title">
-                                            <p>$2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000</p>
-                                        </div>
-                                    </div>
-                                    <div class="space15">&nbsp;</div>
-                                </li>
-                                <li>
-                                    <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                        <div class="product_title">
-                                            <p>Price Price Price Price Price Price Price Price</p>
-                                        </div>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <div class="product_title">
-                                            <p>$2000 </p>
-                                        </div>
-                                    </div>
-                                    <div class="space15">&nbsp;</div>
-                                </li>
-                                <li>
-                                    <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                        <div class="product_title">
-                                            <p>Price Price </p>
-                                        </div>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <div class="product_title">
-                                            <p>$2000</p>
-                                        </div>
-                                    </div>
-                                    <div class="space15">&nbsp;</div>
-                                </li>
-                                <li>
-                                    <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                        <div class="product_title">
-                                            <p>Price Price </p>
-                                        </div>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <div class="product_title">
-                                            <p>$2000</p>
-                                        </div>
-                                    </div>
-                                    <div class="space15">&nbsp;</div>
-                                </li>
-                                <li>
-                                    <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                        <div class="product_title">
-                                            <p>Price Price </p>
-                                        </div>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <div class="product_title">
-                                            <p>$2000</p>
-                                        </div>
-                                    </div>
-                                    <div class="space15">&nbsp;</div>
-                                </li>
+                                @if($i>5)
+                                    @break
+                                @endif
+                                @endforeach
+                                
+
                             </ul>
-                            <button type="button" class="button product_title_button" data-toggle="modal" data-target="#information">Xem
+                            <button type="button" class="btn btn-outline-info btn-change" style="width: 100%" data-toggle="modal" data-target="#information">Xem
                                 thông số chi tiết</button>
                             <div class="space15">&nbsp;</div>
                         </div>
@@ -288,13 +176,54 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="viewed_title" id="exampleModalLabel">Thông Số Kỹ Thuật</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12 col-md-5 ">
+                        <div class="container">
+                            <ul>
+                                @foreach ($item['product']['specifications'] as $item1)
+                                <li>
+                                    <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
+                                        <div class="product_title">
+                                            <p>{{$item1['title']}}</p>
+                                        </div>
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <div class="product_title">
+                                            <p>{{$item1['value']}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="space15">&nbsp;</div>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
+
 <!-- Recently Viewed -->
 <div class="viewed">
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="viewed_title_container">
-                    <h3 class="viewed_title">Recently Viewed</h3>
+                    <h3 class="viewed_title">Sản phẩm đã xem</h3>
                     <div class="viewed_nav_container">
                         <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
                         <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -303,27 +232,14 @@
                 <div class="viewed_slider_container">
                     <!-- Recently Viewed Slider -->
                     <div class="owl-carousel owl-theme viewed_slider">
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_1.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
-                                    <div class="viewed_name"><a href="#">Beoplay H7</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
+                       
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_2.jpg" alt=""></div>
+                                    <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
-                                    <div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
                                 <ul class="item_marks">
                                     <li class="item_mark item_discount">-25%</li>
@@ -333,60 +249,74 @@
                         </div>
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_3.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225</div>
-                                    <div class="viewed_name"><a href="#">Samsung J730F...</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
+                             <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_4.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
-                                    <div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
+                             <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_5.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
-                                    <div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
+                             <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_6.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$375</div>
-                                    <div class="viewed_name"><a href="#">Speedlink...</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
+                             <!-- Recently Viewed Item -->
+                        <div class="owl-item">
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -429,7 +359,6 @@
                             <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_corsair.png"
                                     style="width: 250px; height: 100px;" alt=""></div>
                         </div>
-
                     </div>
                     <!-- Brands Slider Navigation -->
                     <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
@@ -440,209 +369,15 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="viewed_title" id="exampleModalLabel">Thông Số Kỹ Thuật</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-lg-12 col-md-5 ">
-                    <div class="container">
-                        <ul>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price Price Price Price Price Price Price</p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000 $2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price Price Price Price Price Price Price</p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000 </p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                            <li>
-                                <div class="d-flex flex-md-row flex-column justify-content-between viewed_title_container">
-                                    <div class="product_title">
-                                        <p>Price Price </p>
-                                    </div>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <div class="product_title">
-                                        <p>$2000</p>
-                                    </div>
-                                </div>
-                                <div class="space15">&nbsp;</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
 
 @section('footer')
 <script src="source/user/js/product_custom.js"></script>
+
+<script>
+    var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}'/100) );
+    document.getElementById('price').innerHTML = a.toPrecision(4)+"₫";
+</script>
+
 @endsection

@@ -22,7 +22,7 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <a class="fix" href="#">Tài khoản Duy Huỳnh</a>
+                                    <a class="fix" href="profile-user">Tài khoản Duy Huỳnh</a>
                                 </li>
                             </ul>
                         </div>
@@ -54,7 +54,7 @@
                 <div class="col-lg-3 col-sm-3 col-3 order-1">
                     <div class="logo_container">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="index">
                                 <div class="img_logo">
                                     <img src="source/user/images/primary_transparent.png">
                                 </div>
@@ -67,7 +67,7 @@
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
-                                <form action="#" class="header_search_form clearfix">
+                                <form action="" class="header_search_form clearfix">
                                     <input type="search" required="required" class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
                                     <div class="custom_dropdown">
                                         <div class="custom_dropdown_list">
@@ -83,7 +83,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <button type="submit" class="header_search_button trans_300" value="Submit"><img
+                                    <button type="" onclick="window.location='productlist';" class="header_search_button trans_300" value="Submit"><img
                                             src="source/user/images/search.png" alt=""></button>
                                 </form>
                             </div>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="cart_content">
                                 <div class="cart_text"><a href="cart"></a></div>
-                                <div class="cart_price">{{Session('cart')->totalPrice}} VND</div>
+                                <div class="cart_price">{{Session('cart')->totalPrice}} ₫</div>
                             </div>
                             @endif
                         </div>

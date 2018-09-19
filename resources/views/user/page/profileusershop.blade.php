@@ -392,7 +392,7 @@
         <div class="row">
             <div class="col">
                 <div class="viewed_title_container">
-                    <h3 class="viewed_title">Recently Viewed</h3>
+                    <h3 class="viewed_title">Sản phẩm đã xem</h3>
                     <div class="viewed_nav_container">
                         <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
                         <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -401,27 +401,14 @@
                 <div class="viewed_slider_container">
                     <!-- Recently Viewed Slider -->
                     <div class="owl-carousel owl-theme viewed_slider">
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_1.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
-                                    <div class="viewed_name"><a href="#">Beoplay H7</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
+                       
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_2.jpg" alt=""></div>
+                                    <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
                                 <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
-                                    <div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
                                 <ul class="item_marks">
                                     <li class="item_mark item_discount">-25%</li>
@@ -431,60 +418,74 @@
                         </div>
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_3.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225</div>
-                                    <div class="viewed_name"><a href="#">Samsung J730F...</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
+                             <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_4.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$379</div>
-                                    <div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
+                             <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_5.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$225<span>$300</span></div>
-                                    <div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
+                             <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="source/user/images/view_6.jpg" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">$375</div>
-                                    <div class="viewed_name"><a href="#">Speedlink...</a></div>
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
                                 </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
                             </div>
-                        </div>
+                             <!-- Recently Viewed Item -->
+                        <div class="owl-item">
+                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">990.000 ₫</div>
+                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_discount">-25%</li>
+                                        <li class="item_mark item_new">new</li>
+                                    </ul>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -536,6 +537,7 @@
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 
 {{-- <div class="modal fade" id="information" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

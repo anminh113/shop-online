@@ -63,7 +63,15 @@
                                                 <div class="cart_item_text">{{$item['item']['productName']}}</div>
                                             </div>
                                             <div class="col-lg-2">
-                                                <div class="cart_item_text">{{$item['item']['price']}}</div>
+                                                <div class="cart_item_text">
+                                                    @if($item['item']['saleOff']['discount']==0)
+                                                        {{$item['item']['price']}}
+                                                    @else
+                                                    {{$item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100}}
+                                                    @endif
+                                                    
+                                                
+                                                </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="cart_item_text">
@@ -86,7 +94,11 @@
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
-                                                    <?php echo ($item['qty'] * $item['item']['price'])  ?>
+                                                    @if($item['item']['saleOff']['discount']==0)
+                                                        {{$item['qty'] * $item['item']['price']}}
+                                                    @else
+                                                        {{$item['qty'] * ($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100)}}
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-1">
@@ -108,24 +120,30 @@
                     <!-- Order Total -->
                     <div class="order_total">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="order_total_content text-letf">
-                                    <div class="order_total_title text-letf">Tạm tính:</div>
-                                    <div class="order_total_amount">$2000</div>
+                            @if(Session::has('cart'))
+                                <div class="col-lg-6">
+                                    <div class="order_total_content text-letf">
+                                        <div class="order_total_title text-letf">Tạm tính:</div>
+                                        <div class="order_total_amount">{{Session('cart')->totalPrice}} ₫</div>
+                                    </div>
+                                    <div class="order_total_content text-letf">
+                                        <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
+                                        <div class="order_total_amount">
+                                            
+                                            {{Session('cart')->totalQty}}
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="order_total_content text-left">
+                                        <div class="order_total_title text-letf">Thành Tiền:</div>
+                                        <div class="order_total_amount">$2000</div>
+                                    </div>
+                                    <div class="order_total_content text-left">
+                                        <div class="order_total_title"></div>
+                                        <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
+                                    </div>
                                 </div>
-                                <div class="order_total_content text-letf">
-                                    <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
-                                    <div class="order_total_amount">$2000</div>
-                                </div>
-                                <div class="order_total_content text-left">
-                                    <div class="order_total_title text-letf">Thành Tiền:</div>
-                                    <div class="order_total_amount">$2000</div>
-                                </div>
-                                <div class="order_total_content text-left">
-                                    <div class="order_total_title"></div>
-                                    <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
-                                </div>
-                            </div>
+                                @endif
                             <div class="col-lg-6">
                                 <div class="cart_buttons">
                                     <button type="button" class="btn btn-outline-info btn-change" onclick="window.location='check-cart';">Xác
@@ -177,6 +195,7 @@
         </div>
     </div>
 </div>
+
 
 @endsection
 

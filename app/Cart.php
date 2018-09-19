@@ -17,32 +17,39 @@ class Cart
 	}
 
 	public function add($item, $id, $img){
-		// if($item->promotion_price == 0){
+
+		if($item['saleOff']['discount'] == 0){
 			$giohang = ['qty'=>0, 'price' => $item['price'], 'item' => $item , 'img' => $img];
-		// }
-		// else{
-		// 	$giohang = ['qty'=>0, 'price' => $item->promotion_price, 'item' => $item];
-		// }
+		}
+		else{
+			$giohang = ['qty'=>0, 'price' => ($item['price']-($item['price'] * $item['saleOff']['discount']/100)), 'item' => $item , 'img' => $img];
+		}
 		if($this->items){
 			if(array_key_exists($id, $this->items)){
 				$giohang = $this->items[$id];
 			}
 		}
+
 		$giohang['qty']++;
-		// if($item->promotion_price == 0){
+
+		if($item['saleOff']['discount'] == 0){
 			$giohang['price'] = $item['price'] * $giohang['qty'];
-		// }
-		// else{
-		// 	$giohang['price'] = $item->promotion_price * $giohang['qty'];
-		// }
+		}
+		else{
+			$giohang['price'] = ($item['price']-($item['price'] * $item['saleOff']['discount']/100)) * $giohang['qty'];
+		}
+
 		$this->items[$id] = $giohang;
+
 		$this->totalQty++;
-		// if($item->promotion_price == 0){
+
+		if($item['saleOff']['discount'] == 0){
 			$this->totalPrice += $item['price'];
-		// }
-		// else{
-		// 	$this->totalPrice += $item->promotion_price;
-		// }
+		}
+		else{
+			$this->totalPrice += $item['price']-($item['price'] * $item['saleOff']['discount']/100);
+		}
+
 		
 	}
 	//xóa 1

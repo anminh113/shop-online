@@ -13,7 +13,7 @@
 
 <!-- Banner -->
 <div class="banner">
-    {{-- <div class="banner_background"></div> --}}
+    <div class="banner_background" style="background: #C9D6FF; background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF); background: linear-gradient(to right, #E2E2E2, #C9D6FF); "></div>
     <div class="container fill_height">
         <div class="row fill_height">
             <div class="banner_product_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/image/380x/9df78eab33525d08d6e5fb8d27136e95/i/5/i5-8000-1_1.jpg" alt=""></div>
@@ -692,7 +692,7 @@
                                         <div class="product_content">
                                             <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                             <div class="product_name">
-                                                <div><a href="product.html">LUNA Smartphone</a></div>
+                                                <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                             </div>
                                             <div class="product_extras">
                                                 {{-- <div class="product_color">
@@ -719,7 +719,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -746,7 +746,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -773,7 +773,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -800,7 +800,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -827,7 +827,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -854,7 +854,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -881,7 +881,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -908,7 +908,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -935,7 +935,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -962,7 +962,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -989,7 +989,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -1016,7 +1016,7 @@
                                             <div class="product_content">
                                                 <div class="product_price discount">5.790.000 ₫<span>6.790.000 ₫</span></div>
                                                 <div class="product_name">
-                                                    <div><a href="product.html">LUNA Smartphone</a></div>
+                                                    <div><a href="product.html">Bo mạch chính/ Mainboard Asus Rog Strix Z370-G Gaming</a></div>
                                                 </div>
                                                 <div class="product_extras">
                                                     {{-- <div class="product_color">
@@ -1790,9 +1790,9 @@
             <div class="col">
                 <div class="tabbed_container">
                     <div class="tabs clearfix tabs-right">
-                        <div class="new_arrivals_title">Mới về</div>
+                        <div class="new_arrivals_title">Sản phẩm mới nhất</div>
                         <ul class="clearfix">
-                            <li class="active">Mới</li>
+                            <li class="active">New</li>
                             {{-- <li>Audio & Video</li>
                             <li>Laptops & Computers</li> --}}
                         </ul>
