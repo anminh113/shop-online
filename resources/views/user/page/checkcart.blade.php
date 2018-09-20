@@ -34,9 +34,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Char. Item -->
-                        
-                    
                     </div>
                 </div>
             </div>
@@ -68,7 +65,48 @@
                                 </div>
                             </li>
                             <hr>
+                            @if(Session::has('cart'))
+                            <?php $i =0 ?>
+                            @foreach ($product_cart as $item)
+                            <?php $i=$i+1?>
                             <li class="cart_item clearfix">
+                                <div class="cart_item_image"><img src="{{$item['img']}}" alt=""></div>
+                                <div class="cart_item_info ">
+                                    <div class="cart_item_name cart_info_col">
+                                        <div class="row">
+                                            <div class="col-lg-5 col-md-5">
+                                                <div class="cart_item_text">{{$item['item']['productName']}}</div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <div class="cart_item_text">  
+                                                    @if($item['item']['saleOff']['discount']==0)
+                                                        {{number_format($item['item']['price'], 3)}}.000₫
+                                                    @else
+                                                        {{number_format($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100, 3)}}.000₫
+                                                    @endif
+                                            </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2">
+                                                <div class="cart_item_text">{{$item['qty']}}</div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2">
+                                                <div class="cart_item_text"> 
+                                                    @if($item['item']['saleOff']['discount']==0)
+                                                        {{number_format($item['qty'] * $item['item']['price'], 3)}}.000₫
+                                                    @else
+                                                        {{number_format($item['qty'] * ($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100), 3)}}.000₫
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <hr>
+                            @endforeach
+                            @endif
+
+                            {{-- <li class="cart_item clearfix">
                                 <div class="cart_item_image"><img src="source/user/images/shopping_cart.jpg" alt=""></div>
                                 <div class="cart_item_info ">
                                     <div class="cart_item_name cart_info_col">
@@ -133,29 +171,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <hr>
-                            <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img src="source/user/images/shopping_cart.jpg" alt=""></div>
-                                <div class="cart_item_info ">
-                                    <div class="cart_item_name cart_info_col">
-                                        <div class="row">
-                                            <div class="col-lg-5 col-md-5">
-                                                <div class="cart_item_text">Bộ vi xử lý/ CPU Pentium G5500 (3.8GHz)</div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2">
-                                                <div class="cart_item_text">1</div>
-                                            </div>
-                                            <div class="col-lg-2 col-md-2">
-                                                <div class="cart_item_text">$2000</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <hr>
+                            <hr> --}}
                         </ul>
                     </div>
                 </div>
@@ -204,13 +220,14 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(Session::has('cart'))
                             <div class="order_total_content ">
                                 <div class="row">
-                                    <div class="col-lg-9 col-md-9">
-                                        <div class="order_cart_title ">Tạm tính (1 sản phẩm)</div>
+                                    <div class="col-lg-7 col-md-6">
+                                        <div class="order_cart_title ">Tạm tính ({{Session('cart')->totalQty}} sản phẩm)</div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <div class="order_cart_amount text-right">$2000</div>
+                                    <div class="col-lg-5 col-md-6">
+                                        <div class="order_cart_amount text-right">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div>
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +237,7 @@
                                         <div class="order_cart_title ">Phí giao hàng</div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
-                                        <div class="order_cart_amount text-right">$20</div>
+                                        <div class="order_cart_amount text-right">0₫</div>
                                     </div>
                                 </div>
                             </div>
@@ -237,6 +254,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="order_total_content ">
                                 <div class="row">
                                     <div class="col-lg-12">

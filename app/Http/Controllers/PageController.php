@@ -4,12 +4,10 @@
     use App\Cart;
     use Session;
     use Illuminate\Http\Request;
-    // use GuzzleHttp\Psr7\Request;
     use GuzzleHttp\Client;
     use GuzzleHttp\Promise;
     use GuzzleHttp\Pool;
     use Illuminate\Support\Facades\Log;
-    // use Illuminate\Support\Facades\View;
  
     class PageController extends Controller{
         
@@ -98,6 +96,19 @@
             }
             
         }
+        public function getDelToCart1($id){
+            $oldCart = Session('cart') ? Session::get('cart'):null;
+            $cart = new Cart($oldCart);
+            $cart->reduceByOne($id);
+            if(count($cart->items)>0){
+                Session::put('cart', $cart);
+                return redirect()->back();
+            }else{
+                Session::forget('cart');
+                return redirect('productlist');
+            }
+            
+        }
 
         public function getProduct(Request $req){
             $data = array();
@@ -154,14 +165,11 @@
         }
 
         public function getCart(){
-            // $data = array();
-            //get json san pham theo ID san pham
-
             //get thong tin san pham
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET',PageController::getUrl('deliveryprices') );
             $data = json_decode($res->getBody()->getContents(), true);
-            // $resultdata = compact('data');
+            // dd($data);
 
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
@@ -170,7 +178,16 @@
         }
 
         public function getCheckCart(){
-            return view('user/page.checkcart');
+            //get thong tin san pham
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('deliveryprices') );
+            $data = json_decode($res->getBody()->getContents(), true);
+            // dd($data);
+
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            $product_cart = $cart->items;  
+            return view('user/page.checkcart',compact('product_cart','data'));
         }
 
         public function getCheckOut(){

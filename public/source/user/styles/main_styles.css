@@ -2389,7 +2389,7 @@ select option
 }
 .arrivals_single_button:hover
 {
-	background: rgba(14, 140, 228, 0.8);
+	background: #008194;
 }
 .arrivals_single_category
 {

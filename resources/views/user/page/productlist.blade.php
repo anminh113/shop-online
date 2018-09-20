@@ -123,7 +123,7 @@
                                     </div>
                                     <script>
                                             var a = {{$item['price']}} - ({{$item['price']}} * {{$item['saleOff']['discount']}}/100);
-                                            document.getElementById('price{{$item['productId']}}').innerHTML = a.toPrecision(4)+"₫ <span>{{$item['price']}}₫</span>";
+                                            document.getElementById('price{{$item['productId']}}').innerHTML = a.toPrecision(4)+".000₫ <span>{{$item['price']}}.000₫</span>";
                                     </script>
                                    
                                 @endforeach

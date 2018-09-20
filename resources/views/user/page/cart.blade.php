@@ -65,9 +65,9 @@
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
                                                     @if($item['item']['saleOff']['discount']==0)
-                                                        {{$item['item']['price']}}
+                                                        {{number_format($item['item']['price'], 3)}}.000₫
                                                     @else
-                                                    {{$item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100}}
+                                                    {{number_format($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100, 3)}}.000₫
                                                     @endif
                                                     
                                                 
@@ -77,15 +77,15 @@
                                                 <div class="cart_item_text">
                                                     <div class="input-group">
                                                         <span class="input-group-btn">
-                                                            <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]">
+                                                            <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]" onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['productId'])}}';">
                                                                 <i class="fas fa-minus"></i>
                                                             </div>
                                                         </span>
-                                                        <input type="text" name="quant[<?php echo $i?>]" style="width: 50px;height: 38px"
+                                                        <input type="text" name="quant[<?php echo $i?>]" 
                                                             class="form-control input-number text-center" value="{{$item['qty']}}"
-                                                            min="1" max="100">
+                                                            min="1" max="100" disabled style="width: 50px;height: 38px; background-color: #fff;">
                                                         <span class="input-group-btn">
-                                                            <div class="btn  btn-number" data-type="plus" data-field="quant[<?php echo $i?>]">
+                                                            <div class="btn  btn-number" onclick="window.location='{{route('gio-hang',$item['item']['productId'])}}';" data-type="plus" data-field="quant[<?php echo $i?>]">
                                                                 <i class="fas fa-plus"></i>
                                                             </div>
                                                         </span>
@@ -95,9 +95,9 @@
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
                                                     @if($item['item']['saleOff']['discount']==0)
-                                                        {{$item['qty'] * $item['item']['price']}}
+                                                        {{number_format($item['qty'] * $item['item']['price'], 3)}}.000₫
                                                     @else
-                                                        {{$item['qty'] * ($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100)}}
+                                                        {{number_format($item['qty'] * ($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100), 3)}}.000₫
                                                     @endif
                                                 </div>
                                             </div>
@@ -124,13 +124,20 @@
                                 <div class="col-lg-6">
                                     <div class="order_total_content text-letf">
                                         <div class="order_total_title text-letf">Tạm tính:</div>
-                                        <div class="order_total_amount">{{Session('cart')->totalPrice}} ₫</div>
+                                        <div class="order_total_amount">{{number_format(Session('cart')->totalPrice, 3)}}.000 ₫</div>
                                     </div>
                                     <div class="order_total_content text-letf">
                                         <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
                                         <div class="order_total_amount">
-                                            
-                                            {{Session('cart')->totalQty}}
+                                            @foreach ($data['deliveryPrices'] as $item)
+                                                @if($item['productQuantity'] === Session('cart')->totalQty)
+                                                    {{$item['transportFee']}}.000 ₫
+                                                    @break
+                                                @else
+                                                    0 ₫
+                                                    @break  
+                                                @endif                                               
+                                            @endforeach
                                         
                                         </div>
                                     </div>
@@ -152,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--   <div class="cart_buttons">
+                    <!-- <div class="cart_buttons">
                         <button type="button" class="button cart_button_checkout">Add to Cart</button>
                     </div> -->
                     <div class="characteristics">
