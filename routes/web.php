@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 // User
 
-
 Route::get('addtocart/{id}', [
     'as'=>'gio-hang',
     'uses'=>'PageController@getAddToCart'

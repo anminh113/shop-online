@@ -1,6 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="brand">
-        
         <a href="{{route('trang-chu-admin')}}"><img src="{{ asset('source/admin/assets/img/primary_transparent.png') }}"  alt="CyberZone Logo" class="img-responsive logo "></a>
     </div>
     <div class="navbar-btn">

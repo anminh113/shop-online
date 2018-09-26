@@ -107,12 +107,12 @@ p a:hover::after
 }
 ::selection
 {
-	background: #0d82d3;	
+	background: #008496;	
 color: #fff;
 }
 p::selection
 {
-	background: #0d82d3;	
+	background: #008496;	
 color: #fff;
 }
 h1{font-size: 48px;}
@@ -135,7 +135,7 @@ h4::selection,
 h5::selection, 
 h6::selection
 {
-	background: #0d82d3;	
+	background: #008496;	
 color: #fff;
 }
 .form-control
@@ -2153,7 +2153,7 @@ select option
 	background: url(https://png.icons8.com/android/18/008496/buy.png) no-repeat;
 	position:absolute;
 	top: 16px;
-	right: 73px;
+	right: 25%;
 	width: 18px;
 	height: 18px;
 }
