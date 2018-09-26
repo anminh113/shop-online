@@ -7,35 +7,6 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/profileshop.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
 
-<style type="text/css">
-    .bar-verygood {
-        width: 60%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
-
-    .bar-good {
-        width: 30%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
-
-    .bar-bad {
-        width: 10%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
-
-    .product_item {
-        position: inherit;
-        display: table-column;
-    }
-
-    .page-active {
-        display: block;
-    }
-
-</style>
 @endsection
 
 @section('content')
@@ -134,22 +105,26 @@
                             <div style="color: #757575;padding-left: 5px;font-size: 14px; padding-bottom: 10px;"> Nhận
                                 xét và đánh giá nhà bán hàng:</div>
                             <div class="text123">
-                                <img  alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png" id="imgClickAndChangeVeryGood"  >
-                                <img  alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png" id="imgClickAndChangeGood"  >
-                                <img  alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png" id="imgClickAndChangeBad"  >
+                                <img alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png"
+                                    id="imgClickAndChangeVeryGood">
+                                <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png"
+                                    id="imgClickAndChangeGood">
+                                <img alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png"
+                                    id="imgClickAndChangeBad">
                             </div>
                             <div class="space20">&nbsp;</div>
                             <div class="contact_form_text" style="padding-left: 5px;">
-                                    <div class="space20">&nbsp;</div>
-                                <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>  
+                                <div class="space20">&nbsp;</div>
+                                <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>
                                 <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
                                     name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
                             </div>
-                          
+
                         </div>
                         <div class="col-lg-9"></div>
-                        <div class="col-lg-3"><button type="button" class="btn btn-outline-warning btn-save"  style="right:0;height: 50px;width: 100%;font-size: 16px; margin-top: 10px">Giử đánh giá</button></div>
-                        
+                        <div class="col-lg-3"><button type="button" class="btn btn-outline-warning btn-save" style="right:0;height: 50px;width: 100%;font-size: 16px; margin-top: 10px">Giử
+                                đánh giá</button></div>
+
                     </div>
                 </div>
             </div>
@@ -324,24 +299,25 @@
 <script src="source/user/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="source/user/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="source/user/js/shop_custom.js"></script>
-<script >
-    $('.text123').on('click', 'img', function(){
+<script>
+    $('.text123').on('click', 'img', function () {
         var id = $(this).attr('id');
-        if(id == 'imgClickAndChangeVeryGood'){
+        if (id == 'imgClickAndChangeVeryGood') {
             $('#imgClickAndChangeVeryGood').attr('src', 'source/user/images/icon-color-verygood.png');
             $('#imgClickAndChangeGood').attr('src', 'source/user/images/icon-good.png');
             $('#imgClickAndChangeBad').attr('src', 'source/user/images/icon-bad.png');
-            
-        }else if(id == 'imgClickAndChangeGood'){
+
+        } else if (id == 'imgClickAndChangeGood') {
             $('#imgClickAndChangeVeryGood').attr('src', 'source/user/images/icon-verygood.png');
             $('#imgClickAndChangeGood').attr('src', 'source/user/images/icon-color-good.png');
             $('#imgClickAndChangeBad').attr('src', 'source/user/images/icon-bad.png');
-        }else{
+        } else {
             $('#imgClickAndChangeVeryGood').attr('src', 'source/user/images/icon-verygood.png');
             $('#imgClickAndChangeGood').attr('src', 'source/user/images/icon-good.png');
             $('#imgClickAndChangeBad').attr('src', 'source/user/images/icon-color-bad.png');
-        }   
+        }
     });
+
 </script>
 
 @endsection
