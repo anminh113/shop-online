@@ -247,7 +247,7 @@
                                         <div class="order_cart_title ">Tổng cộng</div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
-                                        <div class="order_cart_amount text-right text-danger">$4000</div>
+                                        <div class="order_cart_amount text-right text-danger">0000</div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>

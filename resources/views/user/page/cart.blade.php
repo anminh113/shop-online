@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="order_total_content text-left">
                                         <div class="order_total_title text-letf">Thành Tiền:</div>
-                                        <div class="order_total_amount">$2000</div>
+                                        <div class="order_total_amount">0000</div>
                                     </div>
                                     <div class="order_total_content text-left">
                                         <div class="order_total_title"></div>

@@ -39,8 +39,8 @@
                     <div class="product_category">{{$item['product']['productType']['productTypeName']}}</div>
                     <div class="product_name">{{$item['product']['productName']}}</div>
                     <div class="product_price">
-                        <span class="text-danger" style="font-size: 22px" id="price">{{$item['product']['price']}}₫</span>
-                        <span style="font-size: 16px; text-decoration: line-through;">{{$item['product']['price']}}₫</span>
+                        <span class="text-danger" style="font-size: 22px" id="price">{{$item['product']['price']}}.000₫</span>
+                        <span style="font-size: 16px; text-decoration: line-through;">{{$item['product']['price']}}.000₫</span>
                         <span style="font-size: 21px"> -{{$item['product']['saleOff']['discount']}}%</span>
                     </div>
                     <div class="product_text">
@@ -62,7 +62,7 @@
                                
                             </div>
                             <div class="button_container">
-                                <a href="{{route('gio-hang',$item['product']['productId'])}}" class="btn btn-outline-info btn-change" style="font-size: 16px; width: 80%; bottom: 2px">Thêm vào giỏ</a>
+                                <a href="{{route('gio-hang',$item['product']['productId'])}}" class="btn btn-outline-info btn-change btn-buy" ><div class="img-buy"></div>Thêm Vào Giỏ </a>
                             </div>
                         </form>
                     </div>
@@ -78,7 +78,7 @@
                                     <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png"
                                             alt=""></div>
                                     <div class="char_content">
-                                        <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500.000₫ trở lên</div>
+                                        <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 3 sản phẩm trở lên</div>
                                     </div>
                                 </div>
                             </div>
@@ -377,7 +377,7 @@
 
 <script>
     var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}'/100) );
-    document.getElementById('price').innerHTML = a.toPrecision(4)+"₫";
+    document.getElementById('price').innerHTML = a.toPrecision(4)+".000₫";
 </script>
 
 @endsection

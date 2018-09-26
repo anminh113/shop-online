@@ -2333,7 +2333,7 @@ select option
     border-bottom: 1px solid #dadada;
 }
 .order-item {
-    min-height: 80px;
+    min-height: 115px;
     margin: 24px 12px 24px 36px;
     padding-right: 12px;
 }
@@ -2385,7 +2385,7 @@ select option
 }
 
 .panel {
-    padding: 0 18px;
+    /* padding: 0 18px; */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
@@ -2416,3 +2416,61 @@ select option
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+/* @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css); */
+
+/****** Style Star Rating Widget *****/
+
+.rating {
+	border: none;
+	float: left;
+}
+
+.rating > input {
+	display: none;
+}
+
+.rating > label:before {
+	margin: 0 5px;
+	font-size: 23px;
+	font-family: FontAwesome;
+	display: inline-block;
+	content: "\f005";
+}
+
+.rating > .half:before {
+	content: "\f089";
+	position: absolute;
+}
+
+.rating > label {
+	color: #ddd;
+	float: right;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label,
+/* show gold star when clicked */
+
+.rating:not(:checked) > label:hover,
+/* hover current star */
+
+.rating:not(:checked) > label:hover ~ label {
+	color: #FFCC40;
+}
+
+/* hover previous stars in list */
+
+.rating > input:checked + label:hover,
+/* hover current star when changing rating */
+
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+/* lighten current selection */
+
+.rating > input:checked ~ label:hover ~ label {
+	color: #FFCC40;
+}
+
+/*End rating star css*/

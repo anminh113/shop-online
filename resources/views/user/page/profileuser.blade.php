@@ -125,7 +125,9 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017</div>
+                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
+                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +160,9 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017</div>
+                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
+                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%; font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -186,7 +190,10 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="item-info">Đã giao ngày 20 thg 11 2017</div>
+                                        <div class="item-info">Đã giao ngày 20 thg 11 2017
+                                            <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                        </div>
+
                                     </div>
                                 </div>
                         </div>

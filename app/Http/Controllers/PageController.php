@@ -13,10 +13,9 @@
         
         //User
 
-        public static function getUrl($text)
-        {
+        public static function getUrl($text){
             // $urlAPI = "http://172.16.198.84:3000/".$text;
-            $urlAPI = "http://172.16.238.133:3000/".$text;
+            $urlAPI = "http://localhost:3000/".$text;
             return $urlAPI;
         }
 
@@ -96,6 +95,7 @@
             }
             
         }
+        
         public function getDelToCart1($id){
             $oldCart = Session('cart') ? Session::get('cart'):null;
             $cart = new Cart($oldCart);
@@ -202,6 +202,14 @@
             return view('user/page.profileusershop');
         }
 
+        public function getRegisterShop(){
+            return view('user/page.registershop');
+        }
+
+        public function getReviewShop(){
+            return view('user/page.reviewshop');
+        }
+
         //End user
 
         // Đăng nhập admin
@@ -302,6 +310,7 @@
         public function getReview(){
             return view('admin/page.reviewadmin');
         }
+
         public function getDiscount(){
                 //get json san pham theo gian hang
                 $client1 = new \GuzzleHttp\Client();
@@ -327,7 +336,6 @@
             return view('admin/page.discountadmin', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
         }
       
-
         //Admin hệ thống
         public function getAdmin(){
             return view('admin/page.admin');

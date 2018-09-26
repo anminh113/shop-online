@@ -15,7 +15,7 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <a class="fix" href="#">Bán hàng cùng CyberZone</a>
+                                    <a class="fix" href="register-shop">Bán hàng cùng CyberZone</a>
                                 </li>
                             </ul>
                         </div>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="cart_content">
                                 <div class="cart_text"><a href="cart"></a></div>
-                                <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000 ₫</div>
+                                <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div>
                             </div>
                             @endif
                         </div>

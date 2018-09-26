@@ -88,6 +88,16 @@ Route::get('profile-user-shop', [
     'uses'=>'PageController@getProfileUserShop'
 ]);
 
+Route::get('register-shop', [
+    'as'=>'register-shop',
+    'uses'=>'PageController@getRegisterShop'
+]);
+
+Route::get('review-shop', [
+    'as'=>'review-shop',
+    'uses'=>'PageController@getReviewShop'
+]);
+
 // Đăng nhập admin
 Route::get('login-admin', [
     'as'=>'login-admin',

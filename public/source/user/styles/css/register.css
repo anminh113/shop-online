@@ -73,4 +73,13 @@
     background: #263961;
     color: #fff;
 }
-
+.right {
+    height: 100%;
+    position: relative;
+    background-image: url(/shop-online/public/source/user/images/hardunsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.text-size{
+    font-size: 18px
+}
