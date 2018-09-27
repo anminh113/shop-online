@@ -21,8 +21,7 @@
 					<ul class="nav">
 						<li><a href="admin" id="admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
 						<li><a href="category-admin-shop" id="category-admin-shop" class=""><i class="lnr lnr-code"></i> <span>Danh sách gian hàng</span></a></li>
-						<li><a href="product-admin" id="product-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Sản phẩm</span></a></li>
-						<li><a href="review-admin" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>
+						<li><a href="add-category-admin" id="add-category-admin" class=""><i class="lnr lnr-code"></i> <span>Thêm danh mục	</span></a></li>
 					</ul>
 
 

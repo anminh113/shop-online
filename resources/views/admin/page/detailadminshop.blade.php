@@ -51,9 +51,9 @@
                                 <input type="text" id="myInput" placeholder="Tìm kiếm..">
                             </div>
                         </div>
-                        <div class="panel-body no-padding">
+                        <div class="panel-body  ">
                             <!-- TABBED CONTENT -->
-                            <div class="custom-tabs-line tabs-line-bottom left-aligned" style="margin-left: 1%;">
+                            <div class="custom-tabs-line tabs-line-bottom left-aligned">
                                 <ul class="nav" role="tablist">
                                     <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Sản
                                             phẩm <span class="badge">7</span></a></li>
@@ -63,11 +63,11 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tab-bottom-left1">
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="product-type" style="height:350px" onclick="">
+                                        <div class="product-type" style="height:380px" onclick="">
                                             <div class="product_border"></div>
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                <img src="source/admin/assets/img/profile-bg.png" width="215"
-                                                    height="215" alt="">
+                                                <img src="source/admin/assets/img/profile-bg.png" width="215" height="215"
+                                                    alt="">
                                             </div>
                                             <div class="product_content">
                                                 <div class="product_price"></div>
@@ -80,11 +80,11 @@
                                         <div class="space10">&nbsp;</div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="product-type" style="height:350px" onclick="">
+                                        <div class="product-type" style="height:380px" onclick="">
                                             <div class="product_border"></div>
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                <img src="source/admin/assets/img/profile-bg.png" width="215"
-                                                    height="215" alt="">
+                                                <img src="source/admin/assets/img/profile-bg.png" width="215" height="215"
+                                                    alt="">
                                             </div>
                                             <div class="product_content">
                                                 <div class="product_price"></div>
@@ -97,11 +97,11 @@
                                         <div class="space10">&nbsp;</div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="product-type" style="height:350px" onclick="">
+                                        <div class="product-type" style="height:380px" onclick="">
                                             <div class="product_border"></div>
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                <img src="source/admin/assets/img/profile-bg.png" width="215"
-                                                    height="215" alt="">
+                                                <img src="source/admin/assets/img/profile-bg.png" width="215" height="215"
+                                                    alt="">
                                             </div>
                                             <div class="product_content">
                                                 <div class="product_price"></div>
@@ -113,11 +113,11 @@
                                         <div class="space10">&nbsp;</div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="product-type" style="height:350px" onclick="">
+                                        <div class="product-type" style="height:380px" onclick="">
                                             <div class="product_border"></div>
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                <img src="source/admin/assets/img/profile-bg.png" width="215"
-                                                    height="215" alt="">
+                                                <img src="source/admin/assets/img/profile-bg.png" width="215" height="215"
+                                                    alt="">
                                             </div>
                                             <div class="product_content">
                                                 <div class="product_price"></div>
@@ -130,11 +130,11 @@
                                         <div class="space10">&nbsp;</div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="product-type" style="height:350px" onclick="">
+                                        <div class="product-type" style="height:380px" onclick="">
                                             <div class="product_border"></div>
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                <img src="source/admin/assets/img/profile-bg.png" width="215"
-                                                    height="215" alt="">
+                                                <img src="source/admin/assets/img/profile-bg.png" width="215" height="215"
+                                                    alt="">
                                             </div>
                                             <div class="product_content">
                                                 <div class="product_price"></div>
@@ -147,11 +147,11 @@
                                         <div class="space10">&nbsp;</div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="product-type" style="height:350px" onclick="">
+                                        <div class="product-type" style="height:380px" onclick="">
                                             <div class="product_border"></div>
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                <img src="source/admin/assets/img/profile-bg.png" width="215"
-                                                    height="215" alt="">
+                                                <img src="source/admin/assets/img/profile-bg.png" width="215" height="215"
+                                                    alt="">
                                             </div>
                                             <div class="product_content">
                                                 <div class="product_price"></div>
@@ -309,18 +309,7 @@
 @endsection
 
 @section('footer')
-<script>
-    var $grid = $('.grid ').isotope({
-    getSortData: {
-        name: '.name', // text from querySelector
-        category: '[data-category]', // value of attribute
-        weight: function( itemElem ) { // function
-        var weight = $( itemElem ).find('.weight').text();
-        return parseFloat( weight.replace( /[\(\)]/g, '') );
-        }
-    }
-    });
-</script>
+
 <script>
     var element = document.getElementById("category-admin-shop");
     element.classList.add("active");

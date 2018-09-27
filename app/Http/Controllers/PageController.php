@@ -355,6 +355,10 @@
             return view('admin/page.detailadminshop');
         }
 
+        public function getAddCategoryAdmin(){
+            return view('admin/page.addcategoryadmin');
+        }
+
 
     }
 

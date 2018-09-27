@@ -163,3 +163,8 @@ Route::get('detail-admin-shop', [
     'uses'=>'PageController@getDetailAdminShop'
 ]);
 
+Route::get('add-category-admin', [
+    'as'=>'them-danh-muc-admin',
+    'uses'=>'PageController@getAddCategoryAdmin'
+]);
+
