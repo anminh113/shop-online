@@ -8,7 +8,7 @@
 <link href="{{ URL::asset('source/admin/assets/vendor/linearicons/style.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ URL::asset('source/admin/assets/vendor/chartist/css/chartist-custom.css') }}" rel="stylesheet" type="text/css" >
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {{-- <link rel="stylesheet" href="source/admin/assets/vendor/bootstrap/css/bootstrap.min.css"> --}}
 {{-- <link rel="stylesheet" href="source/admin/assets/vendor/font-awesome/css/font-awesome.min.css"> --}}
 {{-- <link rel="stylesheet" href="source/admin/assets/vendor/linearicons/style.css"> --}}

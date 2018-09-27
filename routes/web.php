@@ -149,6 +149,13 @@ Route::get('discount-admin', [
 //Admin hệ thống
 
 Route::get('admin', [
-    'as'=>'trang chu admin he thong',
+    'as'=>'trang-chu-admin-he-thong',
     'uses'=>'PageController@getAdmin'
 ]);
+
+Route::get('category-admin-shop', [
+    'as'=>'danh-sach-shop-he-thong',
+    'uses'=>'PageController@getCategoryAdminShop'
+]);
+
+

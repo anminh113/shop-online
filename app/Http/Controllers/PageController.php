@@ -134,22 +134,27 @@
              $client1 = new \GuzzleHttp\Client();
              $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
              $data = json_decode($res->getBody()->getContents(), true);
-            //   dd($data);
+            //   dd($data['products']);
 
              //end get json
+             $dataPrice = array();
+                $datasaleOff =array();
+                $dataPriceProduct = array();
              $datatext = array();
              for ($i=0;  $i < count($data['products']); $i++){
-                 $data2 = $data['products'][$i]['productId'];
-                 $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-                 $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                $datasaleOff[] = $data['products'][$i]['saleOff']['discount'];
+                $dataPrice[] = $data['products'][$i]['price'];
+                $data2 = $data['products'][$i]['productId'];
+                $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                $datatext[] = json_decode($res2->getBody()->getContents(), true);
              }
              $result = compact('datatext');
-
-             // dd($result);
-
-          
-
-            return view('user/page.productlist',compact('data','result'));
+            foreach( $datasaleOff as $price => $sale ) {
+                $dataPriceProduct[] = ($dataPrice[$price]-($dataPrice[$price]*$sale)/100);
+               
+            }
+            $resultPrice = compact('dataPriceProduct');
+            return view('user/page.productlist',compact('data','result','resultPrice'));
         }
 
         public function getRegister(){
@@ -212,10 +217,7 @@
 
         //End user
 
-        // Đăng nhập admin
-        public function getLoginAdmin(){
-            return view('admin/page.loginadmin');
-        }
+        
 
         
 
@@ -335,10 +337,19 @@
 
             return view('admin/page.discountadmin', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
         }
+
+        // Đăng nhập admin
+        public function getLoginAdmin(){
+            return view('admin/page.loginadmin');
+        }
       
         //Admin hệ thống
         public function getAdmin(){
             return view('admin/page.admin');
+        }
+
+        public function getCategoryAdminShop(){
+            return view('admin/page.categoryadminshop');
         }
 
 

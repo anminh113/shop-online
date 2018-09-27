@@ -116,8 +116,7 @@
                                     </span></div>
                             </div>
                             <div class="cart_content">
-                                <div class="cart_text"><a href="cart"></a></div>
-                                <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div>
+                                {{-- <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div> --}}
                             </div>
                             @endif
                         </div>
