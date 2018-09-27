@@ -150,8 +150,7 @@
              }
              $result = compact('datatext');
             foreach( $datasaleOff as $price => $sale ) {
-                $dataPriceProduct[] = ($dataPrice[$price]-($dataPrice[$price]*$sale)/100);
-               
+                $dataPriceProduct[] = ($dataPrice[$price]-($dataPrice[$price]*$sale)/100);   
             }
             $resultPrice = compact('dataPriceProduct');
             return view('user/page.productlist',compact('data','result','resultPrice'));
@@ -350,6 +349,10 @@
 
         public function getCategoryAdminShop(){
             return view('admin/page.categoryadminshop');
+        }
+
+        public function getDetailAdminShop(){
+            return view('admin/page.detailadminshop');
         }
 
 

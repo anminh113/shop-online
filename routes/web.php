@@ -158,4 +158,8 @@ Route::get('category-admin-shop', [
     'uses'=>'PageController@getCategoryAdminShop'
 ]);
 
+Route::get('detail-admin-shop', [
+    'as'=>'chi-tiet-shop-he-thong',
+    'uses'=>'PageController@getDetailAdminShop'
+]);
 

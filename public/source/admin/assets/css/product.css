@@ -5,7 +5,7 @@
     display: -webkit-flex;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: flex-start;
     position: relative;
     background: #FFFFFF;

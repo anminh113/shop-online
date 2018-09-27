@@ -13,7 +13,7 @@ $.fn.ddTableFilter = function(options) {
 
     $('#th_format ', table).each(function(index) {
       if($(this).hasClass('skip-filter')) return;
-      var selectbox = $('<select class="form-control">');
+      var selectbox = $('<select class="" style="width:auto">');
       var values = [];
       var opts = [];
       selectbox.append('<option value="--all--">' + $(this).text() + '</option>');

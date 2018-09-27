@@ -23,16 +23,15 @@
                             </div>
                         </div>
                         <div class="panel-body no-padding">
-                           
                             <table class="table table-striped" >
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên gian hàng</th>
-                                        <th>Tên khách hàng</th>
+                                        <th>Gian hàng</th>
+                                        <th>Người đại diện</th>
                                         <th>Số điện thoại</th>
-                                        <th>Ngày đăng ký</th>
-                                        <th>Trạng thái</th>
+                                        <th>Địa chỉ kho</th>
+                                        <th>Xem chi tiết</th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
@@ -41,24 +40,24 @@
                                         <td>Steve</td>
                                         <td>$Steve</td>
                                         <td>0123456789</td>
-                                        <td>Oct 21, 2016</td>
-                                        <td><span class="label label-success">Chấp nhận</span></td>
+                                        <td>6</td>
+                                        <td><a href="detail-admin-shop">Xem chi tiết</a></td>
                                     </tr>
-                                    <tr data-toggle="modal" data-target="#exampleModalLong">
+                                    <tr>
                                         <td><a href="#">763649</a></td>
                                         <td>Amber</td>
                                         <td>$Steve</td>
                                         <td>0123456789</td>
-                                        <td>Oct 21, 2016</td>
-                                        <td><span class="label label-warning">Chờ xác nhận</span></td>
+                                        <td>16</td>
+                                        <td><a href="detail-admin-shop">Xem chi tiết</a></td>
                                     </tr>
                                     <tr>
                                         <td><a href="#">763650</a></td>
                                         <td>Michael</td>
                                         <td>$34</td>
                                         <td>0123456789</td>
-                                        <td>Oct 18, 2016</td>
-                                        <td><span class="label label-danger">Từ chối</span></td>
+                                        <td>216</td>
+                                        <td><a href="detail-admin-shop  ">Xem chi tiết</a></td>
                                     </tr>
                                     
                                 </tbody>
