@@ -24,62 +24,112 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-lg-3 col-md-4">
-                            <h4>Thêm sản phẩm giảm giá:</h4>
+                            <h4>Thêm sự kiện giảm giá:</h4>
                         </div>
-                        <div class="col-lg-2 col-md-4">
-                            <div class="input-group">
-                                <input class="form-control" type="number" min="0" max="100">
-                                <span class="input-group-addon">%</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4">
-                            <div class="panel-title">
-                                <select class="form-control" id="category">
-                                        <option value="">- Chọn danh mục -</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4">
-                            <div class="panel-title">
-                                <select class="form-control" id="producttype">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-4">
-                                <div class="panel-title">
 
-                                        <button type="button" class="btn btn-outline- btn-save" >Tìm kiếm</button>                
-                                </div>
-                            </div>
+
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div >
-                        <label for="checkAll">Chọn tất cả </label>
-                        <input type="checkbox" name="checkall" id="checkAll" hidden>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <label for="basic">% giảm giá:</label>
+                            <div class="input-group">
+                                <input class="form-control" type="number" min="1" value="1" max="99">
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <label for="basic">Ngày bắt đầu:</label>
+                            <div class="input-group">
+                                <input class="form-control" id="stardate" type="date">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <label for="basic">Ngày kết thúc:</label>
+                            <div class="input-group">
+                                <input class="form-control" id="enddate" type="date">
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-4">
+                            <label for="basic">&nbsp;&nbsp;</label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-outline- btn-save" style="min-width:150px;">Thêm</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="space10">&nbsp;</div>
-                    <div class="row">
-                        <?php $i= 0 ?>
-                        @foreach ($data['products'] as $item )
-                        <?php $i = $i +1;?>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="product-type" style="height:260px;" id="texts<?php echo $i ?>">
-                                <label for="productid<?php echo $i ?>">
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <h4>Thêm sự kiện giảm giá cho sản phẩm:</h4>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="panel-title">
+                            <select class="form-control" id="">
+                                <option value="">- % -</option>
+                                <option value="">-5%  2018-09-28 : 2018-09-30</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <h4>Tìm kiếm sản phẩm:</h4>
+                    </div>
+                    <div class="col-lg-2 col-md-4">
+                        <div class="panel-title">
+                            <select class="form-control" id="category">
+                                <option value="">- Chọn danh mục -</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="panel-title">
+                            <select class="form-control" id="producttype">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-4">
+                        <div class="panel-title">
+                            <button type="button" class="btn btn-outline- btn-save">Tìm kiếm</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="space10">&nbsp;</div>
+                <div>
+                    <label for="checkAll" class="btn btn-outline- btn-change">Chọn tất cả </label>
+                    <input type="checkbox" name="checkall" id="checkAll" hidden>
+                    <div class="space15">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <?php $i= 0 ?>
+                    @foreach ($data['products'] as $item )
+                    <?php $i = $i +1;?>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="product-type" style="height:260px;" id="texts<?php echo $i ?>">
+                            <label for="productid<?php echo $i ?>">
                                 <div class="product_border"></div>
                                 <div class="product_fav">
-                                        <span class="lnr lnr-checkmark-circle"></span>
+                                    <span class="lnr lnr-checkmark-circle"></span>
                                 </div>
                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                     @foreach ($result['datatext'] as $da )
-                                        @foreach ($da['images'] as $da1)
-                                            @if($item['productId']== $da1['productId'])
-                                                <img src={{$da1["imageURL"]}} width="115" height="115" alt="">
-                                                @break
-                                            @endif
-                                        @endforeach
-                                    @endforeach 
-                                </div> 
+                                    @foreach ($da['images'] as $da1)
+                                    @if($item['productId']== $da1['productId'])
+                                    <img src={{$da1["imageURL"]}} width="115" height="115" alt="">
+                                    @break
+                                    @endif
+                                    @endforeach
+                                    @endforeach
+                                </div>
                                 <div class="product_content">
                                     <div class="product_price">{{$item['price']}} VND</div>
                                     <div class="product_name">
@@ -87,29 +137,25 @@
                                     </div>
                                 </div>
                             </label>
-                            </div>
-                            <div class="space10">&nbsp;</div>
                         </div>
-                        <label hidden>
-                        <input type="checkbox" id="productid<?php echo $i ?>" value="{{$item['productId']}}" >
-                                <span class="checkmark"></span>
-                        </label>
-                        <script>
-                                $("#texts<?php echo $i ?>").click(function() {
-                                $('#texts<?php echo $i ?> .product_fav').toggleClass('active');
-                                });
-                        </script> 
-                          
-                        @endforeach
+                        <div class="space10">&nbsp;</div>
                     </div>
-
-                   
-   
+                    <label hidden>
+                        <input type="checkbox" id="productid<?php echo $i ?>" value="{{$item['productId']}}">
+                        <span class="checkmark"></span>
+                    </label>
+                    <script>
+                        $("#texts<?php echo $i ?>").click(function () {
+                            $('#texts<?php echo $i ?> .product_fav').toggleClass('active');
+                        });
+                    </script>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-    <!-- END MAIN CONTENT -->
+</div>
+<!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
 @endsection
@@ -131,9 +177,10 @@
         }
         $('#category').append(html);
     });
+
 </script>
 
-    {{-- get data productType where category --}}
+{{-- get data productType where category --}}
 <script>
     $('#category').change(function () {
         var option = $(this).find('option:selected').val();
@@ -156,21 +203,35 @@
             $('#producttype').append(html);
         });
     });
-    
+
 </script>
-   
+
 <script>
     var element = document.getElementById("discount-admin");
     element.classList.add("active");
+
 </script>
 <script>
-    $("#checkAll").click(function() {
+    $("#checkAll").click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
         $('.product_fav').toggleClass('active');
 
         $('.text123').toggleClass('hidden1')
 
     });
+
+</script>
+<script>
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+    var today = year + "-" + month + "-" + day;
+    document.getElementById("stardate").min = today;
+    document.getElementById("enddate").min = today;
+
 </script>
 
 

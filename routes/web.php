@@ -168,3 +168,13 @@ Route::get('add-category-admin', [
     'uses'=>'PageController@getAddCategoryAdmin'
 ]);
 
+Route::get('add-producttype-admin', [
+    'as'=>'them-loai-admin',
+    'uses'=>'PageController@getAddProductTypeAdmin'
+]);
+
+Route::get('add-specification-admin', [
+    'as'=>'them-thong-so ky-thuat-admin',
+    'uses'=>'PageController@getAddSpecificationAdmin'
+]);
+

@@ -78,11 +78,18 @@
                                 <span class="input-group-addon">VND</span>
                             </div>
                             <div class="space15">&nbsp;</div>
+                            <label for="basic">Số lượng nhập kho:</label>
+                            <div class="input-group">
+                                <input class="form-control" type="number">
+                                <span class="input-group-addon">Chiếc</span>
+                            </div>
+                            <div class="space15">&nbsp;</div>
                             <label for="basic">Chọn danh mục sản phẩm:</label>
                             <select class="form-control" id="category">
                                 <option value="">- Chọn danh mục -</option>
 
                             </select>
+                            
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Thông số kỹ thuật:</label>
                             <select class="form-control" id="producttype">

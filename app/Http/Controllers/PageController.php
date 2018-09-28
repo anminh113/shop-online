@@ -359,6 +359,14 @@
             return view('admin/page.addcategoryadmin');
         }
 
+        public function getAddProductTypeAdmin(){
+            return view('admin/page.addproducttypeadmin');
+        }
+
+        public function getAddSpecificationAdmin(){
+            return view('admin/page.addspecificationadmin');
+        }
+
 
     }
 

@@ -38,13 +38,14 @@
                 <div class="product_description">
                     <div class="product_category">{{$item['product']['productType']['productTypeName']}}</div>
                     <div class="product_name">{{$item['product']['productName']}}</div>
+                    <div class="rating_r rating_r_2 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i> </div>
                     <div class="product_price">
                         <span class="text-danger" style="font-size: 22px" id="price">{{$item['product']['price']}}.000₫</span>
                         <span style="font-size: 16px; text-decoration: line-through;">{{$item['product']['price']}}.000₫</span>
                         <span style="font-size: 21px"> -{{$item['product']['saleOff']['discount']}}%</span>
                     </div>
                     <div class="product_text">
-                            {{$item['product']['overviews'][0]['value']}}...
+                        {{$item['product']['overviews'][0]['value']}} ...
                     </div>
                     <div class="order_info d-flex flex-row">
                         <form action="#">

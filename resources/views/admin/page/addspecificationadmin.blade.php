@@ -45,22 +45,19 @@
                     <!-- RECENT PURCHASES -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><b>Các danh mục sản phẩm có trên hệ thống</b> </h3>
+                            <h3 class="panel-title"><b>Loại sản phẩm: XXX</b> </h3>
                             <div class="right" style="position: absolute;">
                                 <input type="text" id="myInput" placeholder="Tìm kiếm...">
                             </div>
                         </div>
                         <div class="panel-body ">
-                            <button type="button" class="btn btn-outline- btn-save" data-toggle="modal" data-target="#exampleModalLong">Thêm
-                                danh mục</button>
-                            <div class="space10">&nbsp;</div>
+                                <button type="button" class="btn btn-outline- btn-save" data-toggle="modal" data-target="#exampleModalLong">Thêm thông số kỹ thuật</button>
+                                    <div class="space10">&nbsp;</div>
                             <table id="table_format" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Danh mục</th>
-                                        <th>Số loại sản phẩm</th>
-                                        <th>Xem chi tiết</th>
+                                        <th>Thông số kỹ thuật</th>
                                         <th>Cập nhật</th>
                                     </tr>
                                 </thead>
@@ -68,15 +65,11 @@
                                     <tr>
                                         <td><a href="#">1</a></td>
                                         <td>0Steve Steve Steve</td>
-                                        <td>2</td>
-                                        <td><a href="add-producttype-admin">Xem chi tiết</a></td>
                                         <td data-toggle="modal" data-target="#update">iconupdate</td>
                                     </tr>
                                     <tr>
                                         <td><a href="#">1</a></td>
                                         <td>Steve Steve Steve</td>
-                                        <td>2</td>
-                                        <td><a href="add-producttype-admin">Xem chi tiết</a></td>
                                         <td data-toggle="modal" data-target="#update">iconupdate</td>
                                     </tr>
                                 </tbody>
@@ -121,13 +114,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle">Thêm danh mục</h4>
+                <h4 class="modal-title" id="exampleModalLongTitle">Thêm loại sản phẩm</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <label for="basic">Tên danh mục sản phẩm:</label>
+                <label for="basic">Tên loại sản phẩm:</label>
                 <div id="titleproduct">
                     <input type="text" id="title1" class="form-control" placeholder="Tên danh ádasdmục">
                 </div>
