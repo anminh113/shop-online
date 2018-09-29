@@ -177,11 +177,11 @@ Route::post('add-category-admin', [
     'as'=>'post-them-danh-muc-admin',
     'uses'=>'PostController@postAddCategoryAdmin'
 ]);
-Route::delete('add-category-admin', [
+Route::delete('add-category-admin/{id}', [
     'as'=>'delete-them-danh-muc-admin',
     'uses'=>'DeleteController@deleteAddCategoryAdmin'
 ]);
-Route::update('add-category-admin', [
+Route::patch('add-category-admin', [
     'as'=>'update-them-danh-muc-admin',
     'uses'=>'UpdateController@updateAddCategoryAdmin'
 ]);

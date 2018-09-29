@@ -261,21 +261,21 @@
             $data = json_decode($res->getBody()->getContents(), true);
             //end get json
 
-            //get storeId
-            $res1 = $client1->request('GET',PageController::getUrl('stores/5b989eb9a6bce5234c9522ea'));
-            $data1 = json_decode($res1->getBody()->getContents(), true);
+            // //get storeId
+            // $res1 = $client1->request('GET',PageController::getUrl('stores/5b989eb9a6bce5234c9522ea'));
+            // $data1 = json_decode($res1->getBody()->getContents(), true);
             
-            //get danh muc trong store
-            $datatext = array();
-            for ($i=0;  $i < count($data1['store']['categories']); $i++){
-                $data2 = $data1['store']['categories'][$i]['categoryId'];
-                $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
-                $datatext[] = json_decode($res2->getBody()->getContents(), true);
+            // //get danh muc trong store
+            // $datatext = array();
+            // for ($i=0;  $i < count($data1['store']['categories']); $i++){
+            //     $data2 = $data1['store']['categories'][$i]['categoryId'];
+            //     $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
+            //     $datatext[] = json_decode($res2->getBody()->getContents(), true);
                 
-            }
-            $result = compact('datatext');
+            // }
+            // $result = compact('datatext');
           
-            return view('admin/page.categoryadmin', compact('data','result')); 
+            return view('admin/page.categoryadmin', compact('data')); 
         }
 
         public function getProductDetailAdmin(Request $req){
@@ -383,31 +383,9 @@
              $res = $client1->request('GET',PageController::getUrl('categories') );
              $data = json_decode($res->getBody()->getContents(), true);
              //end get json
- 
-
-
             return view('admin/page.addcategoryadmin', compact('data'));
         }
-        public function postAddCategoryAdmin(Request $req){
-             //post data json
-             $datajson=array("categoryName" => $req->namecategory);
-             $jsonData =json_encode($datajson);
-             $json_url = PageController::getUrl('categories');
-             $ch = curl_init( $json_url );
-             $options = array(
-                 CURLOPT_RETURNTRANSFER => true,
-                 CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                 CURLOPT_POSTFIELDS => $jsonData
-             );
-             curl_setopt_array( $ch, $options );
-             $result =  curl_exec($ch);
-             dd($result);
-             exit();
-             Log::info($result);
-             curl_close($ch);
-             //end post json
-            return view('admin/page.addcategoryadmin');
-        }
+       
 
         public function getAddProductTypeAdmin(){
             return view('admin/page.addproducttypeadmin');

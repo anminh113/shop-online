@@ -18,6 +18,16 @@
             $urlAPI = "http://localhost:3000/".$text;
             return $urlAPI;
         }
+        // Admin hệ thống
+        public function deleteAddCategoryAdmin(Request $req){
+             //get json danh muc all
+             $client1 = new \GuzzleHttp\Client();
+             $res = $client1->request('DELETE',PageController::getUrl('categories/'.$req->id.'') );
+             $data = json_decode($res->getBody()->getContents(), true);
+            
+          
+             return redirect()->back();       
+            }
 
  
         

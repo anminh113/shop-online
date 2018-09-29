@@ -43,7 +43,7 @@
                         </table>
                     </div>
                     <div class="row">
-                            <table id="table_format" class="table table-striped">
+                            {{-- <table id="table_format" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
@@ -60,7 +60,7 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-                            </table>
+                            </table> --}}
                         </div>
 
                 </div>

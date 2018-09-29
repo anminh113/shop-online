@@ -23,24 +23,28 @@
 
 
         public function updateAddCategoryAdmin(Request $req){
-            //post data json
-            $datajson=array("categoryName" => $req->namecategory);
+            // post data json
+            $datajson=array([
+                "propName" => "categoryName",
+                "value" => $req->namecategory]
+            );
             $jsonData =json_encode($datajson);
-            $json_url = PageController::getUrl('categories');
+            $json_url = PageController::getUrl('categories/'.$req->categoryId.'');
             $ch = curl_init( $json_url );
             $options = array(
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "PATCH",
                 CURLOPT_POSTFIELDS => $jsonData
             );
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
-            dd($result);
-            exit();
+            // dd($result);
+            // exit();
             Log::info($result);
             curl_close($ch);
             //end post json
-           return view('admin/page.addcategoryadmin');
+            return redirect()->back();
        }
 
  

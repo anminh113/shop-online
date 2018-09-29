@@ -66,15 +66,26 @@
                                 </thead>
                                 <tbody id="myTable">
                                     @foreach ($data['categories'] as $item)
-                                        <tr>
-                                            <td><a href="#">1</a></td>
-                                            <td>{{$item['categoryName']}}</td>
-                                            <td>2</td>
-                                            <td><a href="add-producttype-admin">Xem chi tiết</a></td>
-                                            <td data-toggle="modal" data-target="#update"><a href="#"><span class="label label-primary"><i class="fa fa-edit"></i></span></a></td>
-                                        </tr>
+                                    <tr>
+                                        <td><a href="#">1</a></td>
+                                        <td>{{$item['categoryName']}}</td>
+                                        <td>2</td>
+                                        <td><a href="add-producttype-admin">Xem chi tiết</a></td>
+                                        <td><a data-toggle="modal" data-target="#update{{$item['categoryId']}}"><span
+                                                    class="label label-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
+                                            <span class="label label-danger" ><input type="submit"form="deleteid{{$item['categoryId']}}" />
+                                                <i class="fa fa-trash" >  </i>
+                                                <form id="deleteid{{$item['categoryId']}}" hidden action="{{route('delete-them-danh-muc-admin',$item['categoryId'])}}"
+                                                    method="post">
+                                                    @method('DELETE')
+
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </span>
+                                        </td>
+                                    </tr>
                                     @endforeach
-                                 
+
                                 </tbody>
                             </table>
                         </div>
@@ -89,11 +100,10 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <form action="{{route('post-them-danh-muc-admin')}}" method="POST">
+            <form action="{{route('post-them-danh-muc-admin')}}" method="POST">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLongTitle">Thêm danh mục</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -116,31 +126,33 @@
     </div>
 </div>
 @foreach ($data['categories'] as $item)
-<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="update{{$item['categoryId']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="{{route('update-them-danh-muc-admin')}}" method="POST">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle">Cập nhật danh mục</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label for="basic">Tên danh mục sản phẩm:</label>
-                <div id="titleproduct">
-                    <input type="text" id="title1" name="updatecategory" class="form-control" value="{{$item['categoryName']}}">
-                    <input type="text" hidden name="categoryId" value="{{$item['categoryId']}}">
+                @csrf
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Cập nhật danh mục</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Xóa</button>
-                <button type="submit" class="btn btn-info">Lưu thông tin</button>
-            </div>
-            {{ csrf_field() }}
-        </form>
+                <div class="modal-body">
+                    <label for="basic">Tên danh mục sản phẩm:</label>
+                    <div id="titleproduct">
+                        <input type="text" name="namecategory" class="form-control" value="{{$item['categoryName']}}">
+                        <input type="text" hidden name="categoryId" value="{{$item['categoryId']}}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-info">Lưu thông tin</button>
+                </div>
+                @method('PATCH')
+                {{ csrf_field() }}
+            </form>
         </div>
     </div>
 </div>

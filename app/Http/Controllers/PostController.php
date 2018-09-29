@@ -29,16 +29,17 @@
              $options = array(
                  CURLOPT_RETURNTRANSFER => true,
                  CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                 CURLOPT_CUSTOMREQUEST => "POST",
                  CURLOPT_POSTFIELDS => $jsonData
              );
              curl_setopt_array( $ch, $options );
              $result =  curl_exec($ch);
-             dd($result);
-             exit();
+            //  dd($result);
+            //  exit();
              Log::info($result);
              curl_close($ch);
              //end post json
-            return view('admin/page.addcategoryadmin');
+             return redirect()->back();
         }
 
       
