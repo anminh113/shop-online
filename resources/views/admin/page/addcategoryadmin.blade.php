@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="panel-body ">
-                            <button type="button" class="btn btn-outline- btn-save" data-toggle="modal" data-target="#exampleModalLong">Thêm
+                            <button type="button" class="btn btn-outline- btn-save" data-toggle="modal" data-target="#add">Thêm
                                 danh mục</button>
                             <div class="space10">&nbsp;</div>
                             <table id="table_format" class="table table-striped">
@@ -65,20 +65,16 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
-                                    <tr>
-                                        <td><a href="#">1</a></td>
-                                        <td>0Steve Steve Steve</td>
-                                        <td>2</td>
-                                        <td><a href="add-producttype-admin">Xem chi tiết</a></td>
-                                        <td data-toggle="modal" data-target="#update">iconupdate</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">1</a></td>
-                                        <td>Steve Steve Steve</td>
-                                        <td>2</td>
-                                        <td><a href="add-producttype-admin">Xem chi tiết</a></td>
-                                        <td data-toggle="modal" data-target="#update">iconupdate</td>
-                                    </tr>
+                                    @foreach ($data['categories'] as $item)
+                                        <tr>
+                                            <td><a href="#">1</a></td>
+                                            <td>{{$item['categoryName']}}</td>
+                                            <td>2</td>
+                                            <td><a href="add-producttype-admin">Xem chi tiết</a></td>
+                                            <td data-toggle="modal" data-target="#update"><a href="#"><span class="label label-primary"><i class="fa fa-edit"></i></span></a></td>
+                                        </tr>
+                                    @endforeach
+                                 
                                 </tbody>
                             </table>
                         </div>
@@ -93,35 +89,40 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle">Thêm danh mục</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label for="basic">Tên danh mục sản phẩm:</label>
-                <div id="titleproduct">
-                    <input type="text" id="title1" class="form-control" placeholder="Tên danh mục">
+        <form action="{{route('post-them-danh-muc-admin')}}" method="POST">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Thêm danh mục</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn btn-info">Lưu thông tin</button>
-            </div>
+                <div class="modal-body">
+                    <label for="basic">Tên danh mục sản phẩm:</label>
+                    <div id="titleproduct">
+                        <input type="text" id="title1" name="namecategory" class="form-control" placeholder="Tên danh mục">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-info">Lưu thông tin</button>
+                </div>
+                {{ csrf_field() }}
+            </form>
         </div>
     </div>
 </div>
+@foreach ($data['categories'] as $item)
 <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <form action="{{route('update-them-danh-muc-admin')}}" method="POST">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle">Thêm danh mục</h4>
+                <h4 class="modal-title" id="exampleModalLongTitle">Cập nhật danh mục</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -129,17 +130,23 @@
             <div class="modal-body">
                 <label for="basic">Tên danh mục sản phẩm:</label>
                 <div id="titleproduct">
-                    <input type="text" id="title1" class="form-control" placeholder="Tên danh ádasdmục">
+                    <input type="text" id="title1" name="updatecategory" class="form-control" value="{{$item['categoryName']}}">
+                    <input type="text" hidden name="categoryId" value="{{$item['categoryId']}}">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Xóa</button>
-                <button type="button" class="btn btn-info">Lưu thông tin</button>
+                <button type="submit" class="btn btn-info">Lưu thông tin</button>
             </div>
+            {{ csrf_field() }}
+        </form>
         </div>
     </div>
 </div>
+@endforeach
+
+
 @endsection
 
 @section('footer')

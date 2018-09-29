@@ -56,3 +56,81 @@
     color: rgba(0,0,0,0.5);
     margin-top: 3px;
 }
+
+
+.rating-overview .score {
+    margin-top: 10px;
+    line-height: 1;
+}
+
+.rating-overview .average {
+    font-size: 48px;
+    color: #212121;
+    margin-bottom: 9px;
+}
+
+.rating-overview .countText {
+    color: #757575;
+    font-size: 14px;
+}
+
+.tillet {
+    color: #757575;
+    font-size: 13px;
+}
+
+.filter__seller-rating {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    width: 32px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.rank {
+    padding-top: 10px;
+}
+
+.side {
+    float: left;
+    width: 16%;
+    margin-top: 0px;
+}
+
+.middle {
+    margin-top: 10px;
+    float: left;
+    width: 54%;
+}
+
+
+.bar-container {
+    width: 97%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+}
+
+.seller-review-item {
+    border-bottom: 1 solid #eff0f5;
+    margin-bottom: 30px;
+}
+
+.seller-review-item .row {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: 'row';
+    flex-direction: 'row';
+    margin: 5px 0;
+}
+.seller-review-item .comments {
+    font-size: 14px;
+    color: #212121;
+}
+.seller-review-item .itemFooter {
+    margin-top:-12px; 
+    color: #9e9e9e;
+    font-size: 12px;
+}
+

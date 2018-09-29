@@ -213,6 +213,9 @@
         public function getReviewShop(){
             return view('user/page.reviewshop');
         }
+        public function getWriteReviewShop(){
+            return view('user/page.writereviewadmin');
+        }
 
         //End user
 
@@ -297,8 +300,25 @@
             return view('admin/page.productdetail', compact('resultdata','resultimg'));
         }
 
-        public function getEditProductDetailAdmin(){
-            return view('admin/page.editproductdetail');
+        public function getEditProductDetailAdmin(Request $req){
+            $data = array();
+            $datatext = array();
+            //get json san pham theo ID san pham
+
+            //get thong tin san pham
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
+            $data[] = json_decode($res->getBody()->getContents(), true);
+            $resultdata = compact('data');
+
+            //get anh san pham
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
+            $datatext[] = json_decode($res->getBody()->getContents(), true);
+            $resultimg = compact('datatext');
+
+             //end get json
+            // dd($result);
+            return view('admin/page.editproductdetail', compact('resultdata','resultimg'));
         }
 
         public function getAddProductDetailAdmin(){
@@ -311,6 +331,8 @@
         public function getReview(){
             return view('admin/page.reviewadmin');
         }
+
+        
 
         public function getDiscount(){
                 //get json san pham theo gian hang
@@ -356,6 +378,34 @@
         }
 
         public function getAddCategoryAdmin(){
+             //get json danh muc all
+             $client1 = new \GuzzleHttp\Client();
+             $res = $client1->request('GET',PageController::getUrl('categories') );
+             $data = json_decode($res->getBody()->getContents(), true);
+             //end get json
+ 
+
+
+            return view('admin/page.addcategoryadmin', compact('data'));
+        }
+        public function postAddCategoryAdmin(Request $req){
+             //post data json
+             $datajson=array("categoryName" => $req->namecategory);
+             $jsonData =json_encode($datajson);
+             $json_url = PageController::getUrl('categories');
+             $ch = curl_init( $json_url );
+             $options = array(
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                 CURLOPT_POSTFIELDS => $jsonData
+             );
+             curl_setopt_array( $ch, $options );
+             $result =  curl_exec($ch);
+             dd($result);
+             exit();
+             Log::info($result);
+             curl_close($ch);
+             //end post json
             return view('admin/page.addcategoryadmin');
         }
 

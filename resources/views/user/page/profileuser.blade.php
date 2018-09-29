@@ -37,7 +37,7 @@
             <div class="space20">&nbsp;</div>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
             <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="openCity(event, 'sanpham');">
                 <div class=" tablink bottombar w3-padding border-red text-center">Quản lý tài khoản</div>
             </a>
@@ -47,9 +47,14 @@
                 <div class=" tablink bottombar w3-padding text-center">Đơn hàng của tôi</div>
             </a>
         </div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
+                <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='review-shop';">
+                    <div class=" tablink bottombar w3-padding text-center">Nhận xét của tôi</div>
+                </a>
+            </div>
         <div class="col-lg-5 col-md-4 col-sm-6 col-6">
                 <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user-shop';">
-                    <div class=" tablink  w3-padding border-red text-center">Sản phẩm yêu thích & Gian hàng đang theo dõi</div>
+                    <div class=" tablink  w3-padding border-red text-center">Sản phẩm yêu thích & Gian hàng đã theo dõi</div>
                 </a>
             </div>
         <div class="col-lg-12">
@@ -96,7 +101,7 @@
             </div>
             <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
-
+                    
                     <div class="order">
                         <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span> Sản phẩm</div>
                         
@@ -126,7 +131,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                        {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +166,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%; font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                        {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%; font-size: 14px; margin-top: 10px">Viết đánh giá</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +196,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                            <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                            {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button> --}}
                                         </div>
 
                                     </div>

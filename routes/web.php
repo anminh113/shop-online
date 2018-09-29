@@ -37,7 +37,7 @@ Route::get('index', [
     'uses'=>'PageController@getIndex'
 ]);
 
-Route::get('product/{id}', [
+Route::get('product/{id}/{typename}', [
     'as'=>'san-pham',
     'uses'=>'PageController@getProduct'
 ]);
@@ -97,6 +97,11 @@ Route::get('review-shop', [
     'uses'=>'PageController@getReviewShop'
 ]);
 
+Route::get('write-review-shop', [
+    'as'=>'write-review-shop',
+    'uses'=>'PageController@getWriteReviewShop'
+]);
+
 // Đăng nhập admin
 Route::get('login-admin', [
     'as'=>'login-admin',
@@ -126,7 +131,7 @@ Route::get('product-detail-admin/{id}', [
     'uses'=>'PageController@getProductDetailAdmin'
 ]);
 
-Route::get('edit-product-detail-admin', [
+Route::get('edit-product-detail-admin/{id}', [
     'as'=>'sua-chi-tiet-san-pham-admin',
     'uses'=>'PageController@getEditProductDetailAdmin'
 ]);
@@ -163,10 +168,24 @@ Route::get('detail-admin-shop', [
     'uses'=>'PageController@getDetailAdminShop'
 ]);
 
+// ---
 Route::get('add-category-admin', [
     'as'=>'them-danh-muc-admin',
     'uses'=>'PageController@getAddCategoryAdmin'
 ]);
+Route::post('add-category-admin', [
+    'as'=>'post-them-danh-muc-admin',
+    'uses'=>'PostController@postAddCategoryAdmin'
+]);
+Route::delete('add-category-admin', [
+    'as'=>'delete-them-danh-muc-admin',
+    'uses'=>'DeleteController@deleteAddCategoryAdmin'
+]);
+Route::update('add-category-admin', [
+    'as'=>'update-them-danh-muc-admin',
+    'uses'=>'UpdateController@updateAddCategoryAdmin'
+]);
+// ---
 
 Route::get('add-producttype-admin', [
     'as'=>'them-loai-admin',

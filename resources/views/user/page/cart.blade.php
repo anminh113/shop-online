@@ -40,10 +40,10 @@
                                                 <div class="cart_item_title">Thành tiền</div>
                                             </div>
                                             <div class="col-lg-1">
-                                                    <div class="cart_item_title">
-                                                        Xóa
-                                                    </div>
+                                                <div class="cart_item_title">
+                                                    Xóa
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -65,47 +65,70 @@
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
                                                     @if($item['item']['saleOff']['discount']==0)
-                                                        {{number_format($item['item']['price'], 3)}}.000₫
+                                                    {{number_format($item['item']['price'], 3)}}.000₫
                                                     @else
-                                                    {{number_format($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100, 3)}}.000₫
+                                                    {{number_format($item['item']['price'] - ($item['item']['price'] *
+                                                    $item['item']['saleOff']['discount'])/100, 3)}}.000₫
                                                     @endif
-                                                    
-                                                
+
+
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="cart_item_text">
                                                     <div class="input-group">
-                                                        <span class="input-group-btn">
-                                                            <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]" onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['productId'])}}';">
+                                                        @if($item['qty']<$item['item']['quantity']) <span class="input-group-btn">
+                                                            <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
+                                                                onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['productId'])}}';">
                                                                 <i class="fas fa-minus"></i>
                                                             </div>
-                                                        </span>
-                                                        <input type="text" name="quant[<?php echo $i?>]" 
-                                                            class="form-control input-number text-center" value="{{$item['qty']}}"
-                                                            min="1" max="100" disabled style="width: 50px;height: 38px; background-color: #fff;">
-                                                        <span class="input-group-btn">
-                                                            <div class="btn  btn-number" onclick="window.location='{{route('gio-hang',$item['item']['productId'])}}';" data-type="plus" data-field="quant[<?php echo $i?>]">
-                                                                <i class="fas fa-plus"></i>
-                                                            </div>
-                                                        </span>
+                                                            </span>
+                                                            <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center"
+                                                                min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
+                                                                disabled style="width: 50px;height: 38px; background-color: #fff;">
+                                                            <span class="input-group-btn">
+                                                                <div class="btn  btn-number" data-type="plus"
+                                                                    data-field="quant[<?php echo $i?>]" onclick="window.location='{{route('gio-hang',$item['item']['productId'])}}';">
+                                                                    <i class="fas fa-plus"></i>
+                                                                </div>
+                                                            </span>
+                                                        @endif
+                                                        @if($item['qty']>=$item['item']['quantity']) <span class="input-group-btn">
+                                                                <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
+                                                                    onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['productId'])}}';">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </div>
+                                                                </span>
+                                                                <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center"
+                                                                    min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
+                                                                    disabled style="width: 50px;height: 38px; background-color: #fff;">
+                                                                <span class="input-group-btn">
+                                                                    <div class="btn  btn-number" data-type="plus"
+                                                                        data-field="quant[<?php echo $i?>]">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </div>
+                                                                </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
                                                     @if($item['item']['saleOff']['discount']==0)
-                                                        {{number_format($item['qty'] * $item['item']['price'], 3)}}.000₫
+                                                    {{number_format($item['qty'] * $item['item']['price'], 3)}}.000₫
                                                     @else
-                                                        {{number_format($item['qty'] * ($item['item']['price'] - ($item['item']['price'] * $item['item']['saleOff']['discount'])/100), 3)}}.000₫
+                                                    {{number_format($item['qty'] * ($item['item']['price'] -
+                                                    ($item['item']['price'] *
+                                                    $item['item']['saleOff']['discount'])/100), 3)}}.000₫
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-1">
-                                                    <div class="cart_item_text">
-                                                    <a href="{{Route('xoa-gio-hang',$item['item']['productId'])}}"><i class="fas fa-trash"></i></a>
-                                                    </div>
+                                                <div class="cart_item_text">
+                                                    <a href="{{Route('xoa-gio-hang',$item['item']['productId'])}}"><i
+                                                            class="fas fa-trash"></i></a>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -121,36 +144,37 @@
                     <div class="order_total">
                         <div class="row">
                             @if(Session::has('cart'))
-                                <div class="col-lg-6">
-                                    <div class="order_total_content text-letf">
-                                        <div class="order_total_title text-letf">Tạm tính:</div>
-                                        <div class="order_total_amount">{{number_format(Session('cart')->totalPrice, 3)}}.000 ₫</div>
-                                    </div>
-                                    <div class="order_total_content text-letf">
-                                        <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
-                                        <div class="order_total_amount">
-                                            @foreach ($data['deliveryPrices'] as $item)
-                                                @if($item['productQuantity'] === Session('cart')->totalQty)
-                                                    {{$item['transportFee']}}.000 ₫
-                                                    @break
-                                                @else
-                                                    0 ₫
-                                                    @break  
-                                                @endif                                               
-                                            @endforeach
-                                        
-                                        </div>
-                                    </div>
-                                    <div class="order_total_content text-left">
-                                        <div class="order_total_title text-letf">Thành Tiền:</div>
-                                        <div class="order_total_amount">0000</div>
-                                    </div>
-                                    <div class="order_total_content text-left">
-                                        <div class="order_total_title"></div>
-                                        <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
+                            <div class="col-lg-6">
+                                <div class="order_total_content text-letf">
+                                    <div class="order_total_title text-letf">Tạm tính:</div>
+                                    <div class="order_total_amount">{{number_format(Session('cart')->totalPrice,
+                                        3)}}.000 ₫</div>
+                                </div>
+                                <div class="order_total_content text-letf">
+                                    <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
+                                    <div class="order_total_amount">
+                                        @foreach ($data['deliveryPrices'] as $item)
+                                        @if($item['productQuantity'] === Session('cart')->totalQty)
+                                        {{$item['transportFee']}}.000 ₫
+                                        @break
+                                        @else
+                                        0 ₫
+                                        @break
+                                        @endif
+                                        @endforeach
+
                                     </div>
                                 </div>
-                                @endif
+                                <div class="order_total_content text-left">
+                                    <div class="order_total_title text-letf">Thành Tiền:</div>
+                                    <div class="order_total_amount">0000</div>
+                                </div>
+                                <div class="order_total_content text-left">
+                                    <div class="order_total_title"></div>
+                                    <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
+                                </div>
+                            </div>
+                            @endif
                             <div class="col-lg-6">
                                 <div class="cart_buttons">
                                     <button type="button" class="btn btn-outline-info btn-change" onclick="window.location='check-cart';">Xác

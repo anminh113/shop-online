@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="space10">&nbsp;</div>
-                                <button type="button" class="btn btn-default" onclick="window.location='edit-product-detail-admin';">Default</button>
+                                <button type="button" class="btn btn-default" onclick="window.location='{{route('sua-chi-tiet-san-pham-admin',$item['product']['productId'])}}';">Cập nhật</button>
                                 <button type="button" class="btn btn-primary">Primary</button>
                             </div>
                         </div>

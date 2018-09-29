@@ -26,17 +26,17 @@
             </div>
             <div class="space10">&nbsp;</div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
             <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="openCity(event, 'sanpham');">
-                <div class=" tablink bottombar w3-padding border-red text-center">Chưa viết đánh giá (4)</div>
+                <div class=" tablink bottombar w3-padding border-red text-center">Đánh giá</div>
             </a>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="openCity(event, 'hoso');">
-                <div class=" tablink bottombar w3-padding text-center">Lịch sử đánh giá</div>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='review-shop';">
+                <div class=" tablink bottombar w3-padding text-center">Nhận xét của tôi</div>
             </a>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
             <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user';">
                 <div class=" tablink  w3-padding border-red text-center">Thông tin cá nhân</div>
             </a>
@@ -44,117 +44,8 @@
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
-                    <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span> Sản
-                            phẩm</div>
 
-                        <div class="panel order-item">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='write-review-shop';"
-                                            style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>2</span> Sản
-                            phẩm</div>
-                        <div class=" panel order-item ">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='write-review-shop';"
-                                            style="width: 100%; font-size: 14px; margin-top: 10px">Viết đánh giá</button>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='write-review-shop';"
-                                            style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
-                                       
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space15">&nbsp;</div>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col-lg-7">
                             <div class="section-title" style="color: #757575;"> Đã mua ngày 15 thg 11 2017</div>
                             <div style="padding-left: 5px;font-size: 13px; padding-bottom: 10px;">Nhận xét và đánh giá
@@ -220,10 +111,10 @@
                         <div class="col-lg-3"><button type="button" class="btn btn-outline-warning btn-save" style="right:0;height: 50px;width: 100%;font-size: 16px; margin-top: 10px">Giử
                                 đánh giá</button></div>
 
-                    </div> --}}
+                    </div>
                 </div>
             </div>
-            <div id="hoso" class="tabcontent" style="display:none">
+            {{-- <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
                     <div class="row">
                         <div class="col-lg-7">
@@ -324,7 +215,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -516,6 +407,7 @@
     });
 
 </script>
+
 <script>
     function openCity(evt, cityName) {
         var i, x, tablinks;
@@ -532,22 +424,23 @@
     }
 
 </script>
+
 <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-    
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function () {
-                this.classList.toggle("active1");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        }
-    
-    </script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active1");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+
+</script>
 
 @endsection
