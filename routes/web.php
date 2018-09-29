@@ -37,7 +37,7 @@ Route::get('index', [
     'uses'=>'PageController@getIndex'
 ]);
 
-Route::get('product/{id}/{typename}', [
+Route::get('product/{id}', [
     'as'=>'san-pham',
     'uses'=>'PageController@getProduct'
 ]);

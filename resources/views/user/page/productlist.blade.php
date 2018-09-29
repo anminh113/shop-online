@@ -111,7 +111,7 @@
                                         <div class="product_content">
                                         <div class="product_price" style="font-size: 16px" id="price{{$item['productId']}}">{{$item['price']}} ₫<span>{{$item['price']}} ₫</span></div>
                                             <div class="product_name">
-                                                <div><a href="{{ route('san-pham',[$item['productId'], preg_replace('/\+/', '-', urlencode($item['productName'])) ])}}" tabindex="0">{{$item['productName']}}</a></div>
+                                                <div><a href="{{ route('san-pham',$item['productId'] )}}" tabindex="0">{{$item['productName']}}</a></div>
                                             </div>
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>

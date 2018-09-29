@@ -71,19 +71,17 @@
                                         <td>{{$item['categoryName']}}</td>
                                         <td>2</td>
                                         <td><a href="add-producttype-admin">Xem chi tiết</a></td>
-                                        <td><a data-toggle="modal" data-target="#update{{$item['categoryId']}}"><span
-                                                    class="label label-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
-                                            <span class="label label-danger" ><input type="submit"form="deleteid{{$item['categoryId']}}" />
+                                        <td><a data-toggle="modal" data-target="#update{{$item['categoryId']}}">
+                                            <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
+                                            <button class="btn btn-danger"  type="submit"   form="deleteid{{$item['categoryId']}}">
                                                 <i class="fa fa-trash" >  </i>
-                                                <form id="deleteid{{$item['categoryId']}}" hidden action="{{route('delete-them-danh-muc-admin',$item['categoryId'])}}"
-                                                    method="post">
-                                                    @method('DELETE')
-
-                                                    {{ csrf_field() }}
-                                                </form>
-                                            </span>
+                                            </button>
                                         </td>
                                     </tr>
+                                    <form id="deleteid{{$item['categoryId']}}" hidden action="{{route('delete-them-danh-muc-admin',$item['categoryId'])}}" method="post">
+                                    @method('DELETE')
+                                    {{ csrf_field() }}
+                                </form>
                                     @endforeach
 
                                 </tbody>
