@@ -187,13 +187,42 @@ Route::patch('add-category-admin', [
 ]);
 // ---
 
-Route::get('add-producttype-admin', [
+// ---
+Route::get('add-producttype-admin/{id}', [
     'as'=>'them-loai-admin',
     'uses'=>'PageController@getAddProductTypeAdmin'
 ]);
+Route::post('add-producttype-admin', [
+    'as'=>'post-them-loai-admin',
+    'uses'=>'PostController@postAddProductTypeAdmin'
+]);
+Route::delete('add-producttype-admin/{id}', [
+    'as'=>'delete-them-loai-admin',
+    'uses'=>'DeleteController@deleteAddProductTypeAdmin'
+]);
+Route::patch('add-producttype-admin', [
+    'as'=>'update-them-loai-admin',
+    'uses'=>'UpdateController@updateAddProductTypeAdmin'
+]);
+// ---
 
-Route::get('add-specification-admin', [
-    'as'=>'them-thong-so ky-thuat-admin',
+// ---
+Route::get('add-specification-admin/{id}', [
+    'as'=>'them-thong-so-ky-thuat-admin',
     'uses'=>'PageController@getAddSpecificationAdmin'
 ]);
+
+Route::post('add-specification-admin', [
+    'as'=>'post-them-thong-so-ky-thuat-admin',
+    'uses'=>'PostController@postAddSpecificationAdmin'
+]);
+Route::delete('add-specification-admin/{id}', [
+    'as'=>'delete-them-thong-so-ky-thuat-admin',
+    'uses'=>'DeleteController@deleteAddSpecificationAdmin'
+]);
+Route::patch('add-specification-admin', [
+    'as'=>'update-them-thong-so-ky-thuat-admin',
+    'uses'=>'UpdateController@updateAddSpecificationAdmin'
+]);
+// ---
 

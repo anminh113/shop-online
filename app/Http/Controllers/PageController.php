@@ -8,6 +8,8 @@
     use GuzzleHttp\Promise;
     use GuzzleHttp\Pool;
     use Illuminate\Support\Facades\Log;
+    use GuzzleHttp\Exception\RequestException;
+
  
     class PageController extends Controller{
         
@@ -261,21 +263,21 @@
             $data = json_decode($res->getBody()->getContents(), true);
             //end get json
 
-            // //get storeId
-            // $res1 = $client1->request('GET',PageController::getUrl('stores/5b989eb9a6bce5234c9522ea'));
-            // $data1 = json_decode($res1->getBody()->getContents(), true);
+            //get storeId
+            $res1 = $client1->request('GET',PageController::getUrl('stores/5b989eb9a6bce5234c9522ea'));
+            $data1 = json_decode($res1->getBody()->getContents(), true);
             
-            // //get danh muc trong store
-            // $datatext = array();
-            // for ($i=0;  $i < count($data1['store']['categories']); $i++){
-            //     $data2 = $data1['store']['categories'][$i]['categoryId'];
-            //     $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
-            //     $datatext[] = json_decode($res2->getBody()->getContents(), true);
+            //get danh muc trong store
+            $datatext = array();
+            for ($i=0;  $i < count($data1['store']['categories']); $i++){
+                $data2 = $data1['store']['categories'][$i]['categoryId'];
+                $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
+                $datatext[] = json_decode($res2->getBody()->getContents(), true);
                 
-            // }
-            // $result = compact('datatext');
+            }
+            $result = compact('datatext');
           
-            return view('admin/page.categoryadmin', compact('data')); 
+            return view('admin/page.categoryadmin', compact('data','result')); 
         }
 
         public function getProductDetailAdmin(Request $req){
@@ -387,12 +389,40 @@
         }
        
 
-        public function getAddProductTypeAdmin(){
-            return view('admin/page.addproducttypeadmin');
+        public function getAddProductTypeAdmin(Request $req){
+            //get json danh muc all
+            $client1 = new \GuzzleHttp\Client();
+            $res = $client1->request('GET',PageController::getUrl('categories/'.$req->id.'') );
+            $data = json_decode($res->getBody()->getContents(), true);
+            //end get json
+
+            $res = $client1->request('GET',PageController::getUrl('producttypes/category/'.$req->id.'') );
+            $data1 = json_decode($res->getBody()->getContents(), true);
+            
+
+            return view('admin/page.addproducttypeadmin', compact('data','data1'));
         }
 
-        public function getAddSpecificationAdmin(){
-            return view('admin/page.addspecificationadmin');
+        public function getAddSpecificationAdmin(Request $req){
+             $client1 = new \GuzzleHttp\Client();  
+             try {
+                $res = $client1->request('GET',PageController::getUrl('producttypes/'.$req->id.'') );
+                $data1 = json_decode($res->getBody()->getContents(), true);
+                // dd($data1);
+                $res = $client1->request('GET',PageController::getUrl('specificationtypes/producttype/'.$req->id.'') );
+                $status = $res->getStatusCode();
+
+                $data = json_decode($res->getBody()->getContents(), true);
+                //  dd($data);
+                return view('admin/page.addspecificationadmin', compact('data','data1','status'));
+
+            } catch (RequestException $e) {
+                if ($e->getResponse()->getStatusCode() == '404') {
+                    $status = $e->getResponse()->getStatusCode();
+                    return view('admin/page.addspecificationadmin', compact('data','data1','status'));
+                }            
+            } 
+           
         }
 
 

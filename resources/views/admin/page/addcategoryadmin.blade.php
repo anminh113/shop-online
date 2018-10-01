@@ -59,7 +59,7 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Danh mục</th>
-                                        <th>Số loại sản phẩm</th>
+                                        {{-- <th>Số loại sản phẩm</th> --}}
                                         <th>Xem chi tiết</th>
                                         <th>Cập nhật</th>
                                     </tr>
@@ -69,8 +69,8 @@
                                     <tr>
                                         <td><a href="#">1</a></td>
                                         <td>{{$item['categoryName']}}</td>
-                                        <td>2</td>
-                                        <td><a href="add-producttype-admin">Xem chi tiết</a></td>
+                                        {{-- <td>2</td> --}}
+                                        <td><a href="{{route('them-loai-admin',$item['categoryId'])}}">Xem chi tiết</a></td>
                                         <td><a data-toggle="modal" data-target="#update{{$item['categoryId']}}">
                                             <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
                                             <button class="btn btn-danger"  type="submit"   form="deleteid{{$item['categoryId']}}">

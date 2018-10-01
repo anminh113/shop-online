@@ -8,6 +8,8 @@
     use GuzzleHttp\Promise;
     use GuzzleHttp\Pool;
     use Illuminate\Support\Facades\Log;
+    use GuzzleHttp\Exception\RequestException;
+
  
     class DeleteController extends Controller{
         
@@ -26,8 +28,17 @@
              $data = json_decode($res->getBody()->getContents(), true);
             
           
-             return redirect()->back();       
-            }
+            return redirect()->back();       
+        }
+
+        public function deleteAddProductTypeAdmin(Request $req){
+            //get json danh muc all
+            $client1 = new \GuzzleHttp\Client();
+            $res = $client1->request('DELETE',PageController::getUrl('producttypes/'.$req->id.'') );
+            $data = json_decode($res->getBody()->getContents(), true);
+            return redirect()->back();
+        }
+    
 
  
         

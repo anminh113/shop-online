@@ -45,14 +45,15 @@
                     <!-- RECENT PURCHASES -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><b>Danh mục: XXX</b> </h3>
+                            <h3 class="panel-title"><b>Danh mục: {{$data['category']['categoryName']}}</b> </h3>
                             <div class="right" style="position: absolute;">
                                 <input type="text" id="myInput" placeholder="Tìm kiếm...">
                             </div>
                         </div>
                         <div class="panel-body ">
-                                <button type="button" class="btn btn-outline- btn-save" data-toggle="modal" data-target="#exampleModalLong">Thêm loại sản phẩm</button>
-                                    <div class="space10">&nbsp;</div>
+                            <button type="button" class="btn btn-outline- btn-save" data-toggle="modal" data-target="#add">Thêm
+                                loại sản phẩm</button>
+                            <div class="space10">&nbsp;</div>
                             <table id="table_format" class="table table-striped">
                                 <thead>
                                     <tr>
@@ -63,18 +64,24 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                    @foreach ($data1['productTypes'] as $item)
                                     <tr>
                                         <td><a href="#">1</a></td>
-                                        <td>0Steve Steve Steve</td>
-                                        <td><a href="add-specification-admin">Xem chi tiết</a></td>
-                                        <td data-toggle="modal" data-target="#update">iconupdate</td>
+                                        <td>{{$item['productTypeName']}}</td>
+                                        <td><a href="{{route('them-thong-so-ky-thuat-admin',$item['productTypeId'])}}">Xem chi tiết</a></td>
+                                        <td><a data-toggle="modal" data-target="#update{{$item['productTypeId']}}">
+                                                <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
+                                            <button class="btn btn-danger" type="submit" form="deleteid{{$item['productTypeId']}}">
+                                                <i class="fa fa-trash"> </i>
+                                            </button>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="#">1</a></td>
-                                        <td>Steve Steve Steve</td>
-                                        <td><a href="add-specification-admin">Xem chi tiết</a></td>
-                                        <td data-toggle="modal" data-target="#update">iconupdate</td>
-                                    </tr>
+                                    <form id="deleteid{{$item['productTypeId']}}" hidden action="{{route('delete-them-loai-admin',$item['productTypeId'])}}"
+                                        method="post">
+                                        @method('DELETE')
+                                        {{ csrf_field() }}</form>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -89,53 +96,66 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle">Thêm danh mục</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label for="basic">Tên danh mục sản phẩm:</label>
-                <div id="titleproduct">
-                    <input type="text" id="title1" class="form-control" placeholder="Tên danh mục">
+            <form action="{{route('post-them-loai-admin')}}" method="POST">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Thêm loại sản phẩm</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn btn-info">Lưu thông tin</button>
-            </div>
+                <div class="modal-body">
+                    <label for="basic">Tên loại sản phẩm:</label>
+                    <div id="titleproduct">
+                        <input type="text" id="title1" name="nameproducttype" class="form-control" placeholder="Tên loại sản phẩm">
+                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-info">Lưu thông tin</button>
+                </div>
+                <input type="text"  name="categoryId"  value="{{$data['category']['categoryId']}}">
+                {{ csrf_field() }}
+            </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+
+@foreach ($data1['productTypes'] as $item)
+<div class="modal fade" id="update{{$item['productTypeId']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle">Thêm loại sản phẩm</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label for="basic">Tên loại sản phẩm:</label>
-                <div id="titleproduct">
-                    <input type="text" id="title1" class="form-control" placeholder="Tên danh ádasdmục">
+            <form action="{{route('update-them-loai-admin')}}" method="POST">
+                @csrf
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Cập nhật danh mục</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Xóa</button>
-                <button type="button" class="btn btn-info">Lưu thông tin</button>
-            </div>
+                <div class="modal-body">
+                    <label for="basic">Tên loại sản phẩm:</label>
+                    <div id="titleproduct">
+                        <input type="text" name="nameproducttype" class="form-control" value="{{$item['productTypeName']}}">
+                        <input type="text" hidden name="productTypeId" value="{{$item['productTypeId']}}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-info">Lưu thông tin</button>
+                </div>
+                @method('PATCH')
+                {{ csrf_field() }}
+            </form>
         </div>
     </div>
 </div>
+@endforeach
 @endsection
 
 @section('footer')

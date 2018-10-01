@@ -23,9 +23,9 @@
 
 					{{-- Admin --}}
 					<ul class="nav">
-						<li><a href="admin" id="admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
-						<li><a href="category-admin-shop" id="category-admin-shop" class=""><i class="lnr lnr-code"></i> <span>Danh sách gian hàng</span></a></li>
-						<li><a href="add-category-admin" id="add-category-admin" class=""><i class="lnr lnr-code"></i> <span>Thêm danh mục	</span></a></li>
+						<li><a href="{{route('trang-chu-admin-he-thong')}}" id="admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
+						<li><a href="{{route('danh-sach-shop-he-thong')}}" id="category-admin-shop" class=""><i class="lnr lnr-code"></i> <span>Danh sách gian hàng</span></a></li>
+						<li><a href="{{route('them-danh-muc-admin')}}" id="add-category-admin" class=""><i class="lnr lnr-code"></i> <span>Thêm danh mục	</span></a></li>
 					</ul>
 
 
