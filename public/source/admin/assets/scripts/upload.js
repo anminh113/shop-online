@@ -46,7 +46,7 @@ $("document").ready(function() {
                     $('#loader1').remove();
                     $('#label1').append('<img id="test1" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                     $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
-                    $("#imgur1").append('<input type="text" id="img1" value="'+res.data.link+'" hidden>');
+                    $("#imgur1").append('<input type="text" id="img1" name="img1" value="'+res.data.link+'" hidden>');
 
                 },
                 error: function() {
@@ -125,7 +125,7 @@ $("document").ready(function() {
                     $('#loader2').remove();
                     $('#label2').append('<img id="test2" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                     $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
-                    $("#imgur2").append('<input type="text" id="img2" value="'+res.data.link+'" hidden>');
+                    $("#imgur2").append('<input type="text" id="img2" name="img2" value="'+res.data.link+'" hidden>');
                 },
                 error: function() {
                     alert("Failed ");
@@ -203,7 +203,7 @@ $("document").ready(function() {
                     $('#loader3').remove();
                     $('#label3').append('<img id="test3" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                     $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
-                    $("#imgur3").append('<input type="text" id="img3" value="'+res.data.link+'" hidden>');
+                    $("#imgur3").append('<input type="text" id="img3" name="img3" value="'+res.data.link+'" hidden>');
                 },
                 error: function() {
                     alert("Failed ");

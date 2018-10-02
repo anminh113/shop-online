@@ -49,10 +49,12 @@
                         <div class="col-lg-5 col-md-5">
                             <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
                                 <div class="image_selected" id="image_selected">
-                                        @foreach ($resultimg['datatext'] as $da )
+                                    @foreach ($resultimg['datatext'] as $da )
                                         @foreach ($da['images'] as $da1)   
-                                                <img id="expandedImg" src={{$da1["imageURL"]}} style="width:100%">
-                                                @break
+                                            @foreach ($da1['imageList'] as $da2) 
+                                                    <img id="expandedImg" src={{$da2["imageURL"]}} style="width:100%">
+                                                    @break
+                                            @endforeach 
                                         @endforeach 
                                     @endforeach
                                    
@@ -61,12 +63,14 @@
                                     <?php $i = 1 ?>
                                     @foreach ($resultimg['datatext'] as $da )
                                         @foreach ($da['images'] as $da1)  
+                                        @foreach ($da1['imageList'] as $da2) 
                                         <div class="column1" id="column<?php echo $i ?>">
                                             <label for="file-upload<?php echo $i ?>" id="label<?php echo $i ?>" class="custom-file-upload"><i class="lnr lnr-sync"></i></label>
-                                            <img id="test<?php echo $i ?>" src={{$da1["imageURL"]}} style="width:100%"
+                                            <img id="test<?php echo $i ?>" src={{$da2["imageURL"]}} style="width:100%"
                                                     onclick="imgshow(this);">
                                         </div>
                                         <?php $i = $i+1 ?>
+                                        @endforeach 
                                         @endforeach 
                                     @endforeach
 

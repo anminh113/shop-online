@@ -98,16 +98,17 @@
                                     <div class="product_item discount">
                                         <div class="product_border"></div>
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                @foreach ($result['datatext'] as $da )
+                                            @foreach ($result['datatext'] as $da )
                                                 @foreach ($da['images'] as $da1)   
-                                                    @if($item['productId']== $da1['productId']) 
-                                                    <img src={{$da1["imageURL"]}} width="115" height="115" alt="">
-                                                        @break
+                                                    @if($item['productId'] == $da1['productId']) 
+                                                        @foreach($da1['imageList'] as $da2)
+                                                            <img src={{$da2['imageURL']}} width="115" height="115" alt="">
+                                                            @break
+                                                        @endforeach
                                                     @endif
                                                 @endforeach 
                                             @endforeach
                                         </div>
-                                        
                                         <div class="product_content">
                                         <div class="product_price" style="font-size: 16px" id="price{{$item['productId']}}">{{$item['price']}} ₫<span>{{$item['price']}} ₫</span></div>
                                             <div class="product_name">

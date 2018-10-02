@@ -111,7 +111,7 @@
                 <div class="modal-body">
                     <label for="basic">Tên danh mục sản phẩm:</label>
                     <div id="titleproduct">
-                        <input type="text" id="title1" name="namecategory" class="form-control" placeholder="Tên danh mục">
+                        <input type="text" id="title1"  name="namecategory" class="form-control" placeholder="Tên danh mục" autofocus>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -140,7 +140,7 @@
                 <div class="modal-body">
                     <label for="basic">Tên danh mục sản phẩm:</label>
                     <div id="titleproduct">
-                        <input type="text" name="namecategory" class="form-control" value="{{$item['categoryName']}}">
+                        <input type="text" name="namecategory"  class="form-control" value="{{$item['categoryName']}}" autofocus>
                         <input type="text" hidden name="categoryId" value="{{$item['categoryId']}}">
                     </div>
                 </div>

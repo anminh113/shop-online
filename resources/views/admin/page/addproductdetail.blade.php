@@ -14,11 +14,12 @@
     <div class="main-content">
         <div class="container-fluid">
             <div class="panel panel-headline">
+                    <form action="{{route('post-them-chi-tiet-san-pham-admin')}}" method="POST">
                 <div class="panel-heading text-right">
                     <div class="row">
                         <div class="col-lg-4 col-md-4"></div>
                         <div class="col-lg-8 col-md-8">
-                            <h3 class="panel-title"><input class="form-control input-lg" type="text" placeholder="Tên sản phẩm "></h3>
+                            <h3 class="panel-title"><input class="form-control input-lg" type="text" name="productname" placeholder="Tên sản phẩm "></h3>
                             <p class="panel-subtitle">
                                 <ul class="breadcrumb">
                                     <!-- <li><a href="#">Chuột</a></li> -->
@@ -30,7 +31,6 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-
                         <form id="imgur">
                             <input type="file" id="file-upload1" class=" imgur btn btn-default btn-file" style="display:none"
                                 accept="image/*" data-max-size="5000" />
@@ -51,8 +51,6 @@
                                             <img id="test1" src="http://placehold.it/1920x1080?text= Thêm ảnh" style="width:100%"
                                                 onclick="imgshow(this);"> </label>
                                         <div style="hidden" id="imgur1"></div>
-
-
                                     </div>
                                     <div class="column">
                                         <label for="file-upload2" id="label2" class="custom-file-upload">
@@ -74,40 +72,40 @@
                         <div class="col-lg-7 col-md-7">
                             <label for="basic">Giá sản phẩm:</label>
                             <div class="input-group">
-                                <input class="form-control" type="text">
+                                <input class="form-control" name="price" type="text">
                                 <span class="input-group-addon">VND</span>
                             </div>
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Số lượng nhập kho:</label>
                             <div class="input-group">
-                                <input class="form-control" type="number">
+                                <input class="form-control" name="quantity" type="number">
                                 <span class="input-group-addon">Chiếc</span>
                             </div>
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Chọn danh mục sản phẩm:</label>
                             <select class="form-control" id="category">
                                 <option value="">- Chọn danh mục -</option>
-
                             </select>
                             
                             <div class="space15">&nbsp;</div>
+                            
                             <label for="basic">Thông số kỹ thuật:</label>
                             <select class="form-control" id="producttype">
-                                {{-- <option value="">Chọn loại thông số kỹ thuật</option> --}}
-
                             </select>
+                            <div hidden id="producttype1"></div>
                             <div class="space15">&nbsp;</div>
                             <table class="table form-style-4" id="table">
                                 <tbody id="myTable">
 
                                 </tbody>
                             </table>
+                            <input hidden name="storeId" value="{{$storeId}}">
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Tổng quan sản phẩm:</label>
                             <div id="titleproduct">
-                                <input type="text" id="title1" class="form-control" placeholder="Tiêu đề">
+                                <input type="text" id="title1" name="title2[]" class="form-control" placeholder="Tiêu đề">
                                 <div class="space10">&nbsp;</div>
-                                <textarea class="form-control" id="value1" style=" box-sizing: border-box; resize: none;"
+                                <textarea class="form-control" id="value1" name="value2[]" style=" box-sizing: border-box; resize: none;"
                                     placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>
                             </div>
                             <div class="space10">&nbsp;</div>
@@ -120,13 +118,15 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="space10">&nbsp;</div>
-                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm
+                            <button type="submit" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm
                                 sản phẩm</button>
 
                             {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='add-product-detail-admin';">Thêm
                                 sản phẩm</button> --}}
                         </div>
                     </div>
+                    {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
         </div>
@@ -156,10 +156,10 @@
             i = i+1;
             console.log(i);
             $("#titleproduct").append('<div class="space10">&nbsp;</div>');
-            $("#titleproduct").append('<input type="text" id="title'+i+'" class="form-control" placeholder="Tiêu đề">');
+            $("#titleproduct").append('<input type="text" id="title'+i+'" name="title2[]" class="form-control" placeholder="Tiêu đề">');
             $("#titleproduct").append('<div class="space10">&nbsp;</div>');
             $("#titleproduct").append(
-                '<textarea class="form-control" id="value'+i+'" style="box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>'
+                '<textarea class="form-control" id="value'+i+'" name="value2[]" style="box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>'
             );
         })
     });
@@ -222,17 +222,18 @@
             var len = data['productTypes'].length;
             for (var i = 0; i < len; i++) {
                 $("#producttype option").remove();
-                html += '<option value="' + json_data_product_type_specificationtypes + '/' + data[
-                    'productTypes'][i]['productTypeId'] + '">' + data['productTypes'][i][
-                    'productTypeName'
-                ] + '</option>';
-            }
+                html += '<option value="' + json_data_product_type_specificationtypes + '/' + data['productTypes'][i]['productTypeId'] + '">' + data['productTypes'][i]['productTypeName'] + '</option>';
+            }   
             $('#producttype').append(html1);
             $('#producttype').append(html);
+           
         });
+       
     });
 
+
 </script>
+
 
 {{-- get data specificationType where productType --}}
 <script>
@@ -243,6 +244,8 @@
             // get data json
             $.getJSON(option, function (data) {
                 var test_data = '';
+                var html ='';
+                var count =0;
                 var len = data['specificationType']['specificationTitle'].length;
                 $('#table tbody tr').remove();
                 $.each(data['specificationType']['specificationTitle'], function (key, value) {
@@ -250,11 +253,15 @@
                     test_data += '<td> <div class="text-table">' + value['title'] +
                         '</div> </td>';
                     test_data +=
-                        '<td><input type="text" class="form-control" placeholder="Nhập ' +
+                        '<td><input type="text" name="title1[]" class="form-control" placeholder="Nhập ' +
                         value['title'] + '... "></td>';
                     test_data += '</tr>';
+                    count = count+1;
                 });
-                $('#myTable').append(test_data);
+                $('#myTable').append(test_data);    
+                var text1 = option.split("/", 6);
+                $('#producttype1').append('<input type="text" name="producttypeid" value="'+text1[5]+'">');  
+
             });
         });
     });

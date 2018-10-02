@@ -136,9 +136,13 @@ Route::get('edit-product-detail-admin/{id}', [
     'uses'=>'PageController@getEditProductDetailAdmin'
 ]);
 
-Route::get('add-product-detail-admin', [
+Route::get('add-product-detail-admin/{id}', [
     'as'=>'them-chi-tiet-san-pham-admin',
     'uses'=>'PageController@getAddProductDetailAdmin'
+]);
+Route::post('add-product-detail-admin', [
+    'as'=>'post-them-chi-tiet-san-pham-admin',
+    'uses'=>'PostController@postAddProductDetailAdmin'
 ]);
 
 Route::get('review-admin', [
@@ -216,7 +220,7 @@ Route::post('add-specification-admin', [
     'as'=>'post-them-thong-so-ky-thuat-admin',
     'uses'=>'PostController@postAddSpecificationAdmin'
 ]);
-Route::delete('add-specification-admin/{id}', [
+Route::delete('add-specification-admin', [
     'as'=>'delete-them-thong-so-ky-thuat-admin',
     'uses'=>'DeleteController@deleteAddSpecificationAdmin'
 ]);

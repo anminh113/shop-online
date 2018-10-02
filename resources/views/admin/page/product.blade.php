@@ -24,9 +24,8 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
-                          
-                                <button type="button" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm sản phẩm</button>
-                          
+
+                        <button type="button" class="btn btn-outline- btn-save" onclick="window.location='{{route('them-chi-tiet-san-pham-admin',$store)}}';">Thêm sản phẩm</button>
                            
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -55,10 +54,12 @@
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                         @foreach ($result['datatext'] as $da )
                                             @foreach ($da['images'] as $da1)   
+                                                @foreach ($da1['imageList'] as $da2)   
                                                 @if($item['productId']== $da1['productId']) 
-                                                    <img src= {{$da1["imageURL"]}}  width="215" height="215" alt="">
+                                                    <img src= {{$da2["imageURL"]}}  width="215" height="215" alt="">
                                                     @break
                                                 @endif
+                                                @endforeach 
                                             @endforeach 
                                         @endforeach
                                     </div>

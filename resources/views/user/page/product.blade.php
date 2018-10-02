@@ -58,19 +58,23 @@
             <div class="col-lg-2 order-lg-1 order-2">
                 <ul class="image_list">
                     @foreach ($resultimg['datatext'] as $da )
-                    @foreach ($da['images'] as $da1)
-                    <li data-image={{$da1["imageURL"]}}><img src={{$da1["imageURL"]}} alt=""></li>
-                    @endforeach
+                        @foreach ($da['images'] as $da1)
+                            @foreach ($da1['imageList'] as $da2)
+                                <li data-image={{$da2["imageURL"]}}><img src={{$da2["imageURL"]}} alt=""></li>
+                            @endforeach
+                        @endforeach
                     @endforeach
                 </ul>
             </div>
             <!-- Selected Image -->
             <div class="col-lg-5 order-lg-2 order-1">
                 @foreach ($resultimg['datatext'] as $da )
-                @foreach ($da['images'] as $da1)
-                <div class="image_selected"><img src={{$da1["imageURL"]}} alt=""></div>
-                @break
-                @endforeach
+                    @foreach ($da['images'] as $da1)
+                        @foreach ($da1['imageList'] as $da2)
+                            <div class="image_selected"><img src={{$da2["imageURL"]}} alt=""></div>
+                        @break
+                        @endforeach
+                    @endforeach
                 @endforeach
             </div>
             <!-- Description -->

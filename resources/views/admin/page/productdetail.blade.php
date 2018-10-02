@@ -32,8 +32,10 @@
                                     <div class="image_selected" id="image_selected">
                                         @foreach ($resultimg['datatext'] as $da )
                                             @foreach ($da['images'] as $da1)   
-                                                    <img id="expandedImg" src={{$da1["imageURL"]}} style="width:100%">
-                                                    @break
+                                                @foreach ($da1['imageList'] as $da2)   
+                                                        <img id="expandedImg" src={{$da2["imageURL"]}} style="width:100%">
+                                                        @break
+                                                @endforeach 
                                             @endforeach 
                                         @endforeach
 
@@ -41,9 +43,11 @@
                                     <div class="image-column">
                                         @foreach ($resultimg['datatext'] as $da )
                                             @foreach ($da['images'] as $da1)  
+                                            @foreach ($da1['imageList'] as $da2)   
                                             <div class="column1" id="column1">
-                                                <img id="test1" src={{$da1["imageURL"]}} style="width:100%" onclick="imgshow(this);">
+                                                <img id="test1" src={{$da2["imageURL"]}} style="width:100%" onclick="imgshow(this);">
                                             </div>
+                                            @endforeach 
                                             @endforeach 
                                         @endforeach
                                     </div>

@@ -69,13 +69,20 @@
                                     <tr>
                                         <td><a href="#">1</a></td>
                                         <td>{{$item['title']}}</td>
-                                        <td><a data-toggle="modal" data-target="#update{{$data['specificationType']['specificationTypeId']}}">
+                                        <td><a data-toggle="modal" data-target="#update{{$item['_id']}}">
                                                 <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
-                                            <button class="btn btn-danger" type="submit" form="deleteid{{$data['specificationType']['specificationTypeId']}}">
+                                            <button class="btn btn-danger" type="submit" form="deleteid{{$item['_id']}}">
                                                 <i class="fa fa-trash"> </i>
                                             </button>
                                         </td>
                                     </tr>
+                                    <form id="deleteid{{$item['_id']}}" hidden action="{{route('delete-them-thong-so-ky-thuat-admin')}}"
+                                    method="post">
+                                    <input type="text" hidden name="productTypeId" value="{{$data['specificationType']['productType']['_id']}}">
+                                    <input type="text" hidden name="specificationTypeIdTitle" value="{{$item['_id']}}">
+
+                                    @method('DELETE')
+                                    {{ csrf_field() }}</form>
                                     @endforeach
 
                                 </tbody>
@@ -139,7 +146,7 @@
                 <div class="modal-body">
                     <label for="basic">Tên thông số kỹ thuật sản phẩm:</label>
                     <div id="titleproduct">
-                        <input type="text" id="title1" name="namespeecification" class="form-control" placeholder="Tên thông số kỹ thuật">
+                        <input type="text" id="title1"  name="namespeecification" class="form-control" placeholder="Tên thông số kỹ thuật" autofocus>
                         <input type="text" hidden name="productTypeId" value="{{$data1['productType']['productTypeId']}}">
                     </div>
                 </div>
@@ -155,7 +162,7 @@
 
 @if($status == '200')
 @foreach ($data['specificationType']['specificationTitle'] as $item)
-<div class="modal fade" id="update{{$data['specificationType']['specificationTypeId']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="update{{$item['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -171,8 +178,9 @@
                 <div class="modal-body">
                     <label for="basic">Tên thông số kỹ thuật:</label>
                     <div id="titleproduct">
-                        <input type="text" name="namespecificationtype" class="form-control" value="{{$item['title']}}">
-                        <input type="text" hidden name="specificationTypeId" value="{{$data['specificationType']['specificationTypeId']}}">
+                        <input type="text"  name="namespecificationtype" class="form-control" value="{{$item['title']}}" autofocus>
+                        <input type="text" hidden name="productTypeId" value="{{$data['specificationType']['productType']['_id']}}">
+                        <input type="text" hidden name="specificationTypeIdTitle" value="{{$item['_id']}}">
                     </div>
                 </div>
                 <div class="modal-footer">

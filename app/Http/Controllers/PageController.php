@@ -78,8 +78,8 @@
 
             $oldCart = Session('cart')?Session::get('cart'):null;
             $cart = new Cart($oldCart);
-            // dd($data[0]['product']);
-            $cart->add($data[0]['product'], $id, $datatext[0]['images'][0]['imageURL']);
+            // dd($datatext[0]['images'][0]['imageList'][0]['imageURL']);
+            $cart->add($data[0]['product'], $id, $datatext[0]['images'][0]['imageList'][0]['imageURL']);
             $req->session()->put('cart', $cart);
             return redirect()->back();
         }
@@ -134,7 +134,7 @@
         public function getProductList(){
              //get json san pham theo gian hang
              $client1 = new \GuzzleHttp\Client();
-             $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
+             $res = $client1->request('GET',PageController::getUrl('products/store/5bb1c71a8875381e34da95ff'));
              $data = json_decode($res->getBody()->getContents(), true);
             //   dd($data['products']);
 
@@ -151,6 +151,7 @@
                 $datatext[] = json_decode($res2->getBody()->getContents(), true);
              }
              $result = compact('datatext');
+            //  dd($datatext);
             foreach( $datasaleOff as $price => $sale ) {
                 $dataPriceProduct[] = ($dataPrice[$price]-($dataPrice[$price]*$sale)/100);   
             }
@@ -232,13 +233,12 @@
 
         public function getProductAdmin(){
                 //get json san pham theo gian hang
+                $store = '5bb1c71a8875381e34da95ff';
                 $client1 = new \GuzzleHttp\Client();
-                $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
+                $res = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
                 $data = json_decode($res->getBody()->getContents(), true);
                 //  dd($data);
                 //end get json
-
-
                 $datatext = array();
                 for ($i=0;  $i < count($data['products']); $i++){
                     $data2 = $data['products'][$i]['productId'];
@@ -253,7 +253,7 @@
                 $data_product_type = PageController::getUrl('producttypes/category');
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
 
-            return view('admin/page.product', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+            return view('admin/page.product', compact('data','result', 'store', 'data_category','data_product_type','data_product_type_specificationtypes'));
         }
 
         public function getCategoryAdmin(){
@@ -319,15 +319,17 @@
             $resultimg = compact('datatext');
 
              //end get json
-            // dd($result);
             return view('admin/page.editproductdetail', compact('resultdata','resultimg'));
         }
 
-        public function getAddProductDetailAdmin(){
+        public function getAddProductDetailAdmin(Request $req){
+
+
+            $storeId = $req->id;
             $data_category = PageController::getUrl('categories');
             $data_product_type = PageController::getUrl('producttypes/category');
             $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-            return view('admin/page.addproductdetail',compact('data_category','data_product_type','data_product_type_specificationtypes'));
+            return view('admin/page.addproductdetail',compact('storeId', 'data_category','data_product_type','data_product_type_specificationtypes'));
         }
 
         public function getReview(){
