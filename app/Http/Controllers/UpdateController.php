@@ -113,6 +113,110 @@
         return redirect()->back();
     }
 
+    public function updateEditProductDetailAdmin(Request $req){
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET',PageController::getUrl('products/'.$req->productid.'') );
+        $data = json_decode($res->getBody()->getContents(), true);
+
+        for ($i=0;  $i < count($data['product']['specifications']); $i++){
+            $data1 = $data['product']['specifications'][$i]['title'];
+            $datatitle[] = $data1;
+        }
+
+        
+
+        $quantities = Input::get('title1');
+        // dd($quantities);
+        for($i=0; $i< count($datatitle); $i++){
+            $valuespecifications[]= ([
+                "title" => $datatitle[$i],
+                "value" => $quantities[$i]
+                ]);
+         }
+       
+        $title2 = Input::get('title');
+        $value2 = Input::get('value');
+        foreach($title2 as $key => $n ) {
+            $arrData[] = array("title"=>$title2[$key], "value"=>$value2[$key]);    
+        }
+
+        //post data json
+        $datajson=array(
+            [
+                "propName" => "productName",
+                "value" => $req->productname
+            ],
+            [
+                "propName" => "price",
+                "value" => $req->price
+            ],
+            [
+                "propName" => "quantity",
+                "value" => $req->quantity
+            ],
+            [
+                "propName" => "specifications",
+                "value" => $valuespecifications
+            ],
+            [
+                "propName" => "overviews",
+                "value" => $arrData
+            ]
+        );
+           
+        // dd($datajson);
+        
+
+        $jsonData =json_encode($datajson);
+        $json_url = PageController::getUrl('products/'.$req->productid.'');
+        $ch = curl_init($json_url);
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+        $result1 =json_decode($result);
+
+        if($result1->message == 'Product updated'){
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->productid.'') );
+            $dataimageid = json_decode($res->getBody()->getContents(), true);
+            //post data json
+            $datajson1=array([
+                "propName" => "imageList",
+                "value" => array(
+                    ["imageURL" => $req->img1],
+                    ["imageURL" => $req->img2],
+                    ["imageURL" => $req->img3]
+                )
+            ]);
+            // dd($datajson1);
+            $jsonData1 =json_encode($datajson1);
+            $json_url1 = PageController::getUrl('productimages/'.$dataimageid['productImageId'].'');
+            $ch1 = curl_init( $json_url1 );
+            $options1 = array(
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "PATCH",
+                CURLOPT_POSTFIELDS => $jsonData1
+            );
+            curl_setopt_array( $ch1, $options1 );
+            $result2 =  curl_exec($ch1);
+            // dd($result2);
+            return redirect()->back();
+        }
+                    
+    
+       
+     
+        // end post json
+        return redirect()->back();
+       
+    }
+
  
         
 

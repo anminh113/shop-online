@@ -99,33 +99,41 @@
                                         <div class="product_border"></div>
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                             @foreach ($result['datatext'] as $da )
-                                                @foreach ($da['images'] as $da1)   
-                                                    @if($item['productId'] == $da1['productId']) 
-                                                        @foreach($da1['imageList'] as $da2)
-                                                            <img src={{$da2['imageURL']}} width="115" height="115" alt="">
+                                                @foreach ($da['imageList'] as $da1)   
+                                                    @if($item['productId'] == $da['productId']) 
+                                                        {{-- @foreach($da1['imageList'] as $da2) --}}
+                                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
                                                             @break
-                                                        @endforeach
+                                                        {{-- @endforeach --}}
                                                     @endif
                                                 @endforeach 
                                             @endforeach
                                         </div>
                                         <div class="product_content">
-                                        <div class="product_price" style="font-size: 16px" id="price{{$item['productId']}}">{{$item['price']}} ₫<span>{{$item['price']}} ₫</span></div>
+                                        <div class="product_price" style="font-size: 16px" id="price{{$item['productId']}}">{{$item['price']}}.000 ₫
+                                            @if(!empty($item['saleOff']))
+                                            <span>{{$item['price']}} ₫</span>
+                                            @endif
+                                        </div>
                                             <div class="product_name">
                                                 <div><a href="{{ route('san-pham',$item['productId'] )}}" tabindex="0">{{$item['productName']}}</a></div>
                                             </div>
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        @if(!empty($item['saleOff']))
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
                                             <li class="product_mark product_new">new</li>
                                         </ul>
+                                        @endif
                                         <a href="{{route('gio-hang',$item['productId'])}}" class="btn btn-outline-info btn-change" style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
                                     </div>
+                                    @if(!empty($item['saleOff']))
                                     <script>
                                             var a = {{$item['price']}} - ({{$item['price']}} * {{$item['saleOff']['discount']}}/100);
                                             document.getElementById('price{{$item['productId']}}').innerHTML = a.toPrecision(4)+".000₫ <span>{{$item['price']}}.000₫</span>";
                                     </script>
+                                    @endif
                                    
                                 @endforeach
                                

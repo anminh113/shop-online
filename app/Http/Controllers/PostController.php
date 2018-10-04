@@ -130,7 +130,6 @@
         //Admin gian hàng
 
         public function postAddProductDetailAdmin(Request $req){
-
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET',PageController::getUrl('specificationtypes/producttype/'.$req->producttypeid.''));
             $data = json_decode($res->getBody()->getContents(), true);
@@ -152,7 +151,6 @@
             foreach($title2 as $key => $n ) {
                 $arrData[] = array("title"=>$title2[$key], "value"=>$value2[$key]);    
             }
-
             //post data json
             $datajson=array(
                 "productTypeId" => $req->producttypeid,
@@ -164,8 +162,6 @@
                 "overviews" => $arrData
                 );
             // dd($datajson);
-
-
             $jsonData =json_encode($datajson);
             $json_url = PageController::getUrl('products');
             $ch = curl_init( $json_url );
@@ -177,15 +173,8 @@
             );
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
-           
             $result1 =json_decode($result);
-            // dd($result1);
-            // dd($result1->createdProduct->productId);
 
-
-            // $res2 = $client->request('GET',PageController::getUrl('productimages/product/'.$result1->createdProduct->productId.''));
-            // $data2 = json_decode($res->getBody()->getContents(), true);
-            // dd($data2);
             if(!empty($result1->createdProduct->productId)){
                 //post data json
                 $datajson1=array(
@@ -207,7 +196,6 @@
                 );
                 curl_setopt_array( $ch1, $options1 );
                 $result2 =  curl_exec($ch1);
-                dd($result2);
                 return redirect()->back();
             }
                         
@@ -216,7 +204,9 @@
          
             // end post json
            
-       }
+        }
+
+        
 
 
 

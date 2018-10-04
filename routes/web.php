@@ -131,11 +131,18 @@ Route::get('product-detail-admin/{id}', [
     'uses'=>'PageController@getProductDetailAdmin'
 ]);
 
+//---
 Route::get('edit-product-detail-admin/{id}', [
     'as'=>'sua-chi-tiet-san-pham-admin',
     'uses'=>'PageController@getEditProductDetailAdmin'
 ]);
+Route::patch('edit-product-detail-admin', [
+    'as'=>'update-sua-chi-tiet-san-pham-admin',
+    'uses'=>'UpdateController@updateEditProductDetailAdmin'
+]);
+//---
 
+//---
 Route::get('add-product-detail-admin/{id}', [
     'as'=>'them-chi-tiet-san-pham-admin',
     'uses'=>'PageController@getAddProductDetailAdmin'
@@ -144,6 +151,7 @@ Route::post('add-product-detail-admin', [
     'as'=>'post-them-chi-tiet-san-pham-admin',
     'uses'=>'PostController@postAddProductDetailAdmin'
 ]);
+//---
 
 Route::get('review-admin', [
     'as'=>'xem-danh-gia',

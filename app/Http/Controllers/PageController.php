@@ -79,7 +79,7 @@
             $oldCart = Session('cart')?Session::get('cart'):null;
             $cart = new Cart($oldCart);
             // dd($datatext[0]['images'][0]['imageList'][0]['imageURL']);
-            $cart->add($data[0]['product'], $id, $datatext[0]['images'][0]['imageList'][0]['imageURL']);
+            $cart->add($data[0]['product'], $id, $datatext[0]['imageList'][0]['imageURL']);
             $req->session()->put('cart', $cart);
             return redirect()->back();
         }
@@ -122,7 +122,6 @@
             $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
             $resultdata = compact('data');
-
             //get anh san pham
             $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
             $datatext[] = json_decode($res->getBody()->getContents(), true);
@@ -134,7 +133,8 @@
         public function getProductList(){
              //get json san pham theo gian hang
              $client1 = new \GuzzleHttp\Client();
-             $res = $client1->request('GET',PageController::getUrl('products/store/5bb1c71a8875381e34da95ff'));
+            //  $res = $client1->request('GET',PageController::getUrl('products/store/5bb1c71a8875381e34da95ff'));
+             $res = $client1->request('GET',PageController::getUrl('products'));
              $data = json_decode($res->getBody()->getContents(), true);
             //   dd($data['products']);
 
@@ -233,6 +233,7 @@
 
         public function getProductAdmin(){
                 //get json san pham theo gian hang
+                // $store ='5bb1c6e38875381e34da95fc';
                 $store = '5bb1c71a8875381e34da95ff';
                 $client1 = new \GuzzleHttp\Client();
                 $res = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
@@ -257,6 +258,7 @@
         }
 
         public function getCategoryAdmin(){
+            $store = '5bb1c71a8875381e34da95ff';
             //get json danh muc all
             $client1 = new \GuzzleHttp\Client();
             $res = $client1->request('GET',PageController::getUrl('categories') );
@@ -264,13 +266,13 @@
             //end get json
 
             //get storeId
-            $res1 = $client1->request('GET',PageController::getUrl('stores/5b989eb9a6bce5234c9522ea'));
+            $res1 = $client1->request('GET',PageController::getUrl('stores/'.$store.''));
             $data1 = json_decode($res1->getBody()->getContents(), true);
-            
+            // dd($data1);
             //get danh muc trong store
             $datatext = array();
             for ($i=0;  $i < count($data1['store']['categories']); $i++){
-                $data2 = $data1['store']['categories'][$i]['categoryId'];
+                $data2 = $data1['store']['categories'][$i]['category'];
                 $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
                 $datatext[] = json_decode($res2->getBody()->getContents(), true);
                 
@@ -290,7 +292,7 @@
             $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
             $resultdata = compact('data');
-
+            // dd($resultdata);
             //get anh san pham
             $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
             $datatext[] = json_decode($res->getBody()->getContents(), true);

@@ -11,6 +11,38 @@
 
   $("document").ready(function() {
       $('#file-upload1').on("change", function() {
+        
+        var bla = $('#img1').val();
+        option = bla.split("/", 6);
+        console.log(option[3].slice(0,7));
+
+
+            var idImage = option[3].slice(0,7);
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
+                "method": "GET",
+                "headers": {
+                    "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                }
+            }
+            $.ajax(settings).done(function(res) {
+                var settings1 = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
+                    "method": "DELETE",
+                    "headers": {
+                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                    }
+                }
+    
+                $.ajax(settings1).done(function(response) {
+                    console.log(response);
+                });
+    
+            });
 
           var $files = $(this).get(0).files;
 
@@ -28,10 +60,11 @@
               var apiUrl = 'https://api.imgur.com/3/image';
               var apiKey = 'e4330ab70984291';
               var href = $('#test1').attr('href');
-              console.log(href);
 
 
               var formData = new FormData();
+              formData.append("title", "test");
+              formData.append("description", "{{$resultdata['data']['product']['productId']}}_anh-1");
               formData.append("image", $files[0]);
               var settings = {
                   "async": true,
@@ -58,6 +91,8 @@
                       $('#loader1').remove();
                       $('#column1').append('<img id="test1" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                       $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
+                      
+                      $('#imgur1').append('<input type="text" id="img1" name="img1" value="'+res.data.link+'" hidden>');
 
                   },
                   error: function() {
@@ -92,6 +127,39 @@
 
   $("document").ready(function() {
       $('#file-upload2').on("change", function() {
+        var bla = $('#img2').val();
+        option = bla.split("/", 6);
+        console.log(option[3].slice(0,7));
+
+
+            var idImage = option[3].slice(0,7);
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
+                "method": "GET",
+                "headers": {
+                    "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                }
+            }
+            $.ajax(settings).done(function(res) {
+                var settings1 = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
+                    "method": "DELETE",
+                    "headers": {
+                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                    }
+                }
+    
+                $.ajax(settings1).done(function(response) {
+                    console.log(response);
+                });
+    
+            });
+
+          var $files = $(this).get(0).files;
 
           var $files = $(this).get(0).files;
 
@@ -110,6 +178,8 @@
               var apiKey = 'e4330ab70984291';
 
               var formData = new FormData();
+              formData.append("title", "test");
+              formData.append("description", "{{$resultdata['data']['product']['productId']}}_anh-2");
               formData.append("image", $files[0]);
               var settings = {
                   "async": true,
@@ -136,7 +206,7 @@
                       $('#loader2').remove();
                       $('#column2').append('<img id="test2" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                       $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
-
+                      $('#imgur2').append('<input type="text" id="img2" name="img2" value="'+res.data.link+'" hidden>');
                   },
                   error: function() {
                       alert("Failed ");
@@ -170,6 +240,39 @@
 
   $("document").ready(function() {
       $('#file-upload3').on("change", function() {
+        var bla = $('#img3').val();
+        option = bla.split("/", 6);
+        console.log(option[3].slice(0,7));
+
+
+            var idImage = option[3].slice(0,7);
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
+                "method": "GET",
+                "headers": {
+                    "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                }
+            }
+            $.ajax(settings).done(function(res) {
+                var settings1 = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
+                    "method": "DELETE",
+                    "headers": {
+                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                    }
+                }
+    
+                $.ajax(settings1).done(function(response) {
+                    console.log(response);
+                });
+    
+            });
+
+          var $files = $(this).get(0).files;
 
           var $files = $(this).get(0).files;
 
@@ -188,6 +291,8 @@
               var apiKey = 'e4330ab70984291';
 
               var formData = new FormData();
+              formData.append("title", "test");
+              formData.append("description", "{{$resultdata['data']['product']['productId']}}_anh-3");
               formData.append("image", $files[0]);
               var settings = {
                   "async": true,
@@ -214,6 +319,7 @@
                       $('#loader3').remove();
                       $('#column3').append('<img id="test3" src="' + res.data.link + '" style="width:100%" onclick="imgshow(this);"/>');
                       $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
+                      $("#imgur3").append('<input type="text" id="img3" name="img3" value="'+res.data.link+'" hidden>');
 
                   },
                   error: function() {

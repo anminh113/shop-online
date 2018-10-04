@@ -23,11 +23,13 @@
         height: 16px;
         background-color: #FFCC40;
     }
+
     .bar-2 {
         width: 30%;
         height: 16px;
         background-color: #FFCC40;
     }
+
     .bar-1 {
         width: 20%;
         height: 16px;
@@ -58,23 +60,23 @@
             <div class="col-lg-2 order-lg-1 order-2">
                 <ul class="image_list">
                     @foreach ($resultimg['datatext'] as $da )
-                        @foreach ($da['images'] as $da1)
-                            @foreach ($da1['imageList'] as $da2)
-                                <li data-image={{$da2["imageURL"]}}><img src={{$da2["imageURL"]}} alt=""></li>
-                            @endforeach
-                        @endforeach
+                    @foreach ($da['imageList'] as $da1)
+                    {{-- @foreach ($da1['imageList'] as $da2) --}}
+                    <li data-image={{$da1["imageURL"]}}><img src={{$da1["imageURL"]}} alt=""></li>
+                    {{-- @endforeach --}}
+                    @endforeach
                     @endforeach
                 </ul>
             </div>
             <!-- Selected Image -->
             <div class="col-lg-5 order-lg-2 order-1">
                 @foreach ($resultimg['datatext'] as $da )
-                    @foreach ($da['images'] as $da1)
-                        @foreach ($da1['imageList'] as $da2)
-                            <div class="image_selected"><img src={{$da2["imageURL"]}} alt=""></div>
-                        @break
-                        @endforeach
-                    @endforeach
+                @foreach ($da['imageList'] as $da1)
+                {{-- @foreach ($da1['imageList'] as $da2) --}}
+                <div class="image_selected"><img src={{$da1["imageURL"]}} alt=""></div>
+                @break
+                {{-- @endforeach --}}
+                @endforeach
                 @endforeach
             </div>
             <!-- Description -->
@@ -85,24 +87,30 @@
                     <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i> </div>
                     <div class="product_price">
                         <span class="text-danger" style="font-size: 22px" id="price">{{$item['product']['price']}}.000₫</span>
+                        @if(!empty($item['product']['saleOff']))
                         <span style="font-size: 16px; text-decoration: line-through;">{{$item['product']['price']}}.000₫</span>
                         <span style="font-size: 21px"> -{{$item['product']['saleOff']['discount']}}%</span>
+                        @endif
                     </div>
                     <div class="product_text">
                         {{$item['product']['overviews'][0]['value']}} ...
                     </div>
                     <div class="space10">&nbsp;</div>
-                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn {{$item['product']['quantity']}} sản phẩm</label>
+                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn
+                        {{$item['product']['quantity']}} sản phẩm</label>
                     <div class=" d-flex flex-row">
                         <form action="#">
                             <div class="clearfix" style="z-index: 1000;">
                                 <!-- Product Quantity -->
                                 <div class="product_quantity clearfix">
                                     <span>Số Lượng: </span>
-                                    <input type="text" name="quant[1]" class="form-control input-number text-center" min="1" max="{{$item['product']['quantity']}}"  value="1" disabled style="background-color: #fff;">
+                                    <input type="text" name="quant[1]" class="form-control input-number text-center"
+                                        min="1" max="{{$item['product']['quantity']}}" value="1" disabled style="background-color: #fff;">
                                     <div class="quantity_buttons">
-                                        <div class="quantity_inc btn-number quantity_control" data-type="plus" data-field="quant[1]" ><i class="fas fa-chevron-up"></i></div>
-                                        <div class="quantity_dec btn-number quantity_control" data-type="minus" data-field="quant[1]" ><i class="fas fa-chevron-down"></i></div>
+                                        <div class="quantity_inc btn-number quantity_control" data-type="plus"
+                                            data-field="quant[1]"><i class="fas fa-chevron-up"></i></div>
+                                        <div class="quantity_dec btn-number quantity_control" data-type="minus"
+                                            data-field="quant[1]"><i class="fas fa-chevron-down"></i></div>
                                     </div>
                                 </div>
                                 <div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -172,17 +180,16 @@
                             <h3 class="viewed_title">Tổng Quan Sản Phẩm</h3>
                         </div>
                         <div class="space15">&nbsp;</div>
-
                         @foreach ($item['product']['overviews'] as $item2)
-                        @if ( count($item2['title']) === 1)
-                        @else
+                        @if(!empty($item2['title']))
                         <div class="single_post_title">{{$item2['title']}}</div>
+                        @else
+                        <div></div>
                         @endif
                         <div class="single_post_text">
                             <p>{{$item2['value']}}</p>
                         </div>
                         @endforeach
-
 
                     </div>
                     <div class="col-lg-5 col-md-5 order-lg-2 order-md-1 order-1 ">
@@ -223,10 +230,10 @@
         </div>
         <div class="space10">&nbsp;</div>
         <div class="viewed_title_container">
-                <h4 class="viewed_title">Nhận xét và đánh giá về {{$item['product']['productName']}}</h4>
-            </div>
+            <h4 class="viewed_title">Nhận xét và đánh giá về {{$item['product']['productName']}}</h4>
+        </div>
         <div class="row">
-               
+
             <div class="col-lg-12">
                 {{-- <div class="section-title"> Điểm đánh giá trung bình</div> --}}
                 <div class="rating-overview">
@@ -234,7 +241,7 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <div class="score">
-                                    <label class="average">88%</label>
+                                    <label class="average">3<span class="countText" style="font-size: 29px">/5</span></label>
                                 </div>
                                 <div class="count">
                                     <div class="countText">
@@ -247,7 +254,8 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="side">
-                                                <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
+                                                <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i>
+                                                    <i></i>
                                                     <i></i> </div>
                                             </div>
                                             <div class="middle">
@@ -261,8 +269,9 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="side">
-                                                    <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                                        <i></i> </div>
+                                                <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i>
+                                                    <i></i>
+                                                    <i></i> </div>
                                             </div>
                                             <div class="middle">
                                                 <div class="bar-container">
@@ -274,37 +283,40 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                                <div class="side">
-                                                        <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                                            <i></i> </div>
-                                                </div>
-                                                <div class="middle">
-                                                    <div class="bar-container">
-                                                        <div class="bar-3"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="side right">
-                                                    <div class="tillet"> 40</div>
+                                            <div class="side">
+                                                <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i>
+                                                    <i></i>
+                                                    <i></i> </div>
+                                            </div>
+                                            <div class="middle">
+                                                <div class="bar-container">
+                                                    <div class="bar-3"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
-                                                    <div class="side">
-                                                            <div class="rating_r rating_r_2 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                                                <i></i> </div>
-                                                    </div>
-                                                    <div class="middle">
-                                                        <div class="bar-container">
-                                                            <div class="bar-2"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="side right">
-                                                        <div class="tillet"> 30</div>
-                                                    </div>
-                                                </div>
+                                            <div class="side right">
+                                                <div class="tillet"> 40</div>
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12">
                                             <div class="side">
-                                                    <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                                        <i></i> </div>
+                                                <div class="rating_r rating_r_2 product_rating"> <i></i> <i></i> <i></i>
+                                                    <i></i>
+                                                    <i></i> </div>
+                                            </div>
+                                            <div class="middle">
+                                                <div class="bar-container">
+                                                    <div class="bar-2"></div>
+                                                </div>
+                                            </div>
+                                            <div class="side right">
+                                                <div class="tillet"> 30</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="side">
+                                                <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i>
+                                                    <i></i>
+                                                    <i></i> </div>
                                             </div>
                                             <div class="middle">
                                                 <div class="bar-container">
@@ -323,61 +335,61 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                    <div class="space10">&nbsp;</div>
-              
-                    <div class="viewed_title_container">
-                            <h5 class="viewed_title">Nhận xét và đánh giá về sản phẩm</h5>
-                        </div>
+                <div class="space10">&nbsp;</div>
+
+                <div class="viewed_title_container">
+                    <h5 class="viewed_title">Nhận xét và đánh giá về sản phẩm</h5>
+                </div>
                 <div class="space10">&nbsp;</div>
 
                 <div class="sis-seller-reviews">
                     <div class="seller-review-item">
-                            <div class="row reviewer">
-                                    <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                        <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div> 
-                                </div>
+                        <div class="row reviewer">
+                            <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i>
+                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
+                        </div>
                         <div class="row">
                             <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
                                 cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
                                 mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
                         </div>
-                        
+
                     </div>
                     <div class="seller-review-item">
-                            <div class="row reviewer">
-                                    <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                        <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div> 
-                                </div>
+                        <div class="row reviewer">
+                            <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i> <i></i>
+                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
+                        </div>
                         <div class="row">
                             <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
                                 cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
                                 mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
                         </div>
-                        
+
                     </div>
                     <div class="seller-review-item">
-                            <div class="row reviewer">
-                                    <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                        <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div> 
-                                </div>
+                        <div class="row reviewer">
+                            <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
+                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
+                        </div>
                         <div class="row">
                             <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
                                 cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
                                 mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
                         </div>
-                        
+
                     </div>
                     <div class="seller-review-item">
-                            <div class="row reviewer">
-                                    <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                        <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div> 
-                                </div>
+                        <div class="row reviewer">
+                            <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
+                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
+                        </div>
                         <div class="row">
                             <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
                                 cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
                                 mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -589,11 +601,12 @@
 @section('footer')
 <script src="source/user/js/product_custom.js"></script>
 <script src="source/user/styles/js/cart.js"></script>
-
+@if(!empty($item['product']['saleOff']))
 <script>
     var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}' / 100));
     document.getElementById('price').innerHTML = a.toPrecision(4) + ".000₫";
 
 </script>
+@endif
 
 @endsection

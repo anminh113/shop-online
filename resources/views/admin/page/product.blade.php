@@ -53,18 +53,18 @@
                                     <div class="product_border"></div>
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                         @foreach ($result['datatext'] as $da )
-                                            @foreach ($da['images'] as $da1)   
-                                                @foreach ($da1['imageList'] as $da2)   
-                                                @if($item['productId']== $da1['productId']) 
-                                                    <img src= {{$da2["imageURL"]}}  width="215" height="215" alt="">
+                                            @foreach ($da['imageList'] as $da1)   
+                                                {{-- @foreach ($da1['imageList'] as $da2)    --}}
+                                                @if($item['productId']== $da['productId']) 
+                                                    <img src= {{$da1["imageURL"]}}  width="215" height="215" alt="">
                                                     @break
                                                 @endif
-                                                @endforeach 
+                                                {{-- @endforeach  --}}
                                             @endforeach 
                                         @endforeach
                                     </div>
                                     <div class="product_content">
-                                    <div class="product_price">{{$item['price']}} VND</div>
+                                    <div class="product_price">{{$item['price']}}.000₫</div>
                                         <div class="product_name">
                                         <div><a href="#" tabindex="0">{{$item['productName']}}</a></div>
                                         </div>

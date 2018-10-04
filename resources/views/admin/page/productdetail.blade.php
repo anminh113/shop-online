@@ -31,23 +31,23 @@
                                 <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
                                     <div class="image_selected" id="image_selected">
                                         @foreach ($resultimg['datatext'] as $da )
-                                            @foreach ($da['images'] as $da1)   
-                                                @foreach ($da1['imageList'] as $da2)   
-                                                        <img id="expandedImg" src={{$da2["imageURL"]}} style="width:100%">
+                                            {{-- @foreach ($da['images'] as $da1)    --}}
+                                                @foreach ($da['imageList'] as $da1)   
+                                                        <img id="expandedImg" src={{$da1["imageURL"]}} style="width:100%">
                                                         @break
-                                                @endforeach 
+                                                {{-- @endforeach  --}}
                                             @endforeach 
                                         @endforeach
 
                                     </div>
                                     <div class="image-column">
                                         @foreach ($resultimg['datatext'] as $da )
-                                            @foreach ($da['images'] as $da1)  
-                                            @foreach ($da1['imageList'] as $da2)   
+                                            @foreach ($da['imageList'] as $da1)  
+                                            {{-- @foreach ($da1['imageList'] as $da2)    --}}
                                             <div class="column1" id="column1">
-                                                <img id="test1" src={{$da2["imageURL"]}} style="width:100%" onclick="imgshow(this);">
+                                                <img id="test1" src={{$da1["imageURL"]}} style="width:100%" onclick="imgshow(this);">
                                             </div>
-                                            @endforeach 
+                                            {{-- @endforeach  --}}
                                             @endforeach 
                                         @endforeach
                                     </div>
@@ -57,10 +57,14 @@
                                 <div class="space10">&nbsp;</div>
                                 <label for="basic" style="font-size: 19px">Giá sản phẩm: </label>
                                 <div id="giasp">
-                                    <span style="font-size: 20px" id="price">{{$item['product']['price']}} VND</span>
+                                    <span style="font-size: 20px" id="price">{{$item['product']['price']}}.000₫</span>
                                     <br>
-                                    <span style="font-size: 18px; text-decoration: line-through;">{{$item['product']['price']}} VND</span>
+                                    @if(!empty($item['product']['saleOff']))
+                                    <span style="font-size: 18px; text-decoration: line-through;">{{$item['product']['price']}}.000₫</span>
                                     <span style="font-size: 20px"> -{{$item['product']['saleOff']['discount']}}%</span>
+                                    {{-- @else --}}
+
+                                    @endif
                                 </div>
                                 <div class="space15">&nbsp;</div>
                                 <label for="basic" style="font-size: 19px">Thông số kỹ thuật:</label>
@@ -84,21 +88,21 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="space10">&nbsp;</div>
-                                <div class="space15">&nbsp;</div>
                                 <label for="basic"><h3>Tổng quan sản phẩm:</h3> </label>
+                                <br>
                                 @foreach ($item['product']['overviews'] as $item2)
-                                    @if ( count($item2['title']) === 1)
-                                     <div></div>
+                                    @if(!empty($item2['title']))
+                                     <b style="margin-left: 10px">{{$item2['title']}} </b>
                                     @else
-                                        <b style="margin-left: 10px">{{$item2['title']}} </b>
+                                        <div></div>
                                     @endif
                                     <p style="margin-left: 10px">{{$item2['value']}}</p>
                                 @endforeach
                             </div>
                             <div class="col-lg-6">
                                 <div class="space10">&nbsp;</div>
-                                <button type="button" class="btn btn-default" onclick="window.location='{{route('sua-chi-tiet-san-pham-admin',$item['product']['productId'])}}';">Cập nhật</button>
-                                <button type="button" class="btn btn-primary">Primary</button>
+                                <button type="button" class="btn btn-change" onclick="window.location='{{route('sua-chi-tiet-san-pham-admin',$item['product']['productId'])}}';">Cập nhật</button>
+                                <button type="button" class="btn btn-save">Xóa</button>
                             </div>
                         </div>
                     </div>
@@ -141,9 +145,12 @@
     });
 </script>
 
+@if(!empty($item['product']['saleOff']))
 <script>
     var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}'/100) );
-    document.getElementById('price').innerHTML = a.toPrecision(4)+" VND";
+    document.getElementById('price').innerHTML = a.toPrecision(4)+".000₫";
 </script>
+@endif
+
 @endsection
       

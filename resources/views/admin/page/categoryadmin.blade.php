@@ -43,25 +43,25 @@
                         </table>
                     </div>
                     <div class="row">
-                            {{-- <table id="table_format" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Danh mục gian hàng </th>
-                                        <th>Cập nhật</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="myTable">
-                                    @foreach ($result['datatext'] as $da)
-                                    <tr>
-                                        <td><a href="#">1</a></td>
-                                        <td>{{$da['category']['categoryName']}}</td>
-                                        <td><a href="#"><span class="label label-danger"><i class="fa fa-trash"></i></span></a></td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table> --}}
-                        </div>
+                        <table id="table_format" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Danh mục gian hàng </th>
+                                    <th>Cập nhật</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTable">
+                                @foreach ($result['datatext'] as $da)
+                                <tr>
+                                    <td><a href="#">1</a></td>
+                                    <td>{{$da['category']['categoryName']}}</td>
+                                    <td><a href="#"><span class="label label-danger"><i class="fa fa-trash"></i></span></a></td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>

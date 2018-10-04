@@ -73,7 +73,7 @@
                             <label for="basic">Giá sản phẩm:</label>
                             <div class="input-group">
                                 <input class="form-control" name="price" type="text">
-                                <span class="input-group-addon">VND</span>
+                                <span class="input-group-addon">.000₫</span>
                             </div>
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Số lượng nhập kho:</label>

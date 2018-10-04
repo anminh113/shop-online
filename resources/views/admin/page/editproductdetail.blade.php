@@ -13,135 +13,149 @@
 
 <!-- MAIN -->
 <div class="main">
-        <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Pictures</a></li>
-                <li><a href="#">Summer 15</a></li>
-                <li>Italy</li>
-            </ul>
+    <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Pictures</a></li>
+        <li><a href="#">Summer 15</a></li>
+        <li>Italy</li>
+    </ul>
+    <form id="imgur" class="upload">
+        <input hidden type="file" id="file-upload1" class=" imgur btn btn-default btn-file" accept="image/*"
+            data-max-size="5000" />
+        <input hidden type="file" id="file-upload2" class=" imgur btn btn-default btn-file" accept="image/*"
+            data-max-size="5000" />
+        <input hidden type="file" id="file-upload3" class=" imgur btn btn-default btn-file" accept="image/*"
+            data-max-size="5000" />
+    </form>
     <!-- MAIN CONTENT -->
-    <div class="main-content">
-        @foreach ($resultdata['data'] as $item)
-        <div class="container-fluid">
-            <div class="panel panel-headline">
-                <div class="panel-heading text-right">
-                    <h3 class="panel-title">
-                        <div class="input-group" id="tensp" style="width: 65%; margin-left: 35%">
-                            <input class="form-control text-right" type="text" placeholder="{{$item['product']['productName']}}">
-                        </div>
-                    </h3>
-                    <p class="panel-subtitle">
-                        <ul class="breadcrumb">
-                            <li>{{$item['product']['productType']['productTypeName']}}</li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <form id="imgur" class="upload">
-                            <input type="file" id="file-upload1" class=" imgur btn btn-default btn-file" accept="image/*"
-                                data-max-size="5000" />
-                            <input type="file" id="file-upload2" class=" imgur btn btn-default btn-file" accept="image/*"
-                                data-max-size="5000" />
-                            <input type="file" id="file-upload3" class=" imgur btn btn-default btn-file" accept="image/*"
-                                data-max-size="5000" />
-                        </form>
-                        <div class="col-lg-5 col-md-5">
-                            <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
-                                <div class="image_selected" id="image_selected">
-                                    @foreach ($resultimg['datatext'] as $da )
-                                        @foreach ($da['images'] as $da1)   
-                                            @foreach ($da1['imageList'] as $da2) 
-                                                    <img id="expandedImg" src={{$da2["imageURL"]}} style="width:100%">
-                                                    @break
-                                            @endforeach 
-                                        @endforeach 
-                                    @endforeach
-                                   
-                                </div>
-                                <div class="image-column">
-                                    <?php $i = 1 ?>
-                                    @foreach ($resultimg['datatext'] as $da )
-                                        @foreach ($da['images'] as $da1)  
-                                        @foreach ($da1['imageList'] as $da2) 
-                                        <div class="column1" id="column<?php echo $i ?>">
-                                            <label for="file-upload<?php echo $i ?>" id="label<?php echo $i ?>" class="custom-file-upload"><i class="lnr lnr-sync"></i></label>
-                                            <img id="test<?php echo $i ?>" src={{$da2["imageURL"]}} style="width:100%"
-                                                    onclick="imgshow(this);">
-                                        </div>
-                                        <?php $i = $i+1 ?>
-                                        @endforeach 
-                                        @endforeach 
-                                    @endforeach
+    <form action="{{route('update-sua-chi-tiet-san-pham-admin')}}" method="POST">
+        <div class="main-content">
+            @foreach ($resultdata['data'] as $item)
+            <div class="container-fluid">
+                <div class="panel panel-headline">
+                    <div class="panel-heading text-right">
+                        <h3 class="panel-title">
+                            <div class="input-group" id="tensp" style="width: 65%; margin-left: 35%">
+                                <input class="form-control text-right" name="productname" type="text" value="{{$item['product']['productName']}}">
+                                <input hidden name="productid" type="text" value="{{$item['product']['productId']}}">
 
-                                  
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7">
-                            <label for="basic">Giá sản phẩm: </label>
-                            <div class="input-group" id="giasp">
-                                <input class="form-control" type="text" value="{{$item['product']['price']}}"
-                                    placeholder="{{$item['product']['price']}}">
-                                <span class="input-group-addon">VND</span>
-                            </div>
-
-                            <div class="space15">&nbsp;</div>
-                            <table class="table form-style-4">
-
-                                <tbody>
-                                    @foreach ($item['product']['specifications'] as $item1)
-                                    <tr>
-                                        <td>
-                                            <div class="text-table">{{$item1['title']}}</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" value="{{$item1['value']}}">
-                                        </td>
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                            <div class="space15">&nbsp;</div>
-                            <label for="basic">Tổng quan sản phẩm:</label>
-
-                            <div id="titleproduct">
-                                @foreach ($item['product']['overviews'] as $item2)
-                                @if ( count($item2['title']) === 1)
-                                <div class="space10">&nbsp;</div>
-                                <input type="text" id="title1" class="form-control" placeholder="Thêm tiêu đề">
-                                @else
-                                <div class="space10">&nbsp;</div>
-                                <input type="text" id="title1" class="form-control" value="{{$item2['title']}}">
-                                @endif
-
-                                {{-- <div class="space10">&nbsp;</div> --}}
-                                <textarea class="form-control" id="value1"  style=" box-sizing: border-box; resize: none;"
-                                    placeholder="{{$item2['value']}}" data-autoresize rows="4"></textarea>
-                                @endforeach
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                            <input type="button" id="add" class="btn btn-outline- btn-change" style="width: 100%;"
-                                value="Thêm thông tin sản phẩm" />
-                        </div>
+                        </h3>
+                        <p class="panel-subtitle">
+                            <ul class="breadcrumb">
+                                <li>{{$item['product']['productType']['productTypeName']}}</li>
+                            </ul>
+                        </p>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="space10">&nbsp;</div>
+                    <div class="panel-body">
+                        <div class="row">        
+                            <div class="col-lg-5 col-md-5">
+                                <div class="container-fluid" style="padding-right: 0px; margin-right: -15px;">
+                                    <div class="image_selected" id="image_selected">
+                                        @foreach ($resultimg['datatext'] as $da )
+                                        {{-- @foreach ($da['images'] as $da1) --}}
+                                        @foreach ($da['imageList'] as $da1)
+                                        <img id="expandedImg" src={{$da1["imageURL"]}} style="width:100%">
+                                        @break
+                                        {{-- @endforeach --}}
+                                        @endforeach
+                                        @endforeach
+
+                                    </div>
+                                    <div class="image-column">
+                                        <?php $i = 1 ?>
+                                        @foreach ($resultimg['datatext'] as $da )
+                                            {{-- @foreach ($da['images'] as $da1) --}}
+                                                @foreach ($da['imageList'] as $da1)
+                                                <div class="column1" id="column<?php echo $i ?>">
+                                                    <label for="file-upload<?php echo $i ?>" id="label<?php echo $i ?>" class="custom-file-upload"><i
+                                                            class="lnr lnr-sync"></i></label>
+                                                   
+                                                    <img id="test<?php echo $i ?>" src={{$da1["imageURL"]}} style="width:100%"
+                                                        onclick="imgshow(this);">
+                                                       
+                                                </div>
+                                                <div  id="imgur<?php echo $i ?>"><input type="text" id="img<?php echo $i ?>" name="img<?php echo $i ?>" value="{{$da1["imageURL"]}}'" hidden></div>
+                                                <?php $i = $i+1 ?>
+                                                @endforeach
+                                            {{-- @endforeach --}}
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7">
+                                <label for="basic">Giá sản phẩm: </label>
+                                <div class="input-group" id="giasp">
+                                    <input class="form-control" type="text" name="price" value="{{$item['product']['price']}}">
+                                    <span class="input-group-addon">.000₫</span>
+                                </div>
+                                <div class="space15">&nbsp;</div>
+                                <label for="basic">Số lượng nhập kho:</label>
+                                <div class="input-group">
+                                    <input class="form-control" name="quantity" type="number" value="{{$item['product']['quantity']}}">
+                                    <span class="input-group-addon">Chiếc</span>
+                                </div>
+                                <div class="space15">&nbsp;</div>
+                                <table class="table form-style-4">
+
+                                    <tbody>
+                                        @foreach ($item['product']['specifications'] as $item1)
+                                        <tr>
+                                            <td>
+                                                <div class="text-table">{{$item1['title']}}</div>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="title1[]" class="form-control" value="{{$item1['value']}}">
+                                            </td>
+                                        </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                                <div class="space15">&nbsp;</div>
+                            
+
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="basic">Tổng quan sản phẩm:</label>
+
+                                <div id="titleproduct">
+                                    @foreach ($item['product']['overviews'] as $item2)
+                                        @if(!empty($item2['title']))
+                                            <div class="space10">&nbsp;</div>
+                                            <input type="text" id="title1" class="form-control" name="title[]" value="{{$item2['title']}}">
+                                        @else
+                                            <div class="space10">&nbsp;</div>
+                                            <input type="text" id="title1" class="form-control" name="title[]"z placeholder="Thêm tiêu đề">
+                                        @endif
+                                            <textarea class="form-control" id="value1" name="value[]" style=" box-sizing: border-box; resize: none;"
+                                             data-autoresize rows="4">{{$item2['value']}}</textarea>
+                                    @endforeach
+                                </div>
+                               
+                            </div>
                         </div>
-                        <div class="col-lg-7">
-                            <div class="space10">&nbsp;</div>
-                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='';">Lưu</button>
-                            {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='';">Thêm
-                                sản phẩm</button> --}}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="space10">&nbsp;</div>
+                                <input type="button" id="add" class="btn btn-outline- btn-change" style="width: 100%;"
+                                    value="Thêm thông tin sản phẩm" />
+                            
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="space10">&nbsp;</div>
+                                <button type="submit" style="width: 100%;" class="btn btn-outline- btn-save" onclick="window.location='';">Lưu</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
+    @method('PATCH')
+    {{ csrf_field() }}
+    </form>
+
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
@@ -172,12 +186,12 @@
             i = i + 1;
             console.log(i);
             $("#titleproduct").append('<div class="space10">&nbsp;</div>');
-            $("#titleproduct").append('<input type="text" id="title' + i +
+            $("#titleproduct").append('<input type="text" name="title[]" id="title' + i +
                 '" class="form-control" placeholder="Tiêu đề">');
             // $("#titleproduct").append('<div class="space10">&nbsp;</div>');
             $("#titleproduct").append(
                 '<textarea class="form-control" id="value' + i +
-                '" style="box-sizing: border-box; resize: none;" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>'
+                '" style="box-sizing: border-box; resize: none;" name="value[]" placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>'
             );
         })
     });
