@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/product_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/lightgallery.css">
+
 <style type="text/css">
     .bar-5 {
         width: 60%;
@@ -58,12 +60,21 @@
         <div class="row">
             <!-- Images -->
             <div class="col-lg-2 order-lg-1 order-2">
-                <ul class="image_list">
+                <ul class="image_list" >
                     @foreach ($resultimg['datatext'] as $da )
                     @foreach ($da['imageList'] as $da1)
                     {{-- @foreach ($da1['imageList'] as $da2) --}}
                     <li data-image={{$da1["imageURL"]}}><img src={{$da1["imageURL"]}} alt=""></li>
                     {{-- @endforeach --}}
+                    <div class="demo-gallery" hidden>
+                        <ul id="lightgallery" class="list-unstyled row">
+                            <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="img/1-1600.jpg" data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>">
+                                <a href="">
+                                    <img class="img-responsive" src="img/thumb-1.jpg">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     @endforeach
                     @endforeach
                 </ul>
@@ -84,7 +95,7 @@
                 <div class="product_description">
                     <div class="product_category">{{$item['product']['productType']['productTypeName']}}</div>
                     <div class="product_name">{{$item['product']['productName']}}</div>
-                    <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i> </div>
+                    <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i> </div>
                     <div class="product_price">
                         <span class="text-danger" style="font-size: 22px" id="price">{{$item['product']['price']}}.000₫</span>
                         @if(!empty($item['product']['saleOff']))
@@ -114,13 +125,17 @@
                                     </div>
                                 </div>
                                 <div class="product_fav"><i class="fas fa-heart"></i></div>
+                             
+                              
 
                             </div>
                             <div class="button_container">
                                 <a href="{{route('gio-hang',$item['product']['productId'])}}" class="btn btn-outline-info btn-change btn-buy">
                                     <div class="img-buy"></div>Thêm Vào Giỏ
                                 </a>
+                               
                             </div>
+                         
                         </form>
                     </div>
                 </div>
@@ -232,6 +247,7 @@
         <div class="viewed_title_container">
             <h4 class="viewed_title">Nhận xét và đánh giá về {{$item['product']['productName']}}</h4>
         </div>
+        
         <div class="row">
 
             <div class="col-lg-12">
@@ -601,6 +617,8 @@
 @section('footer')
 <script src="source/user/js/product_custom.js"></script>
 <script src="source/user/styles/js/cart.js"></script>
+<script src="source/user/styles/js/lightgallery-all.min.js"></script>
+
 @if(!empty($item['product']['saleOff']))
 <script>
     var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}' / 100));

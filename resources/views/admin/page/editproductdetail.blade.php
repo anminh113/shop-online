@@ -96,6 +96,7 @@
                                     <span class="input-group-addon">Chiếc</span>
                                 </div>
                                 <div class="space15">&nbsp;</div>
+                                <label for="basic" style="font-size: 15px">Thông số kỹ thuật:</label>
                                 <table class="table form-style-4">
 
                                     <tbody>
@@ -138,7 +139,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="space10">&nbsp;</div>
-                                <input type="button" id="add" class="btn btn-outline- btn-change" style="width: 100%;"
+                                <input type="button" id="add" class="btn btn-outline- btn-change" style="width: 60%;"
                                     value="Thêm thông tin sản phẩm" />
                             
                             </div>

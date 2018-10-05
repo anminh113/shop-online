@@ -100,6 +100,9 @@
                                 </tbody>
                             </table>
                             <input hidden name="storeId" value="{{$storeId}}">
+                           
+                        </div>
+                        <div class="col-lg-12">
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Tổng quan sản phẩm:</label>
                             <div id="titleproduct">
@@ -108,17 +111,17 @@
                                 <textarea class="form-control" id="value1" name="value2[]" style=" box-sizing: border-box; resize: none;"
                                     placeholder="Thông tin sản phẩm " data-autoresize rows="4"></textarea>
                             </div>
-                            <div class="space10">&nbsp;</div>
-                            <input type="button" id="add" class="btn btn-outline- btn-change" style="width: 100%;" value="Thêm thông tin sản phẩm" />
+                            
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-5">
+                        <div class="col-lg-6">
                             <div class="space10">&nbsp;</div>
+                            <input type="button" id="add" class="btn btn-outline- btn-change" style="width: 60%;" value="Thêm tổng quan sản phẩm" />
                         </div>
-                        <div class="col-lg-7">
+                        <div class="col-lg-6">
                             <div class="space10">&nbsp;</div>
-                            <button type="submit" class="btn btn-outline- btn-save" onclick="window.location='add-product-detail-admin';">Thêm
+                            <button type="submit"  class="btn btn-outline- btn-save" style="width: 100%;" onclick="window.location='add-product-detail-admin';">Thêm
                                 sản phẩm</button>
 
                             {{-- <button type="button" class="btn btn-outline- btn-change" onclick="window.location='add-product-detail-admin';">Thêm

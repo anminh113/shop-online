@@ -66,7 +66,7 @@
                                     <div class="product_content">
                                     <div class="product_price">{{$item['price']}}.000₫</div>
                                         <div class="product_name">
-                                        <div><a href="#" tabindex="0">{{$item['productName']}}</a></div>
+                                        <div style="width: 95%; margin-left: 2.5%"><a href="#" tabindex="0">{{$item['productName']}}</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
         $.getJSON(option, function (data) {
             $('#table tbody tr').remove();
             var html = '';
-            var html1 = '<option value="">- Chọn loại thông số kỹ thuật -</option>';
+            var html1 = '<option value="">- Chọn loại sản phẩm -</option>';
             var len = data['productTypes'].length;
             for (var i = 0; i < len; i++) {
                 $("#producttype option").remove();

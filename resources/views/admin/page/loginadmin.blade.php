@@ -18,8 +18,8 @@
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
-	<link rel="apple-touch-icon" sizes="76x76" href="source/admin/assets/img/logo/icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="source/admin/assets/img/logo/icon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="source/admin/assets/img/icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="source/admin/assets/img/icon.png">
 	<style type="text/css">
 		.auth-box .left:before{
 			     height: auto; 
@@ -33,33 +33,30 @@
 		<div class="vertical-align-wrap">
 			<div class="vertical-align-middle">
 				<div class="auth-box">
-				<!-- 	<div class="row">
-						<div class="col-lg-4"></div>
-						<div class="col-lg-8"></div>
-					</div> -->
+				
 					<div class="left">
 						<div class="content">
 							<div class="header">
+									@if(Session::has('flag'))
+									<div class="alert alert-{{Session::get('flag')}}">
+										{{Session::get('message')}}
+									</div>
+									@endif	
 								<div class="logo text-center"><img src="source/admin/assets/img/primary_transparent.png" alt="CyberZone Logo"></div>
 								<p class="lead">Login to your account</p>
 							</div>
-							<form class="form-auth-small" action="#">
+							<form class="form-auth-small" action="{{route('post-login-admin')}}" method="POST">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input type="email" class="form-control" id="signin-email" value="" placeholder="Email">
+									<input type="text" class="form-control" id="signin-email" name="email" value="" placeholder="Email">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input type="password" class="form-control" id="signin-password" value="" placeholder="Password">
+									<input type="password" class="form-control" id="signin-password" name="password" value="" placeholder="Password">
 								</div>
-								<!-- <div class="form-group clearfix">
-									<label class="fancy-checkbox element-left">
-										<input type="checkbox">
-										<span>Remember me</span>
-									</label>
-								</div> -->
+							
 								<button type="submit" class="btn btn-lg btn-block" style="background-color:#028496; color: #fff ">LOGIN</button>
-								
+								{{ csrf_field() }}
 							</form>
 						</div>
 					</div>

@@ -107,6 +107,16 @@ Route::get('login-admin', [
     'as'=>'login-admin',
     'uses'=>'PageController@getLoginAdmin'
 ]);
+Route::post('login-admin', [
+    'as'=>'post-login-admin',
+    'uses'=>'PostController@postLoginAdmin'
+]);
+// Route::group(['middleware' => 'jwt.auth'], function () {
+
+   
+
+// });
+
 
 
 //Admin gian hàng

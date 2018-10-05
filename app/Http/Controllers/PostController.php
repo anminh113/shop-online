@@ -10,6 +10,8 @@
     use Illuminate\Support\Facades\Log;
     use GuzzleHttp\Exception\RequestException;
     use Illuminate\Support\Facades;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Validator;
 
  
     class PostController extends Controller{
@@ -21,6 +23,88 @@
             $urlAPI = "http://localhost:3000/".$text;
             return $urlAPI;
         }
+
+        // Đăng nhập
+        public function postLoginAdmin(Request $req){
+            $client = new \GuzzleHttp\Client();
+            try {
+                $res = $client->request('GET', PageController::getUrl('accounts/'.$req->email.''));
+                $data = json_decode($res->getBody()->getContents(), true);
+                // dd($data);
+                //   $this->validate($req,[
+                //         'email'=>'required|email',
+                //         'password'=>'required|min:6|max:20'
+                //     ],[
+                //         'email.required'=>'Vui lòng nhập email',
+                //         'email.email'=>'Không đúng định dạng email',
+                //         'password.required'=>'Vui lòng nhập mật khẩu',
+                //         'password.min'=>'Mật khẩu có ít nhất 6 ký tự',
+                //         'password.max'=>'Mật khẩu tối đa 20 ký tự'
+                //     ]);
+                // $credentials = array($data['account']['username']=>$req->email , $data['account']['password']=>$req->password);
+                // // dd($credentials);
+                // if(Auth::attempt($credentials)){
+                //     echo 'ok';
+                //     return redirect()->route('trang-chu')->with(['flag'=>'success','message'=>'Dang nhap thanh cong']);
+                // }
+                // else{
+                //     echo 'eo ok';
+                //     return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+                // }
+                // $rules = ([
+                //             'email'=>'required|email',
+                //             'password'=>'required|min:6|max:20',
+                //             'email.required'=>'Vui lòng nhập email',
+                //             'email.email'=>'Không đúng định dạng email',
+                //             'password.required'=>'Vui lòng nhập mật khẩu',
+                //             'password.min'=>'Mật khẩu có ít nhất 6 ký tự',
+                //             'password.max'=>'Mật khẩu tối đa 20 ký tự'
+                //         ]);
+            
+                // $input = $req->only('email', 'password');
+            
+                // $validator = Validator::make($input, $rules);
+                    
+                // if($validator->fails()) {
+                //     $error = $validator->messages();
+                //     return response()->json(['success'=> false, 'error'=> $error]);
+                // }
+            
+            
+                $email = $req['email'];
+                $password = $req['password'];
+                if($data['account']){
+                    if($password === $data['account']['password']){
+                        if($data['account']['role']['roleName'] == 'Quản lý gian hàng')
+                        {
+                        return redirect()->route('trang-chu-admin')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản lý gian hàng']);
+                        }
+                        else if($data['account']['role']['roleName'] == 'Quản trị viên')
+                        {
+                        return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản trị viên']);
+                        }
+                    }else{
+                        return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+                    }
+                }else{
+                    return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+            }
+            }catch (\GuzzleHttp\Exception\ClientException $e) {
+                // return $e->getResponse()->getStatusCode();
+                return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+            }
+            
+          
+               
+          
+
+
+        
+          
+            
+            
+           
+       }
 
         // Admin hệ thống
         public function postAddCategoryAdmin(Request $req){
@@ -205,10 +289,6 @@
             // end post json
            
         }
-
-        
-
-
 
     }
 

@@ -190,7 +190,7 @@
         $.getJSON(option, function (data) {
             $('#table tbody tr').remove();
             var html = '';
-            var html1 = '<option value="">- Chọn loại thông số kỹ thuật -</option>';
+            var html1 = '<option value="">- Chọn loại sản phẩm -</option>';
             var len = data['productTypes'].length;
             for (var i = 0; i < len; i++) {
                 $("#producttype option").remove();
