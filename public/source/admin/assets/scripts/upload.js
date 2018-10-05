@@ -235,31 +235,3 @@ $("document").ready(function() {
     });
 });
 
-function deleteFromImgur() {
-    var idImage = "z5Ob1vB";
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
-        "method": "GET",
-        "headers": {
-            "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-        }
-    }
-    $.ajax(settings).done(function(res) {
-        var settings1 = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
-            "method": "DELETE",
-            "headers": {
-                "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-            }
-        }
-
-        $.ajax(settings1).done(function(response) {
-            console.log(response);
-        });
-
-    });
-}

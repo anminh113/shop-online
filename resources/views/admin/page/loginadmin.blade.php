@@ -38,9 +38,9 @@
 						<div class="content">
 							<div class="header">
 									@if(Session::has('flag'))
-									<div class="alert alert-{{Session::get('flag')}}">
-										{{Session::get('message')}}
-									</div>
+										<div class="alert alert-{{Session::get('flag')}}">
+											{{Session::get('message')}}
+										</div>
 									@endif	
 								<div class="logo text-center"><img src="source/admin/assets/img/primary_transparent.png" alt="CyberZone Logo"></div>
 								<p class="lead">Login to your account</p>

@@ -109,13 +109,9 @@ Route::get('login-admin', [
 ]);
 Route::post('login-admin', [
     'as'=>'post-login-admin',
-    'uses'=>'PostController@postLoginAdmin'
+    'uses'=>'UserController@showProfile'
 ]);
-// Route::group(['middleware' => 'jwt.auth'], function () {
 
-   
-
-// });
 
 
 
@@ -178,12 +174,12 @@ Route::get('discount-admin', [
 Route::get('admin', [
     'as'=>'trang-chu-admin-he-thong',
     'uses'=>'PageController@getAdmin'
-]);
+])->middleware('Checklevel');
 
 Route::get('category-admin-shop', [
     'as'=>'danh-sach-shop-he-thong',
     'uses'=>'PageController@getCategoryAdminShop'
-]);
+])->middleware('Checklevel');
 
 Route::get('detail-admin-shop', [
     'as'=>'chi-tiet-shop-he-thong',
@@ -247,4 +243,6 @@ Route::patch('add-specification-admin', [
     'uses'=>'UpdateController@updateAddSpecificationAdmin'
 ]);
 // ---
+
+
 

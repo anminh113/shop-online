@@ -75,7 +75,7 @@
                                                         onclick="imgshow(this);">
                                                        
                                                 </div>
-                                                <div  id="imgur<?php echo $i ?>"><input type="text" id="img<?php echo $i ?>" name="img<?php echo $i ?>" value="{{$da1["imageURL"]}}'" hidden></div>
+                                                <div  id="imgur<?php echo $i ?>"><input type="text" id="img<?php echo $i ?>" name="img<?php echo $i ?>" value="{{$da1["imageURL"]}}" hidden></div>
                                                 <?php $i = $i+1 ?>
                                                 @endforeach
                                             {{-- @endforeach --}}

@@ -228,11 +228,17 @@
 
         //Admin gian hàng
         public function getIndexAdmin(){
-            return view('admin/page.trangchu');
+            if (Session::has('key')){
+                return view('admin/page.trangchu');
+            }
+            return view('admin/page.loginadmin');
+           
+            
         }
 
         public function getProductAdmin(){
-                //get json san pham theo gian hang
+            if (Session::has('key')){
+                 //get json san pham theo gian hang
                 // $store ='5bb1c6e38875381e34da95fc';
                 $store = '5bb1c71a8875381e34da95ff';
                 $client1 = new \GuzzleHttp\Client();
@@ -255,90 +261,110 @@
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
 
             return view('admin/page.product', compact('data','result', 'store', 'data_category','data_product_type','data_product_type_specificationtypes'));
+            }
+            return view('admin/page.loginadmin');
+               
         }
 
         public function getCategoryAdmin(){
-            $store = '5bb1c71a8875381e34da95ff';
-            //get json danh muc all
-            $client1 = new \GuzzleHttp\Client();
-            $res = $client1->request('GET',PageController::getUrl('categories') );
-            $data = json_decode($res->getBody()->getContents(), true);
-            //end get json
-
-            //get storeId
-            $res1 = $client1->request('GET',PageController::getUrl('stores/'.$store.''));
-            $data1 = json_decode($res1->getBody()->getContents(), true);
-            // dd($data1);
-            //get danh muc trong store
-            $datatext = array();
-            for ($i=0;  $i < count($data1['store']['categories']); $i++){
-                $data2 = $data1['store']['categories'][$i]['category'];
-                $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
-                $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                
+            if (Session::has('key')){
+                $store = '5bb1c71a8875381e34da95ff';
+                //get json danh muc all
+                $client1 = new \GuzzleHttp\Client();
+                $res = $client1->request('GET',PageController::getUrl('categories') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                //end get json
+    
+                //get storeId
+                $res1 = $client1->request('GET',PageController::getUrl('stores/'.$store.''));
+                $data1 = json_decode($res1->getBody()->getContents(), true);
+                // dd($data1);
+                //get danh muc trong store
+                $datatext = array();
+                for ($i=0;  $i < count($data1['store']['categories']); $i++){
+                    $data2 = $data1['store']['categories'][$i]['category'];
+                    $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
+                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                    
+                }
+                $result = compact('datatext');
+              
+                return view('admin/page.categoryadmin', compact('data','result')); 
             }
-            $result = compact('datatext');
-          
-            return view('admin/page.categoryadmin', compact('data','result')); 
+            return view('admin/page.loginadmin');
+            
         }
 
         public function getProductDetailAdmin(Request $req){
-            $data = array();
-            $datatext = array();
-            //get json san pham theo ID san pham
+            if (Session::has('key')){
+                $data = array();
+                $datatext = array();
+                //get json san pham theo ID san pham
 
-            //get thong tin san pham
-            $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
-            $data[] = json_decode($res->getBody()->getContents(), true);
-            $resultdata = compact('data');
-            // dd($resultdata);
-            //get anh san pham
-            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
-            $datatext[] = json_decode($res->getBody()->getContents(), true);
-            $resultimg = compact('datatext');
+                //get thong tin san pham
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
+                $data[] = json_decode($res->getBody()->getContents(), true);
+                $resultdata = compact('data');
+                // dd($resultdata);
+                //get anh san pham
+                $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
+                $datatext[] = json_decode($res->getBody()->getContents(), true);
+                $resultimg = compact('datatext');
 
-             //end get json
-            // dd($result);
+                //end get json
+                // dd($result);
 
-            return view('admin/page.productdetail', compact('resultdata','resultimg'));
+                return view('admin/page.productdetail', compact('resultdata','resultimg'));
+            }
+            return view('admin/page.loginadmin');
+            
         }
 
         public function getEditProductDetailAdmin(Request $req){
-            $data = array();
-            $datatext = array();
-            //get json san pham theo ID san pham
+            if (Session::has('key')){
+                $data = array();
+                $datatext = array();
+                //get json san pham theo ID san pham
 
-            //get thong tin san pham
-            $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
-            $data[] = json_decode($res->getBody()->getContents(), true);
-            $resultdata = compact('data');
+                //get thong tin san pham
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
+                $data[] = json_decode($res->getBody()->getContents(), true);
+                $resultdata = compact('data');
 
-            //get anh san pham
-            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
-            $datatext[] = json_decode($res->getBody()->getContents(), true);
-            $resultimg = compact('datatext');
+                //get anh san pham
+                $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
+                $datatext[] = json_decode($res->getBody()->getContents(), true);
+                $resultimg = compact('datatext');
 
-             //end get json
-            return view('admin/page.editproductdetail', compact('resultdata','resultimg'));
+                //end get json
+                return view('admin/page.editproductdetail', compact('resultdata','resultimg'));        
+            }
+            return view('admin/page.loginadmin');
+            
         }
 
         public function getAddProductDetailAdmin(Request $req){
+            if (Session::has('key')){
+                $storeId = $req->id;
+                $data_category = PageController::getUrl('categories');
+                $data_product_type = PageController::getUrl('producttypes/category');
+                $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+                return view('admin/page.addproductdetail',compact('storeId', 'data_category','data_product_type','data_product_type_specificationtypes'));      
+            }
+            return view('admin/page.loginadmin');
 
-
-            $storeId = $req->id;
-            $data_category = PageController::getUrl('categories');
-            $data_product_type = PageController::getUrl('producttypes/category');
-            $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-            return view('admin/page.addproductdetail',compact('storeId', 'data_category','data_product_type','data_product_type_specificationtypes'));
+           
         }
 
         public function getReview(){
-            return view('admin/page.reviewadmin');
+            if (Session::has('key')){
+                return view('admin/page.reviewadmin');            
+            }
+            return view('admin/page.loginadmin');
+            
         }
-
-        
 
         public function getDiscount(){
                 //get json san pham theo gian hang
@@ -367,65 +393,89 @@
 
         // Đăng nhập admin
         public function getLoginAdmin(){
+            session()->forget('key');
             return view('admin/page.loginadmin');
         }
       
         //Admin hệ thống
         public function getAdmin(){
-            return view('admin/page.admin');
+            if (Session::has('key')){
+                return view('admin/page.admin');
+            }
+            return view('admin/page.loginadmin');
         }
 
         public function getCategoryAdminShop(){
-            return view('admin/page.categoryadminshop');
+            if (Session::has('key')){
+                return view('admin/page.categoryadminshop');
+            }
+            return view('admin/page.loginadmin');
+           
         }
 
         public function getDetailAdminShop(){
-            return view('admin/page.detailadminshop');
+            if (Session::has('key')){
+                return view('admin/page.detailadminshop');
+            }
+            return view('admin/page.loginadmin');
+            
         }
 
         public function getAddCategoryAdmin(){
-             //get json danh muc all
-             $client1 = new \GuzzleHttp\Client();
-             $res = $client1->request('GET',PageController::getUrl('categories') );
-             $data = json_decode($res->getBody()->getContents(), true);
-             //end get json
-            return view('admin/page.addcategoryadmin', compact('data'));
+            if (Session::has('key')){
+                //get json danh muc all
+                $client1 = new \GuzzleHttp\Client();
+                $res = $client1->request('GET',PageController::getUrl('categories') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                //end get json
+                return view('admin/page.addcategoryadmin', compact('data'));
+            }
+            return view('admin/page.loginadmin');
+           
         }
        
 
         public function getAddProductTypeAdmin(Request $req){
-            //get json danh muc all
-            $client1 = new \GuzzleHttp\Client();
-            $res = $client1->request('GET',PageController::getUrl('categories/'.$req->id.'') );
-            $data = json_decode($res->getBody()->getContents(), true);
-            //end get json
+            if (Session::has('key')){
+                //get json danh muc all
+                $client1 = new \GuzzleHttp\Client();
+                $res = $client1->request('GET',PageController::getUrl('categories/'.$req->id.'') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                //end get json
 
-            $res = $client1->request('GET',PageController::getUrl('producttypes/category/'.$req->id.'') );
-            $data1 = json_decode($res->getBody()->getContents(), true);
+                $res = $client1->request('GET',PageController::getUrl('producttypes/category/'.$req->id.'') );
+                $data1 = json_decode($res->getBody()->getContents(), true);
+                
+
+                return view('admin/page.addproducttypeadmin', compact('data','data1'));
+            }
+            return view('admin/page.loginadmin');
             
-
-            return view('admin/page.addproducttypeadmin', compact('data','data1'));
         }
 
         public function getAddSpecificationAdmin(Request $req){
-             $client1 = new \GuzzleHttp\Client();  
-             try {
-                $res = $client1->request('GET',PageController::getUrl('producttypes/'.$req->id.'') );
-                $data1 = json_decode($res->getBody()->getContents(), true);
-                // dd($data1);
-                $res = $client1->request('GET',PageController::getUrl('specificationtypes/producttype/'.$req->id.'') );
-                $status = $res->getStatusCode();
+            if (Session::has('key')){
+                $client1 = new \GuzzleHttp\Client();  
+                try {
+                    $res = $client1->request('GET',PageController::getUrl('producttypes/'.$req->id.'') );
+                    $data1 = json_decode($res->getBody()->getContents(), true);
+                    // dd($data1);
+                    $res = $client1->request('GET',PageController::getUrl('specificationtypes/producttype/'.$req->id.'') );
+                    $status = $res->getStatusCode();
 
-                $data = json_decode($res->getBody()->getContents(), true);
-                //  dd($data);
-                return view('admin/page.addspecificationadmin', compact('data','data1','status'));
-
-            } catch (RequestException $e) {
-                if ($e->getResponse()->getStatusCode() == '404') {
-                    $status = $e->getResponse()->getStatusCode();
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    //  dd($data);
                     return view('admin/page.addspecificationadmin', compact('data','data1','status'));
-                }            
-            } 
+
+                } catch (RequestException $e) {
+                    if ($e->getResponse()->getStatusCode() == '404') {
+                        $status = $e->getResponse()->getStatusCode();
+                        return view('admin/page.addspecificationadmin', compact('data','data1','status'));
+                    }            
+                } 
+            }
+            return view('admin/page.loginadmin');
+             
            
         }
 
