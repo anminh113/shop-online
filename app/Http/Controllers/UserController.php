@@ -23,13 +23,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function showProfile(Request $req)
+    public function showProfileAdmin(Request $req)
     {
 
         $client = new \GuzzleHttp\Client();
         try {
             $res = $client->request('GET', PageController::getUrl('accounts/'.$req->email.''));
             $data = json_decode($res->getBody()->getContents(), true);
+
             $email = $req['email'];
             $password = $req['password'];
             if($password === $data['account']['password']){
@@ -37,20 +38,20 @@ class UserController extends Controller
                 {
                 $req->session()->put('key',$data['account'] );
 
-                return redirect()->route('trang-chu-admin')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản lý gian hàng']);
+                return redirect()->route('trang-chu-admin')->with(['flag'=>'success','message'=>'Đăng nhập thành công','role'=>'Quản lý gian hàng']);
                 }
                 else if($data['account']['role']['roleName'] == 'Quản trị viên')
                 {
                 $req->session()->put('key',$data['account'] );
 
-                return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản trị viên']);
+                return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'success','message'=>'Đăng nhập thành công','role'=>'Quản trị viên']);
                 }
             }else{
-                return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+                return redirect()->back()->with(['flag'=>'danger','message'=>'Đăng nhập không thành công']);
             }
         }catch (\GuzzleHttp\Exception\ClientException $e) {
             // return $e->getResponse()->getStatusCode();
-            return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+            return redirect()->route('login-admin')->with(['flag'=>'danger','message'=>'Đăng nhập không thành công']);
         }
         
         //

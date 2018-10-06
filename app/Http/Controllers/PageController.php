@@ -228,16 +228,14 @@
 
         //Admin gian hàng
         public function getIndexAdmin(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 return view('admin/page.trangchu');
             }
-            return view('admin/page.loginadmin');
-           
-            
+            return redirect()->guest(route('login-admin'));            
         }
 
         public function getProductAdmin(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                  //get json san pham theo gian hang
                 // $store ='5bb1c6e38875381e34da95fc';
                 $store = '5bb1c71a8875381e34da95ff';
@@ -262,12 +260,12 @@
 
             return view('admin/page.product', compact('data','result', 'store', 'data_category','data_product_type','data_product_type_specificationtypes'));
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
                
         }
 
         public function getCategoryAdmin(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 $store = '5bb1c71a8875381e34da95ff';
                 //get json danh muc all
                 $client1 = new \GuzzleHttp\Client();
@@ -291,12 +289,12 @@
               
                 return view('admin/page.categoryadmin', compact('data','result')); 
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
             
         }
 
         public function getProductDetailAdmin(Request $req){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 $data = array();
                 $datatext = array();
                 //get json san pham theo ID san pham
@@ -317,12 +315,12 @@
 
                 return view('admin/page.productdetail', compact('resultdata','resultimg'));
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
             
         }
 
         public function getEditProductDetailAdmin(Request $req){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 $data = array();
                 $datatext = array();
                 //get json san pham theo ID san pham
@@ -341,32 +339,33 @@
                 //end get json
                 return view('admin/page.editproductdetail', compact('resultdata','resultimg'));        
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
             
         }
 
         public function getAddProductDetailAdmin(Request $req){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 $storeId = $req->id;
                 $data_category = PageController::getUrl('categories');
                 $data_product_type = PageController::getUrl('producttypes/category');
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
                 return view('admin/page.addproductdetail',compact('storeId', 'data_category','data_product_type','data_product_type_specificationtypes'));      
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
 
            
         }
 
         public function getReview(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 return view('admin/page.reviewadmin');            
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
             
         }
 
         public function getDiscount(){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 //get json san pham theo gian hang
                 $client1 = new \GuzzleHttp\Client();
                 $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
@@ -388,41 +387,44 @@
                 $data_product_type = PageController::getUrl('producttypes/category');
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
 
-            return view('admin/page.discountadmin', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+                return view('admin/page.discountadmin', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+            }
+            return redirect()->guest(route('login-admin', [], false));           
         }
 
         // Đăng nhập admin
         public function getLoginAdmin(){
             session()->forget('key');
-            return view('admin/page.loginadmin');
+            return view('admin/page.loginadmin');        
         }
+       
       
         //Admin hệ thống
         public function getAdmin(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 return view('admin/page.admin');
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
         }
 
         public function getCategoryAdminShop(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 return view('admin/page.categoryadminshop');
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
            
         }
 
         public function getDetailAdminShop(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 return view('admin/page.detailadminshop');
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
             
         }
 
         public function getAddCategoryAdmin(){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 //get json danh muc all
                 $client1 = new \GuzzleHttp\Client();
                 $res = $client1->request('GET',PageController::getUrl('categories') );
@@ -430,13 +432,13 @@
                 //end get json
                 return view('admin/page.addcategoryadmin', compact('data'));
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
            
         }
        
 
         public function getAddProductTypeAdmin(Request $req){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 //get json danh muc all
                 $client1 = new \GuzzleHttp\Client();
                 $res = $client1->request('GET',PageController::getUrl('categories/'.$req->id.'') );
@@ -449,12 +451,12 @@
 
                 return view('admin/page.addproducttypeadmin', compact('data','data1'));
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
             
         }
 
         public function getAddSpecificationAdmin(Request $req){
-            if (Session::has('key')){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 $client1 = new \GuzzleHttp\Client();  
                 try {
                     $res = $client1->request('GET',PageController::getUrl('producttypes/'.$req->id.'') );
@@ -474,7 +476,7 @@
                     }            
                 } 
             }
-            return view('admin/page.loginadmin');
+            return redirect()->guest(route('login-admin', [], false));            
              
            
         }

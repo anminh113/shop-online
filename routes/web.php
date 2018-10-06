@@ -109,7 +109,7 @@ Route::get('login-admin', [
 ]);
 Route::post('login-admin', [
     'as'=>'post-login-admin',
-    'uses'=>'UserController@showProfile'
+    'uses'=>'UserController@showProfileAdmin'
 ]);
 
 
@@ -174,12 +174,12 @@ Route::get('discount-admin', [
 Route::get('admin', [
     'as'=>'trang-chu-admin-he-thong',
     'uses'=>'PageController@getAdmin'
-])->middleware('Checklevel');
+]);
 
 Route::get('category-admin-shop', [
     'as'=>'danh-sach-shop-he-thong',
     'uses'=>'PageController@getCategoryAdminShop'
-])->middleware('Checklevel');
+]);
 
 Route::get('detail-admin-shop', [
     'as'=>'chi-tiet-shop-he-thong',

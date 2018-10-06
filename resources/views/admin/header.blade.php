@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="brand">
         <a href="{{route('trang-chu-admin')}}"><img src="{{ asset('source/admin/assets/img/primary_transparent.png') }}"  alt="CyberZone Logo" class="img-responsive logo "></a>
@@ -24,23 +25,16 @@
                 </li>
                 
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('source/admin/assets/img/user.png')}}" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('source/admin/assets/img/user.png')}}" class="img-circle" alt="Avatar"> <span>{{ $name }}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        @if(Auth::check())
-                            <li><a href="#"><i class="fa fa-user"></i>Chào bạn </a></li>			
-                            <li><a href="#">Đăng xuất</a></li>
-                        @else
-                            <li><a href="#">Đăng kí</a></li>
-                            <li><a href="#">Đăng nhập</a></li>
-                        @endif
+                      
                         <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                         <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
                         <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-                        <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                        {{-- <li><a onclick="{{ session()->flush() }}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li> --}}
                     </ul>
                 </li>
                 <!-- <li>
-                    <a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
                 </li> -->
             </ul>
         </div>
