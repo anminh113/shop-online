@@ -23,10 +23,8 @@
             <div class="panel">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4">
-
-                        <button type="button" class="btn btn-outline- btn-save" onclick="window.location='{{route('them-chi-tiet-san-pham-admin',$store)}}';">Thêm sản phẩm</button>
-                           
+                        <div class="col-lg-2 col-md-4">
+                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='{{route('them-chi-tiet-san-pham-admin',$store)}}';">Thêm sản phẩm</button>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="panel-title">
@@ -35,13 +33,22 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="panel-title">
-                                <select class="form-control" id="producttype">
-                                    
-                                </select>
+
+                        <form action="{{route('post-discount-admin')}}" method="POST">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="panel-title">
+                                    <select class="form-control" id="producttype">
+                                    </select>
+                                </div>
+                                <div hidden id="producttype1"></div>
                             </div>
-                        </div>
+                            <div class="col-lg-2 col-md-4">
+                                <button type="submit" class="btn btn-outline- btn-change" >Tìm kiếm</button>
+                            </div>
+                            {{ csrf_field() }}
+                        </form> 
+
+
                     </div>
                 </div>
                 <div class="panel-body">
@@ -49,13 +56,13 @@
                     <div class="row">
                         @foreach ($data['products'] as $item )
                             <div class="col-lg-3 col-md-6">
-                                <div class="product-type" onclick="window.location='{{route('chi-tiet-san-pham-admin',$item['productId'])}}';">
+                                <div class="product-type" onclick="window.location='{{route('chi-tiet-san-pham-admin',$item['_id'])}}';">
                                     <div class="product_border"></div>
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                         @foreach ($result['datatext'] as $da )
                                             @foreach ($da['imageList'] as $da1)   
                                                 {{-- @foreach ($da1['imageList'] as $da2)    --}}
-                                                @if($item['productId']== $da['productId']) 
+                                                @if($item['_id']== $da['productId']) 
                                                     <img src= {{$da1["imageURL"]}}  width="215" height="215" alt="">
                                                     @break
                                                 @endif
@@ -92,16 +99,15 @@
 
 {{-- get data category where storeID --}}
 <script>
-    var json_data_category = "{{$data_category}}";
+    var json_data_category = "{{$res12}}";
     var json_data_product_type = "{{$data_product_type}}";
     $.getJSON(json_data_category, function (data) {
         $('#table tbody tr').remove();
         var html = '';
-        var len = data['categories'].length;
+        var len = data['store']['categories'].length;
         for (var i = 0; i < len; i++) {
             // console.log(data['categories'][i]['categoryName']);
-            html += '<option value="' + json_data_product_type + '/' + data['categories'][i]['categoryId'] +
-                '">' + data['categories'][i]['categoryName'] + '</option>';
+            html += '<option value="' + json_data_product_type + '/' + data['store']['categories'][i]['category']['_id'] + '">' + data['store']['categories'][i]['category']['categoryName'] + '</option>';
         }
         $('#category').append(html);
     });
@@ -122,15 +128,27 @@
             for (var i = 0; i < len; i++) {
                 $("#producttype option").remove();
                 html += '<option value="' + json_data_product_type_specificationtypes + '/' + data[
-                    'productTypes'][i]['productTypeId'] + '">' + data['productTypes'][i][
+                    'productTypes'][i]['_id'] + '">' + data['productTypes'][i][
                     'productTypeName'
                 ] + '</option>';
             }
+            
             $('#producttype').append(html1);
             $('#producttype').append(html);
+           
+            $('#producttype1').append('<input type="text" name="producttypeid" value="'+text1[5]+'">');  
         });
     });
-    
+   
 </script>
+
+<script>
+     $('#producttype').change(function () {
+            var option1 = $(this).find('option:selected').val();
+            var text1 = option1.split("/", 6);
+            $('#producttype1').append('<input type="text" name="producttypeid" value="'+text1[5]+'">');  
+          
+    });
+    </script>
 
 @endsection

@@ -122,14 +122,31 @@ Route::get('index-admin', [
     'uses'=>'PageController@getIndexAdmin'
 ]);
 
+//---
 Route::get('category-admin', [
     'as'=>'danh-muc-admin',
     'uses'=>'PageController@getCategoryAdmin'   
 ]);
 
+Route::post('category-admin', [
+    'as'=>'post-danh-muc-admin',
+    'uses'=>'PostController@postCategoryAdmin'   
+]);
+
+Route::delete('category-admin', [
+    'as'=>'delete-danh-muc-admin',
+    'uses'=>'DeleteController@deleteCategoryAdmin'   
+]);
+
+//---
+
 Route::get('product-admin', [
     'as'=>'san-pham-admin',
     'uses'=>'PageController@getProductAdmin'
+]);
+Route::post('product-admin', [
+    'as'=>'post-san-pham-admin',
+    'uses'=>'PostController@postProductAdmin'
 ]);
 
 Route::get('product-detail-admin/{id}', [
@@ -164,10 +181,22 @@ Route::get('review-admin', [
     'uses'=>'PageController@getReview'
 ]);
 
+//---
 Route::get('discount-admin', [
     'as'=>'discount-admin',
     'uses'=>'PageController@getDiscount'
 ]);
+
+Route::post('discount-admin', [
+    'as'=>'post-discount-admin',
+    'uses'=>'PostController@postDiscount'
+]);
+
+Route::post('search-discount-admin', [
+    'as'=>'post-tim-kiem-discount-admin',
+    'uses'=>'PostController@postSearchDiscount'
+]);
+//---
 
 //Admin hệ thống
 

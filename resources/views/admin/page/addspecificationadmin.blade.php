@@ -147,7 +147,7 @@
                     <label for="basic">Tên thông số kỹ thuật sản phẩm:</label>
                     <div id="titleproduct">
                         <input type="text" id="title1"  name="namespeecification" class="form-control" placeholder="Tên thông số kỹ thuật" autofocus>
-                        <input type="text" hidden name="productTypeId" value="{{$data1['productType']['productTypeId']}}">
+                        <input type="text" hidden name="productTypeId" value="{{$data1['productType']['_id']}}">
                     </div>
                 </div>
                 <div class="modal-footer">

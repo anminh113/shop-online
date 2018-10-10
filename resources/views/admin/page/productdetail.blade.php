@@ -101,7 +101,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="space10">&nbsp;</div>
-                                <button type="button" class="btn btn-change" onclick="window.location='{{route('sua-chi-tiet-san-pham-admin',$item['product']['productId'])}}';">Cập nhật</button>
+                                <button type="button" class="btn btn-change" onclick="window.location='{{route('sua-chi-tiet-san-pham-admin',$item['product']['_id'])}}';">Cập nhật</button>
                                 <button type="button" class="btn btn-save">Xóa</button>
                             </div>
                         </div>

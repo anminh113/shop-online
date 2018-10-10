@@ -130,7 +130,7 @@
 
                             </div>
                             <div class="button_container">
-                                <a href="{{route('gio-hang',$item['product']['productId'])}}" class="btn btn-outline-info btn-change btn-buy">
+                                <a href="{{route('gio-hang',$item['product']['_id'])}}" class="btn btn-outline-info btn-change btn-buy">
                                     <div class="img-buy"></div>Thêm Vào Giỏ
                                 </a>
                                

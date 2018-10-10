@@ -70,18 +70,18 @@
                                         <td><a href="#">1</a></td>
                                         <td>{{$item['categoryName']}}</td>
                                         {{-- <td>2</td> --}}
-                                        <td><a href="{{route('them-loai-admin',$item['categoryId'])}}">Xem chi tiết</a></td>
-                                        <td><a data-toggle="modal" data-target="#update{{$item['categoryId']}}">
+                                        <td><a href="{{route('them-loai-admin',$item['_id'])}}">Xem chi tiết</a></td>
+                                        <td><a data-toggle="modal" data-target="#update{{$item['_id']}}">
                                             <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
-                                            <button class="btn btn-danger"  type="submit"   form="deleteid{{$item['categoryId']}}">
+                                            <button class="btn btn-danger"  type="submit"   form="deleteid{{$item['_id']}}">
                                                 <i class="fa fa-trash" >  </i>
                                             </button>
                                         </td>
                                     </tr>
-                                    <form id="deleteid{{$item['categoryId']}}" hidden action="{{route('delete-them-danh-muc-admin',$item['categoryId'])}}" method="post">
+                                    <form id="deleteid{{$item['_id']}}" hidden action="{{route('delete-them-danh-muc-admin',$item['_id'])}}" method="post">
                                     @method('DELETE')
                                     {{ csrf_field() }}
-                                </form>
+                                    </form>
                                     @endforeach
 
                                 </tbody>
@@ -124,7 +124,7 @@
     </div>
 </div>
 @foreach ($data['categories'] as $item)
-<div class="modal fade" id="update{{$item['categoryId']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="update{{$item['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -141,7 +141,7 @@
                     <label for="basic">Tên danh mục sản phẩm:</label>
                     <div id="titleproduct">
                         <input type="text" name="namecategory"  class="form-control" value="{{$item['categoryName']}}" autofocus>
-                        <input type="text" hidden name="categoryId" value="{{$item['categoryId']}}">
+                        <input type="text" hidden name="categoryId" value="{{$item['_id']}}">
                     </div>
                 </div>
                 <div class="modal-footer">

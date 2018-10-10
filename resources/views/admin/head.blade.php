@@ -34,6 +34,9 @@
 <link rel="icon"  type="image/png" sizes="96x96" href="{{ URL::asset('source/admin/assets/img/icon.png') }}"  >
 {{-- <link rel="apple-touch-icon" sizes="76x76" href="source/admin/assets/img/icon.png"> --}}
 {{-- <link rel="icon" type="image/png" sizes="96x96" href="source/admin/assets/img/icon.png"> --}}
-<link href="{{ URL::asset('source/admin/assets/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" >
 {{-- <link rel="stylesheet" href="source/admin/assets/css/iziToast.min.css"> --}}
 <script type="text/javascript" src="{{ URL::asset('source/admin/assets/vendor/jquery/jquery.min.js') }}"></script>
+<link href="{{ URL::asset('source/admin/assets/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" >
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+
+

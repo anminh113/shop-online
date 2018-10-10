@@ -41,19 +41,17 @@
                                 <li><a href="#">Accessories</a></li>
                             </ul>
                         </div>
-
                         <hr>
-                        <div class="sidebar_section">
+                       
+                        <div class="sidebar_section filter_by_section">
                             <div class="sidebar_subtitle brands_subtitle">Giá</div>
-                            <ul class="brands_list">
-                                <li class="brand shop_sorting_button1"><a href="">0 ₫ - 10.000.000 ₫</a></li>
-                                <li class="brand shop_sorting_button1"><a href="#">10.000.000 ₫ - 20.000.000 ₫</a></li>
-                                <li class="brand shop_sorting_button1"><a href="#">20.000.000 ₫ - 30.000.000 ₫</a></li>
-                                <li class="brand shop_sorting_button1"><a href="#">30.000.000 ₫ - 40.000.000 ₫</a></li>
-                                <li class="brand shop_sorting_button1"><a href="#">40.000.000 ₫ - 50.000.000 ₫</a></li>
-                                <li class="brand shop_sorting_button1"><a href="#">50.000.000 ₫ - 60.000.000 ₫</a></li>
-                                <li class="brand shop_sorting_button1"><a href="#">60.000.000 ₫ - 70.000.000 ₫</a></li>
-                            </ul>
+                            <div class="filter_price">
+                                <div id="slider-range" class="slider_range"></div>
+                                <p>Range: </p>
+                                <p>
+                                    <input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;">
+                                </p>
+                            </div>
                         </div>
                         <hr>
                         <div class="sidebar_section">
@@ -76,6 +74,7 @@
                         <div class="shop_content">
                             <div class="shop_bar clearfix">
                             <div class="shop_product_count" style="font-size: 16px"><span>{{count($data['products'] )}}</span> Sản phẩm</div>
+                            <input type="text"  id="quicksearch" placeholder="Search" />
                                 <div class="shop_sorting">
                                     <span>Sắp xếp theo:</span>
                                     <ul>
@@ -85,12 +84,15 @@
                                                 <li class="shop_sorting_button" data-isotope-option='original-order'>Độ phổ biến</li>
                                                 <li class="shop_sorting_button" data-isotope-option='PriceIncrease'>Giá tăng dần</li>
                                                 <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá giảm dần</li>
+                                                <li class="shop_sorting_button" data-isotope-option='name'>name</li>
                                                 <!-- <li class="shop_sorting_button" data-filter="numberGreater">300 > number > 5000</li> -->
                                             </ul>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+                         
+                 
                             <div class="product_grid">
                                 <div class="product_grid_border"></div>
                                 @foreach ($data['products'] as $item )
@@ -100,7 +102,7 @@
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                             @foreach ($result['datatext'] as $da )
                                                 @foreach ($da['imageList'] as $da1)   
-                                                    @if($item['productId'] == $da['productId']) 
+                                                    @if($item['_id'] == $da['productId']) 
                                                         {{-- @foreach($da1['imageList'] as $da2) --}}
                                                             <img src={{$da1['imageURL']}} width="115" height="115" alt="">
                                                             @break
@@ -110,13 +112,13 @@
                                             @endforeach
                                         </div>
                                         <div class="product_content">
-                                        <div class="product_price" style="font-size: 16px" id="price{{$item['productId']}}">{{$item['price']}}.000 ₫
+                                        <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{$item['price']}}.000 ₫
                                             @if(!empty($item['saleOff']))
                                             <span>{{$item['price']}} ₫</span>
                                             @endif
                                         </div>
                                             <div class="product_name">
-                                                <div><a href="{{ route('san-pham',$item['productId'] )}}" tabindex="0">{{$item['productName']}}</a></div>
+                                                <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
                                             </div>
                                         </div>
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -126,12 +128,12 @@
                                             <li class="product_mark product_new">new</li>
                                         </ul>
                                         @endif
-                                        <a href="{{route('gio-hang',$item['productId'])}}" class="btn btn-outline-info btn-change" style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change" style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
                                     </div>
                                     @if(!empty($item['saleOff']))
                                     <script>
                                             var a = {{$item['price']}} - ({{$item['price']}} * {{$item['saleOff']['discount']}}/100);
-                                            document.getElementById('price{{$item['productId']}}').innerHTML = a.toPrecision(4)+".000₫ <span>{{$item['price']}}.000₫</span>";
+                                            document.getElementById('price{{$item['_id']}}').innerHTML = a.toPrecision(4)+".000₫ <span>{{$item['price']}}.000₫</span>";
                                     </script>
                                     @endif
                                    
@@ -338,6 +340,7 @@
 
 
 @section('footer')
+
 <script src="source/user/plugins/Isotope/isotope.pkgd.min.js"></script>
 <script src="source/user/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="source/user/plugins/parallax-js-master/parallax.min.js"></script>

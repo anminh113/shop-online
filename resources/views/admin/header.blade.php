@@ -1,5 +1,9 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
+       
+       
+
+       
     <div class="brand">
         <a href="{{route('trang-chu-admin')}}"><img src="{{ asset('source/admin/assets/img/primary_transparent.png') }}"  alt="CyberZone Logo" class="img-responsive logo "></a>
     </div>
@@ -20,7 +24,6 @@
                         <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
                         <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
                         <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-                        <li><a href="#" class="more">See all notifications</a></li>
                     </ul>
                 </li>
                 
@@ -31,7 +34,7 @@
                         <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                         <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
                         <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-                        {{-- <li><a onclick="{{ session()->flush() }}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li> --}}
+                    <li><a href="{{route('login-admin')}}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                     </ul>
                 </li>
                 <!-- <li>

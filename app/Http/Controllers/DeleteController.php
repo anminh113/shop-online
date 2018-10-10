@@ -15,11 +15,11 @@
         
         //User
 
-        public static function getUrl($text){
-            // $urlAPI = "http://172.16.198.84:3000/".$text;
-            $urlAPI = "http://localhost:3000/".$text;
-            return $urlAPI;
-        }
+        // public static function getUrl($text){
+        //     // $urlAPI = "http://172.16.198.84:3000/".$text;
+        //     $urlAPI = "http://localhost:3000/".$text;
+        //     return $urlAPI;
+        // }
         // Admin hệ thống
         public function deleteAddCategoryAdmin(Request $req){
              //get json danh muc all
@@ -52,7 +52,7 @@
             }
             if(empty($datatitle)){
                 // dd($datatitle);
-                $res = $client1->request('delete',PageController::getUrl('specificationtypes/'.$data2['specificationType']['specificationTypeId'].'') );
+                $res = $client1->request('delete',PageController::getUrl('specificationtypes/'.$data2['specificationType']['_id'].'') );
                 $data = json_decode($res->getBody()->getContents(), true);
                 return redirect()->back();
             }
@@ -68,7 +68,7 @@
                 "value" =>     $value    ]);
             
             $jsonData1 =json_encode($datajson1);
-            $json_url1 = PageController::getUrl('specificationtypes/'.$data2['specificationType']['specificationTypeId'].'');
+            $json_url1 = PageController::getUrl('specificationtypes/'.$data2['specificationType']['_id'].'');
             $ch1 = curl_init( $json_url1 );
             $options1 = array(
                 CURLOPT_RETURNTRANSFER => true,
@@ -78,6 +78,57 @@
             );
             curl_setopt_array( $ch1, $options1 );
             $result1 =  curl_exec($ch1);
+            return redirect()->back();
+        }
+
+        public function deleteCategoryAdmin(Request $req){
+            $client = new \GuzzleHttp\Client();  
+            $store = Session::get('key')[0]['store']['_id'];
+            $res = $client->request('GET',PageController::getUrl('producttypes/category/'.$req->categoryId.'') );
+            $data = json_decode($res->getBody()->getContents(), true);
+            for($i=0; $i<count($data['productTypes']); $i++){
+                $data1[] = $data['productTypes'][$i]['_id'];
+               
+            }
+          
+            $datacount = 0;
+            for($i=0; $i<count($data1); $i++){
+                $res1 = $client->request('GET',PageController::getUrl('products/store/producttype/'.$store.'/'.$data1[$i].''));
+                $datatext[] = json_decode($res1->getBody()->getContents(), true);
+                $datacount = $datacount + $datatext[$i]['count'];
+            }
+            // dd($datacount);
+            if($datacount > 0){
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Không thể xóa khi có sản phẩm trong danh mục']);
+            }else{
+                $res2 = $client->request('GET',PageController::getUrl('stores/'.$store.''));
+                $data3 = json_decode($res2->getBody()->getContents(), true);
+              
+                for ($i=0;  $i < count($data3['store']['categories']); $i++){
+                    if($data3['store']['categories'][$i]['category']['_id'] != $req->categoryId){
+                        $value[]= (["category" => $data3['store']['categories'][$i]['category']['_id'],]);
+                    }
+                }
+                $datajson=array([
+                    "propName" => "categories",
+                    "value" => $value
+                ]);
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('stores/'.$store.'');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+                // dd($result);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'OK Xóa rồi đó']);
+            }
+
             return redirect()->back();
         }
     

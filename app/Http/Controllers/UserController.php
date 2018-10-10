@@ -30,7 +30,7 @@ class UserController extends Controller
         try {
             $res = $client->request('GET', PageController::getUrl('accounts/'.$req->email.''));
             $data = json_decode($res->getBody()->getContents(), true);
-
+            
             $email = $req['email'];
             $password = $req['password'];
             if($password === $data['account']['password']){
@@ -38,20 +38,20 @@ class UserController extends Controller
                 {
                 $req->session()->put('key',$data['account'] );
 
-                return redirect()->route('trang-chu-admin')->with(['flag'=>'success','message'=>'Đăng nhập thành công','role'=>'Quản lý gian hàng']);
+                return redirect()->route('trang-chu-admin')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Quản lý gian hàng']);
                 }
                 else if($data['account']['role']['roleName'] == 'Quản trị viên')
                 {
                 $req->session()->put('key',$data['account'] );
 
-                return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'success','message'=>'Đăng nhập thành công','role'=>'Quản trị viên']);
+                return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Quản trị viên']);
                 }
             }else{
-                return redirect()->back()->with(['flag'=>'danger','message'=>'Đăng nhập không thành công']);
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
             }
         }catch (\GuzzleHttp\Exception\ClientException $e) {
             // return $e->getResponse()->getStatusCode();
-            return redirect()->route('login-admin')->with(['flag'=>'danger','message'=>'Đăng nhập không thành công']);
+            return redirect()->route('login-admin')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
         }
         
         //

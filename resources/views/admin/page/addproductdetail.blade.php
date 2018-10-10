@@ -195,16 +195,15 @@
 
 {{-- get data category where storeID --}}
 <script>
-    var json_data_category = "{{$data_category}}";
+    var json_data_category = "{{$res1}}";
     var json_data_product_type = "{{$data_product_type}}";
     $.getJSON(json_data_category, function (data) {
         $('#table tbody tr').remove();
         var html = '';
-        var len = data['categories'].length;
+        var len = data['store']['categories'].length;
         for (var i = 0; i < len; i++) {
-            // console.log(data['categories'][i]['categoryName']);
-            html += '<option value="' + json_data_product_type + '/' + data['categories'][i]['categoryId'] +
-                '">' + data['categories'][i]['categoryName'] + '</option>';
+            html += '<option value="' + json_data_product_type + '/' + data['store']['categories'][i]['category']['_id'] +
+                '">' + data['store']['categories'][i]['category']['categoryName'] + '</option>';
         }
         $('#category').append(html);
     });
@@ -225,7 +224,7 @@
             var len = data['productTypes'].length;
             for (var i = 0; i < len; i++) {
                 $("#producttype option").remove();
-                html += '<option value="' + json_data_product_type_specificationtypes + '/' + data['productTypes'][i]['productTypeId'] + '">' + data['productTypes'][i]['productTypeName'] + '</option>';
+                html += '<option value="' + json_data_product_type_specificationtypes + '/' + data['productTypes'][i]['_id'] + '">' + data['productTypes'][i]['productTypeName'] + '</option>';
             }   
             $('#producttype').append(html1);
             $('#producttype').append(html);

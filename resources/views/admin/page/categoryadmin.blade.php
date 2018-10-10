@@ -21,6 +21,7 @@
                 <div class="panel-heading">
                     <h3>Danh mục sản phẩm</h3>
                 </div>
+               
                 <div class="panel-body">
                     <div class="row">
                         <table id="table_format" class="table table-striped">
@@ -32,12 +33,19 @@
                                 </tr>
                             </thead>
                             <tbody id="myTable">
-                                @foreach ($data['categories'] as $item)
-                                <tr>
-                                    <td><a href="#">1</a></td>
-                                    <td>{{$item['categoryName']}}</td>
-                                    <td><a href="#"><span class="label label-primary"><i class="fa fa-plus"></i></span></a></td>
+                                @foreach ($result1['data3'] as $item )
+                                    <tr>
+                                        <td><a href="#">1</a></td>
+                                        <td>{{$item['categoryName']}}</td>
+                                        <td><button class="btn btn-info"  type="submit" form="postId{{$item['_id']}}">
+                                            <i class="fa fa-plus" >  </i>
+                                            </button>
+                                        </td>
                                     </tr>
+                                    <form id="postId{{$item['_id']}}" hidden action="{{route('post-danh-muc-admin')}}" method="post">
+                                        <input type="text" name="categoryId" hidden value="{{$item['_id']}}">
+                                        {{ csrf_field() }}
+                                    </form>
                                 @endforeach
                             </tbody>
                         </table>
@@ -52,12 +60,20 @@
                                 </tr>
                             </thead>
                             <tbody id="myTable">
-                                @foreach ($result['datatext'] as $da)
+                                @foreach ($result['data2'] as $da)
                                 <tr>
                                     <td><a href="#">1</a></td>
-                                    <td>{{$da['category']['categoryName']}}</td>
-                                    <td><a href="#"><span class="label label-danger"><i class="fa fa-trash"></i></span></a></td>
+                                    <td>{{$da['categoryName']}}</td>
+                                    <td><button class="btn btn-danger"  type="submit" form="deleteid{{$da['_id']}}">
+                                        <i class="fa fa-trash" >  </i>
+                                        </button>
+                                    </td>
                                 </tr>
+                                <form id="deleteid{{$da['_id']}}" hidden action="{{route('delete-danh-muc-admin')}}" method="post">
+                                    <input type="text" name="categoryId" hidden value="{{$da['_id']}}">
+                                    @method('DELETE')
+                                    {{ csrf_field() }}
+                                </form>
                                 @endforeach
                             </tbody>
                         </table>

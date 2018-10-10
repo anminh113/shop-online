@@ -37,7 +37,7 @@
                         <h3 class="panel-title">
                             <div class="input-group" id="tensp" style="width: 65%; margin-left: 35%">
                                 <input class="form-control text-right" name="productname" type="text" value="{{$item['product']['productName']}}">
-                                <input hidden name="productid" type="text" value="{{$item['product']['productId']}}">
+                                <input hidden name="productid" type="text" value="{{$item['product']['_id']}}">
 
                             </div>
                         </h3>

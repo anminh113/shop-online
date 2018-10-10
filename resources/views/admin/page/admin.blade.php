@@ -128,9 +128,9 @@
     element.classList.add("active");
 
 </script>
+
 <script>
     jQuery('#table_format').ddTableFilter();
-
 </script>
 
 

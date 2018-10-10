@@ -15,11 +15,11 @@
         
     //User
 
-    public static function getUrl($text){
-        // $urlAPI = "http://172.16.198.84:3000/".$text;
-        $urlAPI = "http://localhost:3000/".$text;
-        return $urlAPI;
-    }
+    // public static function getUrl($text){
+    //     // $urlAPI = "http://172.16.198.84:3000/".$text;
+    //     $urlAPI = "http://localhost:3000/".$text;
+    //     return $urlAPI;
+    // }
 
     // Admin hệ thống
 
@@ -100,7 +100,7 @@
             "propName" => "specificationTitle",
             "value" =>     $value    ]);
         $jsonData1 =json_encode($datajson1);
-        $json_url1 = PageController::getUrl('specificationtypes/'.$data2['specificationType']['specificationTypeId'].'');
+        $json_url1 = PageController::getUrl('specificationtypes/'.$data2['specificationType']['_id'].'');
         $ch1 = curl_init( $json_url1 );
         $options1 = array(
             CURLOPT_RETURNTRANSFER => true,
@@ -193,9 +193,9 @@
                     ["imageURL" => $req->img3]
                 )
             ]);
-            dd($datajson1);
+            // dd($datajson1);
             $jsonData1 =json_encode($datajson1);
-            $json_url1 = PageController::getUrl('productimages/'.$dataimageid['productImageId'].'');
+            $json_url1 = PageController::getUrl('productimages/'.$dataimageid['_id'].'');
             $ch1 = curl_init( $json_url1 );
             $options1 = array(
                 CURLOPT_RETURNTRANSFER => true,

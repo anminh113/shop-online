@@ -14,17 +14,19 @@
     use Illuminate\Support\Facades\Validator;
     use Hash;
     use Illuminate\Support\Facades\Auth;
+    use DateTime;
+    use DateTimeZone;
 
  
     class PostController extends Controller{
         
         
 
-        public static function getUrl($text){
-            // $urlAPI = "http://172.16.198.84:3000/".$text;
-            $urlAPI = "http://localhost:3000/".$text;
-            return $urlAPI;
-        }
+        // public static function getUrl($text){
+        //     // $urlAPI = "http://172.16.198.84:3000/".$text;
+        //     $urlAPI = "http://localhost:3000/".$text;
+        //     return $urlAPI;
+        // }
 
         // Đăng nhập
         public function postLoginAdmin(Request $req){
@@ -154,7 +156,7 @@
                     "propName" => "specificationTitle",
                     "value" =>     $value    ]);
                 $jsonData1 =json_encode($datajson1);
-                $json_url1 = PageController::getUrl('specificationtypes/'.$data2['specificationType']['specificationTypeId'].'');
+                $json_url1 = PageController::getUrl('specificationtypes/'.$data2['specificationType']['_id'].'');
                 $ch1 = curl_init( $json_url1 );
                 $options1 = array(
                     CURLOPT_RETURNTRANSFER => true,
@@ -215,11 +217,12 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
+           
 
-            if(!empty($result1->createdProduct->productId)){
+            if(!empty($result1->createdProduct->_id)){
                 //post data json
                 $datajson1=array(
-                    "productId" => $result1->createdProduct->productId,
+                    "productId" => $result1->createdProduct->_id,
                     "imageList" => array(
                         ["imageURL" => $req->img1],
                         ["imageURL" => $req->img2],
@@ -237,15 +240,86 @@
                 );
                 curl_setopt_array( $ch1, $options1 );
                 $result2 =  curl_exec($ch1);
-                return redirect()->back();
+
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
             }
+            // end post json
+           
+        }
+
+        public function postProductAdmin(Request $req){
+            session()->flash('SearchProductTypeId', $req->producttypeid);
+            return redirect()->route('san-pham-admin');
+        }
+
+        public function postCategoryAdmin(Request $req){
+            $store = Session::get('key')[0]['store']['_id'];
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('stores/'.$store.''));
+            $data = json_decode($res->getBody()->getContents(), true);
+            $count = 0;
+            for ($i=0;  $i < count($data['store']['categories']); $i++){
+                $value[]= (["category" => $data['store']['categories'][$i]['category']['_id'],]);
+                $count ++;
+            }
+            if($count>0){
+                $value1 =(["category" => $req->categoryId]);
+                array_push($value,$value1);
+                $datajson=array([
+                    "propName" => "categories",
+                    "value" => $value
+                ]);
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('stores/'.$store.'');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+                // dd($result);
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+            }   
+        }
+
+        public function postSearchDiscount(Request $req){
+            session()->flash('SearchProductTypeId', $req->producttypeid);
+            return redirect()->route('discount-admin');
+        }
+
+        public function postDiscount(Request $req){
+            $store = Session::get('key')[0]['store']['_id'];
+            $datajson=array(
+                "storeId" =>  $store,
+                "discount" => $req->DiscountNumber,
+                "dateStart" => $req->startdate,
+                "dateEnd" => $req->enddate
+                );
+            // dd($datajson);
+            $jsonData =json_encode($datajson);
+            $json_url = PageController::getUrl('salesoff');
+            $ch = curl_init( $json_url );
+            $options = array(
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => $jsonData
+            );
+            curl_setopt_array( $ch, $options );
+            $result =  curl_exec($ch);
+            dd($result);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        }
                         
         
            
          
-            // end post json
            
-        }
+        
 
     }
 

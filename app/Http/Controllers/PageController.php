@@ -12,6 +12,12 @@
 
  
     class PageController extends Controller{
+
+        // Đăng nhập admin
+        public function getLoginAdmin(){
+            session()->forget('key');
+            return view('admin/page.loginadmin');        
+        }
         
         //User
 
@@ -146,7 +152,7 @@
              for ($i=0;  $i < count($data['products']); $i++){
                 $datasaleOff[] = $data['products'][$i]['saleOff']['discount'];
                 $dataPrice[] = $data['products'][$i]['price'];
-                $data2 = $data['products'][$i]['productId'];
+                $data2 = $data['products'][$i]['_id'];
                 $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
                 $datatext[] = json_decode($res2->getBody()->getContents(), true);
              }
@@ -216,15 +222,13 @@
         public function getReviewShop(){
             return view('user/page.reviewshop');
         }
+
         public function getWriteReviewShop(){
             return view('user/page.writereviewadmin');
         }
 
         //End user
 
-        
-
-        
 
         //Admin gian hàng
         public function getIndexAdmin(){
@@ -236,29 +240,53 @@
 
         public function getProductAdmin(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
-                 //get json san pham theo gian hang
-                // $store ='5bb1c6e38875381e34da95fc';
-                $store = '5bb1c71a8875381e34da95ff';
+                $store = Session::get('key')[0]['store']['_id'];
                 $client1 = new \GuzzleHttp\Client();
-                $res = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
-                $data = json_decode($res->getBody()->getContents(), true);
-                //  dd($data);
-                //end get json
-                $datatext = array();
-                for ($i=0;  $i < count($data['products']); $i++){
-                    $data2 = $data['products'][$i]['productId'];
-                    $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                    
+                if(Session::has('SearchProductTypeId')){
+
+                    $res = $client1->request('GET',PageController::getUrl('products/store/producttype/'.$store.'/'.Session::get('SearchProductTypeId').''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    //  dd($data);
+                    //end get json
+                    $datatext = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        $data2 = $data['products'][$i]['_id'];
+                        $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                        $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                        
+                    }
+                    $result = compact('datatext');
+                    // dd($result);
+                    $res12 = PageController::getUrl('stores/'.$store.'');
+                    $data_category = PageController::getUrl('categories');
+                    $data_product_type = PageController::getUrl('producttypes/category');
+                    $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+
+                    return view('admin/page.product', compact('data','res12' ,'result', 'store', 'data_category','data_product_type','data_product_type_specificationtypes'));
+
+                }else{
+                    //get json san pham theo gian hang
+                   
+                    $res = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    //  dd($data);
+                    //end get json
+                    $datatext = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        $data2 = $data['products'][$i]['_id'];
+                        $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                        $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                        
+                    }
+                    $result = compact('datatext');
+                    // dd($result);
+                    $res12 = PageController::getUrl('stores/'.$store.'');
+                    $data_category = PageController::getUrl('categories');
+                    $data_product_type = PageController::getUrl('producttypes/category');
+                    $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+
+                    return view('admin/page.product', compact('data','result','res12' , 'store', 'data_category','data_product_type','data_product_type_specificationtypes'));
                 }
-                $result = compact('datatext');
-                // dd($result);
-
-                $data_category = PageController::getUrl('categories');
-                $data_product_type = PageController::getUrl('producttypes/category');
-                $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-
-            return view('admin/page.product', compact('data','result', 'store', 'data_category','data_product_type','data_product_type_specificationtypes'));
             }
             return redirect()->guest(route('login-admin', [], false));            
                
@@ -266,7 +294,7 @@
 
         public function getCategoryAdmin(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
-                $store = '5bb1c71a8875381e34da95ff';
+                $store = Session::get('key')[0]['store']['_id'];
                 //get json danh muc all
                 $client1 = new \GuzzleHttp\Client();
                 $res = $client1->request('GET',PageController::getUrl('categories') );
@@ -276,18 +304,30 @@
                 //get storeId
                 $res1 = $client1->request('GET',PageController::getUrl('stores/'.$store.''));
                 $data1 = json_decode($res1->getBody()->getContents(), true);
-                // dd($data1);
+                // dd($data1['store']['categories']);
                 //get danh muc trong store
-                $datatext = array();
                 for ($i=0;  $i < count($data1['store']['categories']); $i++){
-                    $data2 = $data1['store']['categories'][$i]['category'];
-                    $res2 = $client1->request('GET',PageController::getUrl('categories/'.$data2.'') );
-                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                    
+                    $data2[] = $data1['store']['categories'][$i]['category'];
                 }
-                $result = compact('datatext');
+                $data3  = array();
+                for($i=0; $i<count($data['categories']); $i++){
+                    $count =0;
+                    for($j=0; $j<count($data2); $j++){
+                        if($data2[$j]['_id'] != $data['categories'][$i]['_id']){
+                            $count ++;
+                            if( $count == count($data2)){
+                                $data3[] = $data['categories'][$i];
+                            }
+                        }
+                    }
+                }
+
+                $result1 = compact('data3');
+
+                $result = compact('data2');
+                // dd($result);
               
-                return view('admin/page.categoryadmin', compact('data','result')); 
+                return view('admin/page.categoryadmin', compact('data','result','result1')); 
             }
             return redirect()->guest(route('login-admin', [], false));            
             
@@ -346,10 +386,12 @@
         public function getAddProductDetailAdmin(Request $req){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
                 $storeId = $req->id;
+                $store = Session::get('key')[0]['store']['_id'];
+                $res1 = PageController::getUrl('stores/'.$store.'');
                 $data_category = PageController::getUrl('categories');
                 $data_product_type = PageController::getUrl('producttypes/category');
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-                return view('admin/page.addproductdetail',compact('storeId', 'data_category','data_product_type','data_product_type_specificationtypes'));      
+                return view('admin/page.addproductdetail',compact('storeId', 'res1', 'data_category','data_product_type','data_product_type_specificationtypes'));      
             }
             return redirect()->guest(route('login-admin', [], false));            
 
@@ -366,39 +408,58 @@
 
         public function getDiscount(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+                $store  = Session::get('key')[0]['store']['_id'];
                 //get json san pham theo gian hang
                 $client1 = new \GuzzleHttp\Client();
-                $res = $client1->request('GET',PageController::getUrl('products/store/5b989eb9a6bce5234c9522ea'));
-                $data = json_decode($res->getBody()->getContents(), true);
-                //  dd($data);
+                if(Session::has('SearchProductTypeId')){
+                    $res = $client1->request('GET',PageController::getUrl('products/store/producttype/'.$store.'/'.Session::get('SearchProductTypeId').''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    //  dd($data);
 
-                //end get json
-                $datatext = array();
-                for ($i=0;  $i < count($data['products']); $i++){
-                    $data2 = $data['products'][$i]['productId'];
-                    $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                    
+                    //end get json
+                    $datatext = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        $data2 = $data['products'][$i]['_id'];
+                        $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                        $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                        
+                    }
+                    $result = compact('datatext');
+                    // dd($result);
+                    $res1 =PageController::getUrl('stores/'.$store.'');
+                    $data_category = PageController::getUrl('categories');
+                    $data_product_type = PageController::getUrl('producttypes/category');
+                    $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+
+                    return view('admin/page.discountadmin', compact('data','res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+                }else{
+                    $res = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    //  dd($data);
+    
+                    //end get json
+                    $datatext = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        $data2 = $data['products'][$i]['_id'];
+                        $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                        $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                        
+                    }
+                    $result = compact('datatext');
+                    // dd($result);
+                    $res1 =PageController::getUrl('stores/'.$store.'');
+                    $data_category = PageController::getUrl('categories');
+                    $data_product_type = PageController::getUrl('producttypes/category');
+                    $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+    
+                    return view('admin/page.discountadmin', compact('data','res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
                 }
-                $result = compact('datatext');
-                // dd($result);
-
-                $data_category = PageController::getUrl('categories');
-                $data_product_type = PageController::getUrl('producttypes/category');
-                $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-
-                return view('admin/page.discountadmin', compact('data','result', 'data_category','data_product_type','data_product_type_specificationtypes'));
             }
             return redirect()->guest(route('login-admin', [], false));           
         }
 
-        // Đăng nhập admin
-        public function getLoginAdmin(){
-            session()->forget('key');
-            return view('admin/page.loginadmin');        
-        }
        
-      
+       
         //Admin hệ thống
         public function getAdmin(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
@@ -436,7 +497,6 @@
            
         }
        
-
         public function getAddProductTypeAdmin(Request $req){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 //get json danh muc all

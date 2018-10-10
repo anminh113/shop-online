@@ -278,7 +278,7 @@ $(document).ready(function() {
                 Price: function(itemElement) {
                     var priceEle = $(itemElement).find('.product_price').text().replace('$', '');
                     return parseFloat(priceEle);
-                }
+                },name: '.product_name div a'
             },
             animationOptions: {
                 duration: 750,
@@ -291,7 +291,7 @@ $(document).ready(function() {
         sortingButtons.each(function() {
             $(this).on('click', function() {
                 $('.sorting_text').text($(this).text());
-
+                
                 var option = $(this).attr('data-isotope-option');
                 if (option == 'PriceIncrease') {
                     $('.product_grid').isotope('updateSortData').isotope();
@@ -299,13 +299,50 @@ $(document).ready(function() {
                 } else if (option == 'PriceReduction') {
                     $('.product_grid').isotope('updateSortData').isotope();
                     $('.product_grid').isotope({ sortBy: 'Price', sortAscending: false });
-                } else {
+                } else if (option == 'name'){
+                    $('.product_grid').isotope('updateSortData').isotope();
+                    $('.product_grid').isotope({ sortBy: 'name' });
+                }else{
                     $('.product_grid').isotope('updateSortData').isotope();
                     $('.product_grid').isotope({ sortBy: 'random' });
                 }
 
             });
         });
+
+        // quick search regex
+        var qsRegex;
+
+        // init Isotope
+        var $grid = $('.product_grid').isotope({
+        itemSelector: '.product_name div a',
+        layoutMode: 'fitRows',
+        filter: function() {
+            return qsRegex ? $(this).text().match( qsRegex ) : true;
+        }
+        });
+
+        // use value of search field to filter
+        var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+        qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+        $grid.isotope();
+        }, 50 ) );
+
+        // debounce so filtering doesn't happen every millisecond
+        function debounce( fn, threshold ) {
+        var timeout;
+        threshold = threshold || 100;
+        return function debounced() {
+            clearTimeout( timeout );
+            var args = arguments;
+            var _this = this;
+            function delayed() {
+            fn.apply( _this, args );
+            }
+            timeout = setTimeout( delayed, threshold );
+        };
+        }
+
     }
 
 
@@ -321,21 +358,21 @@ $(document).ready(function() {
             $("#slider-range").slider({
                 range: true,
                 min: 0,
-                max: 5000,
-                values: [880, 1880],
+                max: 50000,
+                values: [880, 6880],
                 slide: function(event, ui) {
-                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#amount").val( ui.values[0] + ".000 ₫ - " + ui.values[1]+".000 ₫");
                 }
             });
 
-            $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+            $("#amount").val( $("#slider-range").slider("values", 0) + ",000 ₫ - " + $("#slider-range").slider("values", 1)+".000 ₫");
             $('.ui-slider-handle').on('mouseup', function() {
                 $('.product_grid').isotope({
                     filter: function() {
                         var priceRange = $('#amount').val();
-                        var priceMin = parseFloat(priceRange.split('-')[0].replace('$', ''));
-                        var priceMax = parseFloat(priceRange.split('-')[1].replace('$', ''));
-                        var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace('$', '');
+                        var priceMin = parseFloat(priceRange.split('-')[0].replace('₫', ''));
+                        var priceMax = parseFloat(priceRange.split('-')[1].replace('₫', ''));
+                        var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace('₫', '');
                         console.log("ID: " + priceMin);
                         console.log("ID: " + priceMax);
                         return (itemPrice > priceMin) && (itemPrice < priceMax);
