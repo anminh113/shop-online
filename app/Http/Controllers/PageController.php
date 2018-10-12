@@ -127,6 +127,7 @@
             $data = array();
             $datatext = array();
             $timereview = array();
+            $countstar = array();
             //get json san pham theo ID san pham
 
             //get thong tin san pham
@@ -142,14 +143,47 @@
             $res = $client->request('GET',PageController::getUrl('reviewProducts/product/'.$req->id.''));
             $datareview = json_decode($res->getBody()->getContents(), true);
             // dd($datareview);
+            $countstar_5 = 0;
+            $countstar_4 = 0;
+            $countstar_3 = 0;
+            $countstar_2 = 0;
+            $countstar_1 = 0;
+
+
+
             for($i=0; $i<$datareview['count']; $i++){
                 $dtstart = new DateTime($datareview['reviewProducts'][$i]['dateReview']);
                 $dtstart->setTimezone(new DateTimeZone('UTC'));
                 $timereview[] =  $dtstart->format('d/m/Y');
-            }
-            // dd($timereview);
 
-            return view('user/page.product',compact('resultdata','resultimg','datareview','timereview'));
+                $countstar[] = $datareview['reviewProducts'][$i]['ratingStar']['ratingStar'];
+                switch ($countstar[$i]) {
+                    case "5":
+                        $countstar_5 ++;
+                        break;
+                    case "4":
+                        $countstar_4 ++;
+                        break;
+                    case "3":
+                        $countstar_3 ++;
+                        break;
+                    case "2":
+                        $countstar_2 ++;
+                        break;
+                    case "1":
+                        $countstar_1 ++;
+                        break;
+                }
+            }
+            // print_r($countstar_5);
+            // print_r($countstar_4);
+            // print_r($countstar_3);
+            // print_r($countstar_2);
+            // print_r($countstar_1);
+            // exit();
+
+            // dd($countstar);
+            return view('user/page.product',compact('resultdata','resultimg','datareview','timereview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getProductList(){

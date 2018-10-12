@@ -285,21 +285,47 @@ section
 	margin-right: 4px;
 	color: #f5e211;
 }
+    /* content: "\f089 ";  */
+
 .rating_r_1 i:first-child::before{content: "\f005";}
+
+.rating_r_1_5 i:first-child::before{content: "\f005";}
+.rating_r_1_5 i:nth-child(2)::before{content: "\f123";}
+
 .rating_r_2 i:first-child::before{content: "\f005";}
 .rating_r_2 i:nth-child(2)::before{content: "\f005";}
+
+.rating_r_2_5 i:first-child::before{content: "\f005";}
+.rating_r_2_5 i:nth-child(2)::before{content: "\f005";}
+.rating_r_2_5 i:nth-child(3)::before{content: "\f123";}
+
+
 .rating_r_3 i:first-child::before{content: "\f005";}
 .rating_r_3 i:nth-child(2)::before{content: "\f005";}
 .rating_r_3 i:nth-child(3)::before{content: "\f005";}
+
+.rating_r_3_5 i:first-child::before{content: "\f005";}
+.rating_r_3_5 i:nth-child(2)::before{content: "\f005";}
+.rating_r_3_5 i:nth-child(3)::before{content: "\f005";}
+.rating_r_3_5 i:nth-child(4)::before{content: "\f123";}
+
 .rating_r_4 i:first-child::before{content: "\f005";}
 .rating_r_4 i:nth-child(2)::before{content: "\f005";}
 .rating_r_4 i:nth-child(3)::before{content: "\f005";}
 .rating_r_4 i:nth-child(4)::before{content: "\f005";}
+
+.rating_r_4_5 i:first-child::before{content: "\f005";}
+.rating_r_4_5 i:nth-child(2)::before{content: "\f005";}
+.rating_r_4_5 i:nth-child(3)::before{content: "\f005";}
+.rating_r_4_5 i:nth-child(4)::before{content: "\f005";}
+.rating_r_4_5 i:nth-child(5)::before{content: "\f123";}
+
 .rating_r_5 i:first-child::before{content: "\f005";}
 .rating_r_5 i:nth-child(2)::before{content: "\f005";}
 .rating_r_5 i:nth-child(3)::before{content: "\f005";}
 .rating_r_5 i:nth-child(4)::before{content: "\f005";}
 .rating_r_5 i:nth-child(5)::before{content: "\f005";}
+
 
 /*********************************
 3. Header

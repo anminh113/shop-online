@@ -26,7 +26,7 @@
 .product_price {
     display: inline-block;
     font-size: 24px;
-    margin-top: 15px; 
+    margin-top: 0px; 
     clear: left;
 }
 .product_text {
@@ -77,6 +77,7 @@
 .tillet {
     color: #757575;
     font-size: 13px;
+    margin-top: 8px;
 }
 
 .filter__seller-rating {
@@ -114,7 +115,7 @@
 
 .seller-review-item {
     border-bottom: 1 solid #eff0f5;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
 }
 
 .seller-review-item .row {
@@ -134,3 +135,37 @@
     font-size: 12px;
 }
 
+.bar-5 {
+    height: 16px;
+    background-color: #FFCC40;
+}
+
+.bar-4 {
+    height: 16px;
+    background-color: #FFCC40;
+}
+
+.bar-3 {
+    height: 16px;
+    background-color: #FFCC40;
+}
+
+.bar-2 {
+    height: 16px;
+    background-color: #FFCC40;
+}
+
+.bar-1 {
+    height: 16px;
+    background-color: #FFCC40;
+}
+
+
+.product_item {
+    position: inherit;
+    display: table-column;
+}
+
+.page-active {
+    display: block;
+}
