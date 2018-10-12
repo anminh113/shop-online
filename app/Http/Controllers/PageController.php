@@ -9,13 +9,18 @@
     use GuzzleHttp\Pool;
     use Illuminate\Support\Facades\Log;
     use GuzzleHttp\Exception\RequestException;
-
+    use DateTime;
+    use Date;
+    use DateTimeZone;
  
     class PageController extends Controller{
 
         // Đăng nhập admin
         public function getLoginAdmin(){
             session()->forget('key');
+            session()->forget('SearchProductTypeId');
+            session()->forget('SearchSaleOffId');
+            session()->forget('HasSearchSaleOffId');
             return view('admin/page.loginadmin');        
         }
         
@@ -121,6 +126,7 @@
         public function getProduct(Request $req){
             $data = array();
             $datatext = array();
+            $timereview = array();
             //get json san pham theo ID san pham
 
             //get thong tin san pham
@@ -133,36 +139,53 @@
             $datatext[] = json_decode($res->getBody()->getContents(), true);
             $resultimg = compact('datatext');
 
-            return view('user/page.product',compact('resultdata','resultimg'));
+            $res = $client->request('GET',PageController::getUrl('reviewProducts/product/'.$req->id.''));
+            $datareview = json_decode($res->getBody()->getContents(), true);
+            // dd($datareview);
+            for($i=0; $i<$datareview['count']; $i++){
+                $dtstart = new DateTime($datareview['reviewProducts'][$i]['dateReview']);
+                $dtstart->setTimezone(new DateTimeZone('UTC'));
+                $timereview[] =  $dtstart->format('d/m/Y');
+            }
+            // dd($timereview);
+
+            return view('user/page.product',compact('resultdata','resultimg','datareview','timereview'));
         }
 
         public function getProductList(){
              //get json san pham theo gian hang
              $client1 = new \GuzzleHttp\Client();
             //  $res = $client1->request('GET',PageController::getUrl('products/store/5bb1c71a8875381e34da95ff'));
-             $res = $client1->request('GET',PageController::getUrl('products'));
-             $data = json_decode($res->getBody()->getContents(), true);
-            //   dd($data['products']);
+            $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $datatime = json_decode($restime->getBody()->getContents(), true);
+          
 
+            $todaytime = new DateTime($datatime['time']);
+            $todaytime->setTimezone(new DateTimeZone('UTC'));
+            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
+            $res = $client1->request('GET',PageController::getUrl('products'));
+            $data = json_decode($res->getBody()->getContents(), true);
              //end get json
-             $dataPrice = array();
-                $datasaleOff =array();
-                $dataPriceProduct = array();
-             $datatext = array();
-             for ($i=0;  $i < count($data['products']); $i++){
-                $datasaleOff[] = $data['products'][$i]['saleOff']['discount'];
-                $dataPrice[] = $data['products'][$i]['price'];
-                $data2 = $data['products'][$i]['_id'];
-                $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-                $datatext[] = json_decode($res2->getBody()->getContents(), true);
-             }
-             $result = compact('datatext');
+            $dataPrice = array();
+            $datasaleOff =array();
+            $dataPriceProduct = array();
+            $datatext = array();
+            for ($i=0;  $i < count($data['products']); $i++){
+            $datasaleOff[] = $data['products'][$i]['saleOff']['discount'];
+            $dataPrice[] = $data['products'][$i]['price'];
+            $data2 = $data['products'][$i]['_id'];
+            $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+            $datatext[] = json_decode($res2->getBody()->getContents(), true);
+            }
+
+            $result = compact('datatext');
             //  dd($datatext);
             foreach( $datasaleOff as $price => $sale ) {
                 $dataPriceProduct[] = ($dataPrice[$price]-($dataPrice[$price]*$sale)/100);   
             }
             $resultPrice = compact('dataPriceProduct');
-            return view('user/page.productlist',compact('data','result','resultPrice'));
+            return view('user/page.productlist',compact('data','result','resultPrice','time'));
         }
 
         public function getRegister(){
@@ -408,51 +431,164 @@
 
         public function getDiscount(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+               
+              
                 $store  = Session::get('key')[0]['store']['_id'];
-                //get json san pham theo gian hang
                 $client1 = new \GuzzleHttp\Client();
+                $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+                $datatime = json_decode($restime->getBody()->getContents(), true);
+              
+                $todaytime = new DateTime($datatime['time']);
+                $todaytime->setTimezone(new DateTimeZone('UTC'));
+                $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
+                
+
+                // dd($time);
+                //get json san pham theo gian hang
+               
                 if(Session::has('SearchProductTypeId')){
                     $res = $client1->request('GET',PageController::getUrl('products/store/producttype/'.$store.'/'.Session::get('SearchProductTypeId').''));
                     $data = json_decode($res->getBody()->getContents(), true);
-                    //  dd($data);
+
+                    $datatext1 = array();
+                    $datatext2 = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] < $time){
+                            $datatext1[] = $data['products'][$i];
+                        }
+                    }
+                    $result1 = compact('datatext1');
+
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] > $time){
+                            $datatext2[] = $data['products'][$i];
+                        }
+                    }
+                    $result2 = compact('datatext2');
 
                     //end get json
                     $datatext = array();
                     for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] < $time){
                         $data2 = $data['products'][$i]['_id'];
                         $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
                         $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                        
+                        }
                     }
                     $result = compact('datatext');
+
+                    $datatext1 = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] > $time){
+                        $data21 = $data['products'][$i]['_id'];
+                        $res21 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data21.''));
+                        $datatext1[] = json_decode($res21->getBody()->getContents(), true);
+                        }
+                    }
+                    $result3 = compact('datatext1');
                     // dd($result);
+                    $resdis = PageController::getUrl('salesoff/store/'.$store.'');
                     $res1 =PageController::getUrl('stores/'.$store.'');
                     $data_category = PageController::getUrl('categories');
                     $data_product_type = PageController::getUrl('producttypes/category');
                     $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+                return view('admin/page.discountadmin', compact('time','data','result3','result2' , 'resdis','result1'  ,'res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+                
+                }else if(Session::has('SearchSaleOffId')){
+                    $res = $client1->request('GET',PageController::getUrl('products/saleoff/'.Session::get('SearchSaleOffId').''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    $datatext1 = array();
+                    $datatext2 = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] < $time){
+                            $datatext1[] = $data['products'][$i];
+                        }
+                    }
+                    $result1 = compact('datatext1');
 
-                    return view('admin/page.discountadmin', compact('data','res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] > $time){
+                            $datatext2[] = $data['products'][$i];
+                        }
+                    }
+                    $result2 = compact('datatext2');
+
+                    //end get json
+                    $datatext = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] < $time){
+                        $data2 = $data['products'][$i]['_id'];
+                        $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                        $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                        }
+                    }
+                    $result = compact('datatext');
+
+                    $datatext1 = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] > $time){
+                        $data21 = $data['products'][$i]['_id'];
+                        $res21 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data21.''));
+                        $datatext1[] = json_decode($res21->getBody()->getContents(), true);
+                        }
+                    }
+                    $result3 = compact('datatext1');
+                    // dd($result);
+                    $resdis = PageController::getUrl('salesoff/store/'.$store.'');
+                    $res1 =PageController::getUrl('stores/'.$store.'');
+                    $data_category = PageController::getUrl('categories');
+                    $data_product_type = PageController::getUrl('producttypes/category');
+                    $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
+                  
+                return view('admin/page.discountadmin', compact('time','data','result3','result2' , 'resdis','result1'  ,'res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+               
                 }else{
                     $res = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
                     $data = json_decode($res->getBody()->getContents(), true);
-                    //  dd($data);
-    
+                    $datatext1 = array();
+                    $datatext2 = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] < $time   ){
+                            $datatext1[] = $data['products'][$i];
+                        }
+                    }
+                    $result1 = compact('datatext1');
+
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(!empty($data['products'][$i]['saleOff']) && $data['products'][$i]['saleOff']['dateEnd'] > $time ){
+                            $datatext2[] = $data['products'][$i];
+                        }
+                    }
+                    $result2 = compact('datatext2');
+
                     //end get json
                     $datatext = array();
                     for ($i=0;  $i < count($data['products']); $i++){
+                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] < $time   ){
                         $data2 = $data['products'][$i]['_id'];
                         $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
                         $datatext[] = json_decode($res2->getBody()->getContents(), true);
-                        
+                        }
                     }
                     $result = compact('datatext');
+
+                    $datatext1 = array();
+                    for ($i=0;  $i < count($data['products']); $i++){
+                        if(!empty($data['products'][$i]['saleOff']) && $data['products'][$i]['saleOff']['dateEnd'] > $time  ){
+                        $data21 = $data['products'][$i]['_id'];
+                        $res21 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data21.''));
+                        $datatext1[] = json_decode($res21->getBody()->getContents(), true);
+                        }
+                    }
+                    $result3 = compact('datatext1');
                     // dd($result);
+                    $resdis = PageController::getUrl('salesoff/store/'.$store.'');
                     $res1 =PageController::getUrl('stores/'.$store.'');
                     $data_category = PageController::getUrl('categories');
                     $data_product_type = PageController::getUrl('producttypes/category');
                     $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-    
-                    return view('admin/page.discountadmin', compact('data','res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
+                return view('admin/page.discountadmin', compact('time','data','result3','result2' , 'resdis', 'result1'  ,'res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
                 }
             }
             return redirect()->guest(route('login-admin', [], false));           

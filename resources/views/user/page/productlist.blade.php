@@ -1,4 +1,3 @@
-
 @extends('user/master')
 @section('head')
 <link rel="stylesheet" type="text/css" href="source/user/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
@@ -42,14 +41,15 @@
                             </ul>
                         </div>
                         <hr>
-                       
+                   
                         <div class="sidebar_section filter_by_section">
                             <div class="sidebar_subtitle brands_subtitle">Giá</div>
                             <div class="filter_price">
                                 <div id="slider-range" class="slider_range"></div>
-                                <p>Range: </p>
-                                <p>
-                                    <input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;">
+                                <p style="width: 100%">
+                                    <input type="text"  id="amount1" class="amount" readonly style="border:0; font-weight:bold; width: 100%">
+
+                                    <input type="text" hidden id="amount" class="amount" readonly style="border:0; font-weight:bold; width: 100%">
                                 </p>
                             </div>
                         </div>
@@ -73,17 +73,21 @@
                         <!-- Shop Content -->
                         <div class="shop_content">
                             <div class="shop_bar clearfix">
-                            <div class="shop_product_count" style="font-size: 16px"><span>{{count($data['products'] )}}</span> Sản phẩm</div>
-                            <input type="text"  id="quicksearch" placeholder="Search" />
+                                <div class="shop_product_count" style="font-size: 16px"><span>{{count($data['products']
+                                        )}}</span> Sản phẩm</div>
+                                <input type="text" id="quicksearch" placeholder="Search" />
                                 <div class="shop_sorting">
                                     <span>Sắp xếp theo:</span>
                                     <ul>
                                         <li>
                                             <span class="sorting_text">Độ phổ biến <i class="fas fa-chevron-down"></span></i>
                                             <ul>
-                                                <li class="shop_sorting_button" data-isotope-option='original-order'>Độ phổ biến</li>
-                                                <li class="shop_sorting_button" data-isotope-option='PriceIncrease'>Giá tăng dần</li>
-                                                <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá giảm dần</li>
+                                                <li class="shop_sorting_button" data-isotope-option='original-order'>Độ
+                                                    phổ biến</li>
+                                                <li class="shop_sorting_button" data-isotope-option='PriceIncrease'>Giá
+                                                    tăng dần</li>
+                                                <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá
+                                                    giảm dần</li>
                                                 <li class="shop_sorting_button" data-isotope-option='name'>name</li>
                                                 <!-- <li class="shop_sorting_button" data-filter="numberGreater">300 > number > 5000</li> -->
                                             </ul>
@@ -91,58 +95,94 @@
                                     </ul>
                                 </div>
                             </div>
-                         
-                 
+
+
                             <div class="product_grid">
                                 <div class="product_grid_border"></div>
                                 @foreach ($data['products'] as $item )
-                                    <!-- Product Item -->
-                                    <div class="product_item discount">
-                                        <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                            @foreach ($result['datatext'] as $da )
-                                                @foreach ($da['imageList'] as $da1)   
-                                                    @if($item['_id'] == $da['productId']) 
-                                                        {{-- @foreach($da1['imageList'] as $da2) --}}
-                                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
-                                                            @break
-                                                        {{-- @endforeach --}}
-                                                    @endif
-                                                @endforeach 
-                                            @endforeach
-                                        </div>
-                                        <div class="product_content">
-                                        <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{$item['price']}}.000 ₫
-                                            @if(!empty($item['saleOff']))
-                                            <span>{{$item['price']}} ₫</span>
-                                            @endif
-                                        </div>
-                                            <div class="product_name">
-                                                <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        @if(!empty($item['saleOff']))
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
+                                <!-- Product Item -->
+                                @if(!empty($item['saleOff']))
+                                <div class="product_item discount">
+                                    <div class="product_border"></div>
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                        @foreach ($result['datatext'] as $da )
+                                        @foreach ($da['imageList'] as $da1)
+                                        @if($item['_id'] == $da['productId'])
+                                        {{-- @foreach($da1['imageList'] as $da2) --}}
+                                        <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                        @break
+                                        {{-- @endforeach --}}
                                         @endif
-                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change" style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        @endforeach
+                                        @endforeach
                                     </div>
-                                    @if(!empty($item['saleOff']))
-                                    <script>
-                                            var a = {{$item['price']}} - ({{$item['price']}} * {{$item['saleOff']['discount']}}/100);
-                                            document.getElementById('price{{$item['_id']}}').innerHTML = a.toPrecision(4)+".000₫ <span>{{$item['price']}}.000₫</span>";
-                                    </script>
+                                    <div class="product_content">
+                                        <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100, 0, '', '')}}@if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}}</span>@endif</div>
+
+                                        <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100)}},000₫@if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
+
+                                        <div class="product_name">
+                                            <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                    @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
+                                    <ul class="product_marks">
+                                        <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
+                                        <li class="product_mark product_new">new</li>
+                                    </ul>
                                     @endif
-                                   
+                                    <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                        style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                </div>
+                                @endif
+
+                                @if(empty($item['saleOff']))
+                                <div class="product_item ">
+                                    <div class="product_border"></div>
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                        @foreach ($result['datatext'] as $da )
+                                        @foreach ($da['imageList'] as $da1)
+                                        @if($item['_id'] == $da['productId'])
+                                        {{-- @foreach($da1['imageList'] as $da2) --}}
+                                        <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                        @break
+                                        {{-- @endforeach --}}
+                                        @endif
+                                        @endforeach
+                                        @endforeach
+                                    </div>
+                                    <div class="product_content">
+                                        <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'], 0, '', '')}}</div>
+
+                                        <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
+
+                                        <div class="product_name">
+                                            <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                    @if(empty($item['saleOff']))
+                                    <ul class="product_marks">
+                                        <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
+                                        <li class="product_mark product_new">new</li>
+                                    </ul>
+                                    @endif
+                                    <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                        style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                </div>
+                                @endif
+
+
+
                                 @endforeach
-                               
+
                             </div>
+
                             <!-- Shop Page Navigation -->
                             <div class="shop_page_nav d-flex flex-row">
-                                <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+                                <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i
+                                        class="fas fa-chevron-left"></i></div>
                                 <ul class="page_nav d-flex flex-row">
                                     <li><a href="#">1</a></li>
                                     <li><a href="#">2</a></li>
@@ -150,7 +190,8 @@
                                     <li><a href="#">...</a></li>
                                     <li><a href="#">21</a></li>
                                 </ul>
-                                <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+                                <div class="page_next d-flex flex-column align-items-center justify-content-center"><i
+                                        class="fas fa-chevron-right"></i></div>
                             </div>
                         </div>
                     </div>
@@ -174,11 +215,12 @@
                 <div class="viewed_slider_container">
                     <!-- Recently Viewed Slider -->
                     <div class="owl-carousel owl-theme viewed_slider">
-                       
+
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
                                 <div class="viewed_content text-center">
                                     <div class="viewed_price">990.000 ₫</div>
                                     <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
@@ -191,74 +233,79 @@
                         </div>
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -347,5 +394,5 @@
 <script src="source/user/js/shop_custom.js"></script>
 
 
-@endsection
 
+@endsection

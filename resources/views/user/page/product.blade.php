@@ -66,15 +66,7 @@
                     {{-- @foreach ($da1['imageList'] as $da2) --}}
                     <li data-image={{$da1["imageURL"]}}><img src={{$da1["imageURL"]}} alt=""></li>
                     {{-- @endforeach --}}
-                    <div class="demo-gallery" hidden>
-                        <ul id="lightgallery" class="list-unstyled row">
-                            <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="img/1-1600.jpg" data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>">
-                                <a href="">
-                                    <img class="img-responsive" src="img/thumb-1.jpg">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                
                     @endforeach
                     @endforeach
                 </ul>
@@ -95,11 +87,12 @@
                 <div class="product_description">
                     <div class="product_category">{{$item['product']['productType']['productTypeName']}}</div>
                     <div class="product_name">{{$item['product']['productName']}}</div>
-                    <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i> </div>
+                <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i> <span style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">({{$datareview['count']}})</span></div>
                     <div class="product_price">
-                        <span class="text-danger" style="font-size: 22px" id="price">{{$item['product']['price']}}.000₫</span>
+                        <span class="text-danger" style="font-size: 22px" id="price">{{number_format($item['product']['price'] - ($item['product']['price'] *
+                            $item['product']['saleOff']['discount'])/100)}},000₫</span>
                         @if(!empty($item['product']['saleOff']))
-                        <span style="font-size: 16px; text-decoration: line-through;">{{$item['product']['price']}}.000₫</span>
+                        <span style="font-size: 16px; text-decoration: line-through;">{{number_format($item['product']['price'])}},000₫</span>
                         <span style="font-size: 21px"> -{{$item['product']['saleOff']['discount']}}%</span>
                         @endif
                     </div>
@@ -352,61 +345,25 @@
             </div>
             <div class="col-lg-12">
                 <div class="space10">&nbsp;</div>
-
                 <div class="viewed_title_container">
                     <h5 class="viewed_title">Nhận xét và đánh giá về sản phẩm</h5>
                 </div>
                 <div class="space10">&nbsp;</div>
 
                 <div class="sis-seller-reviews">
-                    <div class="seller-review-item">
-                        <div class="row reviewer">
-                            <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
-                        </div>
-                        <div class="row">
-                            <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
-                                cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
-                                mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
-                        </div>
+                    @foreach ($datareview['reviewProducts'] as $time => $review)
+                        <div class="seller-review-item">
+                            <div class="row reviewer">
+                                <div class="rating_r rating_r_{{$review['ratingStar']['ratingStar']}} product_rating"> <i></i><i></i><i></i><i></i>
+                                <i></i> <label class="itemFooter">{{$review['customer']['name']}} - {{$timereview[$time]}}</label></div>
+                            </div>
+                            <div class="row">
+                            <label class="comments">{{$review['review']}}</label>
+                            </div>
 
-                    </div>
-                    <div class="seller-review-item">
-                        <div class="row reviewer">
-                            <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
                         </div>
-                        <div class="row">
-                            <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
-                                cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
-                                mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
-                        </div>
-
-                    </div>
-                    <div class="seller-review-item">
-                        <div class="row reviewer">
-                            <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
-                        </div>
-                        <div class="row">
-                            <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
-                                cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
-                                mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
-                        </div>
-
-                    </div>
-                    <div class="seller-review-item">
-                        <div class="row reviewer">
-                            <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
-                        </div>
-                        <div class="row">
-                            <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon
-                                cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng
-                                mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
-                        </div>
-
-                    </div>
+                    
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -619,12 +576,12 @@
 <script src="source/user/styles/js/cart.js"></script>
 <script src="source/user/styles/js/lightgallery-all.min.js"></script>
 
-@if(!empty($item['product']['saleOff']))
+{{-- @if(!empty($item['product']['saleOff']))
 <script>
     var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}' / 100));
     document.getElementById('price').innerHTML = a.toPrecision(4) + ".000₫";
 
 </script>
-@endif
+@endif --}}
 
 @endsection

@@ -358,30 +358,35 @@ $(document).ready(function() {
             $("#slider-range").slider({
                 range: true,
                 min: 0,
-                max: 50000,
-                values: [880, 6880],
+                max: 15000,
+                values: [800, 900],
                 slide: function(event, ui) {
-                    $("#amount").val( ui.values[0] + ".000 ₫ - " + ui.values[1]+".000 ₫");
+                    $("#amount").val( ui.values[0]+ ",000₫ - " + ui.values[1]+",000₫");
+                    $("#amount1").val( ui.values[0].toLocaleString()+ ",000₫ - " + ui.values[1].toLocaleString()+",000₫");
                 }
             });
-
-            $("#amount").val( $("#slider-range").slider("values", 0) + ",000 ₫ - " + $("#slider-range").slider("values", 1)+".000 ₫");
+          
+            $("#amount").val( $("#slider-range").slider("values", 0) + "000₫ - " + $("#slider-range").slider("values", 1)+"000₫");
+            $("#amount1").val( $("#slider-range").slider("values", 0) + ",000₫ - " + $("#slider-range").slider("values", 1)+",000₫");
             $('.ui-slider-handle').on('mouseup', function() {
+                console.clear();
+ 
                 $('.product_grid').isotope({
                     filter: function() {
                         var priceRange = $('#amount').val();
-                        var priceMin = parseFloat(priceRange.split('-')[0].replace('₫', ''));
-                        var priceMax = parseFloat(priceRange.split('-')[1].replace('₫', ''));
-                        var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace('₫', '');
-                        console.log("ID: " + priceMin);
-                        console.log("ID: " + priceMax);
-                        return (itemPrice > priceMin) && (itemPrice < priceMax);
+                        var priceMin = parseInt(priceRange.split('-')[0].replace('.000₫', ''));
+                        var priceMax = parseInt(priceRange.split('-')[1].replace('.000₫', '').replace(' ', ''));
+                        console.log(priceMin);
+                        var itemPrice = parseInt($(this).find('.product_price1').clone().children().remove().end().text().replace( '', '' ));
+                        var isInHeightRange = (priceMin <= itemPrice && priceMax >= itemPrice);
+                    return isInHeightRange;
+                        // return((itemPrice >= priceMin) && (itemPrice <= priceMax)) || (itemPrice >= priceMin) || (itemPrice <= priceMax)  ;
                     },
                     animationOptions: {
                         duration: 750,
                         easing: 'linear',
                         queue: false
-                    }
+                    },
                 });
             });
         }

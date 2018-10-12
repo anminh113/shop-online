@@ -386,3 +386,60 @@ textarea {
     opacity: 0;
 }
 
+
+.product_fav1 {
+    position: absolute;
+    z-index: 98;
+    top: 13px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.product_fav1 span {
+    display: block;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    color: #008798;
+    line-height: 36px;
+    width: 36px;
+    height: 36px;
+    pointer-events: none;
+    z-index: 99;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+.product-type:hover .product_fav1 {
+    visibility: visible;
+    opacity: 1;
+}
+.product_fav1:hover {
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+}
+
+.product_fav1.active span {
+    color: red;
+}
+.product_fav1.active {
+    visibility: visible;
+    opacity: 1;
+}
+

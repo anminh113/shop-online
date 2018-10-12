@@ -196,6 +196,21 @@ Route::post('search-discount-admin', [
     'as'=>'post-tim-kiem-discount-admin',
     'uses'=>'PostController@postSearchDiscount'
 ]);
+
+Route::post('add-discount-admin', [
+    'as'=>'post-add-discount-admin',
+    'uses'=>'PostController@postAddDiscount'
+]);
+
+Route::post('delete-discount-admin', [
+    'as'=>'post-delete-discount-admin',
+    'uses'=>'PostController@postDeleteDiscount'
+]);
+
+Route::post('search-saleoff-discount-admin', [
+    'as'=>'search-saleoff-admin',
+    'uses'=>'PostController@postSaleoffAdmin'
+]);
 //---
 
 //Admin hệ thống

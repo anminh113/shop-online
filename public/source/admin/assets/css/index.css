@@ -58,6 +58,9 @@
     border: 2px solid #ddd; 
     border-radius: 4px;
 }
+.custom-tabs-line.tabs-line-bottom .active a{
+    border-bottom: 2px solid #00C9B8;
+}
 
 
 /*.sidebar .nav > li > a:hover, .sidebar .nav > li > a:focus, .sidebar .nav > li > a.active{

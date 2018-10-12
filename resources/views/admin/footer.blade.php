@@ -20,7 +20,7 @@
           resetOnHover: true,
           transitionIn: 'flipInX',
           transitionOut: 'flipOutX',
-          position: 'topRight',
+          position: 'bottomRight',
           theme: 'light',
         });
       </script>

@@ -243,7 +243,6 @@
 
                 return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
             }
-            // end post json
            
         }
 
@@ -286,20 +285,36 @@
             }   
         }
 
+
+
         public function postSearchDiscount(Request $req){
             session()->flash('SearchProductTypeId', $req->producttypeid);
             return redirect()->route('discount-admin');
         }
 
+        public function postSaleoffAdmin(Request $req){
+            session()->flash('SearchSaleOffId', $req->saleoffid);
+            session()->flash('HasSearchSaleOffId', '1');
+            return redirect()->route('discount-admin');
+        }
+
         public function postDiscount(Request $req){
             $store = Session::get('key')[0]['store']['_id'];
+
+            $dtstart = new DateTime($req->start);
+            $dtstart->setTimezone(new DateTimeZone('UTC'));
+            $start =  $dtstart->format('Y-m-d\TH:i:s.u\Z');
+
+            $dtend = new DateTime($req->enddate);
+            $dtend->setTimezone(new DateTimeZone('UTC'));
+            $end =  $dtend->format('Y-m-d\TH:i:s.u\Z');
+
             $datajson=array(
                 "storeId" =>  $store,
                 "discount" => $req->DiscountNumber,
-                "dateStart" => $req->startdate,
-                "dateEnd" => $req->enddate
+                "dateStart" => $start,
+                "dateEnd" => $end
                 );
-            // dd($datajson);
             $jsonData =json_encode($datajson);
             $json_url = PageController::getUrl('salesoff');
             $ch = curl_init( $json_url );
@@ -311,9 +326,62 @@
             );
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
-            dd($result);
         return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
+
+        public function postAddDiscount(Request $req){
+
+            $quantities = Input::get('productDiscount');
+            for($i=0; $i< count($quantities); $i++){
+                $datajson=array([
+                    "propName" => "saleOff",
+                    "value" => $req->discount
+                ]);
+
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('products/'.$quantities[$i].'');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+            }
+
+           
+
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        }
+
+        public function postDeleteDiscount(Request $req){
+            $quantities = Input::get('DeleteProductDiscount');
+            for($i=0; $i< count($quantities); $i++){
+                $datajson=array([
+                    "propName" => "saleOff",
+                    "value" => null
+                ]);
+
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('products/'.$quantities[$i].'');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+            }
+
+           
+
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        }
+
                         
         
            

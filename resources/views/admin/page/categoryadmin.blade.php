@@ -1,6 +1,8 @@
 @extends('admin/master')
 
 @section('head')
+{{-- <title>CybetZone - Admin</title> --}}
+
 <link href="{{ URL::asset('source/admin/assets/css/product.css') }}" rel="stylesheet" type="text/css">
 
 @endsection

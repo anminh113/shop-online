@@ -65,10 +65,10 @@
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
                                                     @if($item['item']['saleOff']['discount']==0)
-                                                    {{number_format($item['item']['price'])}}.000₫
+                                                    {{number_format($item['item']['price'])}},000₫
                                                     @else
                                                     {{number_format($item['item']['price'] - ($item['item']['price'] *
-                                                    $item['item']['saleOff']['discount'])/100)}}.000₫
+                                                    $item['item']['saleOff']['discount'])/100)}},000₫
                                                     @endif
 
 
@@ -115,11 +115,11 @@
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
                                                     @if($item['item']['saleOff']['discount']==0)
-                                                    {{number_format($item['qty'] * $item['item']['price'])}}.000₫
+                                                    {{number_format($item['qty'] * $item['item']['price'])}},000₫
                                                     @else
                                                     {{number_format($item['qty'] * ($item['item']['price'] -
                                                     ($item['item']['price'] *
-                                                    $item['item']['saleOff']['discount'])/100))}}.000₫
+                                                    $item['item']['saleOff']['discount'])/100))}},000₫
                                                     @endif
                                                 </div>
                                             </div>
@@ -149,11 +149,11 @@
                                     <div class="order_total_title text-letf">Tạm tính:</div>
                                     <div class="order_total_amount">
                                             @if($item['item']['saleOff']['discount']==0)
-                                            {{number_format($item['qty'] * $item['item']['price'])}}.000₫
+                                            {{number_format($item['qty'] * $item['item']['price'])}},000₫
                                             @else
                                             {{number_format($item['qty'] * ($item['item']['price'] -
                                             ($item['item']['price'] *
-                                            $item['item']['saleOff']['discount'])/100))}}.000₫
+                                            $item['item']['saleOff']['discount'])/100))}},000₫
                                             @endif
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                                     <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png"
                                             alt=""></div>
                                     <div class="char_content">
-                                        <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500.000₫ trở lên</div>
+                                        <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500,000₫ trở lên</div>
                                     </div>
                                 </div>
                             </div>

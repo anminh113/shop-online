@@ -33,8 +33,7 @@
                                 </select>
                             </div>
                         </div>
-
-                        <form action="{{route('post-discount-admin')}}" method="POST">
+                        <form action="{{route('post-san-pham-admin')}}" method="POST">
                             <div class="col-lg-4 col-md-4">
                                 <div class="panel-title">
                                     <select class="form-control" id="producttype">
@@ -47,8 +46,6 @@
                             </div>
                             {{ csrf_field() }}
                         </form> 
-
-
                     </div>
                 </div>
                 <div class="panel-body">
