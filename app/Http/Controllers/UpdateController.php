@@ -51,10 +51,15 @@
 
     public function updateAddProductTypeAdmin(Request $req){
         //post data json
-        $datajson=array([
+        $datajson=array(
+            [
             "propName" => "productTypeName",
             "value" => $req->nameproducttype
-            ]);
+            ],[
+            "propName" => "imageURL",
+            "value" => $req->img
+            ]
+        );
         // dd($datajson);
         $jsonData =json_encode($datajson);
         $json_url = PageController::getUrl('producttypes/'.$req->productTypeId.'');

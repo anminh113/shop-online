@@ -51,10 +51,12 @@
                             </div>
                         </div>
                         <div class="panel-body ">
+
                             <button type="button" class="btn btn-outline- btn-save" data-toggle="modal" data-target="#add">Thêm
                                 loại sản phẩm</button>
                             <div class="space10">&nbsp;</div>
-                            <table id="table_format" class="table table-striped">
+
+                            <table id="table_format" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
@@ -66,12 +68,19 @@
                                 </thead>
                                 <tbody id="myTable">
                                     @foreach ($data1['productTypes'] as $item)
+                                    <form id="imgur">
+                                        <input type="file" id="file-upload{{$item['_id']}}" class=" imgur btn btn-default btn-file"
+                                            style="display:none" accept="image/*" data-max-size="5000" />
+                                    </form>
                                     <tr>
                                         <td><a href="#">1</a></td>
-                                        <td></td>
-                                        <td>{{$item['productTypeName']}}</td>
-                                        <td><a href="{{route('them-thong-so-ky-thuat-admin',$item['_id'])}}">Xem chi tiết</a></td>
-                                        <td><a data-toggle="modal" data-target="#update{{$item['_id']}}">
+                                        <td>
+                                         <img  src={{$item['imageURL']}}width="50px" height="50">
+                                        </td>
+                                        <td style=" vertical-align: middle">{{$item['productTypeName']}}</td>
+                                        <td style=" vertical-align: middle;"><a href="{{route('them-thong-so-ky-thuat-admin',$item['_id'])}}">Xem
+                                                chi tiết</a></td>
+                                        <td style=" vertical-align: middle;"><a data-toggle="modal" data-target="#update{{$item['_id']}}">
                                                 <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
                                             <button class="btn btn-danger" type="submit" form="deleteid{{$item['_id']}}">
                                                 <i class="fa fa-trash"> </i>
@@ -100,6 +109,10 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
+<form id="imgur">
+        <input type="file" id="file-upload" class=" imgur btn btn-default btn-file" style="display:none"
+            accept="image/*" data-max-size="5000" />
+</form>
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -110,18 +123,24 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+             
                 <div class="modal-body">
                     <label for="basic">Tên loại sản phẩm:</label>
-                    <div id="titleproduct">
-                        <input type="text" id="title1"  name="nameproducttype" class="form-control" placeholder="Tên loại sản phẩm" autofocus>
-                       
-                    </div>
+
+                    <input type="text" id="title1" name="nameproducttype" class="form-control" placeholder="Tên loại sản phẩm"
+                        autofocus>
+                    <hr>
+                    <label for="file-upload" id="label" class="custom-file-upload">
+                        <img id="image" src="http://placehold.it/1920x1080?text= Thêm ảnh" class="rounded float-left" width="100"height="100">
+                    </label>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
                     <button type="submit" class="btn btn-info">Lưu thông tin</button>
                 </div>
-                <input type="text"  name="categoryId"  value="{{$data['category']['_id']}}">
+                <div style="hidden" id="imgur"></div>
+                <input type="text" hidden name="categoryId" value="{{$data['category']['_id']}}">
                 {{ csrf_field() }}
             </form>
         </div>
@@ -145,8 +164,15 @@
                 <div class="modal-body">
                     <label for="basic">Tên loại sản phẩm:</label>
                     <div id="titleproduct">
-                        <input type="text"  name="nameproducttype" class="form-control" value="{{$item['productTypeName']}}" autofocus>
+                        <input type="text" name="nameproducttype" class="form-control" value="{{$item['productTypeName']}}"
+                            autofocus>
+                        <hr>
+                        <label for="file-upload{{$item['_id']}}" id="label{{$item['_id']}}" class="custom-file-upload">
+                            <img id="image{{$item['_id']}}" src={{$item['imageURL']}} class="rounded float-left" width="100"height="100">
+                        </label>
+                        
                         <input type="text" hidden name="productTypeId" value="{{$item['_id']}}">
+                        <div hidden id="imgur{{$item['_id']}}"><input type="text" id="img{{$item['_id']}}" name="img" value="{{$item['imageURL']}}" hidden> </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -160,6 +186,7 @@
     </div>
 </div>
 @endforeach
+
 @endsection
 
 @section('footer')
@@ -167,8 +194,194 @@
 <script>
     var element = document.getElementById("add-category-admin");
     element.classList.add("active");
+</script>
+
+{{-- them anh --}}
+<script>
+    $("document").ready(function () {
+        $('#file-upload').on("change", function () {
+            var $files = $(this).get(0).files;
+            if ($files.length) {
+
+                // Reject big files
+                if ($files[0].size > $(this).data("max-size") * 1024) {
+                    console.log("Please select a smaller file");
+                    return false;
+                }
+                var apiUrl = 'https://api.imgur.com/3/image';
+                var apiKey = 'e4330ab70984291';
+
+                var formData = new FormData();
+                formData.append("image", $files[0]);
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": apiUrl,
+                    "method": "POST",
+                    "datatype": "json",
+                    "headers": {
+                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                    },
+                    "processData": false,
+                    "contentType": false,
+                    "data": formData,
+                    beforeSend: function (xhr) {
+                        console.log("Uploading");
+                        $('#image').remove();
+                        $('#label').append('<div class="buttonload" id="loader"><i class="fa fa-circle-o-notch fa-spin"></i> Đang tải...</div>');
+                    },
+                    success: function (res) {
+                        // console.log(res.data.id);
+                        $('#file-upload1').remove();
+                        $('#image').remove();
+                        // $('#expandedImg').remove();
+                        $('#loader').remove();
+                        $('#label').append('<img src="' + res.data.link +'" class="rounded float-left" width="100px" height="100"/><input type="text" name="img" value="' + res.data.link +'" hidden>');
+                      
+
+                    },
+                    error: function () {
+                        alert("Failed ");
+                    }
+                }
+                $.ajax(settings).done(function (response) {
+                    // console.log(response.data.id);
+                    var form = new FormData();
+                    form.append("ids[]", "" + response.data.id + "");
+                    var settings1 = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "https://api.imgur.com/3/album/6eEzKQy/add",
+                        "method": "POST",
+                        "headers": {
+                            "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                        },
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+
+                    $.ajax(settings1).done(function (response) {
+                        console.log(response);
+                    });
+                });
+            }
+        });
+    });
 
 </script>
+{{-- end them anh --}}
+
+@foreach ($data1['productTypes'] as $item)
+<script>
+    $("document").ready(function () {
+        $('#file-upload{{$item['_id']}}').on("change", function () {
+            // Delete image
+            var bla = $('#img{{$item['_id']}}').val();
+            console.log(bla);
+            if(bla != ''){
+                option = bla.split("/", 6);
+                console.log(option[3].slice(0,7));
+                var idImage = option[3].slice(0,7);
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://api.imgur.com/3/album/6eEzKQy/image/" + idImage,
+                    "method": "GET",
+                    "headers": {
+                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                    }
+                }
+                $.ajax(settings).done(function(res) {
+                    var settings1 = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
+                        "method": "DELETE",
+                        "headers": {
+                            "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                        }
+                    }
+                    $.ajax(settings1).done(function(response) {
+                        console.log(response);
+                    });
+        
+                });
+            }
+            // Uploading image
+            var $files = $(this).get(0).files;
+            if ($files.length) {
+                if ($files[0].size > $(this).data("max-size") * 1024) {
+                    console.log("Please select a smaller file");
+                    return false;
+                }
+                var apiUrl = 'https://api.imgur.com/3/image';
+                var apiKey = 'e4330ab70984291';
+
+                var formData = new FormData();
+                formData.append("image", $files[0]);
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": apiUrl,
+                    "method": "POST",
+                    "datatype": "json",
+                    "headers": {
+                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                    },
+                    "processData": false,
+                    "contentType": false,
+                    "data": formData,
+                    beforeSend: function (xhr) {
+                        console.log("Uploading");
+                        $('#image{{$item['_id']}}').remove();
+                        $('#label{{$item['_id']}}').append('<div class="buttonload" id="loader"><i class="fa fa-circle-o-notch fa-spin"></i> Đang tải...</div>');
+                    },
+                    success: function (res) {
+                        // console.log(res.data.id);
+                        $('#file-upload1').remove();
+                        $('#image{{$item['_id']}}').remove();
+                        // $('#expandedImg').remove();
+                        $('#loader').remove();
+                        $('#label{{$item['_id']}}').append('<img src="' + res.data.link +'" width="50px" height="50"/>');
+                        // $('#image_selected').append('<img id="expandedImg" src="' + res.data.link + '" style="width:100%"/>');
+                        $("#imgur{{$item['_id']}}").append('<input type="text" name="img" value="' + res.data.link +'" hidden>');
+
+                    },
+                    error: function () {
+                        alert("Failed ");
+                    }
+                }
+                // Add album
+                $.ajax(settings).done(function (response) {
+                    // console.log(response.data.id);
+                    var form = new FormData();
+                    form.append("ids[]", "" + response.data.id + "");
+                    var settings1 = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "https://api.imgur.com/3/album/6eEzKQy/add",
+                        "method": "POST",
+                        "headers": {
+                            "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+                        },
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+
+                    $.ajax(settings1).done(function (response) {
+                        console.log(response);
+                    });
+                });
+            }
+        });
+    });
+
+</script>
+@endforeach
 
 
 @endsection

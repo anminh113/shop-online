@@ -22,7 +22,8 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                <a class="fix" href="{{ route('profile-user',Session::get('keyuser')['_id'] )}}">Tài khoản {{Session::get('keyuser')['username']}}</a>
+                                    <a class="fix" href="{{ route('profile-user',Session::get('keyuser')['_id'] )}}">Tài
+                                        khoản {{Session::get('keyuser')['username']}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -34,7 +35,7 @@
                             </ul>
                         </div>
                         @else
-                      
+
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
@@ -78,7 +79,7 @@
                         <div class="header_search_content">
                             <div class="header_search_form_container">
                                 <form action="" class="header_search_form clearfix">
-                                    <input type="search" required="required"  class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
+                                    <input type="search" required="required" class="header_search_input" placeholder="Tìm kiếm sản phẩm...">
                                     <div class="custom_dropdown">
                                         <div class="custom_dropdown_list">
                                             <span class="custom_dropdown_placeholder clc">Tất cả danh mục</span>
@@ -93,16 +94,16 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <button type="" onclick="window.location='productlist';" class="header_search_button trans_300" value="Submit"><img
-                                            src="source/user/images/search.png" alt=""></button>
+                                    <button type="" onclick="window.location='productlist';" class="header_search_button trans_300"
+                                        value="Submit"><img src="source/user/images/search.png" alt=""></button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="col-lg-3 col-9 order-lg-3 order-2 text-lg-left text-right">
-                     <!-- Wishlist -->
+                    <!-- Wishlist -->
                     <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                         <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                             <div class="wishlist_icon">
@@ -115,22 +116,23 @@
                                 <div class="wishlist_text"><a href="#"></a></div>
                             </div>
                         </div>
-                    <!-- Cart -->
-                    <div class="cart" onclick="window.location='cart';">
-                        <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                            @if(Session::has('cart'))
-                            <div class="cart_icon">
-                                <img src="source/user/images/cart.png" alt="">
-                                <div class="cart_count"><span>
-                                        {{Session('cart')->totalQty}}
-                                    </span></div>
+                        <!-- Cart -->
+                        <div class="cart" onclick="window.location='cart';">
+                            <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                @if(Session::has('cart'))
+                                <div class="cart_icon">
+                                    <img src="source/user/images/cart.png" alt="">
+                                    <div class="cart_count"><span>
+                                            {{Session('cart')->totalQty}}
+                                        </span></div>
+                                </div>
+                                <div class="cart_content">
+                                    {{-- <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div>
+                                    --}}
+                                </div>
+                                @endif
                             </div>
-                            <div class="cart_content">
-                                {{-- <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div> --}}
-                            </div>
-                            @endif
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -149,61 +151,16 @@
                                 <div class="cat_menu_text">Danh Mục</div>
                             </div>
                             <ul class="cat_menu">
-                                <li class="hassubs">
-                                    <a href="#">Linh Kiện Máy Tính<i class="fas fa-chevron-right"></i></a>
-                                    <ul>
-                                        <li class="hassubs">
-                                            <a href="#">CPU - Bộ vi xử lý<i class="fas fa-chevron-right"></i></a>
-                                            <ul>
-                                                <li><a href="#">Intel Core i3<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Intel Core i5<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Intel Core i7<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Intel Core i9<i class="fas fa-chevron-right"></i></a></li>
-                                            </ul>
-                                        <li class="hassubs">
-                                            <a href="#">RAM<i class="fas fa-chevron-right"></i></a>
-                                            <ul>
-                                                <li><a href="#">RAM G.SKILL<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">RAM ADATA<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">RAM KINGMAX<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">RAM KINGSTON<i class="fas fa-chevron-right"></i></a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="hassubs">
-                                            <a href="#">Bo Mạch Chủ<i class="fas fa-chevron-right"></i></a>
-                                            <ul>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            </ul>
-                                        </li>
-                                </li>
-                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                            </ul>
-                            </li>
-                            <li><a href="#">Màn Hình Máy Tính<i class="fas fa-chevron-right"></i></a></li>
-                            <li class="hassubs">
-                                <a href="#">Ổ Cứng SSD/HDD<i class="fas fa-chevron-right"></i></a>
-                                <ul>
+                                @foreach($datacategory['data1'] as $time => $item )
                                     <li class="hassubs">
-                                        <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
+                                    <a href="#">{{$data[$time]['categoryName']}}<i class="fas fa-chevron-right"></i></a>
                                         <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            @foreach($item['productTypes'] as $text )
+                                            <li><a href="#">{{$text['productTypeName']}}</a></li>
+                                            @endforeach
                                         </ul>
                                     </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Chuột, Bàn phím, Webcam<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Tai Nghe & Loa<i class="fas fa-chevron-right"></i></a></li>
+                                @endforeach
                             </ul>
                         </div>
                         <!-- Main Nav Menu -->

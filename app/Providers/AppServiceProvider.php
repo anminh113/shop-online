@@ -55,6 +55,26 @@ class AppServiceProvider extends ServiceProvider
 
             }
         });
+
+        view()->composer('user/header', function($view){
+            try {
+                $data1 = array();
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',AppServiceProvider::getUrl('categories') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                for($i=0; $i<count($data['categories']); $i++){
+                    $res1 = $client->request('GET',AppServiceProvider::getUrl('producttypes/category/'.$data['categories'][$i]['_id'].'') );
+                    $data1[] = json_decode($res1->getBody()->getContents(), true);
+                }
+                $result1 = compact('data1');
+                // dd($data['categories']);
+            }catch (\GuzzleHttp\Exception\ClientException $e) {
+                // $view->with(['product_cart'=>$cart->items]);
+                return $e->getResponse()->getStatusCode();
+            }
+            $view->with(['datacategory'=>$result1, 'data'=>$data['categories']]);
+            
+        });
     }
 
     /**

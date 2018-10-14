@@ -81,6 +81,7 @@
             //post data json
             $datajson=array(
                 "productTypeName" => $req->nameproducttype,
+                "imageURL" => $req->img,
                 "categoryId" => $req->categoryId
                 );
             // dd($datajson);

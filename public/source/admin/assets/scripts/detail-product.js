@@ -12,9 +12,9 @@
   $("document").ready(function() {
       $('#file-upload1').on("change", function() {
         
-        var bla = $('#img1').val();
-        option = bla.split("/", 6);
-        console.log(option[3].slice(0,7));
+            var bla = $('#img1').val();
+            option = bla.split("/", 6);
+            console.log(option[3].slice(0,7));
 
 
             var idImage = option[3].slice(0,7);

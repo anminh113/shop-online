@@ -175,14 +175,8 @@
                         break;
                 }
             }
-            // print_r($countstar_5);
-            // print_r($countstar_4);
-            // print_r($countstar_3);
-            // print_r($countstar_2);
-            // print_r($countstar_1);
-            // exit();
-
-            // dd($countstar);
+            dd($datareview);
+         
             return view('user/page.product',compact('resultdata','resultimg','datareview','timereview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
@@ -270,7 +264,6 @@
             try {
                 $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$req->id.'') );
                 $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
-// dd($datacustomer);
                 $resaddress = $client->request('GET',PageController::getUrl('deliveryaddresses/customer/'.$datacustomer['customer']['_id'].'') );
                 $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
                 // dd($dataaddress);
@@ -696,7 +689,7 @@
 
                 $res = $client1->request('GET',PageController::getUrl('producttypes/category/'.$req->id.'') );
                 $data1 = json_decode($res->getBody()->getContents(), true);
-                
+                // dd($data1);
 
                 return view('admin/page.addproducttypeadmin', compact('data','data1'));
             }
