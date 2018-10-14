@@ -3,8 +3,11 @@
 
 <head>
     <base href="{{asset(' ')}}">
+
     @include('user/head')
     @yield('head')
+    <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+
 </head>
 
 <body>

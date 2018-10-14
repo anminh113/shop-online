@@ -85,18 +85,19 @@
                             <div class="header">
                                 <p class="lead">Đăng Nhập</p>
                             </div>
-                            <form action="#" class="clearfix">
+                            <form action="{{route('post-dang-nhap')}}" method="POST">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Số Điện Thoại hoặc Email</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Mật Khẩu</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <label for="pass">Mật Khẩu</label>
+                                    <input type="password" class="form-control" id="pass" name="pass" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" class="button register_title_button">Đăng Nhập</button>
+                                    <button type="submit" class="button register_title_button">Đăng Nhập</button>
                                 </div>
+                                {{ csrf_field() }}
                             </form>
                             <small class="form-text">Hoặc Đăng Nhập với</small>
                             <div class="space10">&nbsp;</div>
@@ -127,52 +128,7 @@
                 </div>
             </div>
         </div>
-        <!--  <div class="row">
-            <div class="col-lg-6">
-                <form action="#" class="clearfix">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Số Điện Thoại hoặc Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Mật Khẩu</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    
-                    
-                </form>
-            </div>
-            <div class="col-lg-6">
-                
-                <div class="form-group">
-                    <label for="exampleInputEmail1">&nbsp;</label>
-                    <button type="button" class="button register_title_button">Đăng Nhập</button>
-                </div>
-                <small id="text" class="form-text text-muted">Hoặc Đăng Nhập với</small>
-                
-                <div class="form-group">
-                        <label for="exampleInputEmail1">&nbsp;</label>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div id="gSignInWrapper">
-                                <div id="customBtn" class="customGPlusSignIn">
-                                    <button  onclick="startApp()" title="Google" data-onsuccess="onSignIn" class="btn btn-googleplus" style="border-radius: 5px; "><i class="fab fa-google"></i> Google</button> 
-                                </div>
-                            </div>
-
-                            <div id="name"></div>
-                            
-                            <div class="space5">&nbsp;</div>
-                        </div>
-                        <div class="col-lg-6 col-md-6"> <button onclick="login()"  title="Facebook" class="btn btn-facebook" style="border-radius: 5px; "><i class="fab fa-facebook-f"></i> Facebook</button></div>
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                </div>
-                <div id="status"></div>
-            </div>
-        </div> -->
+    
     </div>
 </div>
 <!-- Brands -->

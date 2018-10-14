@@ -36,7 +36,6 @@ function call() {
 
 $(function() {
 
-    //populate our years select box
     for (i = new Date().getFullYear(); i > 1950; i--){
         $('#years').append($('<option />').val(i).html(i));
     }

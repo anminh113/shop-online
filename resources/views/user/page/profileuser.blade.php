@@ -48,15 +48,15 @@
             </a>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-                <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='review-shop';">
-                    <div class=" tablink bottombar w3-padding text-center">Nhận xét của tôi</div>
-                </a>
-            </div>
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='review-shop';">
+                <div class=" tablink bottombar w3-padding text-center">Nhận xét của tôi</div>
+            </a>
+        </div>
         <div class="col-lg-5 col-md-4 col-sm-6 col-6">
-                <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user-shop';">
-                    <div class=" tablink  w3-padding border-red text-center">Sản phẩm yêu thích & Gian hàng đã theo dõi</div>
-                </a>
-            </div>
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user-shop';">
+                <div class=" tablink  w3-padding border-red text-center">Sản phẩm yêu thích & Gian hàng đã theo dõi</div>
+            </a>
+        </div>
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
@@ -64,13 +64,12 @@
                         <!-- Char. Item -->
                         <div class="col-lg-6 col-md-6 char_col">
                             <div class="char_item " style="height: 235px;">
-                                <div class="char_title_top"><b>Personal Profile </b><span>|</span> <a href=""
+                                <div class="char_title_top"><b> Thông tin cá nhân </b><span>|</span> <a href=""
                                         data-toggle="modal" data-target="#informationuser">Chỉnh Sửa</a></div>
                                 <div class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="char_content">
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px">Duy
-                                            Huynh</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px">anminh113@gmail.com</div>
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px">{{$datacustomer['customer']['name']}}</div>
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px">{{$datacustomer['customer']['email']}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -78,20 +77,22 @@
                         <!-- Char. Item -->
                         <div class="col-lg-6 col-md-6 char_col">
                             <div class="char_item " style="height: 235px;">
-                                <div class="char_title_top"><b>Address Book </b><span>|</span> <a href="" data-toggle="modal"
+                                <div class="char_title_top"><b> Địa chỉ </b><span>|</span> <a href="" data-toggle="modal"
                                         data-target="#information">Chỉnh Sửa</a></div>
                                 <div class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="char_content">
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px; color:#878F90">DEFAULT
-                                            SHIPPING ADDRESS</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px"><b>Huỳnh
-                                                Khắc Duy</b> </div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">32-34
-                                            đường số 3 - khu TĐC - ĐHYD, KV4 - P.An khánh - Q.Ninh kiều</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">Cần
-                                            Thơ - Quận Ninh Kiều - Phường An Khánh</div>
-                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">01697186707</div>
-
+                                        @if($dataaddress['count']!=0)
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px; color:#878F90">ĐỊA
+                                            CHỈ VẬN CHUYỂN</div>
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px"><b>{{$dataaddress['deliveryAddresses'][0]['presentation']}}</b></div>
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">{{$dataaddress['deliveryAddresses'][0]['address']}}</div>
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px">{{$dataaddress['deliveryAddresses'][0]['phoneNumber']}}</div>
+                                        @else
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 14px; color:#878F90">ĐỊA
+                                            CHỈ VẬN CHUYỂN</div>
+                                        <div class="char_title" style="padding-bottom: 7px; font-size: 15px"><b>Chưa có
+                                                địa chỉ giao hàng</b></div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -101,10 +102,11 @@
             </div>
             <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
-                    
+
                     <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span> Sản phẩm</div>
-                        
+                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span> Sản
+                            phẩm</div>
+
                         <div class="panel order-item">
                             <div class="row">
                                 <div class="col-lg-2">
@@ -131,7 +133,9 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button> --}}
+                                        {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';"
+                                            style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                        --}}
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +143,8 @@
                     </div>
                     <div class="space10">&nbsp;</div>
                     <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>2</span> Sản phẩm</div>
+                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>2</span> Sản
+                            phẩm</div>
                         <div class=" panel order-item ">
                             <div class="row">
                                 <div class="col-lg-2">
@@ -166,45 +171,49 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%; font-size: 14px; margin-top: 10px">Viết đánh giá</button> --}}
+                                        {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';"
+                                            style="width: 100%; font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                        --}}
                                     </div>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="item-main item-main-mini">
-                                            <div>
-                                                <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                    KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                                <p class="text desc"></p>
-                                                <p class="text desc bold"></p>
-                                            </div>
+                                <div class="col-lg-2">
+                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="item-main item-main-mini">
+                                        <div>
+                                            <div class="text title item-title" data-spm="details_title">Chuột quang
+                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
+                                            <p class="text desc"></p>
+                                            <p class="text desc bold"></p>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                    class="text">&nbsp;1</span></span></div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="item-status item-capsule">
-                                            <p class="capsule">Đã huỷ đơn</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                            {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';" style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button> --}}
-                                        </div>
-
                                     </div>
                                 </div>
+                                <div class="col-lg-1">
+                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
+                                                class="text">&nbsp;1</span></span></div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="item-status item-capsule">
+                                        <p class="capsule">Đã huỷ đơn</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
+                                        {{-- <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='review-shop';"
+                                            style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                        --}}
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="space15">&nbsp;</div>
-                  
+
                 </div>
             </div>
         </div>
@@ -226,11 +235,12 @@
                 <div class="viewed_slider_container">
                     <!-- Recently Viewed Slider -->
                     <div class="owl-carousel owl-theme viewed_slider">
-                       
+
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
                                 <div class="viewed_content text-center">
                                     <div class="viewed_price">990.000 ₫</div>
                                     <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
@@ -243,74 +253,79 @@
                         </div>
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -377,22 +392,21 @@
             </div>
             <div class="modal-body">
                 <div class="row order_cart_title1">
-                    <div class="col-lg-2 col-md-2">Tên</div>
-                    <div class="col-lg-3 col-md-3">Địa chỉ</div>
-                    <div class="col-lg-3 col-md-3">Mã vùng</div>
-                    <div class="col-lg-2 col-md-2">Số điện thoại</div>
-                    <div class="col-lg-2 col-md-2"></div>
+                    <div class="col-lg-2 ">Tên</div>
+                    <div class="col-lg-6 ">Địa chỉ</div>
+                    <div class="col-lg-2 ">Số điện thoại</div>
+                    <div class="col-lg-2 "></div>
                 </div>
                 <div class="row order_cart_title2 ">
-                    <div class="col-lg-2 col-md-2">Huỳnh Khắc Duy</div>
-                    <div class="col-lg-3 col-md-3">32-34 đường số 3 - khu TĐC - ĐHYD, KV4 - P.An khánh - Q.Ninh kiều</div>
-                    <div class="col-lg-3 col-md-3">Cần Thơ - Quận Ninh Kiều - Phường An Khánh</div>
-                    <div class="col-lg-2 col-md-3">01697186707</div>
-                    <div class="col-lg-2 col-md-1">
+                    @foreach($dataaddress['deliveryAddresses'] as $item)
+                    <div class="col-lg-2 ">{{$item['presentation']}}</div>
+                    <div class="col-lg-6 ">{{$item['address']}}</div>
+                    <div class="col-lg-2 ">{{$item['phoneNumber']}}</div>
+                    <div class="col-lg-2 ">
                         <a href="" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#informationuser1">Chỉnh
                             sửa</a>
-
                     </div>
+                    @endforeach
                 </div>
 
 
@@ -485,64 +499,49 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="#" class="clearfix">
+                        <form action="#" id="change">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Họ Tên</label>
-                                    <input type="email" class="form-control" id="hoten" aria-describedby="" placeholder="   ">
+                                    <label for="hoten">Họ Tên</label>
+                                    <input type="text" class="form-control" id="hoten" name="hoten" aria-describedby=""
+                                        value="{{$datacustomer['customer']['name']}}">
                                 </div>
                                 <div class="space10">&nbsp;</div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" id="email" aria-describedby="" placeholder="  ">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="" value="{{$datacustomer['customer']['email']}}">
                                 </div>
                                 <div class="space10">&nbsp;</div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Số Điện Thoại</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby=""
-                                        placeholder="Enter email">
+                                    <label for="sdt">Số Điện Thoại</label>
+                                    <input type="text" class="form-control" id="sdt" name="sdt" aria-describedby=""
+                                        value="{{$datacustomer['customer']['phoneNumber']}}">
                                 </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Ngày Sinh</label>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4">
-                                            <select class="form-control" name="month" onchange="call()">
-                                                <option value="">Tháng</option>
-                                                <option value="1">Tháng 1</option>
-                                                <option value="2">Tháng 2</option>
-                                                <option value="3">Tháng 3</option>
-                                                <option value="4">Tháng 4</option>
-                                                <option value="5">Tháng 5</option>
-                                                <option value="6">Tháng 6</option>
-                                                <option value="7">Tháng 7</option>
-                                                <option value="8">Tháng 8</option>
-                                                <option value="9">Tháng 9</option>
-                                                <option value="10">Tháng 10</option>
-                                                <option value="11">Tháng 11</option>
-                                                <option value="12">Tháng 12</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4">
-                                            <select class="form-control" name="day" onchange="call()">
-                                                <option>Ngày</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-3 col-md-4">
-                                            <select class="form-control" id="years" name="year">
-                                                <option>Năm</option>
-                                            </select>
-                                        </div>
+                                <div class="form-group row" hidden>
+                                    <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="example-date-input">Ngày sinh</label>
+                                    <input class="form-control" type="date" value="{{$start}}" id="example-date-input">
+                                </div>
                             </div>
+
+                         
+
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Giới Tính</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Nam</option>
+                                    <label for="gender">Giới Tính</label>
+                                    <select class="form-control" id="gender" name="gender">
+                                        @if($datacustomer['customer']['gender'] =="Nam")
+                                        <option selected>Nam</option>
                                         <option>Nữ</option>
+                                        @else
+                                        <option>Nam</option>
+                                        <option selected>Nữ</option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -553,7 +552,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-info btn-change"><a href="" data-dismiss="modal"
                         aria-label="Close" data-toggle="modal" data-target="#informationchangepass">Thay đổi mật khẩu</a></button>
-                <button type="button" class="btn btn-outline-warning btn-save">Lưu thông tin</button>
+                <button type="submit" form="change" class="btn btn-outline-warning btn-save">Lưu thông tin</button>
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
             </div>
         </div>
@@ -683,6 +682,7 @@
 <script src="source/user/styles/js/datacontry.js"></script>
 <script src="source/user/js/shop_custom.js"></script>
 <script src="source/user/styles/js/register.js"></script>
+
 <script>
     function openCity(evt, cityName) {
         var i, x, tablinks;
@@ -717,4 +717,12 @@
 
 </script>
 
+<script>
+    var day = "{{$datacustomer['customer']['birthday']}}";
+    var dtstart = moment('{{$datacustomer['customer']['birthday']}}').format('MM/DD/YYYY');
+    var text1 = dtstart.split("/", 6);
+    console.log(text1[0]);
+    document.getElementById('example-date-input').value = dtstart;
+
+</script>
 @endsection

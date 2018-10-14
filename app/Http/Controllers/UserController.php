@@ -25,7 +25,6 @@ class UserController extends Controller
      */
     public function showProfileAdmin(Request $req)
     {
-
         $client = new \GuzzleHttp\Client();
         try {
             $res = $client->request('GET', PageController::getUrl('accounts/'.$req->email.''));
@@ -54,7 +53,29 @@ class UserController extends Controller
             return redirect()->route('login-admin')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
         }
         
-        //
+    }
+
+    public function postLogin(Request $req){
+        $client = new \GuzzleHttp\Client();
+        try {
+            $res = $client->request('GET', PageController::getUrl('accounts/'.$req['email'].''));
+            $data = json_decode($res->getBody()->getContents(), true);
+            $email = $req['email'];
+            $password = $req['pass'];
+            if($password === $data['account']['password']){
+                if($data['account']['role']['roleName'] == "Khách hàng")
+                {
+                $req->session()->put('keyuser',$data['account'] );
+                return redirect()->route('trang-chu')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Khách hàng']);
+                }
+               
+            }else{
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
+            }
+        }catch (\GuzzleHttp\Exception\ClientException $e) {
+            // return $e->getResponse()->getStatusCode();
+            return redirect()->route('dang-nhap')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
+        }
     }
 
 }

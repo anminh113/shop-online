@@ -16,7 +16,7 @@ class Cart
 		}
 	}
 
-	public function add($item, $id, $img){
+	public function add($item, $id, $sl, $img){
 
 		if($item['saleOff']['discount'] == 0){
 			$giohang = ['qty'=>0, 'price' => $item['price'], 'item' => $item , 'img' => $img];
@@ -30,7 +30,7 @@ class Cart
 			}
 		}
 
-		$giohang['qty']++;
+		$giohang['qty']+= $sl;
 
 		if($item['saleOff']['discount'] == 0){
 			$giohang['price'] = $item['price'] * $giohang['qty'];
@@ -41,7 +41,7 @@ class Cart
 
 		$this->items[$id] = $giohang;
 
-		$this->totalQty++;
+		$this->totalQty+= $sl;
 
 		if($item['saleOff']['discount'] == 0){
 			$this->totalPrice += $item['price'];

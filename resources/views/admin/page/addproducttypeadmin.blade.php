@@ -58,6 +58,7 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
+                                        <th>Ảnh</th>
                                         <th>Loại sản phẩm</th>
                                         <th>Xem chi tiết</th>
                                         <th>Cập nhật</th>
@@ -67,6 +68,7 @@
                                     @foreach ($data1['productTypes'] as $item)
                                     <tr>
                                         <td><a href="#">1</a></td>
+                                        <td></td>
                                         <td>{{$item['productTypeName']}}</td>
                                         <td><a href="{{route('them-thong-so-ky-thuat-admin',$item['_id'])}}">Xem chi tiết</a></td>
                                         <td><a data-toggle="modal" data-target="#update{{$item['_id']}}">
@@ -76,10 +78,12 @@
                                             </button>
                                         </td>
                                     </tr>
+
                                     <form id="deleteid{{$item['_id']}}" hidden action="{{route('delete-them-loai-admin',$item['_id'])}}"
                                         method="post">
                                         @method('DELETE')
-                                        {{ csrf_field() }}</form>
+                                        {{ csrf_field() }}
+                                    </form>
                                     @endforeach
 
                                 </tbody>

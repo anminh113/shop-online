@@ -10,5 +10,10 @@
 <link rel="stylesheet" type="text/css" href="source/user/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
 <link rel="stylesheet" type="text/css" href="source/user/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="source/user/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/iziToast.min.css">
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
 <script src="source/user/js/jquery-3.3.1.min.js"></script>
+
+
+
 

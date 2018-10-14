@@ -8,3 +8,4 @@
     <script src="source/user/plugins/greensock/ScrollToPlugin.min.js"></script>
     <script src="source/user/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
     <script src="source/user/plugins/easing/easing.js"></script>
+    <script src="source/user/styles/js/iziToast.min.js"></script>

@@ -48,7 +48,7 @@
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['_id'] )}}';">
                 <div class=" tablink  w3-padding border-red text-center">Thông tin cá nhân</div>
             </a>
         </div>

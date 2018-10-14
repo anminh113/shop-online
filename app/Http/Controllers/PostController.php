@@ -51,19 +51,8 @@
             }catch (\GuzzleHttp\Exception\ClientException $e) {
                 // return $e->getResponse()->getStatusCode();
                 return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
-            }
-            
-          
-               
-          
-
-
-        
-          
-            
-            
-           
-       }
+            }     
+        }
 
         // Admin hệ thống
         public function postAddCategoryAdmin(Request $req){
@@ -285,8 +274,6 @@
             }   
         }
 
-
-
         public function postSearchDiscount(Request $req){
             session()->flash('SearchProductTypeId', $req->producttypeid);
             return redirect()->route('discount-admin');
@@ -378,6 +365,85 @@
             }
 
            
+
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        }
+
+        // User
+
+        public function postAddToCart(Request $req){
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('products/'.$req->productid.'') );
+            $data[] = json_decode($res->getBody()->getContents(), true);
+
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->productid.''));
+            $datatext[] = json_decode($res->getBody()->getContents(), true);
+
+            $oldCart = Session('cart')?Session::get('cart'):null;
+            $cart = new Cart($oldCart);
+            // dd($req->productid);
+           
+            // dd($datatext[0]['images'][0]['imageList'][0]['imageURL']);
+            $cart->add($data[0]['product'], $req->productid, $req->qty ,$datatext[0]['imageList'][0]['imageURL']);
+            $req->session()->put('cart', $cart);
+            return redirect()->route('cart');
+        }
+
+        
+
+        public function postRegister(Request $req){
+                // "sdt" =>  $req['sdt'],
+                // "hoten" =>  $req['hoten'],
+                // "month" =>  $req['month'],
+                // "day" =>  $req['day'],
+                // "year" =>  $req['year'],
+                // "gender" =>  $req['gender'],
+            $datajson=array(
+                "username" =>  $req['email'],
+                "password" =>  $req['pass'],
+                "roleId" =>  $req['role']
+                );
+            // dd($datajson);
+            $jsonData =json_encode($datajson);
+            $json_url = PageController::getUrl('accounts');
+            $ch = curl_init( $json_url );
+            $options = array(
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => $jsonData
+            );
+            curl_setopt_array( $ch, $options );
+            $result =  curl_exec($ch);
+            $result1 =json_decode($result);
+            // dd($result1->createdAccount->_id);
+            if($result1->message == "Created account successfully"){
+                $dtstart = new DateTime("".$req['year']."-".$req['month']."-".$req['day']."");
+                $dtstart->setTimezone(new DateTimeZone('UTC'));
+                $start =  $dtstart->format('Y-m-d');
+                $datacustomerjson=array(
+                    "accountId" =>  $result1->createdAccount->_id,
+                    "name" =>  $req['hoten'],
+                    "gender" =>  $req['gender'],
+                    "email" =>  $req['email'],
+                    "phoneNumber" =>  $req['sdt'],
+                    "birthday" => $start
+                );
+                $jsonData1 =json_encode($datacustomerjson);
+                $json_url1 = PageController::getUrl('customers');
+                $ch1 = curl_init( $json_url1 );
+                $options1 = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData1
+                );
+                curl_setopt_array( $ch1, $options1 );
+                $result =  curl_exec($ch1);
+            }
+
+
+
 
         return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }

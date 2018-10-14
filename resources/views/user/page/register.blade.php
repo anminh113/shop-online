@@ -17,8 +17,8 @@
 
 @endsection
 @section('content')
-  
-   
+
+
 
 <!-- Characteristics -->
 <div class="characteristics">
@@ -76,100 +76,101 @@
         <div class="space15">&nbsp;</div>
         <div class="row">
             <div class="col-lg-6">
-                <form action="#" class="clearfix">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Số Điện Thoại</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Mật Khẩu</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nhập Lại Mật Khẩu</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8">
-                            <div class="form-group">
-                                <label>Ngày Sinh</label>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <select class="form-control" name="month" onchange="call()">
-                                            <option value="">Tháng</option>
-                                            <option value="1">Tháng 1</option>
-                                            <option value="2">Tháng 2</option>
-                                            <option value="3">Tháng 3</option>
-                                            <option value="4">Tháng 4</option>
-                                            <option value="5">Tháng 5</option>
-                                            <option value="6">Tháng 6</option>
-                                            <option value="7">Tháng 7</option>
-                                            <option value="8">Tháng 8</option>
-                                            <option value="9">Tháng 9</option>
-                                            <option value="10">Tháng 10</option>
-                                            <option value="11">Tháng 11</option>
-                                            <option value="12">Tháng 12</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <select class="form-control" name="day" onchange="call()">
-                                            <option>Ngày</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <select class="form-control" id="years" name="year">
-                                            <option>Năm</option>
-                                        </select>
-                                    </div>
+            <form action="{{route('post-dang-ky')}}" id="dangky" method="POST">
+                <div class="space10">&nbsp;</div>
+                <div class="form-group">
+                    <label for="sdt">Số Điện Thoại</label>
+                    <input type="text" class="form-control" id="sdt" name="sdt" placeholder="">
+                </div>
+                <div class="space10">&nbsp;</div>
+                <div class="form-group">
+                    <label for="hoten">Họ Tên</label>
+                    <input type="text" class="form-control" id="hoten" name="hoten" placeholder="">
+                    <input type="text" hidden name="role" value="5b962b3289403417208b6488">
+                </div>
+                <div class="space10">&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="form-group">
+                            <label>Ngày Sinh</label>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4">
+                                    <select class="form-control" name="month" onchange="call()">
+                                        <option value="">Tháng</option>
+                                        <option value="01">Tháng 1</option>
+                                        <option value="02">Tháng 2</option>
+                                        <option value="03">Tháng 3</option>
+                                        <option value="04">Tháng 4</option>
+                                        <option value="05">Tháng 5</option>
+                                        <option value="06">Tháng 6</option>
+                                        <option value="07">Tháng 7</option>
+                                        <option value="08">Tháng 8</option>
+                                        <option value="09">Tháng 9</option>
+                                        <option value="10">Tháng 10</option>
+                                        <option value="11">Tháng 11</option>
+                                        <option value="12">Tháng 12</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <select class="form-control" name="day" onchange="call()">
+                                        <option>Ngày</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <select class="form-control" id="years" name="year">
+                                        <option>Năm</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Giới Tính</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option value="">Chọn</option>
-                                    <option>Nam</option>
-                                    <option>Nữ</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group">
+                            <label for="gender">Giới Tính</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="">Chọn</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
                         </div>
                     </div>
-                </form>
+                </div>
+                {{ csrf_field() }}
+            </form>
             </div>
             <div class="col-lg-6">
+                <div class="space10">&nbsp;</div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Họ Tên</label>
-                    <input type="email" class="form-control" id="hoten" aria-describedby="emailHelp" placeholder="   ">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" form="dangky" name="email" placeholder="  ">
                 </div>
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="  ">
+                    <label for="pass">Mật Khẩu</label>
+                    <input type="password" class="form-control" id="pass"  form="dangky" name="pass" placeholder="">
                 </div>
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
-                    <button type="button" class="button register_title_button">Đăng Ký</button>
+                    <button type="submit" form="dangky" class="button register_title_button">Đăng Ký</button>
                 </div>
                 <small id="text" class="form-text text-muted">Hoặc Đăng kí với</small>
-                </br>
+                <br>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div id="gSignInWrapper">
                                 <div id="customBtn" class="customGPlusSignIn">
-                                    <button  onclick="startApp()" title="Google" data-onsuccess="onSignIn" class="btn btn-googleplus btn-lg" style="border-radius: 5px; "><i class="fab fa-google"></i> Google</button> 
+                                    <button onclick="startApp()" title="Google" data-onsuccess="onSignIn" class="btn btn-googleplus btn-lg"
+                                        style="border-radius: 5px; "><i class="fab fa-google"></i> Google</button>
                                 </div>
                             </div>
 
                             <div id="name"></div>
-                            
+
                             <div class="space5">&nbsp;</div>
                         </div>
-                        <div class="col-lg-6 col-md-6"> <button onclick="login()"  title="Facebook" class="btn btn-facebook btn-lg" style="border-radius: 5px; "><i class="fab fa-facebook-f"></i> Facebook</button></div>
+                        <div class="col-lg-6 col-md-6"> <button onclick="login()" title="Facebook" class="btn btn-facebook btn-lg"
+                                style="border-radius: 5px; "><i class="fab fa-facebook-f"></i> Facebook</button></div>
                     </div>
                     <div class="space10">&nbsp;</div>
                 </div>
@@ -231,5 +232,3 @@
 <script src="source/user/js/custom.js"></script>
 <script src="source/user/styles/js/register.js"></script>
 @endsection
-
-

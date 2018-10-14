@@ -11,7 +11,7 @@
                         <a href="mailto:anminh113@gmail.com">anminh113@gmail.com</a></div>
                     <div class="top_bar_content ml-auto">
                         {{-- <div class="top_bar_contact_item">+84 169 718 6707</div> --}}
-
+                        @if (Session::has('keyuser'))
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
@@ -22,10 +22,19 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <a class="fix" href="profile-user">Tài khoản Duy Huỳnh</a>
+                                <a class="fix" href="{{ route('profile-user',Session::get('keyuser')['_id'] )}}">Tài khoản {{Session::get('keyuser')['username']}}</a>
                                 </li>
                             </ul>
                         </div>
+                        <div class="top_bar_menu">
+                            <ul class="standard_dropdown top_bar_dropdown">
+                                <li>
+                                    <a class="fix" href="login">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </div>
+                        @else
+                      
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
@@ -40,6 +49,7 @@
                                 </li>
                             </ul>
                         </div>
+                        @endif
 
                     </div>
                 </div>

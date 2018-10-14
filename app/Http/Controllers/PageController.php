@@ -90,7 +90,7 @@
             $oldCart = Session('cart')?Session::get('cart'):null;
             $cart = new Cart($oldCart);
             // dd($datatext[0]['images'][0]['imageList'][0]['imageURL']);
-            $cart->add($data[0]['product'], $id, $datatext[0]['imageList'][0]['imageURL']);
+            $cart->add($data[0]['product'], $id,1, $datatext[0]['imageList'][0]['imageURL']);
             $req->session()->put('cart', $cart);
             return redirect()->back();
         }
@@ -227,6 +227,7 @@
         }
 
         public function getLogin(){
+            session()->forget('keyuser');
             return view('user/page.login');
         }
 
@@ -264,8 +265,28 @@
             return view('user/page.checkout');
         }
 
-        public function getProfileUser(){
-            return view('user/page.profileuser');
+        public function getProfileUser(Request $req){
+            $client = new \GuzzleHttp\Client();
+            try {
+                $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$req->id.'') );
+                $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
+// dd($datacustomer);
+                $resaddress = $client->request('GET',PageController::getUrl('deliveryaddresses/customer/'.$datacustomer['customer']['_id'].'') );
+                $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
+                // dd($dataaddress);
+               
+                
+                $dtstart = new DateTime( $datacustomer['customer']['birthday']);
+                $dtstart->setTimezone(new DateTimeZone('UTC'));
+                $start =  $dtstart->format('Y-m-d');
+                return view('user/page.profileuser',compact('datacustomer','dataaddress','start'));
+
+            }catch (\GuzzleHttp\Exception\ClientException $e) {
+                return $e->getResponse()->getStatusCode();
+                
+            }
+            // dd($dataaddress);
+            return view('user/page.profileuser',compact('datacustomer','dataaddress'));
         }
 
         public function getProfileUserShop(){
@@ -628,8 +649,6 @@
             return redirect()->guest(route('login-admin', [], false));           
         }
 
-       
-       
         //Admin hệ thống
         public function getAdmin(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){

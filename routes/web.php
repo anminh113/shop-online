@@ -17,10 +17,16 @@ Route::get('/', function () {
 
 // User
 
+//---
 Route::get('addtocart/{id}', [
     'as'=>'gio-hang',
     'uses'=>'PageController@getAddToCart'
 ]);
+Route::post('addtocart', [
+    'as'=>'post-gio-hang',
+    'uses'=>'PostController@postAddToCart'
+]);
+//---
 
 Route::get('deltocart/{id}', [
     'as'=>'xoa-gio-hang',
@@ -47,15 +53,30 @@ Route::get('productlist', [
     'uses'=>'PageController@getProductList'
 ]);
 
+//---
 Route::get('register', [
     'as'=>'dang-ky',
     'uses'=>'PageController@getRegister'
 ]);
 
+Route::post('register', [
+    'as'=>'post-dang-ky',
+    'uses'=>'PostController@postRegister'
+]);
+//---
+
+//---
 Route::get('login', [
     'as'=>'dang-nhap',
     'uses'=>'PageController@getLogin'
 ]);
+
+Route::post('login', [
+    'as'=>'post-dang-nhap',
+    'uses'=>'UserController@postLogin'
+]);
+
+//---
 
 Route::get('profileshop', [
     'as'=>'profileshop',
@@ -77,7 +98,7 @@ Route::get('check-out', [
     'uses'=>'PageController@getCheckOut'
 ]);
 
-Route::get('profile-user', [
+Route::get('profile-user/{id}', [
     'as'=>'profile-user',
     'uses'=>'PageController@getProfileUser'
 ]);

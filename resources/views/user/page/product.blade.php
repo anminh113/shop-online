@@ -21,13 +21,13 @@
         <div class="row">
             <!-- Images -->
             <div class="col-lg-2 order-lg-1 order-2">
-                <ul class="image_list" >
+                <ul class="image_list">
                     @foreach ($resultimg['datatext'] as $da )
                     @foreach ($da['imageList'] as $da1)
                     {{-- @foreach ($da1['imageList'] as $da2) --}}
                     <li data-image={{$da1["imageURL"]}}><img src={{$da1["imageURL"]}} alt=""></li>
                     {{-- @endforeach --}}
-                
+
                     @endforeach
                     @endforeach
                 </ul>
@@ -50,10 +50,12 @@
                     <div class="product_name">{{$item['product']['productName']}}</div>
                     <div style="width:100%; display: table-cell; vertical-align: middle; text-align: left;">
                         <div class="my-rating-9" style="margin-right: 8px;display: inline-block;vertical-align: middle;"></div>
-                        <a style="color: #9e9e9e;font-size: 12px;display: inline-block;vertical-align: middle;">({{$datareview['count']}} nhận xét)</a>
+                        <a style="color: #9e9e9e;font-size: 12px;display: inline-block;vertical-align: middle;">({{$datareview['count']}}
+                            nhận xét)</a>
                     </div>
                     <div class="product_price">
-                        <span class="text-danger" style="font-size: 22px" id="price">{{number_format($item['product']['price'] - ($item['product']['price'] *
+                        <span class="text-danger" style="font-size: 22px" id="price">{{number_format($item['product']['price']
+                            - ($item['product']['price'] *
                             $item['product']['saleOff']['discount'])/100)}},000₫</span>
                         @if(!empty($item['product']['saleOff']))
                         <span style="font-size: 16px; text-decoration: line-through;">{{number_format($item['product']['price'])}},000₫</span>
@@ -64,35 +66,29 @@
                         {{$item['product']['overviews'][0]['value']}} ...
                     </div>
                     <div class="space10">&nbsp;</div>
-                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn
-                        {{$item['product']['quantity']}} sản phẩm</label>
+                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn {{$item['product']['quantity']}} sản phẩm</label>
                     <div class=" d-flex flex-row">
-                        <form action="#">
+                        <form action="{{route('post-gio-hang')}}" id="add" method="post">
                             <div class="clearfix" style="z-index: 1000;">
+                                    <input type="text" hidden name="productid" value="{{$item['product']['_id']}}">
                                 <!-- Product Quantity -->
-                                <div class="product_quantity clearfix">
-                                    <span>Số Lượng: </span>
-                                    <input type="text" name="quant[1]" class="form-control input-number text-center"
-                                        min="1" max="{{$item['product']['quantity']}}" value="1" disabled style="background-color: #fff;">
+                                <div class="product_quantity ">
+                                
+                                    <span>Số Lượng: </span> 
+                                    <input type="text" name="qty" class="form-control text-center" min="1" max="{{$item['product']['quantity']}}" value="1">
                                     <div class="quantity_buttons">
-                                        <div class="quantity_inc btn-number quantity_control" data-type="plus"
-                                            data-field="quant[1]"><i class="fas fa-chevron-up"></i></div>
-                                        <div class="quantity_dec btn-number quantity_control" data-type="minus"
-                                            data-field="quant[1]"><i class="fas fa-chevron-down"></i></div>
+                                        <button type="button" class="  quantity_inc quantity_control btn-pluss"><i class="fas fa-chevron-up"></i></button>
+                                        <button type="button" class="  quantity_dec quantity_control btn-minuse"><i class="fas fa-chevron-down"></i></button>
                                     </div>
                                 </div>
                                 <div class="product_fav"><i class="fas fa-heart"></i></div>
-                             
-                              
-
                             </div>
                             <div class="button_container">
-                                <a href="{{route('gio-hang',$item['product']['_id'])}}" class="btn btn-outline-info btn-change btn-buy">
+                                <button type="submit" class="btn btn-outline-info btn-change btn-buy">
                                     <div class="img-buy"></div>Thêm Vào Giỏ
-                                </a>
-                               
+                                </button>
                             </div>
-                         
+                            {{ csrf_field() }}
                         </form>
                     </div>
                 </div>
@@ -167,7 +163,7 @@
                     <div class="col-lg-5 col-md-5 order-lg-2 order-md-1 order-1 ">
                         <div class="viewed_title_container">
                             <h3 class="viewed_title">Thông Số Kỹ Thuật</h3>
-                           
+
                         </div>
                         <div class="space15">&nbsp;</div>
                         <div class="container">
@@ -205,7 +201,7 @@
         <div class="viewed_title_container">
             <h4 class="viewed_title">Nhận xét và đánh giá về {{$item['product']['productName']}}</h4>
         </div>
-        
+
         <div class="row">
 
             <div class="col-lg-12">
@@ -215,7 +211,7 @@
                         <div class="row">
                             <div class="col-lg-2">
                                 <div class="score">
-                                <label class="average">{{(5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1)}}<span class="countText" style="font-size: 29px">/5</span></label>
+                                    <label class="average">{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 0, '.', '')}}<span class="countText" style="font-size: 29px">/5</span></label>
                                 </div>
                                 <div class="count">
                                     <div class="countText">
@@ -238,7 +234,7 @@
                                                 </div>
                                             </div>
                                             <div class="side right">
-                                            <div class="tillet">{{$countstar_5}}</div>
+                                                <div class="tillet">{{$countstar_5}}</div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -317,14 +313,15 @@
 
                 <div class="sis-seller-reviews">
                     @foreach ($datareview['reviewProducts'] as $time => $review)
-                        <div class="seller-review-item">
-                            <div class="row reviewer">
-                                <div class="rating_r rating_r_{{$review['ratingStar']['ratingStar']}} product_rating"><i></i><i></i><i></i><i></i><i></i><label class="itemFooter">{{$review['customer']['name']}} - {{$timereview[$time]}}</label></div>
-                            </div>
-                            <div class="row">
-                            <label class="comments">{{$review['review']}}</label>
-                            </div>
+                    <div class="seller-review-item">
+                        <div class="row reviewer">
+                            <div class="rating_r rating_r_{{$review['ratingStar']['ratingStar']}} product_rating"><i></i><i></i><i></i><i></i><i></i><label
+                                    class="itemFooter">{{$review['customer']['name']}} - {{$timereview[$time]}}</label></div>
                         </div>
+                        <div class="row">
+                            <label class="comments">{{$review['review']}}</label>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -538,21 +535,35 @@
 <script src="source/user/styles/js/cart.js"></script>
 <script src="source/user/styles/js/lightgallery-all.min.js"></script>
 <script>
-    var countstar = '{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}';
-    $(function() {
-      $(".my-rating-9").starRating({
-        readOnly: true,
-        initialRating: parseFloat(countstar),
-        starGradient:  {start: '#F4E800', end: '#F4E800'},
-        starShape: '#F4E800',
-        emptyColor: '#FFF',
-        starSize: 25,
-        strokeWidth: 20,
-        strokeColor: '#F4E800'
-      });
-    
+    var countstar ='{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}';
+    $(function () {
+        $(".my-rating-9").starRating({
+            readOnly: true,
+            initialRating: parseFloat(countstar),
+            starGradient: {
+                start: '#F4E800',
+                end: '#F4E800'
+            },
+            starShape: '#F4E800',
+            emptyColor: '#FFF',
+            starSize: 25,
+            strokeWidth: 20,
+            strokeColor: '#F4E800'
+        });
+
     });
-    </script>
+
+</script>
+<script>
+    $('.btn-minuse').on('click', function(){            
+       $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) - 1)
+    })
+
+    $('.btn-pluss').on('click', function(){            
+        $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) + 1)
+    })
+    
+</script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
 
 
