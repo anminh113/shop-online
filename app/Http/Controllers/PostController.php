@@ -374,6 +374,13 @@
 
         public function postAddToCart(Request $req){
             $client = new \GuzzleHttp\Client();
+
+            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $datatime = json_decode($restime->getBody()->getContents(), true);
+            $todaytime = new DateTime($datatime['time']);
+            $todaytime->setTimezone(new DateTimeZone('UTC'));
+            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
             $res = $client->request('GET',PageController::getUrl('products/'.$req->productid.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
 
@@ -385,7 +392,7 @@
             // dd($req->productid);
            
             // dd($datatext[0]['images'][0]['imageList'][0]['imageURL']);
-            $cart->add($data[0]['product'], $req->productid, $req->qty ,$datatext[0]['imageList'][0]['imageURL']);
+            $cart->add($data[0]['product'], $req->productid, $req->qty ,$datatext[0]['imageList'][0]['imageURL'],$time);
             $req->session()->put('cart', $cart);
             return redirect()->route('cart');
         }

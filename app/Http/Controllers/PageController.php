@@ -81,16 +81,23 @@
         
         public function getAddToCart(Request $req, $id){
             $client = new \GuzzleHttp\Client();
+            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $datatime = json_decode($restime->getBody()->getContents(), true);
+            $todaytime = new DateTime($datatime['time']);
+            $todaytime->setTimezone(new DateTimeZone('UTC'));
+            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
+          
             $res = $client->request('GET',PageController::getUrl('products/'.$id.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
 
             $res = $client->request('GET',PageController::getUrl('productimages/product/'.$id.''));
             $datatext[] = json_decode($res->getBody()->getContents(), true);
 
+
             $oldCart = Session('cart')?Session::get('cart'):null;
             $cart = new Cart($oldCart);
-            // dd($datatext[0]['images'][0]['imageList'][0]['imageURL']);
-            $cart->add($data[0]['product'], $id,1, $datatext[0]['imageList'][0]['imageURL']);
+            $cart->add($data[0]['product'], $id,1, $datatext[0]['imageList'][0]['imageURL'], $time);
             $req->session()->put('cart', $cart);
             return redirect()->back();
         }
@@ -175,7 +182,6 @@
                         break;
                 }
             }
-            dd($datareview);
          
             return view('user/page.product',compact('resultdata','resultimg','datareview','timereview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
@@ -186,8 +192,6 @@
             //  $res = $client1->request('GET',PageController::getUrl('products/store/5bb1c71a8875381e34da95ff'));
             $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-          
-
             $todaytime = new DateTime($datatime['time']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
@@ -232,14 +236,21 @@
         public function getCart(){
             //get thong tin san pham
             $client = new \GuzzleHttp\Client();
+
+            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $datatime = json_decode($restime->getBody()->getContents(), true);
+            $todaytime = new DateTime($datatime['time']);
+            $todaytime->setTimezone(new DateTimeZone('UTC'));
+            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
             $res = $client->request('GET',PageController::getUrl('deliveryprices') );
             $data = json_decode($res->getBody()->getContents(), true);
             // dd($data);
-
+            // dd(Session::get('cart'));
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
             $product_cart = $cart->items;           
-            return view('user/page.cart',compact('product_cart','data'));
+            return view('user/page.cart',compact('product_cart','data','time'));
         }
 
         public function getCheckCart(){

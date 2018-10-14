@@ -16,14 +16,19 @@ class Cart
 		}
 	}
 
-	public function add($item, $id, $sl, $img){
-
-		if($item['saleOff']['discount'] == 0){
+	public function add($item, $id, $sl, $img, $time){
+		
+		if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] < $time)
+		{
 			$giohang = ['qty'=>0, 'price' => $item['price'], 'item' => $item , 'img' => $img];
-		}
-		else{
+		}else if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
+		{
 			$giohang = ['qty'=>0, 'price' => ($item['price']-($item['price'] * $item['saleOff']['discount']/100)), 'item' => $item , 'img' => $img];
 		}
+		else{
+			$giohang = ['qty'=>0, 'price' => $item['price'], 'item' => $item , 'img' => $img];
+		}
+
 		if($this->items){
 			if(array_key_exists($id, $this->items)){
 				$giohang = $this->items[$id];
@@ -32,22 +37,26 @@ class Cart
 
 		$giohang['qty']+= $sl;
 
-		if($item['saleOff']['discount'] == 0){
+		if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] < $time){
 			$giohang['price'] = $item['price'] * $giohang['qty'];
+		}else if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time){
+			$giohang['price'] = ($item['price']-($item['price'] * $item['saleOff']['discount']/100)) * $giohang['qty'];
 		}
 		else{
-			$giohang['price'] = ($item['price']-($item['price'] * $item['saleOff']['discount']/100)) * $giohang['qty'];
+			$giohang['price'] = $item['price'] * $giohang['qty'];
 		}
 
 		$this->items[$id] = $giohang;
 
 		$this->totalQty+= $sl;
 
-		if($item['saleOff']['discount'] == 0){
+		if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] < $time){
 			$this->totalPrice += $item['price'];
+		}else if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time){
+			$this->totalPrice += $item['price']-($item['price'] * $item['saleOff']['discount']/100);
 		}
 		else{
-			$this->totalPrice += $item['price']-($item['price'] * $item['saleOff']['discount']/100);
+			$this->totalPrice += $item['price'];
 		}
 
 		

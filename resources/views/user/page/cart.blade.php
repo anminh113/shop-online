@@ -64,13 +64,13 @@
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
-                                                    @if($item['item']['saleOff']['discount']==0)
+                                                        {{-- empty($item['saleOff']) || $item['saleOff']['dateEnd'] < $time --}}
+                                                    @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                                     {{number_format($item['item']['price'])}},000₫
                                                     @else
                                                     {{number_format($item['item']['price'] - ($item['item']['price'] *
                                                     $item['item']['saleOff']['discount'])/100)}},000₫
                                                     @endif
-
 
                                                 </div>
                                             </div>
@@ -114,7 +114,8 @@
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
-                                                    @if($item['item']['saleOff']['discount']==0)
+
+                                                        @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                                     {{number_format($item['qty'] * $item['item']['price'])}},000₫
                                                     @else
                                                     {{number_format($item['qty'] * ($item['item']['price'] -
@@ -125,8 +126,7 @@
                                             </div>
                                             <div class="col-lg-1">
                                                 <div class="cart_item_text">
-                                                    <a href="{{Route('xoa-gio-hang',$item['item']['_id'])}}"><i
-                                                            class="fas fa-trash"></i></a>
+                                                    <a href="{{Route('xoa-gio-hang',$item['item']['_id'])}}"><i class="fas fa-trash"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,20 +148,14 @@
                                 <div class="order_total_content text-letf">
                                     <div class="order_total_title text-letf">Tạm tính:</div>
                                     <div class="order_total_amount">
-                                            @if($item['item']['saleOff']['discount']==0)
-                                            {{number_format($item['qty'] * $item['item']['price'])}},000₫
-                                            @else
-                                            {{number_format($item['qty'] * ($item['item']['price'] -
-                                            ($item['item']['price'] *
-                                            $item['item']['saleOff']['discount'])/100))}},000₫
-                                            @endif
+                                            {{number_format(Session::get('cart')->totalPrice)}},000₫
                                     </div>
                                 </div>
                                 <div class="order_total_content text-letf">
                                     <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
                                     <div class="order_total_amount">
                                         @foreach ($data['deliveryPrices'] as $item)
-                                        @if($item['productQuantity'] === Session('cart')->totalQty)
+                                        @if($item['productQuantity'] === Session::get('cart')->totalQty)
                                         {{$item['transportFee']}}.000 ₫
                                         @break
                                         @else
@@ -190,9 +184,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="cart_buttons">
-                        <button type="button" class="button cart_button_checkout">Add to Cart</button>
-                    </div> -->
+                 
                     <div class="characteristics">
                         <div class="row">
                             <!-- Char. Item -->

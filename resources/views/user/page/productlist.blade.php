@@ -101,7 +101,7 @@
                                 <div class="product_grid_border"></div>
                                 @foreach ($data['products'] as $item )
                                 <!-- Product Item -->
-                                @if(!empty($item['saleOff']))
+                                @if(!empty($item['saleOff']) )
                                 <div class="product_item discount">
                                     <div class="product_border"></div>
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
@@ -117,10 +117,13 @@
                                         @endforeach
                                     </div>
                                     <div class="product_content">
+                                        @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
                                         <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100, 0, '', '')}}@if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}}</span>@endif</div>
-
                                         <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100)}},000₫@if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
-
+                                        @else
+                                        <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'], 0, '', '')}}</div>
+                                        <div class="product_price"  style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
+                                        @endif
                                         <div class="product_name">
                                             <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
                                         </div>
