@@ -54,31 +54,36 @@
                             nhận xét)</a>
                     </div>
                     <div class="product_price">
-                        <span class="text-danger" style="font-size: 22px" id="price">{{number_format($item['product']['price']
-                            - ($item['product']['price'] *
-                            $item['product']['saleOff']['discount'])/100)}},000₫</span>
-                        @if(!empty($item['product']['saleOff']))
-                        <span style="font-size: 16px; text-decoration: line-through;">{{number_format($item['product']['price'])}},000₫</span>
-                        <span style="font-size: 21px"> -{{$item['product']['saleOff']['discount']}}%</span>
+                        @if(empty($item['product']['saleOff']) || $item['product']['saleOff']['dateEnd'] < $timeend) 
+                            <span class="text-danger" style="font-size: 22px" >{{number_format($item['product']['price'])}},000₫</span>
+                        @else 
+                            <span class="text-danger" style="font-size: 22px" >{{number_format($item['product']['price']- ($item['product']['price'] *$item['product']['saleOff']['discount'])/100)}},000₫</span>
+                            <span style="font-size: 16px; text-decoration: line-through;">{{number_format($item['product']['price'])}},000₫</span>
+                            <span style="font-size: 21px"> -{{$item['product']['saleOff']['discount']}}%</span>
                         @endif
+
                     </div>
                     <div class="product_text">
                         {{$item['product']['overviews'][0]['value']}} ...
                     </div>
                     <div class="space10">&nbsp;</div>
-                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn {{$item['product']['quantity']}} sản phẩm</label>
+                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn
+                        {{$item['product']['quantity']}} sản phẩm</label>
                     <div class=" d-flex flex-row">
                         <form action="{{route('post-gio-hang')}}" id="add" method="post">
                             <div class="clearfix" style="z-index: 1000;">
-                                    <input type="text" hidden name="productid" value="{{$item['product']['_id']}}">
+                                <input type="text" hidden name="productid" value="{{$item['product']['_id']}}">
                                 <!-- Product Quantity -->
                                 <div class="product_quantity ">
-                                
-                                    <span>Số Lượng: </span> 
-                                    <input type="text" name="qty" class="form-control text-center" min="1" max="{{$item['product']['quantity']}}" value="1">
+
+                                    <span>Số Lượng: </span>
+                                    <input type="text" name="qty" class="form-control text-center" min="1" max="{{$item['product']['quantity']}}"
+                                        value="1">
                                     <div class="quantity_buttons">
-                                        <button type="button" class="  quantity_inc quantity_control btn-pluss"><i class="fas fa-chevron-up"></i></button>
-                                        <button type="button" class="  quantity_dec quantity_control btn-minuse"><i class="fas fa-chevron-down"></i></button>
+                                        <button type="button" class="  quantity_inc quantity_control btn-pluss"><i
+                                                class="fas fa-chevron-up"></i></button>
+                                        <button type="button" class="  quantity_dec quantity_control btn-minuse"><i
+                                                class="fas fa-chevron-down"></i></button>
                                     </div>
                                 </div>
                                 <div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -90,7 +95,20 @@
                             </div>
                             {{ csrf_field() }}
                         </form>
+                    
                     </div>
+                    <hr>
+              
+                        <div class="d-flex flex-row">
+                            <div class="char_icon"><img style="width: 40px;height: 40px" src="https://png.icons8.com/ultraviolet/40/000000/small-business.png" alt=""></div>
+                            <div class="char_content">
+                            <div class="char_title">Được bán bởi {{$item['product']['store']['storeName']}}</div>
+                                <div class="char_subtitle">{{$item['product']['store']['location']}}</div>
+                            </div>
+                            <div class="space10">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <div class="char_icon"><div class="btn btn-outline- btn-save" style="font-size:12px"  onclick="window.location='{{route('profileshop',$item['product']['store']['_id'])}}';">Xem Shop </div> </div>
+                        </div>
+                        <hr>
                 </div>
             </div>
             <div class="col-lg-7 order-3">
@@ -203,103 +221,196 @@
         </div>
 
         <div class="row">
-
             <div class="col-lg-12">
                 {{-- <div class="section-title"> Điểm đánh giá trung bình</div> --}}
                 <div class="rating-overview">
                     <div class="right">
                         <div class="row">
-                            <div class="col-lg-2">
-                                <div class="score">
-                                    <label class="average">{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 0, '.', '')}}<span class="countText" style="font-size: 29px">/5</span></label>
-                                </div>
-                                <div class="count">
-                                    <div class="countText">
-                                        Đánh giá tích cực
+                            @if($datareview['count'] != 0)
+                                <div class="col-lg-2">
+                                    <div class="score">
+                                        <label class="average">{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}<span class="countText" style="font-size: 29px">/5</span></label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-10">
-                                <div class="scoreItem">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i>
-                                                    <i></i>
-                                                    <i></i> </div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-5" style="width: {{number_format(($countstar_5 / $datareview['count'])*100 , 0, '', '')}}%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet">{{$countstar_5}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i>
-                                                    <i></i>
-                                                    <i></i> </div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-4" style="width: {{number_format(($countstar_4 / $datareview['count'])*100 , 0, '', '')}}%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet"> {{$countstar_4}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i>
-                                                    <i></i>
-                                                    <i></i> </div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-3" style="width: {{number_format(($countstar_3 / $datareview['count'])*100 , 0, '', '')}}%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet"> {{$countstar_3}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="rating_r rating_r_2 product_rating"> <i></i> <i></i> <i></i>
-                                                    <i></i>
-                                                    <i></i> </div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-2" style="width: {{number_format(($countstar_2 / $datareview['count'])*100 , 0, '', '')}}%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet"> {{$countstar_2}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i>
-                                                    <i></i>
-                                                    <i></i> </div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-1" style="width: {{number_format(($countstar_1 / $datareview['count'])*100 , 0, '', '')}}%"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet"> {{$countstar_1}}</div>
-                                            </div>
+                                    <div class="count">
+                                        <div class="countText">
+                                            Đánh giá tích cực
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-lg-10">
+                                    <div class="scoreItem">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-5" style="width: {{number_format(($countstar_5 / $datareview['count'])*100 , 0, '', '')}}%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet">{{$countstar_5}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-4" style="width: {{number_format(($countstar_4 / $datareview['count'])*100 , 0, '', '')}}%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_4}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-3" style="width: {{number_format(($countstar_3 / $datareview['count'])*100 , 0, '', '')}}%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_3}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_2 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-2" style="width: {{number_format(($countstar_2 / $datareview['count'])*100 , 0, '', '')}}%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_2}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-1" style="width: {{number_format(($countstar_1 / $datareview['count'])*100 , 0, '', '')}}%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_1}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="col-lg-2">
+                                    <div class="score">
+                                        <label class="average">0<span class="countText" style="font-size: 29px">/5</span></label>
+                                    </div>
+                                    <div class="count">
+                                        <div class="countText">
+                                            Đánh giá tích cực
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="scoreItem">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-5" style="width: 0%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet">{{$countstar_5}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-4" style="width: 0%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_4}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-3" style="width: 0%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_3}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_2 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-2" style="width: 0%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_2}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i>
+                                                        <i></i>
+                                                        <i></i> </div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-1" style="width: 0%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="sideright">
+                                                    <div class="tillet"> {{$countstar_1}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -312,17 +423,28 @@
                 <div class="space10">&nbsp;</div>
 
                 <div class="sis-seller-reviews">
-                    @foreach ($datareview['reviewProducts'] as $time => $review)
-                    <div class="seller-review-item">
-                        <div class="row reviewer">
-                            <div class="rating_r rating_r_{{$review['ratingStar']['ratingStar']}} product_rating"><i></i><i></i><i></i><i></i><i></i><label
-                                    class="itemFooter">{{$review['customer']['name']}} - {{$timereview[$time]}}</label></div>
+                    @if($datareview['count'] != 0)
+                        @foreach ($datareview['reviewProducts'] as $time => $review)
+                        <div class="seller-review-item">
+                            <div class="row reviewer">
+                                <div class="rating_r rating_r_{{$review['ratingStar']['ratingStar']}} product_rating"><i></i><i></i><i></i><i></i><i></i><label
+                                        class="itemFooter">{{$review['customer']['name']}} - {{$timereview[$time]}}</label></div>
+                            </div>
+                            <div class="row">
+                                <label class="comments">{{$review['review']}}</label>
+                            </div>
                         </div>
-                        <div class="row">
-                            <label class="comments">{{$review['review']}}</label>
+                        @endforeach
+                    @else 
+                        <div class="seller-review-item">
+                            <div class="row reviewer">
+                            </div>
+                            <div class="row">
+                                <label class="comments" style="color: #9e9e9e;font-size: 16px;">Hiện chưa có nhận xét nào cho sản phẩm. Cho người khác biết ý kiến của bạn và trở thành người đầu tiên nhận xét sản phẩm này.</label>
+                            </div>
                         </div>
-                    </div>
-                    @endforeach
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -534,6 +656,8 @@
 <script src="source/user/js/product_custom.js"></script>
 <script src="source/user/styles/js/cart.js"></script>
 <script src="source/user/styles/js/lightgallery-all.min.js"></script>
+
+@if($datareview['count'] != 0)
 <script>
     var countstar ='{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}';
     $(function () {
@@ -554,15 +678,38 @@
     });
 
 </script>
+@else
 <script>
-    $('.btn-minuse').on('click', function(){            
-       $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) - 1)
+    $(function () {
+        $(".my-rating-9").starRating({
+            readOnly: true,
+            initialRating: 0,
+            starGradient: {
+                start: '#F4E800',
+                end: '#F4E800'
+            },
+            starShape: '#F4E800',
+            emptyColor: '#FFF',
+            starSize: 25,
+            strokeWidth: 20,
+            strokeColor: '#F4E800'
+        });
+
+    });
+
+</script>
+@endif
+
+
+<script>
+    $('.btn-minuse').on('click', function () {
+        $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) - 1)
     })
 
-    $('.btn-pluss').on('click', function(){            
+    $('.btn-pluss').on('click', function () {
         $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) + 1)
     })
-    
+
 </script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
 

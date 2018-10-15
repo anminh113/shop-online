@@ -78,7 +78,7 @@ Route::post('login', [
 
 //---
 
-Route::get('profileshop', [
+Route::get('profileshop/{id}', [
     'as'=>'profileshop',
     'uses'=>'PageController@getProfileShop'
 ]);

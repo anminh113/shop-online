@@ -8,36 +8,38 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
 
 <style type="text/css">
-.bar-verygood {
-    width: 60%;
-    height: 16px;
-    background-color: #FFCC40;
-}
+    .bar-verygood {
+        width: 60%;
+        height: 16px;
+        background-color: #FFCC40;
+    }
 
-.bar-good {
-    width: 30%;
-    height: 16px;
-    background-color: #FFCC40;
-}
+    .bar-good {
+        width: 30%;
+        height: 16px;
+        background-color: #FFCC40;
+    }
 
-.bar-bad {
-    width: 10%;
-    height: 16px;
-    background-color: #FFCC40;
-}
-.product_item {
-    position: inherit;
-    display: table-column;
-}
+    .bar-bad {
+        width: 10%;
+        height: 16px;
+        background-color: #FFCC40;
+    }
 
-.page-active {
-    display: block;
-}
+    .product_item {
+        position: inherit;
+        display: table-column;
+    }
+
+    .page-active {
+        display: block;
+    }
+
 </style>
 @endsection
 
 @section('content')
-   
+
 
 
 
@@ -49,13 +51,15 @@
                 <div class="home_overlay"></div>
                 <div class="home_content d-flex flex-column align-items-left justify-content-center">
                     <div class="home_shop">
-                        <div class="char_icon"><img src="source/user/images/icons8-home-page-100.png" style="width: 70px" alt=""></div>
+                        <div class="char_icon"><img src="source/user/images/icons8-home-page-100.png" style="width: 70px"
+                                alt=""></div>
                         <div class="char_content">
                             <div class="char_title">HARA Shop</div>
                             <div class="char_subtitle">903 Lượng theo dõi</div>
                             <div class="char_subtitle">77% Đánh giá tích cực</div>
                         </div>
-                        <div class="char_icon" style="margin-left: 20px"><img src="source/user/images/icons8-plus-500.png" style="width: 45px" alt="">
+                        <div class="char_icon" style="margin-left: 20px"><img src="source/user/images/icons8-plus-500.png"
+                                style="width: 45px" alt="">
                             <div class="char_subtitle">Theo dõi</div>
                         </div>
                     </div>
@@ -93,30 +97,17 @@
                                     <li><a href="#">Accessories</a></li>
                                 </ul>
                             </div>
-                            <!--    <div class="sidebar_section filter_by_section">
-                                        <div class="sidebar_title">Filter By</div>
-                                        <div class="sidebar_subtitle">Price</div>
-                                        <div class="filter_price">
-                                            <div id="slider-range" class="slider_range"></div>
-                                            <p>Range: </p>
-                                            <p>
-                                                <input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;">
-                                            </p>
-                                        </div>
-                                    </div> -->
-                            <hr>
-                            <div class="sidebar_section">
-                                <div class="sidebar_subtitle brands_subtitle">Giá</div>
-                                <ul class="brands_list">
-                                    <li class="brand shop_sorting_button1"><a href="">0 ₫ - 10.000.000 ₫</a></li>
-                                    <li class="brand shop_sorting_button1"><a href="#">10.000.000 ₫ - 20.000.000 ₫</a></li>
-                                    <li class="brand shop_sorting_button1"><a href="#">20.000.000 ₫ - 30.000.000 ₫</a></li>
-                                    <li class="brand shop_sorting_button1"><a href="#">30.000.000 ₫ - 40.000.000 ₫</a></li>
-                                    <li class="brand shop_sorting_button1"><a href="#">40.000.000 ₫ - 50.000.000 ₫</a></li>
-                                    <li class="brand shop_sorting_button1"><a href="#">50.000.000 ₫ - 60.000.000 ₫</a></li>
-                                    <li class="brand shop_sorting_button1"><a href="#">60.000.000 ₫ - 70.000.000 ₫</a></li>
-                                </ul>
-                            </div>
+                            <div class="sidebar_section filter_by_section">
+                                    <div class="sidebar_subtitle brands_subtitle">Giá</div>
+                                    <div class="filter_price">
+                                        <div id="slider-range" class="slider_range"></div>
+                                        <p style="width: 100%">
+                                            <input type="text"  id="amount1" class="amount" readonly style="border:0; font-weight:bold; width: 100%">
+        
+                                            <input type="text" hidden id="amount" class="amount" readonly style="border:0; font-weight:bold; width: 100%">
+                                        </p>
+                                    </div>
+                                </div>
                             <hr>
                             <div class="sidebar_section">
                                 <div class="sidebar_subtitle brands_subtitle">Thương hiệu</div>
@@ -136,151 +127,131 @@
                             <h3 class="viewed_title">HARA Shop</h3>
                             <!-- Shop Content -->
                             <div class="shop_content">
-                                <div class="shop_bar clearfix">
-                                    <div class="shop_product_count"><span>186</span> sản phẩm</div>
-                                    <div class="shop_sorting">
-                                        <span>Sắp xếp theo:</span>
-                                        <ul>
-                                            <li>
-                                                <span class="sorting_text">Độ phổ biến <i class="fas fa-chevron-down"></span></i>
-                                                <ul>
-                                                    <li class="shop_sorting_button" data-isotope-option='original-order'>Độ phổ biến</li>
-                                                    <li class="shop_sorting_button" data-isotope-option='PriceIncrease'>Giá tăng dần</li>
-                                                    <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá giảm dần</li>
-                                                </ul>
-                                            </li>
+                                    <div class="shop_bar clearfix">
+                                        <div class="shop_product_count" style="font-size: 16px"><span>{{count($data['products']
+                                                )}}</span> Sản phẩm</div>
+                                        <input type="text" id="quicksearch" placeholder="Search" />
+                                        <div class="shop_sorting">
+                                            <span>Sắp xếp theo:</span>
+                                            <ul>
+                                                <li>
+                                                    <span class="sorting_text">Độ phổ biến <i class="fas fa-chevron-down"></span></i>
+                                                    <ul>
+                                                        <li class="shop_sorting_button" data-isotope-option='original-order'>Độ
+                                                            phổ biến</li>
+                                                        <li class="shop_sorting_button" data-isotope-option='PriceIncrease'>Giá
+                                                            tăng dần</li>
+                                                        <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá
+                                                            giảm dần</li>
+                                                        <li class="shop_sorting_button" data-isotope-option='name'>name</li>
+                                                        <!-- <li class="shop_sorting_button" data-filter="numberGreater">300 > number > 5000</li> -->
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+        
+        
+                                    <div class="product_grid">
+                                        <div class="product_grid_border"></div>
+                                        @foreach ($data['products'] as $item )
+                                        <!-- Product Item -->
+                                        @if(!empty($item['saleOff']) )
+                                        <div class="product_item discount">
+                                            <div class="product_border"></div>
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                @foreach ($result['datatext'] as $da )
+                                                @foreach ($da['imageList'] as $da1)
+                                                @if($item['_id'] == $da['productId'])
+                                                {{-- @foreach($da1['imageList'] as $da2) --}}
+                                                <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                @break
+                                                {{-- @endforeach --}}
+                                                @endif
+                                                @endforeach
+                                                @endforeach
+                                            </div>
+                                            <div class="product_content">
+                                                @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
+                                                <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100, 0, '', '')}}@if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}}</span>@endif</div>
+                                                <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100)}},000₫@if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
+                                                @else
+                                                <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'], 0, '', '')}}</div>
+                                                <div class="product_price"  style=" color:#000; font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
+                                                @endif
+                                                <div class="product_name">
+                                                    <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                            @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                            @endif
+                                            <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                                style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        </div>
+                                        @endif
+        
+                                        @if(empty($item['saleOff']))
+                                        <div class="product_item ">
+                                            <div class="product_border"></div>
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                @foreach ($result['datatext'] as $da )
+                                                @foreach ($da['imageList'] as $da1)
+                                                @if($item['_id'] == $da['productId'])
+                                                {{-- @foreach($da1['imageList'] as $da2) --}}
+                                                <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                @break
+                                                {{-- @endforeach --}}
+                                                @endif
+                                                @endforeach
+                                                @endforeach
+                                            </div>
+                                            <div class="product_content">
+                                                <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'], 0, '', '')}}</div>
+        
+                                                <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
+        
+                                                <div class="product_name">
+                                                    <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
+                                                </div>
+                                            </div>
+                                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                            @if(empty($item['saleOff']))
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
+                                            @endif
+                                            <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                                style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        </div>
+                                        @endif
+        
+        
+        
+                                        @endforeach
+        
+                                    </div>
+        
+                                    <!-- Shop Page Navigation -->
+                                    <div class="shop_page_nav d-flex flex-row">
+                                        <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i
+                                                class="fas fa-chevron-left"></i></div>
+                                        <ul class="page_nav d-flex flex-row">
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">...</a></li>
+                                            <li><a href="#">21</a></li>
                                         </ul>
+                                        <div class="page_next d-flex flex-column align-items-center justify-content-center"><i
+                                                class="fas fa-chevron-right"></i></div>
                                     </div>
                                 </div>
-                                <div class="product_grid">
-                                <div class="product_grid_border"></div>
-                                <!-- Product Item -->
-                                <div class="product_item is_new">
-                                    <div class="product_border"></div>
-                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/8/1/81kuk0lrqul._sl1500_-r.jpg" width="115" height="115" alt=""></div>
-                                    <div class="product_content">
-                                        <div class="product_price">1.050.000 ₫</div>
-                                        <div class="product_name">
-                                            <div><a href="#" tabindex="0">Thùng máy/ Case CM Masterbox Lite 3.1 TG (No power)</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                    <ul class="product_marks">
-                                        <li class="product_mark product_discount">-25%</li>
-                                        <li class="product_mark product_new">new</li>
-                                    </ul>
-                                </div>
-                                 <!-- Product Item -->
-                                 <div class="product_item is_new">
-                                        <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/8/1/81kuk0lrqul._sl1500_-r.jpg" width="115" height="115" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">1.050.000 ₫</div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Thùng máy/ Case CM Masterbox Lite 3.1 TG (No power)</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                     <!-- Product Item -->
-                                <div class="product_item is_new">
-                                        <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/8/1/81kuk0lrqul._sl1500_-r.jpg" width="115" height="115" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">1.050.000 ₫</div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Thùng máy/ Case CM Masterbox Lite 3.1 TG (No power)</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                     <!-- Product Item -->
-                                <div class="product_item is_new">
-                                        <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/8/1/81kuk0lrqul._sl1500_-r.jpg" width="115" height="115" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">1.050.000 ₫</div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Thùng máy/ Case CM Masterbox Lite 3.1 TG (No power)</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                     <!-- Product Item -->
-                                <div class="product_item is_new">
-                                        <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/8/1/81kuk0lrqul._sl1500_-r.jpg" width="115" height="115" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">1.150.000 ₫</div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Thùng máy/ Case CM Masterbox Lite 3.1 TG (No power)</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                     <!-- Product Item -->
-                                <div class="product_item is_new">
-                                        <div class="product_border"></div>
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/8/1/81kuk0lrqul._sl1500_-r.jpg" width="115" height="115" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">1.050.000 ₫</div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Thùng máy/ Case CM Masterbox Lite 3.1 TG (No power)</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                <!-- Product Item -->
-                                {{-- <div class="product_item discount">
-                                    <div class="product_border"></div>
-                                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="source/user/images/featured_1.png" alt=""></div>
-                                    <div class="product_content">
-                                        <div class="product_price">$225<span>$300</span></div>
-                                        <div class="product_name">
-                                            <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                        </div>
-                                    </div>
-                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                    <ul class="product_marks">
-                                        <li class="product_mark product_discount">-25%</li>
-                                        <li class="product_mark product_new">new</li>
-                                    </ul>
-                                </div> --}}
-                              
-                            </div>
-                                <!-- Shop Page Navigation -->
-                                <div class="shop_page_nav d-flex flex-row">
-                                    <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
-                                    <ul class="page_nav d-flex flex-row">
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">...</a></li>
-                                        <li><a href="#">21</a></li>
-                                    </ul>
-                                    <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -293,9 +264,10 @@
                             <div class="char_item ">
                                 <div class="char_title_top">Địa điểm</div>
                                 <div class="d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-place-marker-100.png" alt=""></div>
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-place-marker-100.png"
+                                            alt=""></div>
                                     <div class="char_content">
-                                        <div class="char_title">Thị trấn Mường Ảng, Huyện Mường Ảng, Tỉnh Điện Biên</div>
+                                    <div class="char_title">{{$datashop['store']['location']}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -305,10 +277,14 @@
                             <div class="char_item ">
                                 <div class="char_title_top">Danh mục Chính</div>
                                 <div class="d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-categorize-240.png" alt=""></div>
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-categorize-240.png"
+                                            alt=""></div>
                                     <div class="char_content">
-                                        <div class="char_title">Linh kiện máy tính, Case, Màn hình, Cameras</div>
-                                        <!-- <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500.000₫ trở lên</div> -->
+                                        <div class="char_title">
+                                            @foreach($datashop['store']['categories'] as $item)
+                                           {{$item['category']['categoryName']}},
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -318,10 +294,10 @@
                             <div class="char_item ">
                                 <div class="char_title_top">Thời gian trên CyberZone</div>
                                 <div class="d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-time-128.png" alt=""></div>
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-time-128.png"
+                                            alt=""></div>
                                     <div class="char_content">
-                                        <div class="char_title">Khoảng 1 tháng</div>
-                                        <!-- <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500.000₫ trở lên</div> -->
+                                        <div class="char_title">Từ ngày {{$createdTime}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -391,39 +367,55 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="section-title"> Nhận xét và đánh giá nhà bán hàng (40)</div>
-                            <div>
-                                <img class="filter__seller-rating" src="source/user/images/icon-verygood.png" width="24" height="24">
-                                <img class="filter__seller-rating" src="source/user/images/icon-good.png" width="24" height="24">
-                                <img class="filter__seller-rating" src="source/user/images/icon-bad.png" width="24" height="24">
+                            {{-- <div>
+                                <img class="filter__seller-rating" src="source/user/images/icon-verygood.png" width="24"
+                                    height="24">
+                                <img class="filter__seller-rating" src="source/user/images/icon-good.png" width="24"
+                                    height="24">
+                                <img class="filter__seller-rating" src="source/user/images/icon-bad.png" width="24"
+                                    height="24">
                             </div>
                             <div class="space10">&nbsp;</div>
                             <div class="contact_form_text">
-                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message" name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
+                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
+                                    name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
                             </div>
-                            <div class="space10">&nbsp;</div>
+                            <div class="space10">&nbsp;</div> --}}
                             <div class="sis-seller-reviews">
                                 <div class="seller-review-item">
-                                    <div class="row rate"><img class="" src="source/user/images/icon-color-verygood.png" width="24" height="24">&nbsp;&nbsp;<span> Tốt</span></div>
+                                    <div class="row rate"><img class="" src="source/user/images/icon-color-verygood.png"
+                                            width="24" height="24">&nbsp;&nbsp;<span> Tốt</span></div>
                                     <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
+                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
+                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
+                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
+                                            hơn 5 năm chả hỏng j cả 😄</label>
                                     </div>
                                     <div class="row reviewer">
                                         <label class="itemFooter">An T. - 3 tháng trước</label>
                                     </div>
                                 </div>
                                 <div class="seller-review-item">
-                                    <div class="row rate"><img class="" src="source/user/images/icon-color-good.png" width="24" height="24">&nbsp;&nbsp;<span> Trung bình</span></div>
+                                    <div class="row rate"><img class="" src="source/user/images/icon-color-good.png"
+                                            width="24" height="24">&nbsp;&nbsp;<span> Trung bình</span></div>
                                     <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
+                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
+                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
+                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
+                                            hơn 5 năm chả hỏng j cả 😄</label>
                                     </div>
                                     <div class="row reviewer">
                                         <label class="itemFooter">An T. - 3 tháng trước</label>
                                     </div>
                                 </div>
                                 <div class="seller-review-item">
-                                    <div class="row rate"><img class="" src="source/user/images/icon-color-bad.png" width="24" height="24">&nbsp;&nbsp;<span> Chưa tốt</span></div>
+                                    <div class="row rate"><img class="" src="source/user/images/icon-color-bad.png"
+                                            width="24" height="24">&nbsp;&nbsp;<span> Chưa tốt</span></div>
                                     <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j cả 😄</label>
+                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
+                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
+                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
+                                            hơn 5 năm chả hỏng j cả 😄</label>
                                     </div>
                                     <div class="row reviewer">
                                         <label class="itemFooter">An T. - 3 tháng trước</label>
@@ -453,11 +445,12 @@
                 <div class="viewed_slider_container">
                     <!-- Recently Viewed Slider -->
                     <div class="owl-carousel owl-theme viewed_slider">
-                       
+
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                    <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
                                 <div class="viewed_content text-center">
                                     <div class="viewed_price">990.000 ₫</div>
                                     <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
@@ -470,74 +463,79 @@
                         </div>
                         <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
-                             <!-- Recently Viewed Item -->
+                        </div>
+                        <!-- Recently Viewed Item -->
                         <div class="owl-item">
-                                <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg" width="115" height="115" alt=""></div>
-                                    <div class="viewed_content text-center">
-                                        <div class="viewed_price">990.000 ₫</div>
-                                        <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                    </div>
-                                    <ul class="item_marks">
-                                        <li class="item_mark item_discount">-25%</li>
-                                        <li class="item_mark item_new">new</li>
-                                    </ul>
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
+                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_content text-center">
+                                    <div class="viewed_price">990.000 ₫</div>
+                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
                                 </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -600,22 +598,19 @@
 <script src="source/user/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="source/user/js/shop_custom.js"></script>
 <script>
-function openCity(evt, cityName) {
-    var i, x, tablinks;
-    x = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
+    function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" border-red", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.firstElementChild.className += " border-red";
     }
-    tablinks = document.getElementsByClassName("tablink");
-    for (i = 0; i < x.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" border-red", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.firstElementChild.className += " border-red";
-}
+
 </script>
 @endsection
- 
-
-   
-  

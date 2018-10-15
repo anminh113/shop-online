@@ -33,7 +33,7 @@
     margin-top: 17px;
 }
 .characteristics {
-    padding-top: 70px;
+    padding-top: 0px;
     padding-bottom: 0px;
 }
 .char_item {
@@ -95,14 +95,19 @@
 
 .side {
     float: left;
-    width: 16%;
+    width: 23%;
     margin-top: 0px;
 }
 
 .middle {
     margin-top: 10px;
     float: left;
-    width: 54%;
+    width: 65%;
+}
+.sideright{
+    float: left;
+    width: 5%;
+    margin-top: 0px;
 }
 
 

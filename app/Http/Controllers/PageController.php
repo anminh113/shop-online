@@ -139,6 +139,14 @@
 
             //get thong tin san pham
             $client = new \GuzzleHttp\Client();
+
+            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $datatime = json_decode($restime->getBody()->getContents(), true);
+            $todaytime = new DateTime($datatime['time']);
+            $todaytime->setTimezone(new DateTimeZone('UTC'));
+            $timeend =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
+
             $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
             $resultdata = compact('data');
@@ -180,10 +188,13 @@
                     case "1":
                         $countstar_1 ++;
                         break;
+                    default:
+                      
+                        break;
                 }
             }
          
-            return view('user/page.product',compact('resultdata','resultimg','datareview','timereview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
+            return view('user/page.product',compact('timeend','resultdata','resultimg','datareview','timereview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getProductList(){
@@ -199,13 +210,10 @@
             $res = $client1->request('GET',PageController::getUrl('products'));
             $data = json_decode($res->getBody()->getContents(), true);
              //end get json
-            $dataPrice = array();
-            $datasaleOff =array();
-            $dataPriceProduct = array();
+         
             $datatext = array();
             for ($i=0;  $i < count($data['products']); $i++){
-            $datasaleOff[] = $data['products'][$i]['saleOff']['discount'];
-            $dataPrice[] = $data['products'][$i]['price'];
+         
             $data2 = $data['products'][$i]['_id'];
             $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
             $datatext[] = json_decode($res2->getBody()->getContents(), true);
@@ -213,10 +221,8 @@
 
             $result = compact('datatext');
             //  dd($datatext);
-            foreach( $datasaleOff as $price => $sale ) {
-                $dataPriceProduct[] = ($dataPrice[$price]-($dataPrice[$price]*$sale)/100);   
-            }
-            $resultPrice = compact('dataPriceProduct');
+         
+           
             return view('user/page.productlist',compact('data','result','resultPrice','time'));
         }
 
@@ -229,8 +235,36 @@
             return view('user/page.login');
         }
 
-        public function getProfileShop(){
-            return view('user/page.profileshop');
+        public function getProfileShop(Request $req){
+              //get json san pham theo gian hang
+              $client1 = new \GuzzleHttp\Client();
+              $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+              $datatime = json_decode($restime->getBody()->getContents(), true);
+              $todaytime = new DateTime($datatime['time']);
+              $todaytime->setTimezone(new DateTimeZone('UTC'));
+              $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
+              $resshop = $client1->request('GET',PageController::getUrl('stores/'.$req->id.''));
+              $datashop = json_decode($resshop->getBody()->getContents(), true);
+  
+              $res = $client1->request('GET',PageController::getUrl('products/store/'.$req->id.''));
+              $data = json_decode($res->getBody()->getContents(), true);
+               //end get json
+           
+              $datatext = array();
+              for ($i=0;  $i < count($data['products']); $i++){
+              $data2 = $data['products'][$i]['_id'];
+              $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+              $datatext[] = json_decode($res2->getBody()->getContents(), true);
+              }
+
+              $createdDate = new DateTime($datashop['store']['createdDate']);
+              $createdDate->setTimezone(new DateTimeZone('UTC'));
+              $createdTime =  $createdDate->format('d-m-Y');
+              
+              $result = compact('datatext');
+            //   dd($data);
+            return view('user/page.profileshop',compact('data','result','resultPrice','time','datashop','createdTime'));
         }
 
         public function getCart(){
@@ -294,6 +328,7 @@
         }
 
         public function getProfileUserShop(){
+         
             return view('user/page.profileusershop');
         }
 

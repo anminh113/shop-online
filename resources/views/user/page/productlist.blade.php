@@ -122,7 +122,7 @@
                                         <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100)}},000₫@if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
                                         @else
                                         <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'], 0, '', '')}}</div>
-                                        <div class="product_price"  style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
+                                        <div class="product_price"  style=" color:#000; font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
                                         @endif
                                         <div class="product_name">
                                             <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>

@@ -64,7 +64,6 @@
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
-                                                        {{-- empty($item['saleOff']) || $item['saleOff']['dateEnd'] < $time --}}
                                                     @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                                     {{number_format($item['item']['price'])}},000₫
                                                     @else
@@ -115,7 +114,7 @@
                                             <div class="col-lg-2">
                                                 <div class="cart_item_text">
 
-                                                        @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
+                                                    @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                                     {{number_format($item['qty'] * $item['item']['price'])}},000₫
                                                     @else
                                                     {{number_format($item['qty'] * ($item['item']['price'] -
