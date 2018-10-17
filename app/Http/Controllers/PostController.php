@@ -126,7 +126,7 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $data = json_decode($result, true);
-            if($data['message'] == "Specification type of product type is already" ){
+            if($data[0]['message'] == "Specification type of product type is already" ){
                 $datatitle = array();
                 $client1 = new \GuzzleHttp\Client();  
                 $res = $client1->request('GET',PageController::getUrl('specificationtypes/producttype/'.$req->productTypeId.'') );
@@ -209,7 +209,7 @@
             $result1 =json_decode($result);
            
 
-            if(!empty($result1->createdProduct->_id)){
+            if(!empty($result1[0]->createdProduct->_id)){
                 //post data json
                 $datajson1=array(
                     "productId" => $result1->createdProduct->_id,
@@ -400,12 +400,7 @@
         
 
         public function postRegister(Request $req){
-                // "sdt" =>  $req['sdt'],
-                // "hoten" =>  $req['hoten'],
-                // "month" =>  $req['month'],
-                // "day" =>  $req['day'],
-                // "year" =>  $req['year'],
-                // "gender" =>  $req['gender'],
+              
             $datajson=array(
                 "username" =>  $req['email'],
                 "password" =>  $req['pass'],
@@ -449,10 +444,63 @@
                 curl_setopt_array( $ch1, $options1 );
                 $result =  curl_exec($ch1);
             }
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        }
 
+        public function postUpdateProfileUser(Request $req){
+            $datajson=array(
+                [ 
+                    "propName" => "name",
+                    "value" => $req['hoten']
+                ],[
+                    "propName" => "gender",
+                    "value" => $req['gender']
+                ],[
+                    "propName" => "birthday",
+                    "value" => $req['date']
+                ],[
+                    "propName" => "email",
+                    "value" => $req['email']
+                ],[
+                    "propName" => "phoneNumber",
+                    "value" => $req['sdt']
+                ]
+            );
+            $jsonData =json_encode($datajson);
+            $json_url = PageController::getUrl('customers/'.$req['customerid'].'');
+            $ch = curl_init( $json_url );
+            $options = array(
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "PATCH",
+                CURLOPT_POSTFIELDS => $jsonData
+            );
+            curl_setopt_array( $ch, $options );
+            $result =  curl_exec($ch);
+            $result1 =json_decode($result);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        }
 
-
-
+        public function postDeliveryProfileUser(Request $req){
+            $address = "".$req['diachi'].", ".$req['xa-phuong']."";
+            $datajson=array(
+                "customerId" =>  $req['customerid'],
+                "presentation" =>$req['hoten'],
+                "phoneNumber" =>  $req['sdt'],
+                "address" =>  $address,
+            );
+            $jsonData =json_encode($datajson);
+            $json_url = PageController::getUrl('deliveryaddresses');
+            $ch = curl_init( $json_url );
+            $options = array(
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => $jsonData
+            );
+            curl_setopt_array( $ch, $options );
+            $result =  curl_exec($ch);
+            $result1 =json_decode($result);
         return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 

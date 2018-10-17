@@ -166,7 +166,7 @@
                                     </div>
                                     <div class="space10">&nbsp;</div>
                                 </div>
-                                <label >
+                                <label hidden>
                                   <p hidden>
                                   <input type="checkbox" id="productid{{$item['_id']}}" name="productDiscount[]"
                                             value="{{$item['_id']}}">

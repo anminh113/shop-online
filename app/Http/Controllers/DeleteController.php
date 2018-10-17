@@ -20,6 +20,20 @@
         //     $urlAPI = "http://localhost:3000/".$text;
         //     return $urlAPI;
         // }
+
+        public function deleteDeliveryProfileUser(Request $req){
+            //get json danh muc all
+            $client1 = new \GuzzleHttp\Client();
+            $res = $client1->request('DELETE',PageController::getUrl('deliveryaddresses/'.$req->id.'') );
+            $data = json_decode($res->getBody()->getContents(), true);
+          
+         
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+       }
+
+
+
+
         // Admin hệ thống
         public function deleteAddCategoryAdmin(Request $req){
              //get json danh muc all

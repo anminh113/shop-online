@@ -137,7 +137,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                    <button type="submit" class="btn btn-info">Lưu thông tin</button>
+                    <button type="submit" id="save" class="btn btn-info">Lưu thông tin</button>
                 </div>
                 <div style="hidden" id="imgur"></div>
                 <input type="text" hidden name="categoryId" value="{{$data['category']['_id']}}">
@@ -177,7 +177,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                    <button type="submit" class="btn btn-info">Lưu thông tin</button>
+                    <button type="submit" id="update" class="btn btn-info">Lưu thông tin</button>
                 </div>
                 @method('PATCH')
                 {{ csrf_field() }}
@@ -202,7 +202,6 @@
         $('#file-upload').on("change", function () {
             var $files = $(this).get(0).files;
             if ($files.length) {
-
                 // Reject big files
                 if ($files[0].size > $(this).data("max-size") * 1024) {
                     console.log("Please select a smaller file");
@@ -231,14 +230,10 @@
                         $('#label').append('<div class="buttonload" id="loader"><i class="fa fa-circle-o-notch fa-spin"></i> Đang tải...</div>');
                     },
                     success: function (res) {
-                        // console.log(res.data.id);
                         $('#file-upload1').remove();
                         $('#image').remove();
-                        // $('#expandedImg').remove();
                         $('#loader').remove();
                         $('#label').append('<img src="' + res.data.link +'" class="rounded float-left" width="100px" height="100"/><input type="text" name="img" value="' + res.data.link +'" hidden>');
-                      
-
                     },
                     error: function () {
                         alert("Failed ");

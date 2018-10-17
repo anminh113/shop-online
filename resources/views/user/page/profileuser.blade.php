@@ -403,7 +403,7 @@
                     <div class="col-lg-6 ">{{$item['address']}}</div>
                     <div class="col-lg-2 ">{{$item['phoneNumber']}}</div>
                     <div class="col-lg-2 ">
-                        <a href="" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#informationuser1">Chỉnh
+                        <a href="" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#informationuser{{$item['_id']}}">Chỉnh
                             sửa</a>
                     </div>
                     @endforeach
@@ -428,12 +428,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" class="clearfix">
+                <form action="{{route('post-delivery-profile-user')}}"  method="POST">
                     <div class="row">
                         <div class="col-lg-6 order-lg-1 order-1">
                             <div class="form-group">
                                 <label for="">Họ tên</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="text" class="form-control" id="" name="hoten"  placeholder="">
+                                <input type="text" hidden name="customerid" value="{{$datacustomer['customer']['_id']}}">
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-2 order-4">
@@ -448,7 +449,7 @@
                         <div class="col-lg-6 order-lg-3 order-2">
                             <div class="form-group">
                                 <label for="">Số điện thoại</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="text" class="form-control" id="" name="sdt">
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-4 order-5">
@@ -462,24 +463,24 @@
                         <div class="col-lg-6 order-lg-5 order-3">
                             <div class="form-group">
                                 <label for="">Địa chỉ nhận hàng</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="text" class="form-control" id="" name="diachi">
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-6 order-6">
                             <div class="form-group">
-                                <label for="">Phường/ Xã</label>
+                                <label>Phường/ Xã</label>
                                 <select name="xa-phuong" id="xa-phuong" class="form-control" style="margin-left: 0px;">
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6 order-lg-7 order-7">
+                        <div class="col-lg-10 order-lg-7 order-7">
                             <div class="space15">&nbsp;</div>
                         </div>
-                        <div class="col-lg-6 order-lg-8 order-8">
-                            <!-- <div class="space15">&nbsp;</div> -->
-                            <button type="button" class="btn btn-outline-warning btn-save text-right">Lưu thông tin</button>
+                        <div class="col-lg-2 order-lg-8 order-8">
+                            <button type="submit" class="btn btn-outline-warning btn-save text-right">Lưu thông tin</button>
                         </div>
                     </div>
+                    {{ csrf_field() }}
                 </form>
             </div>
         </div>
@@ -491,7 +492,7 @@
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="viewed_title" id="exampleModalLabel">Chỉnh sửa thông tin cá nhân</h4>
+                <h4 class="viewed_title" id="exampleModalLabel">Thông tin cá nhân</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -499,17 +500,18 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="#" id="change">
+                        <form action="{{route('post-update-profile-user')}}" id="change" method="POST">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="hoten">Họ Tên</label>
                                     <input type="text" class="form-control" id="hoten" name="hoten" aria-describedby=""
                                         value="{{$datacustomer['customer']['name']}}">
+                                        <input type="text" hidden name="customerid" value="{{$datacustomer['customer']['_id']}}">
                                 </div>
                                 <div class="space10">&nbsp;</div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" aria-describedby="" value="{{$datacustomer['customer']['email']}}">
+                                    <input type="email" class="form-control" id="email" name="email" aria-describedby="" value="{{$datacustomer['customer']['email']}}">
                                 </div>
                                 <div class="space10">&nbsp;</div>
                                 <div class="form-group">
@@ -520,17 +522,14 @@
                                 <div class="form-group row" hidden>
                                     <label for="example-date-input" class="col-2 col-form-label">Date</label>
                                     <div class="col-10">
-                                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                                        <input class="form-control" type="date"  value="2011-08-19" id="example-date-input">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-date-input">Ngày sinh</label>
-                                    <input class="form-control" type="date" value="{{$start}}" id="example-date-input">
+                                    <input class="form-control" type="date" name="date" value="{{$start}}" id="example-date-input">
                                 </div>
                             </div>
-
-                         
-
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <label for="gender">Giới Tính</label>
@@ -545,6 +544,7 @@
                                     </select>
                                 </div>
                             </div>
+                            {{ csrf_field() }}
                         </form>
                     </div>
                 </div>
@@ -559,74 +559,286 @@
     </div>
 </div>
 
-<div class="modal fade" id="informationuser1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+@foreach($dataaddress['deliveryAddresses'] as $item)
+<div class="modal fade" id="informationuser{{$item['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="viewed_title" id="exampleModalLabel">Thêm thông tin và địa chỉ nhận hàng mới</h4>
+                <h4 class="viewed_title" id="exampleModalLabel">Cập nhật thông tin và địa chỉ nhận hàng mới</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" class="clearfix">
+            <form action="{{route('update-delivery-profile-user')}}" id="info{{$item['_id']}}" method="POST">
                     <div class="row">
                         <div class="col-lg-6 order-lg-1 order-1">
                             <div class="form-group">
                                 <label for="">Họ tên</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="text" class="form-control" name="hoten"  value="{{$item['presentation']}}">
+                                <input type="text" hidden name="id"  value="{{$item['_id']}}">
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-2 order-4">
                             <div class="form-group">
                                 <label for="">Tỉnh/ Thành phố</label>
-                                <select name="tinh-thanhpho" id="tinh-thanhpho-user" class="form-control" style="margin-left: 0px;"
-                                    id="">
-                                    <option value="">Chọn tỉnh thành</option>
+                                <select name="tinh-thanhpho" id="tinh-thanhpho-user{{$item['_id']}}" class="form-control" style="margin-left: 0px;"
+                                   >
+                                 
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-3 order-2">
                             <div class="form-group">
                                 <label for="">Số điện thoại</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="text" class="form-control"  value="{{$item['phoneNumber']}}" name="sdt">
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-4 order-5">
                             <div class="form-group">
                                 <label for="">Quận/ Huyện</label>
-                                <select name="quan-huyen" id="quan-huyen-user" class="form-control" style="margin-left: 0px;"
-                                    id="">
+                                <select name="quan-huyen" id="quan-huyen-user{{$item['_id']}}" class="form-control" style="margin-left: 0px;" >
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-5 order-3">
                             <div class="form-group">
                                 <label for="">Địa chỉ nhận hàng</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="text" class="form-control" id="diachi{{$item['_id']}}" name="diachi" >
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-6 order-6">
                             <div class="form-group">
                                 <label for="">Phường/ Xã</label>
-                                <select name="xa-phuong" id="xa-phuong-user" class="form-control" style="margin-left: 0px;">
+                                <select name="xa-phuong" id="xa-phuong-user{{$item['_id']}}" class="form-control" style="margin-left: 0px;">
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6 order-lg-7 order-7">
+                        <div class="col-lg-8 order-lg-7 order-7">
                             <div class="space15">&nbsp;</div>
                         </div>
-                        <div class="col-lg-6 order-lg-8 order-8">
+                        <div class="col-lg-4 order-lg-8 order-8">
                             <!-- <div class="space15">&nbsp;</div> -->
-                            <button type="button" class="btn btn-outline-warning btn-save text-right">Lưu thông tin</button>
+                            <button type="button" class="btn btn-outline-info btn-change"><a href="{{route('delete-delivery-profile-user',$item['_id'])}}">Xóa địa chỉ</a></button>
+                            <button type="submit" form="info{{$item['_id']}}" class="btn btn-outline-warning btn-save text-right">Lưu thông tin</button>
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
                         </div>
                     </div>
-                </form>
+            @method('PATCH')
+            {{ csrf_field() }}
+            </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        load_json_data('tinh-thanhpho-user{{$item['_id']}}');
+        function load_json_data(id, parent_id) {
+            var html_code = '';
+            var html_add = '';
+            $.getJSON("source/user/datacontry/tinh_tp.json", function(data) {
+                var text = "{{$item['address']}}";
+                var text1 = text.split(",");
+                var html1 = [];
+                for(var i=((text1.length)-1); i <= ((text1.length)-1); i++){
+                    html1 = text1[i]; 
+                    var htmltext = html1.slice(1,100); 
+                }
+               
+                html_code = '<option value="">Chọn tỉnh thành</option>';
+                $.each(data, function(key, value) {
+
+                    if (id == 'tinh-thanhpho-user{{$item['_id']}}') {
+                        if (value.type == 'tinh' || value.type == 'thanh-pho') {
+                            html_code += '<option value="' + value.code + '"> ' + value.name_with_type + '</option>';
+                            if(value.name_with_type == htmltext){
+                            html_add = '<option value="' + value.code + '" selected> ' + value.name_with_type + '</option>';
+                            }
+                        }
+                    } else {
+                        if (value.code == parent_id) {
+                            if(value.name_with_type == htmltext){
+                            html_add = '<option value="' + value.code + '" selected> ' + value.name_with_type + '</option>';
+                            }
+                            html_code += '<option value="' + value.code + '"> ' + value.name_with_type + '</option>';  
+                        }  
+                    }
+                });
+                
+           
+                $('#tinh-thanhpho-user{{$item['_id']}}').html(html_code);
+                $('#tinh-thanhpho-user{{$item['_id']}}').append(html_add);
+                
+            });
+        }
+
+       
+
+
+        
+        function load_json_data1(id, parent_id) {
+            var html_code = '';
+            var html_add = '';
+            $.getJSON("source/user/datacontry/quan_huyen.json", function(data) {
+                var quan = "{{$item['address']}}";
+                var quan1 = quan.split(",");
+                var htmlquan;
+                for(var i=((quan1.length)-2); i <= ((quan1.length)-2); i++){
+                    htmlquan = quan1[i]; 
+                    var htmltext1 = htmlquan.slice(1,100); 
+                }
+                html_code += '<option value="">Chọn quận huyện</option>';
+                $.each(data, function(key, value) {
+                    if (id == 'tinh-thanhpho-user{{$item['_id']}}') {
+                        if (value.type == 'thanh-pho' || value.type == 'huyen' || value.type == 'thi-xa') {
+                            // html_add = '<option value="' + value.code + '" selected> ' +htmltext1  + '</option>';
+                            html_code += '<option value="' + value.code + '"> ' + value.name_with_type + '</option>';
+                            if(value.name_with_type == htmltext1){
+                            html_add = '<option value="' + value.code + '" selected> ' + value.name_with_type + '</option>';
+                            }
+                        }
+                    } else {
+                        if (value.parent_code == parent_id) {
+                            html_code += '<option value="' + value.code + '"> ' + value.name_with_type + '</option>';
+                            if(value.name_with_type == htmltext1){
+                            html_add = '<option value="' + value.code + '" selected> ' + value.name_with_type + '</option>';
+                            }
+                        }
+                    }
+                });
+              
+                $('#quan-huyen-user{{$item['_id']}}').html(html_code);
+                $('#quan-huyen-user{{$item['_id']}}').append(html_add);
+            });
+
+        }
+        function load_json_data2(id, parent_id) {
+            var html_code = '';
+            var html_add = '';
+            $.getJSON("source/user/datacontry/xa_phuong.json", function(data) {
+                var quan = "{{$item['address']}}";
+                var quan1 = quan.split(",");
+                var htmlquan;
+                for(var i=((quan1.length)-3); i <= ((quan1.length)-3); i++){
+                    htmlquan = quan1[i]; 
+                    var htmltext1 = htmlquan.slice(1,100); 
+                }
+
+                html_code += '<option value="">Chọn xã phường</option>';
+                $.each(data, function(key, value) {
+                    if (id == 'tinh-thanhpho-user{{$item['_id']}}') {
+                        if (value.type == 'phuong' || value.type == 'xa') {
+                            if(value.name_with_type == htmltext1){
+                            html_add = '<option value="' + value.path_with_type + '" selected> ' + value.name_with_type + '</option>';
+                            }
+                            html_code += '<option value="' + value.path_with_type + '"> ' + value.name_with_type + '</option>';
+                           
+                        }
+                    } else {
+                        if (value.parent_code == parent_id) {
+                            if(value.name_with_type == htmltext1){
+                            html_add = '<option value="' + value.path_with_type + '" selected> ' + value.name_with_type + '</option>';
+                            }
+                            html_code += '<option value="' + value.path_with_type + '"> ' + value.name_with_type + '</option>';
+                           
+                        }
+                    }
+                });
+              
+                $('#xa-phuong-user{{$item['_id']}}').html(html_code);
+                $('#xa-phuong-user{{$item['_id']}}').append(html_add);
+            });
+
+        }
+
+
+     
+        $(document).one('click', '#tinh-thanhpho-user{{$item['_id']}}', function() {
+            var country_id = $(this).val();
+            console.log("ID: " + country_id);
+            if (country_id != '') {
+                load_json_data1('quan-huyen', country_id);
+            } else {
+                $('#quan-huyen-user{{$item['_id']}}').html('<option value="">Chọn quận huyện</option>');
+                $('#xa-phuong-user{{$item['_id']}}').html('<option value="">Chọn xã phường</option>');
+            }
+        });
+      
+
+        $(document).one('click', '#quan-huyen-user{{$item['_id']}}', function() {
+            var state_id = $(this).val();
+            console.log("ID: " + state_id);
+            if (state_id != '') {
+                load_json_data2('xa-phuong', state_id);
+            } else {
+                $('#quan-huyen-user{{$item['_id']}}').html('<option value="">Chọn quận huyện</option>');
+                $('#xa-phuong-user{{$item['_id']}}').html('<option value="">Chọn xã phường</option>');
+            }
+        });
+
+        $(document).on('change', '#tinh-thanhpho-user{{$item['_id']}}', function() {
+            var country_id = $(this).val();
+            console.log("ID: " + country_id);
+            if (country_id != '') {
+                load_json_data1('quan-huyen', country_id);
+            } else {
+                $('#quan-huyen-user{{$item['_id']}}').html('<option value="">Chọn quận huyện</option>');
+                $('#xa-phuong-user{{$item['_id']}}').html('<option value="">Chọn xã phường</option>');
+            }
+        });
+    
+    
+    
+        $(document).on('change', '#quan-huyen-user{{$item['_id']}}', function() {
+            var state_id = $(this).val();
+            console.log("ID: " + state_id);
+            if (state_id != '') {
+                load_json_data2('xa-phuong', state_id);
+            } else {
+                $('#quan-huyen-user{{$item['_id']}}').html('<option value="">Chọn quận huyện</option>');
+                $('#xa-phuong-user{{$item['_id']}}').html('<option value="">Chọn xã phường</option>');
+            }
+        });
+    
+        
+       
+      
+  
+
+
+        
+
+        if (html.length>0) {
+            setTimeout(function() {
+                document.getElementById('tinh-thanhpho-user{{$item['_id']}}').click();
+            }, 100);
+        }
+        if (html.length>0) {
+            setTimeout(function() {
+                document.getElementById('quan-huyen-user{{$item['_id']}}').click();
+            }, 350);
+        }
+    });
+
+
+    var text = "{{$item['address']}}";
+    var text1 = text.split(",");
+    var html = [];
+
+
+    for(var i=0; i <= ((text1.length)-4); i++){
+        html.push(text1[i]); 
+        document.getElementById('diachi{{$item['_id']}}').value = html;
+    }
+   
+</script>
+
+
+    
+@endforeach
+
 
 <div class="modal fade" id="informationchangepass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -639,33 +851,35 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" class="clearfix">
+            <form action="{{route('update-password-profile-user')}}" id="changepass" method="POST">
                     <div class="row">
                         <div class="col-lg-12 order-lg-1 order-1">
                             <div class="form-group">
                                 <label for="">Mật khẩu cũ</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="password" class="form-control"  name="oldpass" >
                             </div>
                         </div>
 
                         <div class="col-lg-12 order-lg-3 order-2">
                             <div class="form-group">
                                 <label for="">Mật khẩu mới</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="password" class="form-control"  name="newpass">    
                             </div>
                         </div>
 
                         <div class="col-lg-12 order-lg-5 order-3">
                             <div class="form-group">
                                 <label for="">Xác nhận mật khẩu mới</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="password" class="form-control" name="checkpass" >         
                             </div>
                         </div>
                     </div>
+                    @method('PATCH')
+                    {{ csrf_field() }}
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-warning btn-save">Lưu thông tin</button>
+                <button type="subnit" form="changepass" class="btn btn-outline-warning btn-save">Lưu thông tin</button>
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
             </div>
         </div>
@@ -699,6 +913,7 @@
     }
 
 </script>
+
 <script>
     var acc = document.getElementsByClassName("accordion");
     var i;
@@ -721,8 +936,9 @@
     var day = "{{$datacustomer['customer']['birthday']}}";
     var dtstart = moment('{{$datacustomer['customer']['birthday']}}').format('MM/DD/YYYY');
     var text1 = dtstart.split("/", 6);
-    console.log(text1[0]);
     document.getElementById('example-date-input').value = dtstart;
 
 </script>
+
+
 @endsection

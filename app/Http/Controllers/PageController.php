@@ -33,50 +33,64 @@
         }
 
         public function getIndex(){
-            
-            // get json
-            $client = new \GuzzleHttp\Client();
-            // $text = ;
-            $res = $client->request('GET', PageController::getUrl('customers'));
+            $client1 = new \GuzzleHttp\Client();
+            $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $datatime = json_decode($restime->getBody()->getContents(), true);
+            $todaytime = new DateTime($datatime['time']);
+            $todaytime->setTimezone(new DateTimeZone('UTC'));
+            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
+            $res = $client1->request('GET',PageController::getUrl('products'));
             $data = json_decode($res->getBody()->getContents(), true);
-            // dd($data);
-            // end get json
 
-            //post data json
+            $datatext = array();
+            for ($i=0;  $i < count($data['products']); $i++){
+            $data2 = $data['products'][$i]['_id'];
+            $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+            $datatext[] = json_decode($res2->getBody()->getContents(), true);
+            }
 
-            // $datajson=array(
-            //     "customerId" => "5b962d37738558095492b988",
-            //     "storeName" => "Máy tính Phong Vũ",
-            //     "location" => "Hồ Chí Minh",
-            //     "phoneNumber" => "0909159753",
-            //     'categories' => [
-            //         [
-            //             'categoryId'     => '5b974fb26153321ffc61b828'
-            //         ],
-            //         [
-            //             'categoryId'     => '5b974fbf6153321ffc61b829'
-            //         ]
-            //     ]);
-     
-            //  $jsonData =json_encode($datajson);
-            //  $json_url = PageController::getUrl('test');
-            //  $ch = curl_init( $json_url );
-            //  $options = array(
-            //      CURLOPT_RETURNTRANSFER => true,
-            //      CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-            //      CURLOPT_POSTFIELDS => $jsonData
-            //  );
-            //  curl_setopt_array( $ch, $options );
-            //  $result =  curl_exec($ch);
-            //  dd($result);
-            //  exit();
-            //  Log::info($result);
-            //  curl_close($ch);
+            $result = compact('datatext');
 
-             //end post json
+            $resonsale = $client1->request('GET',PageController::getUrl('products/onSale'));
+            $dataonsale = json_decode($resonsale->getBody()->getContents(), true);
+
+            $datatextonsale = array();
+            for ($i=0;  $i < count($dataonsale['products']); $i++){
+            $data3 = $dataonsale['products'][$i]['_id'];
+            $res3 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data3.''));
+            $datatextonsale[] = json_decode($res3->getBody()->getContents(), true);
+            }
+            $resultonsale = compact('datatextonsale');  
 
 
-            return view('user/page.trangchu', compact('data'));
+            $res1 = $client1->request('GET',PageController::getUrl('producttypes') );
+            $dataproducttypes = json_decode($res1->getBody()->getContents(), true);
+
+
+            $resproductPurchase = $client1->request('GET',PageController::getUrl('orderItems/productPurchase'));
+            $dataproductPurchase = json_decode($resproductPurchase->getBody()->getContents(), true);
+
+            $datatextproductPurchase = array();
+            for ($i=0;  $i < count($dataproductPurchase['productPurchases']); $i++){
+            $dataproductPurchase1 = $dataproductPurchase['productPurchases'][$i]['_id'];
+            $res4 = $client1->request('GET',PageController::getUrl('products/'.$dataproductPurchase1.''));
+            $datatextproductPurchase[] = json_decode($res4->getBody()->getContents(), true);
+            }
+            $resultproductPurchase = compact('datatextproductPurchase');  
+            // dd($resultproductPurchase);      
+            
+
+            $datatextproductPurchaseImage = array();
+            for ($i=0;  $i < count($resultproductPurchase['datatextproductPurchase']); $i++){
+            $data5 = $resultproductPurchase['datatextproductPurchase'][$i]['product']['_id'];
+            $res5 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data5.''));
+            $datatextproductPurchaseImage[] = json_decode($res5->getBody()->getContents(), true);
+            }
+            $resultproductPurchaseImage = compact('datatextproductPurchaseImage');  
+            // dd($resultproductPurchaseImage);      
+          
+            return view('user/page.trangchu',compact('resultproductPurchase','resultproductPurchaseImage','data','result','resultPrice','time','resultonsale','dataonsale','dataproducttypes'));
         }
         
         public function getAddToCart(Request $req, $id){

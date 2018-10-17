@@ -98,10 +98,37 @@ Route::get('check-out', [
     'uses'=>'PageController@getCheckOut'
 ]);
 
+//---
 Route::get('profile-user/{id}', [
     'as'=>'profile-user',
     'uses'=>'PageController@getProfileUser'
 ]);
+
+Route::get('delete-delivery-profile-user/{id}', [
+    'as'=>'delete-delivery-profile-user',
+    'uses'=>'DeleteController@deleteDeliveryProfileUser'
+]);
+
+Route::post('profile-user', [
+    'as'=>'post-update-profile-user',
+    'uses'=>'PostController@postUpdateProfileUser'
+]);
+
+Route::post('delivery-profile-user', [
+    'as'=>'post-delivery-profile-user',
+    'uses'=>'PostController@postDeliveryProfileUser'
+]);
+
+Route::patch('update-profile-user', [
+    'as'=>'update-delivery-profile-user',
+    'uses'=>'UpdateController@updateDeliveryProfileUser'
+]);
+
+Route::patch('update-password-profile-user', [
+    'as'=>'update-password-profile-user',
+    'uses'=>'UpdateController@updatePasswordProfileUser'
+]);
+//---
 
 Route::get('profile-user-shop', [
     'as'=>'profile-user-shop',

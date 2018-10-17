@@ -15,11 +15,81 @@
         
     //User
 
-    // public static function getUrl($text){
+     // public static function getUrl($text){
     //     // $urlAPI = "http://172.16.198.84:3000/".$text;
     //     $urlAPI = "http://localhost:3000/".$text;
     //     return $urlAPI;
     // }
+
+    public function updateDeliveryProfileUser(Request $req){
+        // post data json
+        $address = "".$req['diachi'].", ".$req['xa-phuong']."";
+        $datajson=array(
+            [
+                "propName" => "presentation",
+                "value" => $req['hoten']
+            ],[
+                "propName" => "phoneNumber",
+                "value" => $req['sdt']
+            ],[
+                "propName" => "address",
+                "value" => $address
+            ]
+        );
+        // dd($datajson);
+        $jsonData =json_encode($datajson);
+        $json_url = PageController::getUrl('deliveryaddresses/'.$req['id'].'');
+        $ch = curl_init( $json_url );
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+      
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+    }
+
+    public function updatePasswordProfileUser(Request $req){
+        $client = new \GuzzleHttp\Client();
+        // post data json
+        if(($req['newpass'] != $req['checkpass']) ) {
+
+            return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Mật khẩu xác nhận không chính xác!!! ']);
+        
+        }else if($req['newpass']==$req['checkpass']){
+            $res = $client->request('GET', PageController::getUrl('accounts/'.Session::get('keyuser')['username'].''));
+            $data = json_decode($res->getBody()->getContents(), true);
+
+            if($data['account']['password'] == $req['oldpass']){
+                $datajson=array(
+                    [
+                        "propName" => "password",
+                        "value" => $req['newpass']
+                    ]
+                );
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('accounts/'.Session::get('keyuser')['username'].'');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+            }else{
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Mật khẩu cũ không chính xác!!! ']);
+            }
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã cập nhật']);
+        }
+      
+    }
+   
 
     // Admin hệ thống
 
@@ -185,8 +255,7 @@
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
-
-        if($result1->message == 'Product updated'){
+        if($result1[0]->message == 'Product updated'){
             $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->productid.'') );
             $dataimageid = json_decode($res->getBody()->getContents(), true);
             //post data json
