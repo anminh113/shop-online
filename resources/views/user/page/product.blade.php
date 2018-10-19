@@ -24,9 +24,7 @@
                 <ul class="image_list">
                     @foreach ($resultimg['datatext'] as $da )
                     @foreach ($da['imageList'] as $da1)
-                    {{-- @foreach ($da1['imageList'] as $da2) --}}
                     <li data-image={{$da1["imageURL"]}}><img src={{$da1["imageURL"]}} alt=""></li>
-                    {{-- @endforeach --}}
 
                     @endforeach
                     @endforeach
@@ -36,10 +34,8 @@
             <div class="col-lg-5 order-lg-2 order-1">
                 @foreach ($resultimg['datatext'] as $da )
                 @foreach ($da['imageList'] as $da1)
-                {{-- @foreach ($da1['imageList'] as $da2) --}}
                 <div class="image_selected"><img src={{$da1["imageURL"]}} alt=""></div>
                 @break
-                {{-- @endforeach --}}
                 @endforeach
                 @endforeach
             </div>
@@ -80,9 +76,9 @@
                                     <input type="text" name="qty" class="form-control text-center" min="1" max="{{$item['product']['quantity']}}"
                                         value="1">
                                     <div class="quantity_buttons">
-                                        <button type="button" class="  quantity_inc quantity_control btn-pluss"><i
+                                        <button type="button" class="quantity_inc quantity_control btn-pluss"><i
                                                 class="fas fa-chevron-up"></i></button>
-                                        <button type="button" class="  quantity_dec quantity_control btn-minuse"><i
+                                        <button type="button" class="quantity_dec quantity_control btn-minuse"><i
                                                 class="fas fa-chevron-down"></i></button>
                                     </div>
                                 </div>
@@ -674,7 +670,6 @@
             strokeWidth: 20,
             strokeColor: '#F4E800'
         });
-
     });
 
 </script>
@@ -703,11 +698,18 @@
 
 <script>
     $('.btn-minuse').on('click', function () {
-        $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) - 1)
+        if( parseInt($(this).parent().siblings('input').val()) > 0){
+            $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) - 1)
+        }else{
+           parseInt($(this).parent().siblings('input').val()) = 1;
+        }
+      
     })
 
     $('.btn-pluss').on('click', function () {
-        $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) + 1)
+      
+            $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) + 1)
+       
     })
 
 </script>

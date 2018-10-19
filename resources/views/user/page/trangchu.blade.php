@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/trangchu.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/star-rating-svg.css">
+
 
 @endsection
 @section('content')
@@ -13,14 +15,13 @@
 
 <!-- Banner -->
 <div class="banner">
-    @foreach ($dataonsale['products'] as $item)
-
-    @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
+    @foreach ($data['products'] as $item)
+    @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
     <div class="banner_background" style="background: #C9D6FF; background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF); background: linear-gradient(to right, #E2E2E2, #C9D6FF); "></div>
     <div class="container fill_height">
         <div class="row fill_height">
             <div class="banner_product_image">
-                @foreach ($resultonsale['datatextonsale'] as $da )
+                @foreach ($result['datatext'] as $da )
                 @foreach ($da['imageList'] as $da1)
                 @if($item['_id'] == $da['productId'])
                 {{-- @foreach($da1['imageList'] as $da2) --}}
@@ -36,10 +37,11 @@
                     <h1 class="banner_text" style="">{{$item['overviews'][0]['title']}}</h1>
 
                     <div class="banner_price" style="">
-                        <span>{{number_format($item['price'] - ($item['price'] *
-                            $item['saleOff']['discount'])/100)}},000₫
+                        <span> {{number_format($item['price'])}},000₫
                         </span>
-                        {{number_format($item['price'])}},000₫
+                       
+                        {{number_format($item['price'] - ($item['price'] *
+                            $item['saleOff']['discount'])/100)}},000₫
                     </div>
 
                     <div class="banner_product_name">{{$item['productName']}}</div>
@@ -72,17 +74,15 @@
                             <!-- Product Panel -->
                             <div class="product_panel panel active">
                                 <div class="arrivals_slider slider">
+                                        <?php $i = 0?>
                                     @foreach($resultproductPurchase['datatextproductPurchase'] as $item)
-                                    @foreach($resultproductPurchase['datatextproductPurchase'] as $item)
-                                    @foreach($resultproductPurchase['datatextproductPurchase'] as $item)
-                                    @foreach($resultproductPurchase['datatextproductPurchase'] as $item)
+                                 
                                     <!-- Slider Item -->
                                     <div class="arrivals_slider_item" style="height:350px; float: left">
                                         <div class="border_active"></div>
                                         <div class="product_item is_new d-flex flex-column align-items-center justify-content-center text-center">
                                             <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                @foreach ($resultproductPurchaseImage['datatextproductPurchaseImage']
-                                                as $da )
+                                                @foreach ($resultproductPurchaseImage['datatextproductPurchaseImage'] as $da )
                                                 @foreach ($da['imageList'] as $da1)
                                                 @if($item['product']['_id'] == $da['productId'])
                                                 <img src={{$da1['imageURL']}} class="rounded float-right" width="120" height="120" alt="">
@@ -99,16 +99,16 @@
                                                 @else
                                                 <div class="product_price" style=" color:#000; ">{{number_format($item['product']['price'])}},000₫</div>
                                                 @endif
-
-
                                                 <div class="product_name">
-                                                    <div><a href="{{ route('san-pham',$item['product']['_id'] )}}"
-                                                            tabindex="0">{{$item['product']['productName']}}</a></div>
+                                                    <div><a href="{{ route('san-pham',$item['product']['_id'] )}}" tabindex="0">{{$item['product']['productName']}}</a></div>
+                                                    <div id="parent">
+                                                    <div class="text1 "><div class="my-rating-{{$item['product']['_id']}}" style="margin-right: 0px;display: inline-block;vertical-align: middle;"></div></div>
+                                                    <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$resultproductPurchase['0'][$i]['count']}})</div> </div>
+                                                    </div>
                                                 </div>
-
                                                 <div class="product_extras">
                                                     <a href="{{route('gio-hang',$item['product']['_id'])}}"><button
-                                                            class="product_cart_button">Thêm vào giỏ </button></a>
+                                                        class="product_cart_button">Thêm vào giỏ {{$resultproductPurchase['0'][$i]['count']}}</button></a>
                                                 </div>
                                             </div>
                                             <div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -118,11 +118,11 @@
                                             </ul>
                                         </div>
                                     </div>
+
                                     <!-- Slider Item -->
+                                    <?php $i = $i + 1?>
                                     @endforeach
-                                    @endforeach
-                                    @endforeach
-                                    @endforeach
+                               
 
 
                                 </div>
@@ -130,29 +130,7 @@
                             </div>
 
                         </div>
-                        {{-- <div class="col-lg-3">
-                            <div class="arrivals_single clearfix">
-                                <div class="d-flex flex-column align-items-center justify-content-center">
-                                    <div class="arrivals_single_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/1/5/1509637586000_img_894159-r.jpg"
-                                            width="215" height="215" alt=""></div>
-                                    <div class="arrivals_single_content">
-                                        <div class="arrivals_single_category"><a href="#">GPU</a></div>
-                                        <div class="arrivals_single_name_container clearfix">
-                                            <div class="arrivals_single_name"><a href="#">Card màn hình Asus 8GB Strix
-                                                    GTX1070Ti-A8G-Gaming</a></div>
-                                            <div class="arrivals_single_price text-right">15.190.000 ₫</div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="arrivals_single_button">Thêm vào giỏ</button>
-                                        </form>
-                                    </div>
-                                    <div class="arrivals_single_fav product_fav active"><i class="fas fa-heart"></i></div>
-                                    <ul class="arrivals_single_marks product_marks">
-                                        <li class="arrivals_single_mark product_mark product_new">new</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> --}}
+                      
                     </div>
                 </div>
             </div>
@@ -179,10 +157,10 @@
                     <div class="owl-carousel owl-theme popular_categories_slider">
                         @foreach($dataproducttypes['productTypes'] as $item)
                         <!-- Popular Categories Item -->
-                        <div class="owl-item">
+                        <div class="owl-item" >
                             <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{$item['imageURL']}}" width="50" height="60"></div>
-                                <div class="popular_category_text">{{$item['productTypeName']}}</div>
+                                <div class="popular_category_image"><img src="{{$item['imageURL']}}" width="50" height="60"  onclick="window.location='{{route('post-producttype-danhsach-sanpham',$item['_id'])}}';"></div>
+                                <div class="popular_category_text"  onclick="window.location='{{route('post-producttype-danhsach-sanpham',$item['_id'])}}';">{{$item['productTypeName']}}</div>
                             </div>
                         </div>
                         @endforeach
@@ -204,12 +182,12 @@
                     <div class="deals_slider_container">
                         <!-- Deals Slider -->
                         <div class="owl-carousel owl-theme deals_slider">
-                            @foreach ($dataonsale['products'] as $item)
-                            @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
+                            @foreach ($data['products'] as $item)
+                            @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
                             <!-- Deals Item -->
                             <div class="owl-item deals_item">
                                 <div class="deals_image">
-                                    @foreach ($resultonsale['datatextonsale'] as $da )
+                                    @foreach ($result['datatext'] as $da )
                                     @foreach ($da['imageList'] as $da1)
                                     @if($item['_id'] == $da['productId'])
                                     {{-- @foreach($da1['imageList'] as $da2) --}}
@@ -277,8 +255,8 @@
                         <div class="product_panel panel active">
                             <div class="featured_slider slider">
                                 <!-- Slider Item -->
-                                @foreach ($dataonsale['products'] as $item)
-                                @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
+                                @foreach ($data['products'] as $item )                              
+                                @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
                                 <!-- Slider Item -->
                                 <div class="featured_slider_item">
                                     <div class="border_active"></div>
@@ -316,8 +294,8 @@
                                     </div>
                                 </div>
                                 @endif
+                               
                                 @endforeach
-
 
                             </div>
 
@@ -338,7 +316,7 @@
             <div class="col">
                 <div class="tabbed_container">
                     <div class="tabs clearfix tabs-right">
-                        <div class="new_arrivals_title">Dành riêng cho bạn</div>
+                        <div class="new_arrivals_title">Gợi ý sản phẩm cho bạn</div>
                         <ul class="clearfix">
                                 <li class="active"><a href="#" style="color:#000">Xem thêm</a> </li>
                         </ul>
@@ -350,6 +328,7 @@
                         <div class="bestsellers_slider slider">
                             <!-- Best Sellers Item -->
                             <?php $i = 1?>
+                            <?php $j = 0?>
                             @foreach ($data['products'] as $item )
                             <?php $i = $i + 1?>
                             @if(!empty($item['saleOff']) )
@@ -368,7 +347,13 @@
                                             @endforeach</div>
                                     <div class="bestsellers_content">
                                         <div class="bestsellers_category"><a href="">{{$item['productType']['productTypeName']}}</a></div>
-                                        <div class="bestsellers_name"><a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a></div>
+                                        <div class="bestsellers_name">
+                                            <a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a>
+                                        </div>  
+                                        <div id="parent">
+                                            <div class="text1 "><div class="my-rating-{{$item['_id']}}" style="margin-right: 0px;display: inline-block;vertical-align: middle;"></div></div>
+                                            <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$j]['count']}})</div> </div>
+                                        </div>
                                         <div class="bestsellers_price discount">
                                              @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
                                                 {{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100)}},000₫<span>{{number_format($item['price'])}},000₫</span>
@@ -379,11 +364,11 @@
                                     </div>
                                 </div>
                                 <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
-                                @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
-                                <ul class="bestsellers_marks">
-                                    <li class="bestsellers_mark bestsellers_discount">-{{$item['saleOff']['discount']}}%</li>
-                                </ul>
-                                @endif
+                                    @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
+                                    <ul class="bestsellers_marks">
+                                        <li class="bestsellers_mark bestsellers_discount">-{{$item['saleOff']['discount']}}%</li>
+                                    </ul>
+                                    @endif
                             </div>
                             @endif
 
@@ -403,7 +388,13 @@
                                             @endforeach</div>
                                     <div class="bestsellers_content">
                                         <div class="bestsellers_category"><a href="#">{{$item['productType']['productTypeName']}}</a></div>
-                                        <div class="bestsellers_name"><a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a></div>
+                                        <div class="bestsellers_name">
+                                            <a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a>
+                                            <div id="parent">
+                                                    <div class="text1 "><div class="my-rating-{{$item['_id']}}" style="margin-right: 0px;display: inline-block;vertical-align: middle;"></div></div>
+                                                    <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$j]['count']}})</div> </div>
+                                                </div>
+                                        </div>
                                         <div class="bestsellers_price "> {{number_format($item['price'])}},000₫</div>
                                     </div>
                                 </div>
@@ -411,9 +402,10 @@
                                 
                             </div>
                             @endif
-                            @if($i>12)
-                            @break
-                            @endif
+                                @if($i>11)
+                                @break
+                                @endif
+                                <?php $j = $j + 1?>
                             @endforeach
                         </div>
                       
@@ -479,5 +471,149 @@
 @section('footer')
 <script src="source/user/plugins/slick-1.8.0/slick.js"></script>
 <script src="source/user/js/custom.js"></script>
+<script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
+@foreach($resultproductPurchase['datatextproductPurchase'] as $item)
+@if(!empty($datajson1['id']) )
+    @if($datajson1['id'] == $item['product']['_id']) 
+    <script>
+         var countstar ='{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}';
+        $(function () {
+            $(".my-rating-{{$item['product']['_id']}}").starRating({
+                readOnly: true,
+                initialRating: countstar,
+                starGradient: {
+                    start: '#F4E800',
+                    end: '#F4E800'
+                },
+                starShape: '#F4E800',
+                emptyColor: '#FFF',
+                starSize: 20,
+                strokeColor: '#F4E800',
+                strokeWidth: 30,
+
+            });
+
+        });
+
+    </script>
+   @else 
+   <script>
+       $(function () {
+           $(".my-rating-{{$item['product']['_id']}}").starRating({
+               readOnly: true,
+               initialRating: 0,
+               starGradient: {
+                   start: '#F4E800',
+                   end: '#F4E800'
+               },
+               starShape: '#F4E800',
+               emptyColor: '#FFF',
+               starSize: 20,
+               strokeColor: '#F4E800',
+               strokeWidth: 30,
+
+           });
+
+       });
+
+   </script>
+   @endif
+@else 
+    <script>
+        $(function () {
+            $(".my-rating-{{$item['product']['_id']}}").starRating({
+                readOnly: true,
+                initialRating: 0,
+                starGradient: {
+                    start: '#F4E800',
+                    end: '#F4E800'
+                },
+                starShape: '#F4E800',
+                emptyColor: '#FFF',
+                starSize: 20,
+                strokeColor: '#F4E800',
+                strokeWidth: 30,
+ 
+            });
+ 
+        });
+ 
+    </script>
+@endif
+
+@endforeach
+
+
+
+@foreach($data['products'] as $item)
+@if(!empty($datajson_gus['id']) )
+    @if($datajson_gus['id'] == $item['_id']) 
+    <script>
+         var countstar ='{{number_format((5 * $countstar_5_guss + 4 * $countstar_4_guss + 3 * $countstar_3_guss + 2 * $countstar_2_guss + 1 * $countstar_1_guss)/($countstar_5_guss+$countstar_4_guss+$countstar_3_guss+$countstar_2_guss+$countstar_1_guss), 1, '.', '')}}';
+        $(function () {
+            $(".my-rating-{{$item['_id']}}").starRating({
+                readOnly: true,
+                initialRating: countstar,
+                starGradient: {
+                    start: '#F4E800',
+                    end: '#F4E800'
+                },
+                starShape: '#F4E800',
+                emptyColor: '#FFF',
+                starSize: 20,
+                strokeColor: '#F4E800',
+                strokeWidth: 30,
+
+            });
+
+        });
+
+    </script>
+   @else 
+   <script>
+       $(function () {
+           $(".my-rating-{{$item['_id']}}").starRating({
+               readOnly: true,
+               initialRating: 0,
+               starGradient: {
+                   start: '#F4E800',
+                   end: '#F4E800'
+               },
+               starShape: '#F4E800',
+               emptyColor: '#FFF',
+               starSize: 20,
+               strokeColor: '#F4E800',
+               strokeWidth: 30,
+
+           });
+
+       });
+
+   </script>
+   @endif
+@else 
+    <script>
+        $(function () {
+            $(".my-rating-{{$item['_id']}}").starRating({
+                readOnly: true,
+                initialRating: 0,
+                starGradient: {
+                    start: '#F4E800',
+                    end: '#F4E800'
+                },
+                starShape: '#F4E800',
+                emptyColor: '#FFF',
+                starSize: 20,
+                strokeColor: '#F4E800',
+                strokeWidth: 30,
+ 
+            });
+ 
+        });
+ 
+    </script>
+@endif
+
+@endforeach
 
 @endsection

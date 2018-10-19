@@ -55,3 +55,21 @@
 .top_bar_menu {
     display: table-cell;
 }
+
+#parent {
+	overflow: hidden;
+	/* height: 30px; */
+   
+}
+.text1 {
+	float: left ;
+	width: 135px !important;
+    overflow: hidden;
+  
+}
+.text2 {
+	float: left ;
+	width: 60px !important;
+	overflow: hidden;
+   
+}

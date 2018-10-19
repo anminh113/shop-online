@@ -48,10 +48,23 @@ Route::get('product/{id}', [
     'uses'=>'PageController@getProduct'
 ]);
 
+//---
 Route::get('productlist', [
     'as'=>'danhsach-sanpham',
     'uses'=>'PageController@getProductList'
 ]);
+
+Route::post('productlist', [
+    'as'=>'post-danhsach-sanpham',
+    'uses'=>'PostController@postProductList'
+]);
+
+Route::get('search-producttype-productlist/{id}', [
+    'as'=>'post-producttype-danhsach-sanpham',
+    'uses'=>'PostController@postProductTypeProductList'
+]);
+
+//---
 
 //---
 Route::get('register', [

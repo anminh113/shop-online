@@ -266,6 +266,9 @@
 
 @media only screen and (max-width: 767px)
 {
+	.cart_item_name .cart_info_col{
+		display: none;
+	}
 	.header_search
 	{
 		display: none;

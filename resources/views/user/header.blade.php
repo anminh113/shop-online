@@ -78,11 +78,10 @@
                     <div class="header_search">
                         <div class="header_search_content">
                             <div class="header_search_form_container">
-                                <form action="" class="header_search_form clearfix">
-                                    <input type="search" required="required" class="header_search_input" style="width: 100%;" placeholder="Tìm kiếm sản phẩm...">
-                                  
-                                    <button type="" onclick="window.location='productlist';" class="header_search_button trans_300"
-                                        value="Submit"><img src="source/user/images/search.png" alt=""></button>
+                                <form action="{{route('post-danhsach-sanpham')}}" method="POST" class="header_search_form clearfix">
+                                    <input type="search" name="search" required="required" class="header_search_input" style="width: 100%;" placeholder="Tìm kiếm sản phẩm...">
+                                    <button  class="header_search_button trans_300" value="submit"><img src="source/user/images/search.png" alt=""></button>
+                                    {{ csrf_field() }}
                                 </form>
                             </div>
                         </div>
@@ -140,10 +139,10 @@
                             <ul class="cat_menu">
                                 @foreach($datacategory['data1'] as $time => $item )
                                     <li class="hassubs">
-                                    <a href="#">{{$data[$time]['categoryName']}}<i class="fas fa-chevron-right"></i></a>
+                                    <a >{{$data[$time]['categoryName']}}<i class="fas fa-chevron-right"></i></a>
                                         <ul>
                                             @foreach($item['productTypes'] as $text )
-                                            <li><a href="#">{{$text['productTypeName']}}</a></li>
+                                            <li><a href="{{route('post-producttype-danhsach-sanpham',$text['_id'])}}">{{$text['productTypeName']}}</a></li>
                                             @endforeach
                                         </ul>
                                     </li>

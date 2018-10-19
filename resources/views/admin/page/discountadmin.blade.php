@@ -219,7 +219,9 @@
                             </div>
                             <div class="row">
                                 <?php $i= 0 ?>
+                                @if($result2 != null)
                                 @foreach ($result2['datatext2'] as $item )
+                                {{-- @if(empty($item['saleOff'])) --}}
                                 <?php $i = $i +1;?>
                                 <div class="col-lg-3 col-md-6">
                                     <div class="product-type" style="height:;" id="texts1<?php echo $i ?>">
@@ -261,7 +263,9 @@
                                         $('#texts1<?php echo $i ?> .product_fav1').toggleClass('active');
                                     });
                                 </script>
+                                {{-- @endif --}}
                                 @endforeach
+                                @endif
 
                             </div>
                             <div class="input-group">

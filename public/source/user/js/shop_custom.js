@@ -359,7 +359,7 @@ $(document).ready(function() {
                 range: true,
                 min: 0,
                 max: 15000,
-                values: [800, 900],
+                values: [0, 900],
                 slide: function(event, ui) {
                     $("#amount").val( ui.values[0]+ ",000₫ - " + ui.values[1]+",000₫");
                     $("#amount1").val( ui.values[0].toLocaleString()+ ",000₫ - " + ui.values[1].toLocaleString()+",000₫");

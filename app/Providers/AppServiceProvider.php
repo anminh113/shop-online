@@ -52,7 +52,6 @@ class AppServiceProvider extends ServiceProvider
                     // return $e->getResponse()->getStatusCode();
                     $view->with(['name'=>'Admin']);
                 }
-
             }
         });
 
@@ -67,7 +66,7 @@ class AppServiceProvider extends ServiceProvider
                     $data1[] = json_decode($res1->getBody()->getContents(), true);
                 }
                 $result1 = compact('data1');
-                // dd($data['categories']);
+                // dd($result1);
             }catch (\GuzzleHttp\Exception\ClientException $e) {
                 // $view->with(['product_cart'=>$cart->items]);
                 return $e->getResponse()->getStatusCode();
@@ -75,6 +74,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['datacategory'=>$result1, 'data'=>$data['categories']]);
             
         });
+
+       
     }
 
     /**

@@ -1458,7 +1458,7 @@ select option
 {
 	font-size: 16px;
 	font-weight: 500;
-	margin-top: 25px;
+	margin-top: 10px;
 }
 
 .product_item.discount
@@ -1487,7 +1487,7 @@ select option
 .product_name
 {
 	margin-top: 4px;
-	height: 80px;
+	height: 103px;
 	overflow: hidden;
 }
 .product_name div
@@ -1505,7 +1505,7 @@ select option
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
-	margin: 8px 0;
+	margin: 0px 0;
     font-size: 13px;
     white-space: inherit;
     overflow: hidden;
@@ -2479,3 +2479,110 @@ select option
 }
 
 /*End rating star css*/
+
+
+
+
+
+
+
+.accordiontext {
+	width: 100%;
+	max-width: 360px;
+	margin: 30px auto 20px;
+	background: #FFF;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+  }
+  
+  .accordiontext .link {
+	cursor: pointer;
+	display: block;
+	padding: 10px 10px 10px 10px;
+	color: #595959;
+	font-size: 16px;
+	/* border-bottom: 1px solid #CCC; */
+	position: relative;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+  }
+  
+  .accordiontext li:last-child .link { border-bottom: 0; }
+  
+  .accordiontext li i {
+	position: absolute;
+	top: 14px;
+	left: 12px;
+	font-size: 18px;
+	color: #595959;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+  }
+  
+  .accordiontext li i.fa-chevron-down {
+	right: 12px;
+	left: auto;
+	font-size: 16px;
+  }
+  
+  .accordiontext li.open .link { color: #008496; }
+  
+  .accordiontext li.open i { color: #008496; }
+  
+  .accordiontext li.open i.fa-chevron-down {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+  }
+  
+  /**
+   * Submenu
+   -----------------------------*/
+  
+  
+  .submenu {
+	display: none;
+	background: #fff;
+	font-size: 14px;
+  }
+  
+  /* .submenu li { border-bottom: 1px solid #4b4a5e; } */
+  
+  .submenu li label {
+	display: block;
+	text-decoration: none;
+	color: #595959;
+	padding: 12px;
+	padding-left: 30px;
+	-webkit-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
+	transition: all 0.25s ease;
+  }
+  
+  .submenu li label:hover {
+	background: #008496;
+	color: #FFF;
+  }
+
+
+  #parent {
+	overflow: hidden;
+	/* height: 30px; */
+   
+}
+.text1 {
+	float: left ;
+	width: 145px !important;
+    overflow: hidden;
+  
+}
+.text2 {
+	float: left ;
+	width: 75px !important;
+	overflow: hidden;
+   
+}

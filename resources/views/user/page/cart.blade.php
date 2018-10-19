@@ -15,212 +15,173 @@
 <div class="cart_section">
     <div class="container">
         <div class="row">
+         
             <div class="col-lg-12 ">
                 <div class="cart_container">
                     <div class="cart_title text-left">Giỏ Hàng</div>
-                    <div class="cart_items">
-                        <ul class="cart_list">
-                            <li class="cart_item clearfix">
-                                <div class="cart_item_image1">
-                                    &nbsp;
-                                </div>
-                                <div class="cart_item_info ">
-                                    <div class="cart_item_name cart_info_col">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="cart_item_title">Tên sản phẩm</div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_title">Đơn giá</div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="cart_item_title">Số lượng</div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_title">Thành tiền</div>
-                                            </div>
-                                            <div class="col-lg-1">
-                                                <div class="cart_item_title">
-                                                    Xóa
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <hr>
-
-                            @if(Session::has('cart'))
-                            <?php $i =0 ?>
-                            @foreach ($product_cart as $item)
-                            <?php $i=$i+1?>
-                            <li class="cart_item clearfix">
-                                <div class="cart_item_image"><img src="{{$item['img']}}" alt=""></div>
-                                <div class="cart_item_info ">
-                                    <div class="cart_item_name cart_info_col">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="cart_item_text">{{$item['item']['productName']}}</div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">
-                                                    @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
-                                                    {{number_format($item['item']['price'])}},000₫
-                                                    @else
-                                                    {{number_format($item['item']['price'] - ($item['item']['price'] *
-                                                    $item['item']['saleOff']['discount'])/100)}},000₫
-                                                    @endif
-
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="cart_item_text">
-                                                    <div class="input-group">
-                                                        @if($item['qty']<$item['item']['quantity']) <span class="input-group-btn">
-                                                            <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
-                                                                onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['_id'])}}';">
-                                                                <i class="fas fa-minus"></i>
-                                                            </div>
-                                                            </span>
-                                                            <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center"
-                                                                min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
-                                                                disabled style="width: 50px;height: 38px; background-color: #fff;">
-                                                            <span class="input-group-btn">
-                                                                <div class="btn  btn-number" data-type="plus"
-                                                                    data-field="quant[<?php echo $i?>]" onclick="window.location='{{route('gio-hang',$item['item']['_id'])}}';">
-                                                                    <i class="fas fa-plus"></i>
-                                                                </div>
-                                                            </span>
-                                                        @endif
-                                                        @if($item['qty']>=$item['item']['quantity']) <span class="input-group-btn">
-                                                                <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
-                                                                    onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['_id'])}}';">
-                                                                    <i class="fas fa-minus"></i>
-                                                                </div>
-                                                                </span>
-                                                                <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center"
-                                                                    min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
-                                                                    disabled style="width: 50px;height: 38px; background-color: #fff;">
-                                                                <span class="input-group-btn">
-                                                                    <div class="btn  btn-number" data-type="plus"
-                                                                        data-field="quant[<?php echo $i?>]">
-                                                                        <i class="fas fa-plus"></i>
-                                                                    </div>
-                                                                </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="cart_item_text">
-
-                                                    @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
-                                                    {{number_format($item['qty'] * $item['item']['price'])}},000₫
-                                                    @else
-                                                    {{number_format($item['qty'] * ($item['item']['price'] -
-                                                    ($item['item']['price'] *
-                                                    $item['item']['saleOff']['discount'])/100))}},000₫
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-1">
-                                                <div class="cart_item_text">
-                                                    <a href="{{Route('xoa-gio-hang',$item['item']['_id'])}}"><i class="fas fa-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <hr>
-                            @endforeach
-                            @endif
-
-
-                        </ul>
+                    <div class="column-labels">
+                        <label class="product-image">Giỏ Hàng</label>
+                        <label class="product-details">Sản phẩm</label>
+                        <label class="product-price">Giá</label>
+                        <label class="product-quantity">Số lượng</label>
+                        <label class="product-line-price">Thành tiền</label>
+                        <label class="product-removal">Xóa</label>
                     </div>
-                    <!-- Order Total -->
+                    @if(Session::has('cart'))
+                    <?php $i =0 ?>
+                    @foreach ($product_cart as $item)
+                    <?php $i=$i+1?>
+                    <div class="product">
+                        <div class="product-image">
+                                <img src="{{$item['img']}}" alt="">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">{{$item['item']['productName']}}</div>
+                        </div>
+                        <div class="product-price">
+                            @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time) 
+                                {{number_format($item['item']['price'])}},000₫ 
+                            @else
+                                {{number_format($item['item']['price'] - ($item['item']['price'] *$item['item']['saleOff']['discount'])/100)}},000₫ 
+                            @endif
+                        </div>
+                        <div class="product-quantity">
+                            @if($item['qty']<$item['item']['quantity']) 
+                            <span class="input-group-btn btn-count-price" >
+                                <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
+                                    onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['_id'])}}';">
+                                    <i class="fas fa-minus"></i>
+                                </div>
+                            </span>
+                            <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center input-count-price"
+                                min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
+                                disabled style="background-color: #fff; ">
+                            <span class="input-group-btn btn-count-price"  >
+                                <div class="btn  btn-number" data-type="plus" data-field="quant[<?php echo $i?>]"
+                                    onclick="window.location='{{route('gio-hang',$item['item']['_id'])}}';">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </span>
+                            @endif
+                            @if($item['qty']>=$item['item']['quantity'])
+                            <span class="input-group-btn btn-count-price"  >
+                                <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
+                                    onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['_id'])}}';">
+                                    <i class="fas fa-minus"></i>
+                                </div>
+                            </span>
+                            <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center input-count-price"
+                                min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
+                                disabled style="background-color: #fff; ">
+                            <span class="input-group-btn btn-count-price" >
+                                <div class="btn  btn-number" data-type="plus" data-field="quant[<?php echo $i?>]">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </span>
+                            @endif
+                        </div>
+                        
+                        <div class="product-line-price"> @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
+                            {{number_format($item['qty'] * $item['item']['price'])}},000₫
+                        @else
+                            {{number_format($item['qty'] * ($item['item']['price'] -($item['item']['price'] *$item['item']['saleOff']['discount'])/100))}},000₫
+                        @endif </div>
+                        <div class="product-removal">
+                        
+                                    <a href="{{Route('xoa-gio-hang',$item['item']['_id'])}}"
+                                    style="color:#5F6368"><i class="fas fa-trash"></i></a>
+                           
+                        </div>
+                    </div>
+                    @endforeach
+                    @endif
                     <div class="order_total">
-                        <div class="row">
-                            @if(Session::has('cart'))
-                            <div class="col-lg-6">
-                                <div class="order_total_content text-letf">
-                                    <div class="order_total_title text-letf">Tạm tính:</div>
-                                    <div class="order_total_amount">
+                            <div class="row">
+                                @if(Session::has('cart'))
+                                <div class="col-lg-6">
+                                    <div class="order_total_content text-letf">
+                                        <div class="order_total_title text-letf">Tạm tính:</div>
+                                        <div class="order_total_amount">
                                             {{number_format(Session::get('cart')->totalPrice)}},000₫
+                                        </div>
+                                    </div>
+                                    <div class="order_total_content text-letf">
+                                        <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
+                                        <div class="order_total_amount">
+                                            @foreach ($data['deliveryPrices'] as $item)
+                                            @if($item['productQuantity'] === Session::get('cart')->totalQty)
+                                            {{$item['transportFee']}}.000 ₫
+                                            @break
+                                            @else
+                                            0 ₫
+                                            @break
+                                            @endif
+                                            @endforeach
+    
+                                        </div>
+                                    </div>
+                                    <div class="order_total_content text-left">
+                                        <div class="order_total_title text-letf">Thành Tiền:</div>
+                                        <div class="order_total_amount">0000</div>
+                                    </div>
+                                    <div class="order_total_content text-left">
+                                        <div class="order_total_title"></div>
+                                        <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
                                     </div>
                                 </div>
-                                <div class="order_total_content text-letf">
-                                    <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
-                                    <div class="order_total_amount">
-                                        @foreach ($data['deliveryPrices'] as $item)
-                                        @if($item['productQuantity'] === Session::get('cart')->totalQty)
-                                        {{$item['transportFee']}}.000 ₫
-                                        @break
-                                        @else
-                                        0 ₫
-                                        @break
-                                        @endif
-                                        @endforeach
-
+                                @endif
+                                <div class="col-lg-6">
+                                    <div class="cart_buttons">
+                                        <button type="button" class="btn btn-outline-info btn-change" onclick="window.location='check-cart';">Xác
+                                            Nhận Giỏ Hàng</button>
                                     </div>
-                                </div>
-                                <div class="order_total_content text-left">
-                                    <div class="order_total_title text-letf">Thành Tiền:</div>
-                                    <div class="order_total_amount">0000</div>
-                                </div>
-                                <div class="order_total_content text-left">
-                                    <div class="order_total_title"></div>
-                                    <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
-                                </div>
-                            </div>
-                            @endif
-                            <div class="col-lg-6">
-                                <div class="cart_buttons">
-                                    <button type="button" class="btn btn-outline-info btn-change" onclick="window.location='check-cart';">Xác
-                                        Nhận Giỏ Hàng</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                 
+    
+                   
                     <div class="characteristics">
-                        <div class="row">
-                            <!-- Char. Item -->
-                            <div class="col-lg-4 col-md-6 char_col">
-                                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png"
-                                            alt=""></div>
-                                    <div class="char_content">
-                                        <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500,000₫ trở lên</div>
+                            <div class="row">
+                                <!-- Char. Item -->
+                                <div class="col-lg-4 col-md-6 char_col">
+                                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                                        <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png"
+                                                alt=""></div>
+                                        <div class="char_content">
+                                            <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500,000₫ trở lên</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Char. Item -->
-                            <div class="col-lg-4 col-md-6 char_col">
-                                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-protect-50.png"
-                                            alt=""></div>
-                                    <div class="char_content">
-                                        <div class="char_subtitle">Thanh toán bảo mật</div>
+                                <!-- Char. Item -->
+                                <div class="col-lg-4 col-md-6 char_col">
+                                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                                        <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-protect-50.png"
+                                                alt=""></div>
+                                        <div class="char_content">
+                                            <div class="char_subtitle">Thanh toán bảo mật</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Char. Item -->
-                            <div class="col-lg-4 col-md-6 char_col">
-                                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-update-50.png"
-                                            alt=""></div>
-                                    <div class="char_content">
-                                        <!-- <div class="char_title">Free Delivery</div> -->
-                                        <div class="char_subtitle">Chính sách đổi trả</div>
+                                <!-- Char. Item -->
+                                <div class="col-lg-4 col-md-6 char_col">
+                                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                                        <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-update-50.png"
+                                                alt=""></div>
+                                        <div class="char_content">
+                                            <!-- <div class="char_title">Free Delivery</div> -->
+                                            <div class="char_subtitle">Chính sách đổi trả</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+
+
+                   
                 </div>
             </div>
+           
         </div>
     </div>
 </div>
@@ -232,4 +193,8 @@
 @section('footer')
 <script src="source/user/js/cart_custom.js"></script>
 <script src="source/user/styles/js/cart.js"></script>
+
+
+
+
 @endsection

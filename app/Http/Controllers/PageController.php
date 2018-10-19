@@ -44,25 +44,66 @@
             $data = json_decode($res->getBody()->getContents(), true);
 
             $datatext = array();
+
+            $countstar_5 = 0;
+            $countstar_4 = 0;
+            $countstar_3 = 0;
+            $countstar_2 = 0;
+            $countstar_1 = 0;
+            $datareview = array();
+            $countstar = array();
+
+
+            $countstar_5_guss = 0;
+            $countstar_4_guss = 0;
+            $countstar_3_guss = 0;
+            $countstar_2_guss = 0;
+            $countstar_1_guss = 0;
+            $datareview_guss = array();
+            $countstar_guss = array();
+
             for ($i=0;  $i < count($data['products']); $i++){
             $data2 = $data['products'][$i]['_id'];
             $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
             $datatext[] = json_decode($res2->getBody()->getContents(), true);
+
+            $res_guss = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
+            $datareview_guss[] = json_decode($res_guss->getBody()->getContents(), true);
+
+            
             }
 
             $result = compact('datatext');
+            $resultdatareview_guss = compact('datareview_guss');
+            array_push($data,$datareview_guss);
 
-            $resonsale = $client1->request('GET',PageController::getUrl('products/onSale'));
-            $dataonsale = json_decode($resonsale->getBody()->getContents(), true);
-
-            $datatextonsale = array();
-            for ($i=0;  $i < count($dataonsale['products']); $i++){
-            $data3 = $dataonsale['products'][$i]['_id'];
-            $res3 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data3.''));
-            $datatextonsale[] = json_decode($res3->getBody()->getContents(), true);
+            for($i=0; $i < count($resultdatareview_guss['datareview_guss']); $i++){
+                for($j=0; $j < count($resultdatareview_guss['datareview_guss'][$i]['reviewProducts']); $j++){
+                $countstar_guss[] = $resultdatareview_guss['datareview_guss'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar']    ;
+                $datajson_guss =array(
+                    "id" => $resultdatareview_guss['datareview_guss'][$i]['reviewProducts'][$j]['product']['_id'],
+                    "value" =>  $countstar_guss
+                );
+                    switch ($countstar_guss[$j]) {
+                        case "5":
+                            $countstar_5_guss ++;
+                            break;
+                        case "4":
+                            $countstar_4_guss ++;
+                            break;
+                        case "3":
+                            $countstar_3_guss ++;
+                            break;
+                        case "2":
+                            $countstar_2_guss ++;
+                            break;
+                        case "1":
+                            $countstar_1_guss ++;
+                            break;
+                    
+                    }
+                }
             }
-            $resultonsale = compact('datatextonsale');  
-
 
             $res1 = $client1->request('GET',PageController::getUrl('producttypes') );
             $dataproducttypes = json_decode($res1->getBody()->getContents(), true);
@@ -86,11 +127,43 @@
             $data5 = $resultproductPurchase['datatextproductPurchase'][$i]['product']['_id'];
             $res5 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data5.''));
             $datatextproductPurchaseImage[] = json_decode($res5->getBody()->getContents(), true);
+            $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data5.''));
+            $datareview[] = json_decode($res3->getBody()->getContents(), true);
             }
             $resultproductPurchaseImage = compact('datatextproductPurchaseImage');  
-            // dd($resultproductPurchaseImage);      
-          
-            return view('user/page.trangchu',compact('resultproductPurchase','resultproductPurchaseImage','data','result','resultPrice','time','resultonsale','dataonsale','dataproducttypes'));
+            // dd($resultproductPurchaseImage); 
+            $resultdatareview = compact('datareview');
+            array_push($resultproductPurchase,$datareview);
+            $datajson1 = array();
+            for($i=0; $i < count($resultdatareview['datareview']); $i++){
+                for($j=0; $j < count($resultdatareview['datareview'][$i]['reviewProducts']); $j++){
+                $countstar[] = $resultdatareview['datareview'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar']    ;
+                $datajson1 =array(
+                    "id" => $resultdatareview['datareview'][$i]['reviewProducts'][$j]['product']['_id'],
+                    "value" =>  $countstar
+                );
+                    switch ($countstar[$j]) {
+                        case "5":
+                            $countstar_5 ++;
+                            break;
+                        case "4":
+                            $countstar_4 ++;
+                            break;
+                        case "3":
+                            $countstar_3 ++;
+                            break;
+                        case "2":
+                            $countstar_2 ++;
+                            break;
+                        case "1":
+                            $countstar_1 ++;
+                            break;
+                    
+                    }
+                }
+            }
+            // dd($resultproductPurchase);
+            return view('user/page.trangchu',compact('datajson_guss','datajson1','countstar_5_guss','countstar_4_guss','countstar_3_guss','countstar_2_guss','countstar_1_guss','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1','resultproductPurchase','resultproductPurchaseImage','data','result','resultPrice','time','dataproducttypes'));
         }
         
         public function getAddToCart(Request $req, $id){
@@ -101,17 +174,13 @@
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
-          
-            $res = $client->request('GET',PageController::getUrl('products/'.$id.'') );
-            $data[] = json_decode($res->getBody()->getContents(), true);
-
-            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$id.''));
-            $datatext[] = json_decode($res->getBody()->getContents(), true);
+         
 
 
             $oldCart = Session('cart')?Session::get('cart'):null;
             $cart = new Cart($oldCart);
-            $cart->add($data[0]['product'], $id,1, $datatext[0]['imageList'][0]['imageURL'], $time);
+            $cart->add($id,1 , $time);
+            // $cart->add($data[0]['product'], $id,1, $datatext[0]['imageList'][0]['imageURL'], $time);
             $req->session()->put('cart', $cart);
             return redirect()->back();
         }
@@ -214,7 +283,6 @@
         public function getProductList(){
              //get json san pham theo gian hang
              $client1 = new \GuzzleHttp\Client();
-            //  $res = $client1->request('GET',PageController::getUrl('products/store/5bb1c71a8875381e34da95ff'));
             $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
             $todaytime = new DateTime($datatime['time']);
@@ -224,20 +292,80 @@
             $res = $client1->request('GET',PageController::getUrl('products'));
             $data = json_decode($res->getBody()->getContents(), true);
              //end get json
-         
+            
+            $countstar_5 = 0;
+            $countstar_4 = 0;
+            $countstar_3 = 0;
+            $countstar_2 = 0;
+            $countstar_1 = 0;
+            $datareview = array();
             $datatext = array();
+            $countstar = array();
+
             for ($i=0;  $i < count($data['products']); $i++){
          
             $data2 = $data['products'][$i]['_id'];
             $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
             $datatext[] = json_decode($res2->getBody()->getContents(), true);
-            }
 
+          
+
+            $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
+            $datareview[] = json_decode($res3->getBody()->getContents(), true);
+            // dd($datareview);
+
+            
+
+            }
             $result = compact('datatext');
-            //  dd($datatext);
+            $resultdatareview = compact('datareview');
+         
+            array_push($data,$datareview);
+            // dd($data);
+            for($i=0; $i < count($resultdatareview['datareview']); $i++){
+                for($j=0; $j < count($resultdatareview['datareview'][$i]['reviewProducts']); $j++){
+                $countstar[] = $resultdatareview['datareview'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar']    ;
+                $datajson1 =array(
+                    "id" => $resultdatareview['datareview'][$i]['reviewProducts'][$j]['product']['_id'],
+                    "value" =>  $countstar
+                );
+                    switch ($countstar[$j]) {
+                        case "5":
+                            $countstar_5 ++;
+                            break;
+                        case "4":
+                            $countstar_4 ++;
+                            break;
+                        case "3":
+                            $countstar_3 ++;
+                            break;
+                        case "2":
+                            $countstar_2 ++;
+                            break;
+                        case "1":
+                            $countstar_1 ++;
+                            break;
+                    
+                    }
+                }
+            }
+          
+
+           
+            //  dd($datajson1);
+
+
+            $res3 = $client1->request('GET',PageController::getUrl('categories') );
+            $data3 = json_decode($res3->getBody()->getContents(), true);
+            $data4 =  $data3['categories'];
+            for($i=0; $i<count($data3['categories']); $i++){
+                $res1 = $client1->request('GET',PageController::getUrl('producttypes/category/'.$data3['categories'][$i]['_id'].'') );
+                $data1[] = json_decode($res1->getBody()->getContents(), true);
+            }
+            $result1 = compact('data1');
          
            
-            return view('user/page.productlist',compact('data','result','resultPrice','time'));
+            return view('user/page.productlist',compact('datajson1','data','result','result1','data4','resultPrice','time','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getRegister(){
@@ -266,10 +394,20 @@
                //end get json
            
               $datatext = array();
+              $countstar_5 = 0;
+              $countstar_4 = 0;
+              $countstar_3 = 0;
+              $countstar_2 = 0;
+              $countstar_1 = 0;
+              $datareview = array();
+              $countstar = array();
+
               for ($i=0;  $i < count($data['products']); $i++){
               $data2 = $data['products'][$i]['_id'];
               $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
               $datatext[] = json_decode($res2->getBody()->getContents(), true);
+              $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
+              $datareview[] = json_decode($res3->getBody()->getContents(), true);
               }
 
               $createdDate = new DateTime($datashop['store']['createdDate']);
@@ -277,8 +415,50 @@
               $createdTime =  $createdDate->format('d-m-Y');
               
               $result = compact('datatext');
+              $resultdatareview = compact('datareview');
+         
+                array_push($data,$datareview);
+
+
+              $res3 = $client1->request('GET',PageController::getUrl('categories') );
+              $data3 = json_decode($res3->getBody()->getContents(), true);
+              $data4 =  $data3['categories'];
+              for($i=0; $i<count($data3['categories']); $i++){
+                  $res1 = $client1->request('GET',PageController::getUrl('producttypes/category/'.$data3['categories'][$i]['_id'].'') );
+                  $data1[] = json_decode($res1->getBody()->getContents(), true);
+              }
+              $result1 = compact('data1');
+
+
+              for($i=0; $i < count($resultdatareview['datareview']); $i++){
+                for($j=0; $j < count($resultdatareview['datareview'][$i]['reviewProducts']); $j++){
+                $countstar[] = $resultdatareview['datareview'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar']    ;
+                $datajson1 =array(
+                    "id" => $resultdatareview['datareview'][$i]['reviewProducts'][$j]['product']['_id'],
+                    "value" =>  $countstar
+                );
+                    switch ($countstar[$j]) {
+                        case "5":
+                            $countstar_5 ++;
+                            break;
+                        case "4":
+                            $countstar_4 ++;
+                            break;
+                        case "3":
+                            $countstar_3 ++;
+                            break;
+                        case "2":
+                            $countstar_2 ++;
+                            break;
+                        case "1":
+                            $countstar_1 ++;
+                            break;
+                    
+                    }
+                }
+            }
             //   dd($data);
-            return view('user/page.profileshop',compact('data','result','resultPrice','time','datashop','createdTime'));
+            return view('user/page.profileshop', compact('createdTime','datashop', 'datajson1','data','result','result1','data4','resultPrice','time','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getCart(){
@@ -296,14 +476,21 @@
             // dd($data);
             // dd(Session::get('cart'));
             $oldCart = Session::get('cart');
+            // dd($oldCart);
             $cart = new Cart($oldCart);
             $product_cart = $cart->items;           
             return view('user/page.cart',compact('product_cart','data','time'));
         }
 
         public function getCheckCart(){
-            //get thong tin san pham
             $client = new \GuzzleHttp\Client();
+            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $datatime = json_decode($restime->getBody()->getContents(), true);
+            $todaytime = new DateTime($datatime['time']);
+            $todaytime->setTimezone(new DateTimeZone('UTC'));
+            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+            //get thong tin san pham
+          
             $res = $client->request('GET',PageController::getUrl('deliveryprices') );
             $data = json_decode($res->getBody()->getContents(), true);
             // dd($data);
@@ -311,7 +498,7 @@
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
             $product_cart = $cart->items;  
-            return view('user/page.checkcart',compact('product_cart','data'));
+            return view('user/page.checkcart',compact('product_cart','data','time'));
         }
 
         public function getCheckOut(){
@@ -568,13 +755,13 @@
                     }
                     $result1 = compact('datatext1');
 
-                    for ($i=0;  $i < count($data['products']); $i++){
-                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] > $time){
-                            $datatext2[] = $data['products'][$i];
-                        }
-                    }
-                    $result2 = compact('datatext2');
-
+                    // for ($i=0;  $i < count($data['products']); $i++){
+                    //     if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] > $time){
+                    //         $datatext2[] = $data['products'][$i];
+                    //     }
+                    // }
+                    // $result2 = compact('datatext2');
+                    // dd($result2);
                     //end get json
                     $datatext = array();
                     for ($i=0;  $i < count($data['products']); $i++){
@@ -585,17 +772,6 @@
                         }
                     }
                     $result = compact('datatext');
-
-                    $datatext1 = array();
-                    for ($i=0;  $i < count($data['products']); $i++){
-                        if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] > $time){
-                        $data21 = $data['products'][$i]['_id'];
-                        $res21 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data21.''));
-                        $datatext1[] = json_decode($res21->getBody()->getContents(), true);
-                        }
-                    }
-                    $result3 = compact('datatext1');
-                    // dd($result);
                     $resdis = PageController::getUrl('salesoff/store/'.$store.'');
                     $res1 =PageController::getUrl('stores/'.$store.'');
                     $data_category = PageController::getUrl('categories');
@@ -656,13 +832,14 @@
                     $data = json_decode($res->getBody()->getContents(), true);
                     $datatext1 = array();
                     $datatext2 = array();
+                    
                     for ($i=0;  $i < count($data['products']); $i++){
                         if(empty($data['products'][$i]['saleOff']) || $data['products'][$i]['saleOff']['dateEnd'] < $time   ){
                             $datatext1[] = $data['products'][$i];
                         }
                     }
                     $result1 = compact('datatext1');
-
+                    
                     for ($i=0;  $i < count($data['products']); $i++){
                         if(!empty($data['products'][$i]['saleOff']) && $data['products'][$i]['saleOff']['dateEnd'] > $time ){
                             $datatext2[] = $data['products'][$i];
