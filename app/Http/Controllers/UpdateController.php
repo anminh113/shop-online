@@ -15,11 +15,6 @@
         
     //User
 
-     // public static function getUrl($text){
-    //     // $urlAPI = "http://172.16.198.84:3000/".$text;
-    //     $urlAPI = "http://localhost:3000/".$text;
-    //     return $urlAPI;
-    // }
 
     public function updateDeliveryProfileUser(Request $req){
         // post data json
@@ -116,7 +111,7 @@
         Log::info($result);
         curl_close($ch);
         //end post json
-        return redirect()->back();
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
     }
 
     public function updateAddProductTypeAdmin(Request $req){
@@ -147,11 +142,15 @@
         Log::info($result);
         curl_close($ch);
         //end post json
-        return redirect()->back();
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
     }
 
     public function updateAddSpecificationAdmin(Request $req){
         $datatitle = array();
+        $value1 = array();
+        $value = array();
+        $value1 = [];
+        $value = [];
         $client1 = new \GuzzleHttp\Client();  
         $res = $client1->request('GET',PageController::getUrl('specificationtypes/producttype/'.$req->productTypeId.'') );
         $data2 = json_decode($res->getBody()->getContents(), true);
@@ -169,7 +168,7 @@
             "_id" => $req->specificationTypeIdTitle,
             "title" =>$req->namespecificationtype
         );
-
+        // dd($value1);
         array_push($value,$value1);
         $datajson1 =array([
             "propName" => "specificationTitle",
@@ -185,7 +184,7 @@
         );
         curl_setopt_array( $ch1, $options1 );
         $result1 =  curl_exec($ch1);
-        return redirect()->back();
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
     }
 
     public function updateEditProductDetailAdmin(Request $req){
@@ -280,14 +279,14 @@
             curl_setopt_array( $ch1, $options1 );
             $result2 =  curl_exec($ch1);
             // dd($result2);
-            return redirect()->back();
+            return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
         }
                     
     
        
      
         // end post json
-        return redirect()->back();
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
        
     }
 

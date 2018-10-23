@@ -58,14 +58,20 @@ class UserController extends Controller
     public function postLogin(Request $req){
         $client = new \GuzzleHttp\Client();
         try {
+     
+
             $res = $client->request('GET', PageController::getUrl('accounts/'.$req['email'].''));
             $data = json_decode($res->getBody()->getContents(), true);
             $email = $req['email'];
             $password = $req['pass'];
+
             if($password === $data['account']['password']){
                 if($data['account']['role']['roleName'] == "Khách hàng")
                 {
                 $req->session()->put('keyuser',$data['account'] );
+                $res = $client->request('GET',PageController::getUrl('customers/account/'.Session::get('keyuser')['_id'].'') );
+                $datacustomer = json_decode($res->getBody()->getContents(), true);
+                session()->push('keyuser.info', $datacustomer);
                 return redirect()->route('trang-chu')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Khách hàng']);
                 }
                

@@ -86,90 +86,92 @@
                                 <div class="product_grid_border"></div>
                                 <?php $i = 0?>
                                 @foreach ($data['products'] as $item )
-
                                 <!-- Product Item -->
-                                @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
-                                <div class="product_item {{$item['productType']['_id']}}  discount">
-                                    <div class="product_border"></div>
-                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                        @foreach ($result['datatext'] as $da )
-                                        @foreach ($da['imageList'] as $da1)
-                                        @if($item['_id'] == $da['productId'])
-                                        {{-- @foreach($da1['imageList'] as $da2) --}}
-                                        <img src={{$da1['imageURL']}} width="115" height="115" alt="">
-                                        @break
-                                        {{-- @endforeach --}}
-                                        @endif
-                                        @endforeach
-                                        @endforeach
-                                    </div>
-
-                                    <div class="product_content">
-                                        <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
-                                            - ($item['price'] * $item['saleOff']['discount'])/100, 0, '',
-                                            '')}}@if( $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}}</span>@endif</div>
-                                        <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
-                                            - ($item['price'] *
-                                            $item['saleOff']['discount'])/100)}},000₫@if($item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
-                                        <div class="product_name">
-                                            <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
-                                            <div id="parent">
-                                            <div class="text1 "><div class="my-rating-{{$item['_id']}}" style="margin-right: 0px;display: inline-block;vertical-align: middle;"></div></div>
-                                                <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div> </div>
-                                            </div>
+                             
+                                @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time12)
+                                    <div class="product_item {{$item['productType']['_id']}}  discount">
+                                        <div class="product_border"></div>
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                            @foreach ($result['datatext'] as $da )
+                                            @foreach ($da['imageList'] as $da1)
+                                            @if($item['_id'] == $da['productId'])
+                                            {{-- @foreach($da1['imageList'] as $da2) --}}
+                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                            @break
+                                            {{-- @endforeach --}}
+                                            @endif
+                                            @endforeach
+                                            @endforeach
                                         </div>
-                                    </div>
-                                    
-                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                   
-                                    <ul class="product_marks">
-                                        <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
-                                    </ul>
-                                   
-                                    <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
-                                        style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
-                                </div>
-                                @endif
 
-                                @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] < $time)
-                                <div class="product_item {{$item['productType']['_id']}}">
-                                    <div class="product_border"></div>
-                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                        @foreach ($result['datatext'] as $da )
-                                        @foreach ($da['imageList'] as $da1)
-                                        @if($item['_id'] == $da['productId'])
-                                        {{-- @foreach($da1['imageList'] as $da2) --}}
-                                        <img src={{$da1['imageURL']}} width="115" height="115" alt="">
-                                        @break
-                                        {{-- @endforeach --}}
-                                        @endif
-                                        @endforeach
-                                        @endforeach
-                                    </div>
-                                    <div class="product_content">
-                                        <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'],0, '', '')}}</div>
-
-                                        <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
-
-                                        <div class="product_name">
-                                            <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
-                                            <div id="parent">
+                                        <div class="product_content">
+                                            <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
+                                                - ($item['price'] * $item['saleOff']['discount'])/100, 0, '',
+                                                '')}}@if( $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}}</span>@endif</div>
+                                            <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
+                                                - ($item['price'] *
+                                                $item['saleOff']['discount'])/100)}},000₫@if($item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
+                                            <div class="product_name">
+                                                <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
+                                                <div id="parent">
                                                 <div class="text1 "><div class="my-rating-{{$item['_id']}}" style="margin-right: 0px;display: inline-block;vertical-align: middle;"></div></div>
-                                                <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div> </div>
+                                                    <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div> </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                    
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
+                                        </ul>
+                                    
+                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                            style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
                                     </div>
-                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                    @if(empty($item['saleOff']))
-                                    <ul class="product_marks">
-                                        <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
-                                        <li class="product_mark product_new">new</li>
-                                    </ul>
-                                    @endif
-                                    <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
-                                        style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
-                                </div>
                                 @endif
+
+                                @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] < $time12)
+                                    <div class="product_item {{$item['productType']['_id']}}">
+                                        <div class="product_border"></div>
+                                        <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                            @foreach ($result['datatext'] as $da )
+                                            @foreach ($da['imageList'] as $da1)
+                                            @if($item['_id'] == $da['productId'])
+                                            {{-- @foreach($da1['imageList'] as $da2) --}}
+                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                            @break
+                                            {{-- @endforeach --}}
+                                            @endif
+                                            @endforeach
+                                            @endforeach
+                                        </div>
+                                        <div class="product_content">
+                                            <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'],0, '', '')}}</div>
+
+                                            <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
+
+                                            <div class="product_name">
+                                                <div><a href="{{ route('san-pham',$item['_id'] )}}" tabindex="0">{{$item['productName']}}</a></div>
+                                                <div id="parent">
+                                                    <div class="text1 "><div class="my-rating-{{$item['_id']}}" style="margin-right: 0px;display: inline-block;vertical-align: middle;"></div></div>
+                                                    <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        @if(empty($item['saleOff']))
+                                        <ul class="product_marks">
+                                            <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
+                                            <li class="product_mark product_new">new</li>
+                                        </ul>
+                                        @endif
+                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                            style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                    </div>
+                                @endif
+                              
+
 
                                 <?php $i = $i + 1?>
                                 @endforeach
@@ -423,51 +425,47 @@
 
 
 @foreach ($data['products'] as $time => $item )
-@if(!empty($datajson1['id']) )
-    @if($datajson1['id'] == $item['_id']) 
-    <script>
-         var countstar ='{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}';
-        $(function () {
-            $(".my-rating-{{$item['_id']}}").starRating({
-                readOnly: true,
-                initialRating: countstar,
-                starGradient: {
-                    start: '#F4E800',
-                    end: '#F4E800'
-                },
-                starShape: '#F4E800',
-                emptyColor: '#FFF',
-                starSize: 20,
-                strokeColor: '#F4E800',
-                strokeWidth: 30,
-
+@if(!empty($datajson1['countsar']))
+    @foreach ($datajson1['countsar'] as $da )
+        @if($da['id'] == $item['_id']) 
+        <script>
+            $(function () {
+                $(".my-rating-{{$item['_id']}}").starRating({
+                    readOnly: true,
+                    initialRating: {{$da['value']}},
+                    starGradient: {
+                        start: '#F4E800',
+                        end: '#F4E800'
+                    },
+                    starShape: '#F4E800',
+                    emptyColor: '#FFF',
+                    starSize: 20,
+                    strokeColor: '#F4E800',
+                    strokeWidth: 30,
+                });
             });
-
-        });
-
-    </script>
-   @else 
-   <script>
-       $(function () {
-           $(".my-rating-{{$item['_id']}}").starRating({
-               readOnly: true,
-               initialRating: 0,
-               starGradient: {
-                   start: '#F4E800',
-                   end: '#F4E800'
-               },
-               starShape: '#F4E800',
-               emptyColor: '#FFF',
-               starSize: 20,
-               strokeColor: '#F4E800',
-               strokeWidth: 30,
-
-           });
-
-       });
-
-   </script>
-   @endif
+        </script>
+        @endif
+    @endforeach
+        @if($da['id'] != $item['_id']) 
+        <script>
+            $(function () {
+                $(".my-rating-{{$item['_id']}}").starRating({
+                    readOnly: true,
+                    initialRating: 0,
+                    starGradient: {
+                        start: '#F4E800',
+                        end: '#F4E800'
+                    },
+                    starShape: '#F4E800',
+                    emptyColor: '#FFF',
+                    starSize: 20,
+                    strokeColor: '#F4E800',
+                    strokeWidth: 30,
+                });
+            });
+        </script>
+        @endif
 @else 
     <script>
         $(function () {
@@ -493,7 +491,9 @@
 
 @endforeach
     
-
+<script>
+var date12 = '{{$time12}}';
+</script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
 
 @endsection

@@ -27,8 +27,8 @@
         //User
 
         public static function getUrl($text){
-            // $urlAPI = "http://172.16.198.84:3000/".$text;
             $urlAPI = "http://localhost:3000/".$text;
+                // $urlAPI = "http://172.16.198.84:3000/".$text;            
             return $urlAPI;
         }
 
@@ -111,15 +111,15 @@
 
             $resproductPurchase = $client1->request('GET',PageController::getUrl('orderItems/productPurchase'));
             $dataproductPurchase = json_decode($resproductPurchase->getBody()->getContents(), true);
-
             $datatextproductPurchase = array();
+          
             for ($i=0;  $i < count($dataproductPurchase['productPurchases']); $i++){
-            $dataproductPurchase1 = $dataproductPurchase['productPurchases'][$i]['_id'];
+            $dataproductPurchase1 = $dataproductPurchase['productPurchases'][$i]['_id']['_id'];
             $res4 = $client1->request('GET',PageController::getUrl('products/'.$dataproductPurchase1.''));
+            // $datatextproductPurchase[] = $dataproductPurchase1;
             $datatextproductPurchase[] = json_decode($res4->getBody()->getContents(), true);
             }
             $resultproductPurchase = compact('datatextproductPurchase');  
-            // dd($resultproductPurchase);      
             
 
             $datatextproductPurchaseImage = array();
@@ -131,37 +131,47 @@
             $datareview[] = json_decode($res3->getBody()->getContents(), true);
             }
             $resultproductPurchaseImage = compact('datatextproductPurchaseImage');  
-            // dd($resultproductPurchaseImage); 
             $resultdatareview = compact('datareview');
             array_push($resultproductPurchase,$datareview);
-            $datajson1 = array();
-            for($i=0; $i < count($resultdatareview['datareview']); $i++){
-                for($j=0; $j < count($resultdatareview['datareview'][$i]['reviewProducts']); $j++){
-                $countstar[] = $resultdatareview['datareview'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar']    ;
-                $datajson1 =array(
-                    "id" => $resultdatareview['datareview'][$i]['reviewProducts'][$j]['product']['_id'],
-                    "value" =>  $countstar
-                );
-                    switch ($countstar[$j]) {
-                        case "5":
-                            $countstar_5 ++;
-                            break;
-                        case "4":
-                            $countstar_4 ++;
-                            break;
-                        case "3":
-                            $countstar_3 ++;
-                            break;
-                        case "2":
-                            $countstar_2 ++;
-                            break;
-                        case "1":
-                            $countstar_1 ++;
-                            break;
-                    
-                    }
-                }
-            }
+            // $datajson1 = array();
+            for($i=0; $i < count($data['0']); $i++){
+                if(!empty($data['0'][$i])){
+                    $countstar_5 = 0;
+                    $countstar_4 = 0;
+                    $countstar_3 = 0;
+                    $countstar_2 = 0;
+                    $countstar_1 = 0;
+                    $countstar = array();
+                    for ($j=0; $j < count($data['0'][$i]['reviewProducts']); $j++) { 
+                        $IDreview[] =  $data['0'][$i]['reviewProducts'][$j]['product']['_id'];
+                        $countstar[] = $data['0'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar'];
+                         switch ($countstar[$j]) {
+                            case "5":
+                                $countstar_5 ++;
+                                break;
+                            case "4":
+                                $countstar_4 ++;
+                                break;
+                            case "3":
+                                $countstar_3 ++;
+                                break;
+                            case "2":
+                                $countstar_2 ++;
+                                break;
+                            case "1":
+                                $countstar_1 ++;
+                                break;      
+                        }
+                        if($j == (count($data['0'][$i]['reviewProducts']) -1)){
+                            $text12  =  number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '');
+                            $datajson1['countsar'][] = array(
+                            "id" => array_pop($IDreview) ,
+                            "value" => ($text12)
+                        ); 
+                        }
+                    }  
+                }      
+            } 
             // dd($resultproductPurchase);
             return view('user/page.trangchu',compact('datajson_guss','datajson1','countstar_5_guss','countstar_4_guss','countstar_3_guss','countstar_2_guss','countstar_1_guss','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1','resultproductPurchase','resultproductPurchaseImage','data','result','resultPrice','time','dataproducttypes'));
         }
@@ -282,17 +292,22 @@
 
         public function getProductList(){
              //get json san pham theo gian hang
-             $client1 = new \GuzzleHttp\Client();
+            $client1 = new \GuzzleHttp\Client();
             $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
             $todaytime = new DateTime($datatime['time']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
-            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+            $time12 =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
+            $datat = array();
             $res = $client1->request('GET',PageController::getUrl('products'));
             $data = json_decode($res->getBody()->getContents(), true);
-             //end get json
-            
+            for ($i=0;  $i < count($data['products']); $i++){
+                if(!empty($data['products'][$i]['saleOff'])){
+                    $datat[] =$data['products'][$i];
+                }
+            }
+          
             $countstar_5 = 0;
             $countstar_4 = 0;
             $countstar_3 = 0;
@@ -301,58 +316,61 @@
             $datareview = array();
             $datatext = array();
             $countstar = array();
-
-            for ($i=0;  $i < count($data['products']); $i++){
-         
-            $data2 = $data['products'][$i]['_id'];
-            $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-            $datatext[] = json_decode($res2->getBody()->getContents(), true);
-
-          
-
-            $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
-            $datareview[] = json_decode($res3->getBody()->getContents(), true);
-            // dd($datareview);
-
             
-
+            for ($i=0;  $i < count($data['products']); $i++){
+                $data2 = $data['products'][$i]['_id'];
+                $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
+                $datareview[] = json_decode($res3->getBody()->getContents(), true);
             }
             $result = compact('datatext');
             $resultdatareview = compact('datareview');
-         
             array_push($data,$datareview);
-            // dd($data);
-            for($i=0; $i < count($resultdatareview['datareview']); $i++){
-                for($j=0; $j < count($resultdatareview['datareview'][$i]['reviewProducts']); $j++){
-                $countstar[] = $resultdatareview['datareview'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar']    ;
-                $datajson1 =array(
-                    "id" => $resultdatareview['datareview'][$i]['reviewProducts'][$j]['product']['_id'],
-                    "value" =>  $countstar
-                );
-                    switch ($countstar[$j]) {
-                        case "5":
-                            $countstar_5 ++;
-                            break;
-                        case "4":
-                            $countstar_4 ++;
-                            break;
-                        case "3":
-                            $countstar_3 ++;
-                            break;
-                        case "2":
-                            $countstar_2 ++;
-                            break;
-                        case "1":
-                            $countstar_1 ++;
-                            break;
-                    
-                    }
-                }
-            }
-          
 
-           
-            //  dd($datajson1);
+
+
+            for($i=0; $i < count($data['0']); $i++){
+                if(!empty($data['0'][$i])){
+                    $countstar_5 = 0;
+                    $countstar_4 = 0;
+                    $countstar_3 = 0;
+                    $countstar_2 = 0;
+                    $countstar_1 = 0;
+                    $countstar = array();
+                    for ($j=0; $j < count($data['0'][$i]['reviewProducts']); $j++) { 
+                        $IDreview[] =  $data['0'][$i]['reviewProducts'][$j]['product']['_id'];
+                        $countstar[] = $data['0'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar'];
+                         switch ($countstar[$j]) {
+                            case "5":
+                                $countstar_5 ++;
+                                break;
+                            case "4":
+                                $countstar_4 ++;
+                                break;
+                            case "3":
+                                $countstar_3 ++;
+                                break;
+                            case "2":
+                                $countstar_2 ++;
+                                break;
+                            case "1":
+                                $countstar_1 ++;
+                                break;      
+                        }
+                        if($j == (count($data['0'][$i]['reviewProducts']) -1)){
+                            $text12  =  number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '');
+                            $datajson1['countsar'][] = array(
+                            "id" => array_pop($IDreview) ,
+                            "value" => ($text12)
+                        ); 
+                        }
+                    }  
+                }      
+            }    
+
+                       
+
 
 
             $res3 = $client1->request('GET',PageController::getUrl('categories') );
@@ -365,7 +383,7 @@
             $result1 = compact('data1');
          
            
-            return view('user/page.productlist',compact('datajson1','data','result','result1','data4','resultPrice','time','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
+            return view('user/page.productlist',compact('datajson1','data','result','result1','data4','resultPrice','time12','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getRegister(){
@@ -430,33 +448,44 @@
               $result1 = compact('data1');
 
 
-              for($i=0; $i < count($resultdatareview['datareview']); $i++){
-                for($j=0; $j < count($resultdatareview['datareview'][$i]['reviewProducts']); $j++){
-                $countstar[] = $resultdatareview['datareview'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar']    ;
-                $datajson1 =array(
-                    "id" => $resultdatareview['datareview'][$i]['reviewProducts'][$j]['product']['_id'],
-                    "value" =>  $countstar
-                );
-                    switch ($countstar[$j]) {
-                        case "5":
-                            $countstar_5 ++;
-                            break;
-                        case "4":
-                            $countstar_4 ++;
-                            break;
-                        case "3":
-                            $countstar_3 ++;
-                            break;
-                        case "2":
-                            $countstar_2 ++;
-                            break;
-                        case "1":
-                            $countstar_1 ++;
-                            break;
-                    
-                    }
-                }
-            }
+              for($i=0; $i < count($data['0']); $i++){
+                if(!empty($data['0'][$i])){
+                    $countstar_5 = 0;
+                    $countstar_4 = 0;
+                    $countstar_3 = 0;
+                    $countstar_2 = 0;
+                    $countstar_1 = 0;
+                    $countstar = array();
+                    for ($j=0; $j < count($data['0'][$i]['reviewProducts']); $j++) { 
+                        $IDreview[] =  $data['0'][$i]['reviewProducts'][$j]['product']['_id'];
+                        $countstar[] = $data['0'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar'];
+                         switch ($countstar[$j]) {
+                            case "5":
+                                $countstar_5 ++;
+                                break;
+                            case "4":
+                                $countstar_4 ++;
+                                break;
+                            case "3":
+                                $countstar_3 ++;
+                                break;
+                            case "2":
+                                $countstar_2 ++;
+                                break;
+                            case "1":
+                                $countstar_1 ++;
+                                break;      
+                        }
+                        if($j == (count($data['0'][$i]['reviewProducts']) -1)){
+                            $text12  =  number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '');
+                            $datajson1['countsar'][] = array(
+                            "id" => array_pop($IDreview) ,
+                            "value" => ($text12)
+                        ); 
+                        }
+                    }  
+                }      
+            }    
             //   dd($data);
             return view('user/page.profileshop', compact('createdTime','datashop', 'datajson1','data','result','result1','data4','resultPrice','time','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
@@ -464,45 +493,92 @@
         public function getCart(){
             //get thong tin san pham
             $client = new \GuzzleHttp\Client();
-
             $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
             $todaytime = new DateTime($datatime['time']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
-
             $res = $client->request('GET',PageController::getUrl('deliveryprices') );
             $data = json_decode($res->getBody()->getContents(), true);
-            // dd($data);
-            // dd(Session::get('cart'));
             $oldCart = Session::get('cart');
-            // dd($oldCart);
             $cart = new Cart($oldCart);
             $product_cart = $cart->items;           
             return view('user/page.cart',compact('product_cart','data','time'));
         }
 
         public function getCheckCart(){
-            $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
-            $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
-            $todaytime->setTimezone(new DateTimeZone('UTC'));
-            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
-            //get thong tin san pham
-          
-            $res = $client->request('GET',PageController::getUrl('deliveryprices') );
-            $data = json_decode($res->getBody()->getContents(), true);
-            // dd($data);
+            if (Session::has('Idaddress')){
+                $client = new \GuzzleHttp\Client();
+                $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+                $datatime = json_decode($restime->getBody()->getContents(), true);
+                $todaytime = new DateTime($datatime['time']);
+                $todaytime->setTimezone(new DateTimeZone('UTC'));
+                $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+                $res = $client->request('GET',PageController::getUrl('deliveryprices') );
+                $data = json_decode($res->getBody()->getContents(), true);
 
-            $oldCart = Session::get('cart');
-            $cart = new Cart($oldCart);
-            $product_cart = $cart->items;  
-            return view('user/page.checkcart',compact('product_cart','data','time'));
+                $oldCart = Session::get('cart');
+                // dd($oldCart);
+                $cart = new Cart($oldCart);
+                $product_cart = $cart->items;  
+                // dd(Session::get('keyuser'));
+
+                $resPaymentMethods = $client->request('GET',PageController::getUrl('PaymentMethods') );
+                $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
+
+                $resaddressone = $client->request('GET',PageController::getUrl('deliveryAddresses/'.Session::get('Idaddress').'') );
+                $dataaddressone = json_decode($resaddressone->getBody()->getContents(), true);
+                $resaddress = $client->request('GET',PageController::getUrl('deliveryaddresses/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].'') );
+                $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
+                // dd($dataaddress);
+                return view('user/page.checkcart',compact('product_cart','data','time','dataaddress','dataaddressone','dataPaymentMethods'));
+            }
+            if (Session::has('keyuser')){
+                $client = new \GuzzleHttp\Client();
+                $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+                $datatime = json_decode($restime->getBody()->getContents(), true);
+                $todaytime = new DateTime($datatime['time']);
+                $todaytime->setTimezone(new DateTimeZone('UTC'));
+                $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+                $res = $client->request('GET',PageController::getUrl('deliveryprices') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                $oldCart = Session::get('cart');
+                $cart = new Cart($oldCart);
+                $product_cart = $cart->items;  
+                $resPaymentMethods = $client->request('GET',PageController::getUrl('PaymentMethods') );
+                $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
+
+                $resaddress = $client->request('GET',PageController::getUrl('deliveryaddresses/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].'') );
+                $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
+                return view('user/page.checkcart',compact('product_cart','data','time','dataaddress','dataPaymentMethods'));
+            }else{
+                return redirect()->route('dang-nhap')->with(['flag'=>'info','title'=>'Cần đăng nhập' ,'message'=>' ']);
+            }
+           
         }
 
-        public function getCheckOut(){
-            return view('user/page.checkout');
+        public function getCheckOut(Request $req){
+             if (Session::has('keyuser')){
+
+                $client = new \GuzzleHttp\Client();
+                $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+                $datatime = json_decode($restime->getBody()->getContents(), true);
+                $todaytime = new DateTime($datatime['time']);
+                $todaytime->setTimezone(new DateTimeZone('UTC'));
+                $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+                $res = $client->request('GET',PageController::getUrl('deliveryprices') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                $oldCart = Session::get('cart');
+                $cart = new Cart($oldCart);
+                $product_cart = $cart->items;  
+
+                $resorder = $client->request('GET',PageController::getUrl('orders/'.$req->id.'') );
+                $dataorder = json_decode($resorder->getBody()->getContents(), true);
+                // dd($dataorder);
+                return view('user/page.checkout',compact('product_cart','data','time','dataorder'));
+            }else{
+                return redirect()->route('dang-nhap')->with(['flag'=>'info','title'=>'Cần đăng nhập' ,'message'=>' ']);
+            }
         }
 
         public function getProfileUser(Request $req){
@@ -518,7 +594,21 @@
                 $dtstart = new DateTime( $datacustomer['customer']['birthday']);
                 $dtstart->setTimezone(new DateTimeZone('UTC'));
                 $start =  $dtstart->format('Y-m-d');
-                return view('user/page.profileuser',compact('datacustomer','dataaddress','start'));
+
+                $resorder = $client->request('GET',PageController::getUrl('orders/customer/'.$datacustomer['customer']['_id'].'') );
+                $dataorder = json_decode($resorder->getBody()->getContents(), true);
+                // dd($dataorder);
+                $dataorderitem = array();
+                for ($i=0; $i <count($dataorder['orders']) ; $i++) { 
+                    $resorderitem = $client->request('GET',PageController::getUrl('orderItems/order/'.$dataorder['orders'][$i]['_id'].'') );
+                    $dataorderitem[] = json_decode($resorderitem->getBody()->getContents(), true);
+
+                }
+                $resultorderitem = compact('dataorderitem');
+                // dd($resultorderitem);
+
+
+                return view('user/page.profileuser',compact('datacustomer','dataaddress','start','dataorder','resultorderitem'));
 
             }catch (\GuzzleHttp\Exception\ClientException $e) {
                 return $e->getResponse()->getStatusCode();
@@ -537,12 +627,43 @@
             return view('user/page.registershop');
         }
 
-        public function getReviewShop(){
-            return view('user/page.reviewshop');
+        public function getReviewShop(Request $req){
+              $client = new \GuzzleHttp\Client();
+            try {
+                $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$req->id.'') );
+                $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
+                $resorder = $client->request('GET',PageController::getUrl('orders/customer/'.$datacustomer['customer']['_id'].'') );
+                $dataorder = json_decode($resorder->getBody()->getContents(), true);
+                // dd($dataorder);
+                $dataorderitem = array();
+                for ($i=0; $i <count($dataorder['orders']) ; $i++) { 
+                    $resorderitem = $client->request('GET',PageController::getUrl('orderItems/order/'.$dataorder['orders'][$i]['_id'].'') );
+                    $dataorderitem[] = json_decode($resorderitem->getBody()->getContents(), true);
+
+                }
+
+                $resultorderitem = compact('dataorderitem');
+                // dd($resultorderitem);
+                }catch (\GuzzleHttp\Exception\ClientException $e) {
+                return $e->getResponse()->getStatusCode();
+                
+            }
+
+            return view('user/page.reviewshop',compact('dataorder','resultorderitem'));
         }
 
-        public function getWriteReviewShop(){
-            return view('user/page.writereviewadmin');
+        public function getWriteReviewShop(Request $req){
+            // dd($req->id);
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
+            $data[] = json_decode($res->getBody()->getContents(), true);
+            $resultdata = compact('data');
+            // dd($resultdata);
+            //get anh san pham
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
+            $datatext[] = json_decode($res->getBody()->getContents(), true);
+            $resultimg = compact('datatext');
+            return view('user/page.writereviewadmin',compact('resultdata','resultimg'));
         }
 
         //End user

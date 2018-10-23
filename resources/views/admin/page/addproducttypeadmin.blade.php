@@ -109,31 +109,32 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
-<form id="imgur">
-        <input type="file" id="file-upload" class=" imgur btn btn-default btn-file" style="display:none"
-            accept="image/*" data-max-size="5000" />
-</form>
+
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('post-them-loai-admin')}}" method="POST">
+            <form action="{{route('post-them-loai-admin')}}" method="POST" name="addtypeproduct">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLongTitle">Thêm loại sản phẩm</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-             
+               
                 <div class="modal-body">
                     <label for="basic">Tên loại sản phẩm:</label>
-
                     <input type="text" id="title1" name="nameproducttype" class="form-control" placeholder="Tên loại sản phẩm"
                         autofocus>
                     <hr>
                     <label for="file-upload" id="label" class="custom-file-upload">
-                        <img id="image" src="http://placehold.it/1920x1080?text= Thêm ảnh" class="rounded float-left" width="100"height="100">
+                        <img id="image" src="http://placehold.it/1920x1080?text= Thêm ảnh"  class="rounded float-left" width="100"height="100">
+                        
                     </label>
-
+                    <div id="errorct"></div>
+                    <div id="imgur" >
+                        <input type="file" id="file-upload" name="addimage" class=" imgur btn btn-default btn-file" style=" display:none   "
+                                accept="image/*" data-max-size="5000" />
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
@@ -152,7 +153,7 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('update-them-loai-admin')}}" method="POST">
+            <form action="{{route('update-them-loai-admin')}}" method="POST" name="addtypeproduct{{$item['_id']}}">
                 @csrf
 
                 <div class="modal-header">
@@ -185,11 +186,75 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $("form[name='addtypeproduct{{$item['_id']}}']").validate({
+            ignore: "not:hidden",
+            rules: {
+                nameproducttype: {
+                	required: true,
+                	minlength: 5
+                }
+            },
+            messages: {   
+                nameproducttype: {
+                	required: "Vui lòng nhập tên loại sản phẩm",
+                	minlength: "Tên loại sản phẩm phải trên 5 ký tự"
+                }
+            },
+            errorElement: "em",
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    });
+</script>
 @endforeach
 
 @endsection
 
 @section('footer')
+
+<script>
+    $(document).ready(function() {
+        $("form[name='addtypeproduct']").validate({
+            ignore: "not:hidden",
+            rules: {
+                nameproducttype: {
+                	required: true,
+                	minlength: 5
+                },
+                addimage:{
+                    required: true,
+                    file: true
+                }
+            },
+            messages: {   
+                nameproducttype: {
+                	required: "Vui lòng nhập tên loại sản phẩm",
+                	minlength: "Tên loại sản phẩm phải trên 5 ký tự"
+                },
+                addimage:{
+                    required: "Vui lòng chọn file hình ảnh",
+                    
+                }
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr("name") == "addimage") {
+                    error.insertAfter("#errorct");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            errorElement: "em",
+            
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    });
+</script>
+
 
 <script>
     var element = document.getElementById("add-category-admin");
@@ -301,7 +366,6 @@
                     $.ajax(settings1).done(function(response) {
                         console.log(response);
                     });
-        
                 });
             }
             // Uploading image

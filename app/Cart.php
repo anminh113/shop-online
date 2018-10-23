@@ -60,10 +60,10 @@ class Cart
 		if(empty($data['product']['saleOff']) || $data['product']['saleOff']['dateEnd'] < $time){
 			$this->totalPrice += $data['product']['price'] * $sl;
 		}else if(!empty($data['product']['saleOff']) && $data['product']['saleOff']['dateEnd'] > $time){
-			$this->totalPrice += $data['product']['price']-($data['product']['price'] * $data['product']['saleOff']['discount']/100) * $sl;
+			$this->totalPrice += ($data['product']['price']-($data['product']['price'] * $data['product']['saleOff']['discount']/100)) * $sl;
 		}
 		else{
-			$this->totalPrice +=  $data['product']['price'] * $sl;
+			$this->totalPrice += $data['product']['price'] * $sl;
 		}
 
 

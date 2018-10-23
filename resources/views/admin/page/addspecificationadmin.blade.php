@@ -136,7 +136,7 @@
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('post-them-thong-so-ky-thuat-admin')}}" method="POST">
+            <form action="{{route('post-them-thong-so-ky-thuat-admin')}}" method="POST" name="addspeecification">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLongTitle">Thêm thông số kỹ thuật sản phẩm</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -166,7 +166,7 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('update-them-thong-so-ky-thuat-admin')}}" method="POST">
+            <form action="{{route('update-them-thong-so-ky-thuat-admin')}}" method="POST" name="addspeecification{{$item['_id']}}">
                 @csrf
 
                 <div class="modal-header">
@@ -193,13 +193,58 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $("form[name='addspeecification{{$item['_id']}}']").validate({
+            ignore: "not:hidden",
+            rules: {
+                namespecificationtype: {
+                	required: true,
+                	minlength: 5
+                }
+            },
+            messages: {   
+                namespecificationtype: {
+                	required: "Vui lòng nhập tên thông số kỹ thuật",
+                	minlength: "Tên thông số kỹ thuật phải trên 5 ký tự"
+                }
+            },
+            errorElement: "em",
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    });
+</script>
 @endforeach
 @endif
 
 @endsection
 
 @section('footer')
-
+<script>
+    $(document).ready(function() {
+        $("form[name='addspeecification']").validate({
+            ignore: "not:hidden",
+            rules: {
+                namespeecification: {
+                	required: true,
+                	minlength: 5
+                }
+            },
+            messages: {   
+                namespeecification: {
+                	required: "Vui lòng nhập tên thông số kỹ thuật",
+                	minlength: "Tên thông số kỹ thuật phải trên 5 ký tự"
+                }
+            },
+            errorElement: "em",
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    });
+</script>
 <script>
     var element = document.getElementById("add-category-admin");
     element.classList.add("active");

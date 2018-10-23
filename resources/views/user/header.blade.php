@@ -22,8 +22,7 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <a class="fix" href="{{ route('profile-user',Session::get('keyuser')['_id'] )}}">Tài
-                                        khoản {{Session::get('keyuser')['username']}}</a>
+                                    <a class="fix" href="{{ route('profile-user',Session::get('keyuser')['_id'] )}}">Tài khoản {{Session::get('keyuser')['info'][0]['customer']['name']}}</a>
                                 </li>
                             </ul>
                         </div>

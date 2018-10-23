@@ -100,22 +100,46 @@ Route::get('cart', [
     'as'=>'cart',
     'uses'=>'PageController@getCart'
 ]);
-
+//---
 Route::get('check-cart', [
     'as'=>'check-cart',
     'uses'=>'PageController@getCheckCart'
 ]);
+Route::post('check-cart', [
+    'as'=>'post-check-cart',
+    'uses'=>'PostController@postCheckCart'
+]);
 
-Route::get('check-out', [
+Route::post('check-deliveryaddress-cart', [
+    'as'=>'post-deliveryAddress-check-cart',
+    'uses'=>'PostController@postdeliveryAddressCheckCart'
+]);
+//---
+
+//---
+Route::get('check-out/{id}', [
     'as'=>'check-out',
     'uses'=>'PageController@getCheckOut'
 ]);
+
+Route::post('check-out', [
+    'as'=>'post-check-out',
+    'uses'=>'PostController@postCheckOut'
+]);
+//--
+
 
 //---
 Route::get('profile-user/{id}', [
     'as'=>'profile-user',
     'uses'=>'PageController@getProfileUser'
 ]);
+
+Route::post('post-profile-user', [
+    'as'=>'post-profile-user',
+    'uses'=>'PostController@postProfileUser'
+]);
+//---
 
 Route::get('delete-delivery-profile-user/{id}', [
     'as'=>'delete-delivery-profile-user',
@@ -153,15 +177,22 @@ Route::get('register-shop', [
     'uses'=>'PageController@getRegisterShop'
 ]);
 
-Route::get('review-shop', [
+Route::get('review-shop/{id}', [
     'as'=>'review-shop',
     'uses'=>'PageController@getReviewShop'
 ]);
-
-Route::get('write-review-shop', [
+//---
+Route::get('write-review-shop/{id}', [
     'as'=>'write-review-shop',
     'uses'=>'PageController@getWriteReviewShop'
 ]);
+Route::post('write-review-shop', [
+    'as'=>'post-write-review-shop',
+    'uses'=>'PostController@postWriteReviewShop'
+]);
+
+
+//---
 
 // Đăng nhập admin
 Route::get('login-admin', [

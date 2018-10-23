@@ -28,7 +28,7 @@
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
             <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="openCity(event, 'sanpham');">
-                <div class=" tablink bottombar w3-padding border-red text-center">Chưa viết đánh giá (4)</div>
+                <div class=" tablink bottombar w3-padding border-red text-center">Chưa viết đánh giá ({{$dataorder['count']}})</div>
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
@@ -44,183 +44,56 @@
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
-                    <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>1</span> Sản
-                            phẩm</div>
 
-                        <div class="panel order-item">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
+                     @foreach ($dataorder['orders'] as $item => $orderitem )
+                     @if($dataorder['orders'][$item]['orderState']['orderStateName'] != "Đã giao hàng")
+                        <div class="order">
+                            <div class="accordion order-info">Đơn hàng #{{$dataorder['orders'][$item]['_id']}}  <span> |</span> <span>{{$dataorder['orders'][$item]['totalQuantity']}}</span> Sản phẩm
+                            </div>
+                            <div class="panel order-item">
+                                @foreach($resultorderitem['dataorderitem'][$item]['orderItems'] as $text )
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="item-pic"><img src="{{$text['product']['imageURL']}}" width="115" height="115"> </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="item-main item-main-mini">
+                                                <div>
+                                                    <div class="text title item-title" data-spm="details_title">
+                                                        {{$text['product']['productName']}}
+                                                    </div>
+                                                    <p class="text desc"></p>
+                                                    <p class="text desc bold"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="item-quantity" style=" width: 100%; "><span><span class="text desc info multiply">Số lượng:&nbsp;{{$text['quantity']}}</span>
+                                              </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="item-status item-capsule">
+                                                <p class="capsule">{{$dataorder['orders'][$item]['orderState']['orderStateName']}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="item-info">
+                                                <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='{{route('write-review-shop',$text['product']['_id'])}}';"
+                                                    style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='write-review-shop';"
-                                            style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
-                                       
-                                    </div>
-                                </div>
+                                    <hr>
+                                @endforeach
+
                             </div>
                         </div>
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="order">
-                        <div class="accordion order-info">Đơn hàng #206505315631747 <span> |</span> <span>2</span> Sản
-                            phẩm</div>
-                        <div class=" panel order-item ">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='write-review-shop';"
-                                            style="width: 100%; font-size: 14px; margin-top: 10px">Viết đánh giá</button>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
-                                                class="text">&nbsp;1</span></span></div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">Đã huỷ đơn</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">Đã giao ngày 20 thg 11 2017
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='write-review-shop';"
-                                            style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
-                                       
-                                    </div>
+                        <div class="space10">&nbsp;</div>
+                        @endif
+                    @endforeach
+                   
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space15">&nbsp;</div>
-                    {{-- <div class="row">
-                        <div class="col-lg-7">
-                            <div class="section-title" style="color: #757575;"> Đã mua ngày 15 thg 11 2017</div>
-                            <div style="padding-left: 5px;font-size: 13px; padding-bottom: 10px;">Nhận xét và đánh giá
-                                sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
-                            <div class="row" style="padding-left: 5px;">
-                                <div class="col-lg-2">
-                                    <img src="source/user/images/new_5.jpg" width="85" height="85">
-                                </div>
-                                <div class="col-lg-10">
-                                    <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;">Thẻ nhớ 16GB
-                                        Class 10 Team MicroSDHC (Đen)</div>
-                                    <span class="content-star-rate">
-                                        <fieldset class="rating">
-                                            <input type="radio" id="star5" name="rating" value="5" form="fb-form" />
-                                            <label class="full" for="star5" data-toggle="tooltip" title="Tuyệt vời - 5 sao"></label>
-
-                                            <input type="radio" id="star4" name="rating" value="4" form="fb-form" />
-                                            <label class="full" for="star4" data-toggle="tooltip" title="Khá tốt - 4 sao"></label>
-
-                                            <input type="radio" id="star3" name="rating" value="3" form="fb-form" />
-                                            <label class="full" for="star3" data-toggle="tooltip" title="Bình thường - 3 sao"></label>
-
-                                            <input type="radio" id="star2" name="rating" value="2" form="fb-form" />
-                                            <label class="full" for="star2" data-toggle="tooltip" title="Tệ - 2 sao"></label>
-
-                                            <input type="radio" id="star1" name="rating" value="1" form="fb-form" />
-                                            <label class="full" for="star1" data-toggle="tooltip" title="Quá tệ - 1 star"></label>
-                                        </fieldset>
-                                    </span>
-                                    <br>
-                                    <div class="space10">&nbsp;</div>
-                                    <div class="contact_form_text" style="padding-left: 5px;">
-                                        <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết</div>
-                                        <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                            name="message" rows="7" placeholder="Đánh giá..." required="required"
-                                            data-error="Please, write us a message."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="section-title" style="font-size:16px"> Bán bởi <a href="">Kho Cực Sốc</a> </div>
-                            <div style="color: #757575;padding-left: 5px;font-size: 14px; padding-bottom: 10px;"> Nhận
-                                xét và đánh giá nhà bán hàng:</div>
-                            <div class="text123">
-                                <img alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png"
-                                    id="imgClickAndChangeVeryGood">
-                                <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png"
-                                    id="imgClickAndChangeGood">
-                                <img alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png"
-                                    id="imgClickAndChangeBad">
-                            </div>
-                            <div class="space20">&nbsp;</div>
-                            <div class="contact_form_text" style="padding-left: 5px;">
-                                <div class="space20">&nbsp;</div>
-                                <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>
-                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                    name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-9"></div>
-                        <div class="col-lg-3"><button type="button" class="btn btn-outline-warning btn-save" style="right:0;height: 50px;width: 100%;font-size: 16px; margin-top: 10px">Giử
-                                đánh giá</button></div>
-
-                    </div> --}}
+                 
                 </div>
             </div>
             <div id="hoso" class="tabcontent" style="display:none">

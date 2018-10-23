@@ -96,48 +96,57 @@
                     @endforeach
                     @endif
                     <div class="order_total">
-                            <div class="row">
-                                @if(Session::has('cart'))
-                                <div class="col-lg-6">
-                                    <div class="order_total_content text-letf">
-                                        <div class="order_total_title text-letf">Tạm tính:</div>
-                                        <div class="order_total_amount">
-                                            {{number_format(Session::get('cart')->totalPrice)}},000₫
-                                        </div>
+                        <div class="row">
+                            @if(Session::has('cart'))
+                            <div class="col-lg-6">
+                                <div class="order_total_content text-letf">
+                                    <div class="order_total_title text-letf">Tạm tính:</div>
+                                    <div class="order_total_amount">
+                                        {{number_format(Session::get('cart')->totalPrice)}},000₫
                                     </div>
-                                    <div class="order_total_content text-letf">
+                                </div>
+                                @foreach ($data['deliveryPrices'] as $item)
+                                @if($item['totalPriceMin'] <= Session::get('cart')->totalPrice && $item['totalPriceMax'] >= Session::get('cart')->totalPrice )
+                                <div class="order_total_content text-letf">
+                                    <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
+                                    <div class="order_total_amount">
+                                        {{$item['transportFee']}},000₫
+                                    </div>
+                                </div>
+                                <div class="order_total_content text-left">
+                                    <div class="order_total_title text-letf">Thành Tiền:</div>
+                                    <div class="order_total_amount"> {{number_format(Session::get('cart')->totalPrice) + $item['transportFee']}},000₫</div>
+                                </div>
+                                @break
+                                @elseif($item['totalPriceMax'] == null)
+                                <div class="order_total_content text-letf">
                                         <div class="order_total_title text-letf">Phí vận chuyển tạm tính:</div>
-                                        <div class="order_total_amount">
-                                            @foreach ($data['deliveryPrices'] as $item)
-                                            @if($item['productQuantity'] === Session::get('cart')->totalQty)
-                                            {{$item['transportFee']}}.000 ₫
-                                            @break
-                                            @else
-                                            0 ₫
-                                            @break
-                                            @endif
-                                            @endforeach
-    
+                                        <div class="order_total_amount" style="font-size: 14px; color:#5F6368 ">
+                                            Miễn phí vận chuyển
                                         </div>
                                     </div>
                                     <div class="order_total_content text-left">
                                         <div class="order_total_title text-letf">Thành Tiền:</div>
-                                        <div class="order_total_amount">0000</div>
+                                        <div class="order_total_amount"> {{number_format(Session::get('cart')->totalPrice) }},000₫</div>
                                     </div>
-                                    <div class="order_total_content text-left">
-                                        <div class="order_total_title"></div>
-                                        <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
-                                    </div>
-                                </div>
+                                    @break
                                 @endif
-                                <div class="col-lg-6">
-                                    <div class="cart_buttons">
-                                        <button type="button" class="btn btn-outline-info btn-change" onclick="window.location='check-cart';">Xác
-                                            Nhận Giỏ Hàng</button>
-                                    </div>
+                                            
+                                @endforeach
+                                <div class="order_total_content text-left">
+                                    <div class="order_total_title"></div>
+                                    <div class="order_total_amount1">(Giá đã bao gồm VAT)</div>
+                                </div>
+                            </div>
+                            @endif
+                            <div class="col-lg-6">
+                                <div class="cart_buttons">
+                                    <button type="button" class="btn btn-outline-info btn-change" onclick="window.location='check-cart';">Xác
+                                        Nhận Giỏ Hàng</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
     
                    
                     <div class="characteristics">

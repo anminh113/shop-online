@@ -2,35 +2,7 @@
 
 @section('head')
 <link href="{{ URL::asset('source/admin/assets/css/product.css') }}" rel="stylesheet" type="text/css">
-<style type="text/css">
-    .bar-verygood {
-        width: 60%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
 
-    .bar-good {
-        width: 30%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
-
-    .bar-bad {
-        width: 10%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
-
-    .product_item {
-        position: inherit;
-        display: table-column;
-    }
-
-    .page-active {
-        display: block;
-    }
-
-</style>
 @endsection
 
 @section('content')
@@ -101,7 +73,7 @@
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('post-them-danh-muc-admin')}}" method="POST">
+            <form action="{{route('post-them-danh-muc-admin')}}" method="POST" name="addcatgory">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLongTitle">Thêm danh mục</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -128,7 +100,7 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{route('update-them-danh-muc-admin')}}" method="POST">
+            <form action="{{route('update-them-danh-muc-admin')}}" method="POST" name="updatecategory{{$item['_id']}}">
                 @csrf
 
                 <div class="modal-header">
@@ -140,7 +112,7 @@
                 <div class="modal-body">
                     <label for="basic">Tên danh mục sản phẩm:</label>
                     <div id="titleproduct">
-                        <input type="text" name="namecategory"  class="form-control" value="{{$item['categoryName']}}" autofocus>
+                        <input type="text" name="namecategory"  class="form-control" value="{{$item['categoryName']}}" autofocus required>
                         <input type="text" hidden name="categoryId" value="{{$item['_id']}}">
                     </div>
                 </div>
@@ -154,6 +126,29 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $("form[name='updatecategory{{$item['_id']}}']").validate({
+            rules: {
+                namecategory: {
+                	required: true,
+                	minlength: 5
+                }
+            },
+            messages: {   
+                namecategory: {
+                	required: "Vui lòng nhập tên danh mục",
+                	minlength: "Tên danh mục phải trên 5 ký tự"
+                },     
+            },
+            errorElement: "em",
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    });
+</script>
+
 @endforeach
 
 
@@ -165,6 +160,28 @@
     var element = document.getElementById("add-category-admin");
     element.classList.add("active");
 
+</script>
+<script>
+    $(document).ready(function() {
+        $("form[name='addcatgory']").validate({
+            rules: {
+                namecategory: {
+                	required: true,
+                	minlength: 5
+                }
+            },
+            messages: {   
+                namecategory: {
+                	required: "Vui lòng nhập tên danh mục",
+                	minlength: "Tên danh mục phải trên 5 ký tự"
+                },     
+            },
+            errorElement: "em",
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    });
 </script>
 
 

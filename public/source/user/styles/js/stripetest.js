@@ -1,11 +1,10 @@
 'use strict';
 
-var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+var stripe = Stripe('pk_test_CeyyXLIDl0bfY9IiYwTIYZAU');
 
 function registerElements(elements, exampleName) {
   var formClass = '.' + exampleName;
   var example = document.querySelector(formClass);
-
   var form = example.querySelector('form');
   var resetButton = example.querySelector('a.reset');
   var error = form.querySelector('.error');
@@ -122,11 +121,43 @@ function registerElements(elements, exampleName) {
 
       if (result.token) {
         // If we received a token, show the token ID.
-        example.querySelector('.token').innerText = result.token.id;
+        example.querySelector('.token').innerText = result.token.id;      
         example.classList.add('submitted');
+        // var form = document.getElementById('payment-form');
+        var form = document.getElementById('pay');
+
+        form.setAttribute('method', 'post');
+
+
+        var hiddenInputToken = document.createElement('input');
+        hiddenInputToken.setAttribute('type', 'hidden');
+        hiddenInputToken.setAttribute('name', 'stripeToken');
+        hiddenInputToken.setAttribute('value', result.token.id);
+
+        var hiddenValueEmail = document.getElementById('example2-address').value;
+        var hiddenInputEmail = document.createElement('input');
+        hiddenInputEmail.setAttribute('type', 'hidden');
+        hiddenInputEmail.setAttribute('name', 'email');
+        hiddenInputEmail.setAttribute('value', hiddenValueEmail);
+
+    
+        
+
+
+
+
+
+        form.appendChild(hiddenInputToken);
+        form.appendChild(hiddenInputEmail);
+        document.body.appendChild(form);   
+        // form.setAttribute('{{ csrf_field() }}');
+        form.submit();
+        
+
       } else {
         // Otherwise, un-disable inputs.
         enableInputs();
+        // stripeTokenHandler(result.token);
       }
     });
   });

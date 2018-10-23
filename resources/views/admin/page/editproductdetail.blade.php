@@ -28,7 +28,7 @@
             data-max-size="5000" />
     </form>
     <!-- MAIN CONTENT -->
-    <form action="{{route('update-sua-chi-tiet-san-pham-admin')}}" method="POST">
+    <form action="{{route('update-sua-chi-tiet-san-pham-admin')}}" method="POST" name="editproduct">
         <div class="main-content">
             @foreach ($resultdata['data'] as $item)
             <div class="container-fluid">
@@ -127,7 +127,7 @@
                                             <input type="text" id="title1" class="form-control" name="title[]" value="{{$item2['title']}}">
                                         @else
                                             <div class="space10">&nbsp;</div>
-                                            <input type="text" id="title1" class="form-control" name="title[]"z placeholder="Thêm tiêu đề">
+                                            <input type="text" id="title1" class="form-control" name="title[]" placeholder="Thêm tiêu đề">
                                         @endif
                                             <textarea class="form-control" id="value1" name="value[]" style=" box-sizing: border-box; resize: none;"
                                              data-autoresize rows="4">{{$item2['value']}}</textarea>
@@ -164,8 +164,106 @@
 
 @section('footer')
 <script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/iziToast.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script> --}}
 <script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/detail-product.js') }}"></script>
+<script>
+        $(document).ready(function() {
+            $("form[name='editproduct']").validate({
+                ignore: "not:hidden",
+                rules: {
+                    productname: {
+                        required: true,
+                        minlength: 5
+                    },
+                    price:{
+                        required: true,
+                        number:true
+                    },
+                    quantity:{
+                        required: true,
+                        number:true
+                    },
+                    "title[]":{
+                        required: true,
+                        minlength: 5
+                    },
+                    "title1[]":{
+                        required: true,
+                    },
+                    img1:{
+                        required: true,
+                        file: true
+                    },
+                    img2:{
+                        required: true,
+                        file: true
+                    },
+                    img3:{
+                        required: true,
+                        file: true
+                    }
+                },
+                messages: {   
+                    productname: {
+                        required: "Vui lòng nhập tên sản phẩm",
+                        minlength: "Tên sản phẩm phải trên 5 ký tự"
+                    },    
+                    price:{
+                        required: "Vui lòng nhập giá sản phẩm",
+                        number:true
+                    },
+                    quantity:{
+                        required: "Vui lòng nhập số lượng nhập kho",
+                        number:true
+                    },
+                    "title[]":{
+                        required: "Vui lòng nhập tiêu đề",
+                        minlength: "Tên sản phẩm phải trên 5 ký tự"
+                    },
+                    img1:{
+                        required: "Chọn file hình ảnh",
+                    },
+                    img2:{
+                        required: "Chọn file hình ảnh",
+                    },
+                    img3:{
+                        required: "Chọn file hình ảnh",
+                    },producttype:{
+                        required: "Vui lòng chọn thông số kỹ thuật",
+                        select: true
+                    },
+                    category:{
+                        required: "Vui lòng chọn danh mục",
+                        select: true
+                    },
+                    "title1[]":{
+                        required: "Vui lòng nhập thông số sản phẩm",
+                    }
+                },
+                // errorPlacement: function(error, element) {
+                //     if (element.attr("name") == "productname") {
+                //         error.insertAfter("#errorname");
+                //     } else if (element.attr("name") == "price") {
+                //         error.insertAfter("#errorprice");
+                //     } else if (element.attr("name") == "quantity") {
+                //         error.insertAfter("#errorquantity");
+                //     } else if (element.attr("name") == "img1" ) {
+                //         error.insertAfter("#errorimg1");
+                //     } else if (element.attr("name") == "img2" ) {
+                //         error.insertAfter("#errorimg2");
+                //     }else if (element.attr("name") == "img3" ) {
+                //         error.insertAfter("#errorimg3");
+                //     }else {
+                //         error.insertAfter(element);
+                //     }
+                // },
+                errorElement: "em",
+                submitHandler: function(form) {
+                form.submit();
+                }
+            });
+        });
+</script>
 <script>
     var element = document.getElementById("product-admin");
     element.classList.add("active");
@@ -211,4 +309,5 @@
     });
 
 </script>
+
 @endsection

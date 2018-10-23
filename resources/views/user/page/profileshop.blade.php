@@ -257,174 +257,174 @@
                 </div>
             </div>
         </div>
-        <div id="hoso" class="tabcontent" style="display:none">
-            <div class="characteristics">
-                <div class="row">
-                    <!-- Char. Item -->
-                    <div class="col-lg-4 col-md-6 char_col">
-                        <div class="char_item ">
-                            <div class="char_title_top">Địa điểm</div>
-                            <div class="d-flex flex-row align-items-center justify-content-start">
-                                <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-place-marker-100.png"
-                                        alt=""></div>
-                                <div class="char_content">
-                                    <div class="char_title">{{$datashop['store']['location']}}</div>
+            <div id="hoso" class="tabcontent" style="display:none">
+                <div class="characteristics">
+                    <div class="row">
+                        <!-- Char. Item -->
+                        <div class="col-lg-4 col-md-6 char_col">
+                            <div class="char_item ">
+                                <div class="char_title_top">Địa điểm</div>
+                                <div class="d-flex flex-row align-items-center justify-content-start">
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-place-marker-100.png"
+                                            alt=""></div>
+                                    <div class="char_content">
+                                        <div class="char_title">{{$datashop['store']['location']}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Char. Item -->
-                    <div class="col-lg-4 col-md-6 char_col">
-                        <div class="char_item ">
-                            <div class="char_title_top">Danh mục Chính</div>
-                            <div class="d-flex flex-row align-items-center justify-content-start">
-                                <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-categorize-240.png"
-                                        alt=""></div>
-                                <div class="char_content">
-                                    <div class="char_title">
-                                        @foreach($datashop['store']['categories'] as $item)
-                                        {{$item['category']['categoryName']}},
-                                        @endforeach
+                        <!-- Char. Item -->
+                        <div class="col-lg-4 col-md-6 char_col">
+                            <div class="char_item ">
+                                <div class="char_title_top">Danh mục Chính</div>
+                                <div class="d-flex flex-row align-items-center justify-content-start">
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-categorize-240.png"
+                                            alt=""></div>
+                                    <div class="char_content">
+                                        <div class="char_title">
+                                            @foreach($datashop['store']['categories'] as $item)
+                                            {{$item['category']['categoryName']}},
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Char. Item -->
+                        <div class="col-lg-4 col-md-6 char_col">
+                            <div class="char_item ">
+                                <div class="char_title_top">Thời gian trên CyberZone</div>
+                                <div class="d-flex flex-row align-items-center justify-content-start">
+                                    <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-time-128.png"
+                                            alt=""></div>
+                                    <div class="char_content">
+                                        <div class="char_title">Từ ngày {{$createdTime}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Char. Item -->
-                    <div class="col-lg-4 col-md-6 char_col">
-                        <div class="char_item ">
-                            <div class="char_title_top">Thời gian trên CyberZone</div>
-                            <div class="d-flex flex-row align-items-center justify-content-start">
-                                <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-time-128.png"
-                                        alt=""></div>
-                                <div class="char_content">
-                                    <div class="char_title">Từ ngày {{$createdTime}}</div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="section-title"> Điểm đánh giá trung bình</div>
+                            <div class="rating-overview">
+                                <div class="left">
+                                    <div class="score">
+                                        <label class="average">88%</label>
+                                    </div>
+                                    <div class="count">
+                                        <div class="countText">
+                                            Đánh giá tích cực
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="section-title"> Điểm đánh giá trung bình</div>
-                        <div class="rating-overview">
-                            <div class="left">
-                                <div class="score">
-                                    <label class="average">88%</label>
-                                </div>
-                                <div class="count">
-                                    <div class="countText">
-                                        Đánh giá tích cực
+                                <div class="right">
+                                    <div class="scoreItem">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="tillet">Tốt</div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-verygood"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="side right">
+                                                    <div class="tillet"> 150</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="tillet">Trung bình</div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-good"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="side right">
+                                                    <div class="tillet"> 63</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="side">
+                                                    <div class="tillet">Chưa tốt</div>
+                                                </div>
+                                                <div class="middle">
+                                                    <div class="bar-container">
+                                                        <div class="bar-bad"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="side right">
+                                                    <div class="tillet"> 20</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="right">
-                                <div class="scoreItem">
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="section-title"> Nhận xét và đánh giá nhà bán hàng (40)</div>
+                            {{-- <div>
+                                <img class="filter__seller-rating" src="source/user/images/icon-verygood.png" width="24"
+                                    height="24">
+                                <img class="filter__seller-rating" src="source/user/images/icon-good.png" width="24" height="24">
+                                <img class="filter__seller-rating" src="source/user/images/icon-bad.png" width="24" height="24">
+                            </div>
+                            <div class="space10">&nbsp;</div>
+                            <div class="contact_form_text">
+                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
+                                    name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
+                            </div>
+                            <div class="space10">&nbsp;</div> --}}
+                            <div class="sis-seller-reviews">
+                                <div class="seller-review-item">
+                                    <div class="row rate"><img class="" src="source/user/images/icon-color-verygood.png"
+                                            width="24" height="24">&nbsp;&nbsp;<span> Tốt</span></div>
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="tillet">Tốt</div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-verygood"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet"> 150</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="tillet">Trung bình</div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-good"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet"> 63</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="side">
-                                                <div class="tillet">Chưa tốt</div>
-                                            </div>
-                                            <div class="middle">
-                                                <div class="bar-container">
-                                                    <div class="bar-bad"></div>
-                                                </div>
-                                            </div>
-                                            <div class="side right">
-                                                <div class="tillet"> 20</div>
-                                            </div>
-                                        </div>
+                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
+                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
+                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
+                                            hơn 5 năm chả hỏng j cả 😄</label>
+                                    </div>
+                                    <div class="row reviewer">
+                                        <label class="itemFooter">An T. - 3 tháng trước</label>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="section-title"> Nhận xét và đánh giá nhà bán hàng (40)</div>
-                        {{-- <div>
-                            <img class="filter__seller-rating" src="source/user/images/icon-verygood.png" width="24"
-                                height="24">
-                            <img class="filter__seller-rating" src="source/user/images/icon-good.png" width="24" height="24">
-                            <img class="filter__seller-rating" src="source/user/images/icon-bad.png" width="24" height="24">
-                        </div>
-                        <div class="space10">&nbsp;</div>
-                        <div class="contact_form_text">
-                            <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
-                        </div>
-                        <div class="space10">&nbsp;</div> --}}
-                        <div class="sis-seller-reviews">
-                            <div class="seller-review-item">
-                                <div class="row rate"><img class="" src="source/user/images/icon-color-verygood.png"
-                                        width="24" height="24">&nbsp;&nbsp;<span> Tốt</span></div>
-                                <div class="row">
-                                    <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                        quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
-                                        mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
-                                        hơn 5 năm chả hỏng j cả 😄</label>
+                                <div class="seller-review-item">
+                                    <div class="row rate"><img class="" src="source/user/images/icon-color-good.png" width="24"
+                                            height="24">&nbsp;&nbsp;<span> Trung bình</span></div>
+                                    <div class="row">
+                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
+                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
+                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
+                                            hơn 5 năm chả hỏng j cả 😄</label>
+                                    </div>
+                                    <div class="row reviewer">
+                                        <label class="itemFooter">An T. - 3 tháng trước</label>
+                                    </div>
                                 </div>
-                                <div class="row reviewer">
-                                    <label class="itemFooter">An T. - 3 tháng trước</label>
-                                </div>
-                            </div>
-                            <div class="seller-review-item">
-                                <div class="row rate"><img class="" src="source/user/images/icon-color-good.png" width="24"
-                                        height="24">&nbsp;&nbsp;<span> Trung bình</span></div>
-                                <div class="row">
-                                    <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                        quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
-                                        mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
-                                        hơn 5 năm chả hỏng j cả 😄</label>
-                                </div>
-                                <div class="row reviewer">
-                                    <label class="itemFooter">An T. - 3 tháng trước</label>
-                                </div>
-                            </div>
-                            <div class="seller-review-item">
-                                <div class="row rate"><img class="" src="source/user/images/icon-color-bad.png" width="24"
-                                        height="24">&nbsp;&nbsp;<span> Chưa tốt</span></div>
-                                <div class="row">
-                                    <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                        quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
-                                        mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
-                                        hơn 5 năm chả hỏng j cả 😄</label>
-                                </div>
-                                <div class="row reviewer">
-                                    <label class="itemFooter">An T. - 3 tháng trước</label>
+                                <div class="seller-review-item">
+                                    <div class="row rate"><img class="" src="source/user/images/icon-color-bad.png" width="24"
+                                            height="24">&nbsp;&nbsp;<span> Chưa tốt</span></div>
+                                    <div class="row">
+                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
+                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
+                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
+                                            hơn 5 năm chả hỏng j cả 😄</label>
+                                    </div>
+                                    <div class="row reviewer">
+                                        <label class="itemFooter">An T. - 3 tháng trước</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 </div>
@@ -597,26 +597,26 @@
 <script src="source/user/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="source/user/js/shop_custom.js"></script>
 <script>
-        // init Isotope
-        var $container = $('.product_grid').isotope({
-        itemSelector: '.product_item'
-        });
-        // filter with selects and checkboxes
-        var $checkboxes = $('#accordion input');
-        $checkboxes.change( function() {
-        var inclusives = [];
-        $checkboxes.each( function( i, elem ) {
-            // if checkbox, use value if checked
-            if ( elem.checked ) {
-            inclusives.push( elem.value );
-            }
-        });
-        var filterValue = inclusives.length ? inclusives.join(', ') : '*';
-            console.log(filterValue);
-        $container.isotope({ filter: filterValue })
-        });
-    
-        </script>
+    // init Isotope
+    var $container = $('.product_grid').isotope({
+    itemSelector: '.product_item'
+    });
+    // filter with selects and checkboxes
+    var $checkboxes = $('#accordion input');
+    $checkboxes.change( function() {
+    var inclusives = [];
+    $checkboxes.each( function( i, elem ) {
+        // if checkbox, use value if checked
+        if ( elem.checked ) {
+        inclusives.push( elem.value );
+        }
+    });
+    var filterValue = inclusives.length ? inclusives.join(', ') : '*';
+        console.log(filterValue);
+    $container.isotope({ filter: filterValue })
+    });
+
+</script>
 <script>
     function openCity(evt, cityName) {
         var i, x, tablinks;
@@ -669,51 +669,47 @@
 
 
 @foreach ($data['products'] as $time => $item )
-@if(!empty($datajson1['id']) )
-    @if($datajson1['id'] == $item['_id']) 
-    <script>
-         var countstar ='{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}';
-        $(function () {
-            $(".my-rating-{{$item['_id']}}").starRating({
-                readOnly: true,
-                initialRating: countstar,
-                starGradient: {
-                    start: '#F4E800',
-                    end: '#F4E800'
-                },
-                starShape: '#F4E800',
-                emptyColor: '#FFF',
-                starSize: 20,
-                strokeColor: '#F4E800',
-                strokeWidth: 30,
-
+@if(!empty($datajson1['countsar']))
+    @foreach ($datajson1['countsar'] as $da )
+        @if($da['id'] == $item['_id']) 
+        <script>
+            $(function () {
+                $(".my-rating-{{$item['_id']}}").starRating({
+                    readOnly: true,
+                    initialRating: {{$da['value']}},
+                    starGradient: {
+                        start: '#F4E800',
+                        end: '#F4E800'
+                    },
+                    starShape: '#F4E800',
+                    emptyColor: '#FFF',
+                    starSize: 20,
+                    strokeColor: '#F4E800',
+                    strokeWidth: 30,
+                });
             });
-
-        });
-
-    </script>
-   @else 
-   <script>
-       $(function () {
-           $(".my-rating-{{$item['_id']}}").starRating({
-               readOnly: true,
-               initialRating: 0,
-               starGradient: {
-                   start: '#F4E800',
-                   end: '#F4E800'
-               },
-               starShape: '#F4E800',
-               emptyColor: '#FFF',
-               starSize: 20,
-               strokeColor: '#F4E800',
-               strokeWidth: 30,
-
-           });
-
-       });
-
-   </script>
-   @endif
+        </script>
+        @endif
+    @endforeach
+        @if($da['id'] != $item['_id']) 
+        <script>
+            $(function () {
+                $(".my-rating-{{$item['_id']}}").starRating({
+                    readOnly: true,
+                    initialRating: 0,
+                    starGradient: {
+                        start: '#F4E800',
+                        end: '#F4E800'
+                    },
+                    starShape: '#F4E800',
+                    emptyColor: '#FFF',
+                    starSize: 20,
+                    strokeColor: '#F4E800',
+                    strokeWidth: 30,
+                });
+            });
+        </script>
+        @endif
 @else 
     <script>
         $(function () {

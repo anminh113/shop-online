@@ -32,190 +32,92 @@
             </a>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='review-shop';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{route('review-shop',Session::get('keyuser')['_id'])}}';">
                 <div class=" tablink bottombar w3-padding text-center">Nhận xét của tôi</div>
             </a>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['_id'] )}}';">
                 <div class=" tablink  w3-padding border-red text-center">Thông tin cá nhân</div>
             </a>
         </div>
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
+                    <form id="fb-form" action="{{route('post-write-review-shop')}}" method="POST">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div style="padding-left: 5px;font-size: 15px; padding-bottom: 10px;">Nhận xét và đánh giá sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
+                                <div class="row" style="padding-left: 5px;">
+                                    <div class="col-lg-2">
+                                        @foreach ($resultimg['datatext'] as $da )
+                                        @foreach ($da['imageList'] as $da1)
+                                          <img src={{$da1["imageURL"]}} width="85" height="85">
+                                        @break
+                                        @endforeach
+                                        @endforeach
 
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="section-title" style="color: #757575;"> Đã mua ngày 15 thg 11 2017</div>
-                            <div style="padding-left: 5px;font-size: 13px; padding-bottom: 10px;">Nhận xét và đánh giá
-                                sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
-                            <div class="row" style="padding-left: 5px;">
-                                <div class="col-lg-2">
-                                    <img src="source/user/images/new_5.jpg" width="85" height="85">
-                                </div>
-                                <div class="col-lg-10">
-                                    <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;">Thẻ nhớ 16GB
-                                        Class 10 Team MicroSDHC (Đen)</div>
-                                    <span class="content-star-rate">
-                                        <fieldset class="rating">
-                                            <input type="radio" id="star5" name="rating" value="5" form="fb-form" />
-                                            <label class="full" for="star5" data-toggle="tooltip" title="Tuyệt vời - 5 sao"></label>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;">{{$resultdata['data'][0]['product']['productName']}}</div>
+                                        <span class="content-star-rate">
+                                            <fieldset class="rating">
+                                                <input type="radio" id="star5" name="ratingproduct" value="5" form="fb-form" />
+                                                <label class="full" for="star5" data-toggle="tooltip" title="Tuyệt vời - 5 sao"></label>
 
-                                            <input type="radio" id="star4" name="rating" value="4" form="fb-form" />
-                                            <label class="full" for="star4" data-toggle="tooltip" title="Khá tốt - 4 sao"></label>
+                                                <input type="radio" id="star4" name="ratingproduct" value="4" form="fb-form" />
+                                                <label class="full" for="star4" data-toggle="tooltip" title="Khá tốt - 4 sao"></label>
 
-                                            <input type="radio" id="star3" name="rating" value="3" form="fb-form" />
-                                            <label class="full" for="star3" data-toggle="tooltip" title="Bình thường - 3 sao"></label>
+                                                <input type="radio" id="star3" name="ratingproduct" value="3" form="fb-form" />
+                                                <label class="full" for="star3" data-toggle="tooltip" title="Bình thường - 3 sao"></label>
 
-                                            <input type="radio" id="star2" name="rating" value="2" form="fb-form" />
-                                            <label class="full" for="star2" data-toggle="tooltip" title="Tệ - 2 sao"></label>
+                                                <input type="radio" id="star2" name="ratingproduct" value="2" form="fb-form" />
+                                                <label class="full" for="star2" data-toggle="tooltip" title="Tệ - 2 sao"></label>
 
-                                            <input type="radio" id="star1" name="rating" value="1" form="fb-form" />
-                                            <label class="full" for="star1" data-toggle="tooltip" title="Quá tệ - 1 star"></label>
-                                        </fieldset>
-                                    </span>
-                                    <br>
-                                    <div class="space10">&nbsp;</div>
-                                    <div class="contact_form_text" style="padding-left: 5px;">
-                                        <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết</div>
-                                        <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                            name="message" rows="7" placeholder="Đánh giá..." required="required"
-                                            data-error="Please, write us a message."></textarea>
+                                                <input type="radio" id="star1" name="ratingproduct" value="1" form="fb-form" />
+                                                <label class="full" for="star1" data-toggle="tooltip" title="Quá tệ - 1 star"></label>
+                                            </fieldset>
+                                        </span>
+                                        <br>
+                                        <div class="space10">&nbsp;</div>
+                                        <div class="contact_form_text" style="padding-left: 5px;">
+                                            <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết</div>
+                                            <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
+                                                name="reviewProduct" rows="7" placeholder="Đánh giá..." required="required"
+                                                data-error="Please, write us a message."></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="section-title" style="font-size:16px"> Bán bởi <a href="">Kho Cực Sốc</a> </div>
-                            <div style="color: #757575;padding-left: 5px;font-size: 14px; padding-bottom: 10px;"> Nhận
-                                xét và đánh giá nhà bán hàng:</div>
-                            <div class="text123">
-                                <img alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png"
-                                    id="imgClickAndChangeVeryGood">
-                                <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png"
-                                    id="imgClickAndChangeGood">
-                                <img alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png"
-                                    id="imgClickAndChangeBad">
-                            </div>
-                            <div class="space20">&nbsp;</div>
-                            <div class="contact_form_text" style="padding-left: 5px;">
+                            <div class="col-lg-5">
+                                <div class="section-title" style="font-size:16px"> Bán bởi <a href="{{route('profileshop',$resultdata['data'][0]['product']['store']['_id'])}}">{{$resultdata['data'][0]['product']['store']['storeName']}}</a> </div>
+                                <div style="color: #757575;padding-left: 5px;font-size: 14px; padding-bottom: 10px;"> Nhận xét và đánh giá nhà bán hàng:</div>
+                                <div class="text123">
+                                    <img alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png"
+                                        id="imgClickAndChangeVeryGood">
+                                    <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png"
+                                        id="imgClickAndChangeGood">
+                                    <img alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png"
+                                        id="imgClickAndChangeBad">
+                                </div>
                                 <div class="space20">&nbsp;</div>
-                                <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>
-                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                    name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
+                                <div class="contact_form_text" style="padding-left: 5px;">
+                                    <div class="space20">&nbsp;</div>
+                                    <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>
+                                    <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
+                                        name="reviewShop" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
+                                </div>
                             </div>
-
+                            <div class="col-lg-9"></div>
+                            <div class="col-lg-3"><button type="submit" class="btn btn-outline-warning btn-save" style="right:0;height: 50px;width: 100%;font-size: 16px; margin-top: 10px">Gửi đánh giá</button></div>
                         </div>
-                        <div class="col-lg-9"></div>
-                        <div class="col-lg-3"><button type="button" class="btn btn-outline-warning btn-save" style="right:0;height: 50px;width: 100%;font-size: 16px; margin-top: 10px">Giử
-                                đánh giá</button></div>
-
-                    </div>
+                        <div id="RatingLevelShop"></div>
+                        <input type="text" hidden name="productId" value="{{$resultdata['data'][0]['product']['_id']}}">
+                        <input type="text" hidden name="storeId" value="{{$resultdata['data'][0]['product']['store']['_id']}}">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
-            {{-- <div id="hoso" class="tabcontent" style="display:none">
-                <div class="characteristics">
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="section-title" style="color: #757575;"> Đã mua ngày 15 thg 11 2017</div>
-                            <div style="padding-left: 5px;font-size: 13px; padding-bottom: 10px;">Nhận xét và đánh giá
-                                sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
-                            <div class="row" style="padding-left: 5px;">
-                                <div class="col-lg-2">
-                                    <img src="source/user/images/new_5.jpg" width="85" height="85">
-                                </div>
-                                <div class="col-lg-10">
-                                    <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;">Thẻ nhớ 16GB
-                                        Class 10 Team MicroSDHC (Đen)</div>
-                                    <div class="rating_r rating_r_1 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i>
-                                    </div>
-                                    <div class="space10">&nbsp;</div>
-                                    <div class="contact_form_text" style="padding-left: 5px;">
-                                        <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết</div>
-                                        <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                            name="message" rows="7" placeholder="Đánh giá..." disabled required="required"
-                                            data-error="Please, write us a message."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="section-title" style="font-size:16px"> Bán bởi <a href="">Kho Cực Sốc</a> </div>
-                            <div style="color: #757575;padding-left: 5px;font-size: 14px; padding-bottom: 10px;"> Nhận
-                                xét và đánh giá nhà bán hàng:</div>
-                            <div class="text123">
-                                <img alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png"
-                                    id="imgClickAndChangeVeryGood">
-                                <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png"
-                                    id="imgClickAndChangeGood">
-                                <img alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png"
-                                    id="imgClickAndChangeBad">
-                            </div>
-                            <div class="space20">&nbsp;</div>
-                            <div class="contact_form_text" style="padding-left: 5px;">
-                                <div class="space20">&nbsp;</div>
-                                <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>
-                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                    name="message" rows="7" placeholder="Đánh giá..." disabled required="required"
-                                    data-error="Please, write us a message."></textarea>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-7">
-                            <div class="section-title" style="color: #757575;"> Đã mua ngày 15 thg 11 2017</div>
-                            <div style="padding-left: 5px;font-size: 13px; padding-bottom: 10px;">Nhận xét và đánh giá
-                                sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
-                            <div class="row" style="padding-left: 5px;">
-                                <div class="col-lg-2">
-                                    <img src="source/user/images/new_5.jpg" width="85" height="85">
-                                </div>
-                                <div class="col-lg-10">
-                                    <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;">Thẻ nhớ 16GB
-                                        Class 10 Team MicroSDHC (Đen)</div>
-                                    <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i> <i></i>
-                                    </div>
-                                    <div class="space10">&nbsp;</div>
-                                    <div class="contact_form_text" style="padding-left: 5px;">
-                                        <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết</div>
-                                        <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                            name="message" rows="7" placeholder="Đánh giá..." disabled required="required"
-                                            data-error="Please, write us a message."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="section-title" style="font-size:16px"> Bán bởi <a href="">Kho Cực Sốc</a> </div>
-                            <div style="color: #757575;padding-left: 5px;font-size: 14px; padding-bottom: 10px;"> Nhận
-                                xét và đánh giá nhà bán hàng:</div>
-                            <div class="text123">
-                                <img alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png"
-                                    id="imgClickAndChangeVeryGood">
-                                <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png"
-                                    id="imgClickAndChangeGood">
-                                <img alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png"
-                                    id="imgClickAndChangeBad">
-                            </div>
-                            <div class="space20">&nbsp;</div>
-                            <div class="contact_form_text" style="padding-left: 5px;">
-                                <div class="space20">&nbsp;</div>
-                                <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>
-                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                    name="message" rows="7" placeholder="Đánh giá..." disabled required="required"
-                                    data-error="Please, write us a message."></textarea>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 </div>
@@ -392,17 +294,20 @@
         var id = $(this).attr('id');
         if (id == 'imgClickAndChangeVeryGood') {
             $('#imgClickAndChangeVeryGood').attr('src', 'source/user/images/icon-color-verygood.png');
+            $('#RatingLevelShop').html(' <input hidden type="text" name="ratingLevel" value="1">')
             $('#imgClickAndChangeGood').attr('src', 'source/user/images/icon-good.png');
             $('#imgClickAndChangeBad').attr('src', 'source/user/images/icon-bad.png');
 
         } else if (id == 'imgClickAndChangeGood') {
             $('#imgClickAndChangeVeryGood').attr('src', 'source/user/images/icon-verygood.png');
             $('#imgClickAndChangeGood').attr('src', 'source/user/images/icon-color-good.png');
+             $('#RatingLevelShop').html(' <input hidden type="text" name="ratingLevel" value="2">')
             $('#imgClickAndChangeBad').attr('src', 'source/user/images/icon-bad.png');
         } else {
             $('#imgClickAndChangeVeryGood').attr('src', 'source/user/images/icon-verygood.png');
             $('#imgClickAndChangeGood').attr('src', 'source/user/images/icon-good.png');
             $('#imgClickAndChangeBad').attr('src', 'source/user/images/icon-color-bad.png');
+             $('#RatingLevelShop').html(' <input hidden type="text" name="ratingLevel" value="3">')
         }
     });
 

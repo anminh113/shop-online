@@ -9,7 +9,9 @@
     use GuzzleHttp\Pool;
     use Illuminate\Support\Facades\Log;
     use GuzzleHttp\Exception\RequestException;
-
+    use GuzzleHttp\Exception\ClientException;
+    use Exception;
+    
  
     class DeleteController extends Controller{
         
@@ -26,10 +28,9 @@
             $client1 = new \GuzzleHttp\Client();
             $res = $client1->request('DELETE',PageController::getUrl('deliveryaddresses/'.$req->id.'') );
             $data = json_decode($res->getBody()->getContents(), true);
-          
-         
-            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
-       }
+
+            return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
+        }
 
 
 
@@ -37,20 +38,27 @@
         // Admin hệ thống
         public function deleteAddCategoryAdmin(Request $req){
              //get json danh muc all
-             $client1 = new \GuzzleHttp\Client();
-             $res = $client1->request('DELETE',PageController::getUrl('categories/'.$req->id.'') );
-             $data = json_decode($res->getBody()->getContents(), true);
-            
-          
-            return redirect()->back();       
+                // $client1 = new \GuzzleHttp\Client();
+                try {
+                    $client = new \GuzzleHttp\Client();
+                    $res = $client->request('DELETE',PageController::getUrl('categories/'.$req->id.''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);     
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Phải xóa loại sản phẩm trong danh mục trước']);
+                }
         }
 
         public function deleteAddProductTypeAdmin(Request $req){
             //get json danh muc all
-            $client1 = new \GuzzleHttp\Client();
-            $res = $client1->request('DELETE',PageController::getUrl('producttypes/'.$req->id.'') );
-            $data = json_decode($res->getBody()->getContents(), true);
-            return redirect()->back();
+            try {
+                $client1 = new \GuzzleHttp\Client();
+                $res = $client1->request('DELETE',PageController::getUrl('producttypes/'.$req->id.'') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Phải xóa thông số lỹ thuật trong loại sản phẩm trước']);
+            }
         }
 
         public function deleteAddSpecificationAdmin(Request $req){
@@ -74,8 +82,6 @@
             for($i=0; $i< count($datatitle); $i++){
                 $value[]= $datatitle[$i];
             }
-          
-       
             // dd($value);
             $datajson1 =array([
                 "propName" => "specificationTitle",
@@ -92,7 +98,7 @@
             );
             curl_setopt_array( $ch1, $options1 );
             $result1 =  curl_exec($ch1);
-            return redirect()->back();
+            return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
         }
 
         public function deleteCategoryAdmin(Request $req){
@@ -102,9 +108,7 @@
             $data = json_decode($res->getBody()->getContents(), true);
             for($i=0; $i<count($data['productTypes']); $i++){
                 $data1[] = $data['productTypes'][$i]['_id'];
-               
             }
-          
             $datacount = 0;
             for($i=0; $i<count($data1); $i++){
                 $res1 = $client->request('GET',PageController::getUrl('products/store/producttype/'.$store.'/'.$data1[$i].''));
@@ -140,10 +144,10 @@
                 curl_setopt_array( $ch, $options );
                 $result =  curl_exec($ch);
                 // dd($result);
-                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'OK Xóa rồi đó']);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
             }
 
-            return redirect()->back();
+            return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
         }
     
 

@@ -108,7 +108,7 @@
                                                 </div>
                                                 <div class="product_extras">
                                                     <a href="{{route('gio-hang',$item['product']['_id'])}}"><button
-                                                        class="product_cart_button">Thêm vào giỏ {{$resultproductPurchase['0'][$i]['count']}}</button></a>
+                                                        class="product_cart_button">Thêm vào giỏ</button></a>
                                                 </div>
                                             </div>
                                             <div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -473,51 +473,47 @@
 <script src="source/user/js/custom.js"></script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
 @foreach($resultproductPurchase['datatextproductPurchase'] as $item)
-@if(!empty($datajson1['id']) )
-    @if($datajson1['id'] == $item['product']['_id']) 
-    <script>
-         var countstar ='{{number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '')}}';
-        $(function () {
-            $(".my-rating-{{$item['product']['_id']}}").starRating({
-                readOnly: true,
-                initialRating: countstar,
-                starGradient: {
-                    start: '#F4E800',
-                    end: '#F4E800'
-                },
-                starShape: '#F4E800',
-                emptyColor: '#FFF',
-                starSize: 20,
-                strokeColor: '#F4E800',
-                strokeWidth: 30,
-
+@if(!empty($datajson1['countsar']))
+    @foreach ($datajson1['countsar'] as $da )
+        @if($da['id'] == $item['product']['_id']) 
+        <script>
+            $(function () {
+                $(".my-rating-{{$item['product']['_id']}}").starRating({
+                    readOnly: true,
+                    initialRating: {{$da['value']}},
+                    starGradient: {
+                        start: '#F4E800',
+                        end: '#F4E800'
+                    },
+                    starShape: '#F4E800',
+                    emptyColor: '#FFF',
+                    starSize: 20,
+                    strokeColor: '#F4E800',
+                    strokeWidth: 30,
+                });
             });
-
-        });
-
-    </script>
-   @else 
-   <script>
-       $(function () {
-           $(".my-rating-{{$item['product']['_id']}}").starRating({
-               readOnly: true,
-               initialRating: 0,
-               starGradient: {
-                   start: '#F4E800',
-                   end: '#F4E800'
-               },
-               starShape: '#F4E800',
-               emptyColor: '#FFF',
-               starSize: 20,
-               strokeColor: '#F4E800',
-               strokeWidth: 30,
-
-           });
-
-       });
-
-   </script>
-   @endif
+        </script>
+        @endif
+    @endforeach
+        @if($da['id'] != $item['product']['_id']) 
+        <script>
+            $(function () {
+                $(".my-rating-{{$item['product']['_id']}}").starRating({
+                    readOnly: true,
+                    initialRating: 0,
+                    starGradient: {
+                        start: '#F4E800',
+                        end: '#F4E800'
+                    },
+                    starShape: '#F4E800',
+                    emptyColor: '#FFF',
+                    starSize: 20,
+                    strokeColor: '#F4E800',
+                    strokeWidth: 30,
+                });
+            });
+        </script>
+        @endif
 @else 
     <script>
         $(function () {

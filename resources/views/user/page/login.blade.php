@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/register.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/login.css">
 <!-- show menu when hover -->
-<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+
 @endsection
 
 @section('content')
@@ -77,6 +77,15 @@
             <h3 class="viewed_title">Chào mừng đến với CyberZone!</h3>
         </div>
         <div class="space15">&nbsp;</div>
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="vertical-align-wrap">
             <div class="vertical-align-middle">
                 <div class="auth-box ">
@@ -85,14 +94,14 @@
                             <div class="header">
                                 <p class="lead">Đăng Nhập</p>
                             </div>
-                            <form action="{{route('post-dang-nhap')}}" method="POST">
+                            <form id="demoForm" name="demoForm" action="{{route('post-dang-nhap')}}" method="POST" accept-charset="utf-8">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="pass">Mật Khẩu</label>
-                                    <input type="password" class="form-control" id="pass" name="pass" placeholder="">
+                                    <label for="password">Mật Khẩu</label>
+                                    <input type="password" class="form-control" id="password" name="pass" placeholder="" required>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="button register_title_button">Đăng Nhập</button>
@@ -131,6 +140,7 @@
     
     </div>
 </div>
+
 <!-- Brands -->
 <div class="brands">
     <div class="container">
@@ -179,5 +189,44 @@
 @section('footer')
 <script src="source/user/js/custom.js"></script>
 <script src="source/user/styles/js/register.js"></script>
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+
+<script>
+    $(document).ready(function() {
+
+        $("form[name='demoForm']").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                pass: {
+                    required: true,
+                    // minlength: 1
+                }
+            },
+            messages: {        
+                pass: {
+                    required: "Vui lòng nhập Password",
+                },
+                email: {
+                    required: "Vui lòng nhập Email",
+                    email: "Vui lòng nhập đúng địa chỉ Email"
+                },
+                // email: "Vui lòng nhập địa chỉ Email",
+            },
+            errorElement: "em",
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
+            },
+            submitHandler: function(form) {
+            form.submit();
+            }
+        });
+    });
+</script>
 @endsection
 
