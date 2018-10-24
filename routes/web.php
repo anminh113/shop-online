@@ -119,6 +119,18 @@ Route::post('wishList', [
     'as'=>'post-wishList',
     'uses'=>'PostController@postwishList'
 ]);
+Route::delete('delete-wishList', [
+    'as'=>'delete-wishList',
+    'uses'=>'DeleteController@deleteWishList'
+]);
+Route::post('follow', [
+    'as'=>'post-follow',
+    'uses'=>'PostController@postFollow'
+]);
+Route::delete('delete-follow', [
+    'as'=>'delete-follow',
+    'uses'=>'DeleteController@deleteFollow'
+]);
 //---
 Route::get('check-out/{id}', [
     'as'=>'check-out',
@@ -170,10 +182,13 @@ Route::patch('update-password-profile-user', [
 ]);
 //---
 
-Route::get('profile-user-shop', [
+//---
+Route::get('profile-user-shop/{id}', [
     'as'=>'profile-user-shop',
     'uses'=>'PageController@getProfileUserShop'
 ]);
+
+//---
 
 Route::get('register-shop', [
     'as'=>'register-shop',
@@ -305,6 +320,11 @@ Route::post('delete-discount-admin', [
 Route::post('search-saleoff-discount-admin', [
     'as'=>'search-saleoff-admin',
     'uses'=>'PostController@postSaleoffAdmin'
+]);
+
+Route::get('order-admin', [
+    'as'=>'order-admin',
+    'uses'=>'PageController@getOrderAdmin'
 ]);
 //---
 

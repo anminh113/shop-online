@@ -92,7 +92,7 @@
                     <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                         <div class="wishlist d-flex flex-row align-items-center justify-content-end">
                             @if (Session::has('keyuser'))
-                            <div class="wishlist_icon">
+                            <div class="wishlist_icon" onclick="window.location='{{route('profile-user-shop',Session::get('keyuser')['info'][0]['customer']['_id'])}}';">
                                 <img src="source/user/images/heart.png" alt="">
                                 <div class="cart_count"><span>
                                         {{$datawl}}

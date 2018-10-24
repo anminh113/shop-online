@@ -97,7 +97,7 @@
                             <form id="demoForm" name="demoForm" action="{{route('post-dang-nhap')}}" method="POST" accept-charset="utf-8">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="" required>
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Mật Khẩu</label>
@@ -196,10 +196,10 @@
 
         $("form[name='demoForm']").validate({
             rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
+                // email: {
+                //     required: true,
+                //     email: true
+                // },
                 pass: {
                     required: true,
                     // minlength: 1
@@ -209,10 +209,10 @@
                 pass: {
                     required: "Vui lòng nhập Password",
                 },
-                email: {
-                    required: "Vui lòng nhập Email",
-                    email: "Vui lòng nhập đúng địa chỉ Email"
-                },
+                // email: {
+                //     required: "Vui lòng nhập Email",
+                //     email: "Vui lòng nhập đúng địa chỉ Email"
+                // },
                 // email: "Vui lòng nhập địa chỉ Email",
             },
             errorElement: "em",

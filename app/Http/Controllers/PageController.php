@@ -415,7 +415,7 @@
               $datatime = json_decode($restime->getBody()->getContents(), true);
               $todaytime = new DateTime($datatime['time']);
               $todaytime->setTimezone(new DateTimeZone('UTC'));
-              $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+              $time12 =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
               $resshop = $client1->request('GET',PageController::getUrl('stores/'.$req->id.''));
               $datashop = json_decode($resshop->getBody()->getContents(), true);
@@ -528,8 +528,25 @@
             }else{
                 $countrating = number_format((($countstar_2 + $countstar_1)/($countstar_2 + $countstar_1 + $countstar_3))*100, 1, '.', '');
             }
+            $resfollowcount = $client1->request('GET',PageController::getUrl('followStores/store/'.$req->id.''));
+            $datafollowcount = json_decode($resfollowcount->getBody()->getContents(), true);
+
+
+            $datafollow = '';
+            if( Session::has('keyuser')){
+                try {
+                $resfollow = $client1->request('GET',PageController::getUrl('followStores/check/'.Session::get('keyuser')['info'][0]['customer']['_id'].'/'.$req->id.''));
+                $datafollow = json_decode($resfollow->getBody()->getContents(), true);
+                // dd($datawl);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                
+                }
+
+
+            }
+
             //   dd($countrating);
-            return view('user/page.profileshop', compact('countstar_1','countstar_2','countstar_3','countrating','timereviewshop','datareviewshop','createdTime','datashop', 'datajson1','data','result','result1','data4','resultPrice','time','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
+            return view('user/page.profileshop', compact('datafollowcount','datafollow','countstar_1','countstar_2','countstar_3','countrating','timereviewshop','datareviewshop','createdTime','datashop', 'datajson1','data','result','result1','data4','resultPrice','time12','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getCart(){
@@ -660,9 +677,54 @@
             return view('user/page.profileuser',compact('datacustomer','dataaddress'));
         }
 
-        public function getProfileUserShop(){
-         
-            return view('user/page.profileusershop');
+        public function getProfileUserShop(Request $req){
+            $client = new \GuzzleHttp\Client();
+            try {
+                $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+                $datatime = json_decode($restime->getBody()->getContents(), true);
+                $todaytime = new DateTime($datatime['time']);
+                $todaytime->setTimezone(new DateTimeZone('UTC'));
+                $time12 =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+
+                $reswl = $client->request('GET',PageController::getUrl('wishList/customer/'.$req->id.'') );
+                $datawl = json_decode($reswl->getBody()->getContents(), true);
+                // dd($datawl);
+                $dataproduct = array();
+                for ($i=0; $i < count($datawl['wishList']) ; $i++) { 
+                    $resproduct = $client->request('GET',PageController::getUrl('products/'.$datawl['wishList'][$i]['product']['_id'].'') );
+                    $dataproduct[] = json_decode($resproduct->getBody()->getContents(), true);
+
+                    $resproduct = $client->request('GET',PageController::getUrl('productimages/product/'.$datawl['wishList'][$i]['product']['_id'].'') );
+                    $dataproductimgae[] = json_decode($resproduct->getBody()->getContents(), true);
+
+                }
+                $resultproduct = compact('dataproduct');
+                // dd($resultproduct);
+                $resultproductimage = compact('dataproductimgae');
+
+                $dataStore =array();
+                $resfollowStore = $client->request('GET',PageController::getUrl('followStores/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].'') );
+                $datafollow = json_decode($resfollowStore->getBody()->getContents(), true);
+                for ($i=0; $i < count($datafollow['followStores']) ; $i++) { 
+                    $resStore = $client->request('GET',PageController::getUrl('stores/'.$datafollow['followStores'][$i]['store']['_id'].'') );
+                    $dataStore[] = json_decode($resStore->getBody()->getContents(), true);
+                    $resProductStore = $client->request('GET',PageController::getUrl('products/store/'.$datafollow['followStores'][$i]['store']['_id'].'') );
+                    $dataProductStore[] = json_decode($resProductStore->getBody()->getContents(), true);
+                    for ($j=0; $j < count($dataProductStore[$i]['products']) ; $j++) {
+                        $res2 = $client->request('GET',PageController::getUrl('productimages/product/'.$dataProductStore[$i]['products'][$j]['_id'].''));
+                        $dataimgproduct[] = json_decode($res2->getBody()->getContents(), true);
+                    }
+
+                }
+                $resultStore = compact('dataStore');
+                // dd($dataimgproduct);
+                // dd($resultProductStore);
+                return view('user/page.profileusershop',compact('dataimgproduct','dataProductStore','resultStore','time12','datawl','resultproduct','dataproductimgae','resultproductimage'));
+            }catch (\GuzzleHttp\Exception\RequestException $e) {
+                return $e->getResponse()->getStatusCode();
+                
+            }
+            return view('user/page.profileusershop',compact('datawl','dataproduct','resultproductimage'));
         }
 
         public function getRegisterShop(){
@@ -681,17 +743,20 @@
                 for ($i=0; $i <count($dataorder['orders']) ; $i++) { 
                     $resorderitem = $client->request('GET',PageController::getUrl('orderItems/order/'.$dataorder['orders'][$i]['_id'].'') );
                     $dataorderitem[] = json_decode($resorderitem->getBody()->getContents(), true);
-
                 }
 
                 $resultorderitem = compact('dataorderitem');
                 // dd($resultorderitem);
-                }catch (\GuzzleHttp\Exception\ClientException $e) {
+                $resreviewproduct = $client->request('GET',PageController::getUrl('reviewProducts/customer/'.$datacustomer['customer']['_id'].'') );
+                $datareviewproduct = json_decode($resreviewproduct->getBody()->getContents(), true);
+                $resreviewshop = $client->request('GET',PageController::getUrl('reviewStores/customer/'.$datacustomer['customer']['_id'].'') );
+                $datareviewshop = json_decode($resreviewshop->getBody()->getContents(), true);
+                }catch (\GuzzleHttp\Exception\RequestException $e) {
                 return $e->getResponse()->getStatusCode();
                 
             }
 
-            return view('user/page.reviewshop',compact('dataorder','resultorderitem'));
+            return view('user/page.reviewshop',compact('datareviewshop','datareviewproduct','dataorder','resultorderitem'));
         }
 
         public function getWriteReviewShop(Request $req){
@@ -1064,6 +1129,16 @@
                     $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
                 return view('admin/page.discountadmin', compact('time','data','result3','result2' , 'resdis', 'result1'  ,'res1' ,'result', 'data_category','data_product_type','data_product_type_specificationtypes'));
                 }
+            }
+            return redirect()->guest(route('login-admin', [], false));           
+        }
+
+        public function getOrderAdmin(){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+               
+                return view('admin/page.orderadmin');
+            }else{
+                return redirect()->guest(route('login-admin', [], false));       
             }
             return redirect()->guest(route('login-admin', [], false));           
         }

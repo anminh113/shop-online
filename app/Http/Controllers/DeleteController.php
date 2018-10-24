@@ -150,7 +150,29 @@
             return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
         }
     
+        public function deleteFollow(Request $req){
 
+            try {
+                $client1 = new \GuzzleHttp\Client();
+                $resfollow = $client1->request('DELETE',PageController::getUrl('followStores/'.Session::get('keyuser')['info'][0]['customer']['_id'].'/'.$req['storeId'].''));
+                $datafollow = json_decode($resfollow->getBody()->getContents(), true);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã bỏ theo dõi thành công' ,'message'=>' ']);
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
+            }
+        }
+
+        public function deleteWishList(Request $req){
+
+            try {
+                $client1 = new \GuzzleHttp\Client();
+                $resfollow = $client1->request('DELETE',PageController::getUrl('wishList/'.Session::get('keyuser')['info'][0]['customer']['_id'].'/'.$req['productId'].''));
+                $datafollow = json_decode($resfollow->getBody()->getContents(), true);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã bỏ sản phẩm yêu thích' ,'message'=>' ']);
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
+            }
+        }
  
         
 

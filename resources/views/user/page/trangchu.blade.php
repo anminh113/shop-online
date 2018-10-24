@@ -480,7 +480,7 @@
             $(function () {
                 $(".my-rating-{{$item['product']['_id']}}").starRating({
                     readOnly: true,
-                    initialRating: {{$da['value']}},
+                    initialRating: '{{$da['value']}}',
                     starGradient: {
                         start: '#F4E800',
                         end: '#F4E800'

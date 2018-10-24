@@ -55,19 +55,18 @@
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
-
+                    @foreach ($resultproduct['dataproduct'] as $key => $item)
+                    {{-- @foreach ($item as  $da) --}}
                     <div class="order">
-                        <div class="order-info">SEICOO STORE</div>
                         <div class="order-item">
                             <div class="row">
                                 <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
+                                    <div class="item-pic"><img src="{{$dataproductimgae[$key]['imageList'][0]['imageURL']}}" width="115" height="115"> </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="item-main item-main-mini">
                                         <div>
-                                            <div class="text title item-title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
+                                        <div class="text title item-title" style="font-size:16px"><a href="{{ route('san-pham',$item['product']['_id'] )}}">{{$item['product']['productName']}}</a> </div>
                                             <p class="text desc"></p>
                                             <p class="text desc bold"></p>
                                         </div>
@@ -75,311 +74,88 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="item-quantity">
-                                        <div class="price"><span><span class="currPrice">618.652.000đ</span></span>
+                                        @if(!empty($item['product']['saleOff']) && $item['product']['saleOff']['dateEnd'] > $time12)
+                                        <div class="price"><span class="currPrice">{{number_format($item['product']['price'] - ($item['product']['price'] * $item['product']['saleOff']['discount'])/100)}},000₫</span>
                                             <div class="originPrice">
-                                                <span class="origin-price-value">772.350₫</span> <span class="promotion">-20%</span>
+                                            <span class="origin-price-value">{{number_format($item['product']['price'])}},000₫</span> <span class="promotion">-{{$item['product']['saleOff']['discount']}}%</span>
                                             </div>
                                         </div>
+                                        @elseif(empty($item['product']['saleOff']) || $item['product']['saleOff']['dateEnd'] < $time12)
+                                        <div class="price">
+                                            <span class="currPrice">{{number_format($item['product']['price'])}},000₫</span>
+                                        </div>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="item-status item-capsule">
                                         <div class="price">
-                                            <button type="button" class="btn btn-outline-warning btn-save" style="width: 125px;font-size: 14px">Thêm
-                                                vào giỏ</button>
+                                            <a href="{{route('gio-hang',$item['product']['_id'])}}"  class="btn btn-outline-info btn-save" style="width: 125px;font-size: 14px">Thêm
+                                                vào giỏ</a>
                                             <div style="margin-bottom: 10px "></div>
-                                            <button type="button" class="btn btn-outline-danger " style="width: 125px;font-size: 14px">Xóa</button>
+                                            <button type="submit" form="wishList{{$item['product']['_id']}}" class="btn btn-outline-danger" style="width: 125px;font-size: 14px">Xóa</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <div class="space10">&nbsp;</div>
-                    <div class="order">
-                        <div class="order-info">SEICOO STORE</div>
-                        <div class="order-item">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="source/user/images/new_5.jpg" alt=""> </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title">Chuột quang
-                                                KHÔNG DÂY Logitech M331 - HÃNG PHÂN PHỐI CHÍNH THỨC</div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-quantity">
-                                        <div class="price"><span><span class="currPrice">618.652.000đ</span></span>
-                                            {{-- <div class="originPrice">
-                                                <span class="origin-price-value">772.350₫</span> <span class="promotion">-20%</span>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <div class="price">
-                                            <button type="button" class="btn btn-outline-warning btn-save" style="width: 125px;font-size: 14px">Thêm
-                                                vào giỏ</button>
-                                            <div style="margin-bottom: 10px "></div>
-                                            <button type="button" class="btn btn-outline-danger " style="width: 125px;font-size: 14px">Xóa</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    {{-- @endforeach --}}
+                    <form action="{{route('delete-wishList')}}" id="wishList{{$item['product']['_id']}}" method="post">
+                            <input type="text" hidden name="productId" value="{{$item['product']['_id']}}">
+                            @method('DELETE')
+                            {{ csrf_field() }}
+                    </form>
+                    @endforeach
 
 
                 </div>
             </div>
             <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
-
-                    <div class="order">
-                        <div class="order-info">
-                            <div class="row">
-                                <div class="col-lg-6 text-left">SEICOO STORE</div>
-                                <div class="col-lg-6 text-right" style="font-size: 12px;">
-                                    ĐANG THEO DÕI <span>|</span> <a href="profileshop">THAM QUAN</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-item">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <!-- Product Item -->
-                                    <div class="product_item is_new product-shop">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                src="source/user/images/new_5.jpg" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">$2250</div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Philips BT6900A</a></div>
-                                            </div>
-                                        </div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <!-- Product Item -->
-                                    <div class="product_item discount product-shop">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                src="source/user/images/featured_1.png" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">$225<span>$300</span></div>
-                                            <div class="product_name text-type-product">
-                                                <div><a href="#" tabindex="0" class="text-type-product">Huawei MediaPad
-                                                        Huawei MediaPad Huawei MediaPad </a></div>
-                                            </div>
-                                        </div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <!-- Product Item -->
-                                    <div class="product_item product-shop">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                src="source/user/images/featured_1.png" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">$225<span>$300</span></div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                            </div>
-                                        </div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <!-- Product Item -->
-                                    <div class="product_item product-shop">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                src="source/user/images/featured_1.png" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">$225<span>$300</span></div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                            </div>
-                                        </div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <!-- Product Item -->
-                                    <div class="product_item product-shop">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                src="source/user/images/featured_1.png" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">$225<span>$300</span></div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                            </div>
-                                        </div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <!-- Product Item -->
-                                    <div class="product_item product-shop">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                src="source/user/images/featured_1.png" alt=""></div>
-                                        <div class="product_content">
-                                            <div class="product_price">$225<span>$300</span></div>
-                                            <div class="product_name">
-                                                <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                            </div>
-                                        </div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-25%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="order">
+                    @foreach ($resultStore['dataStore'] as $key =>$item)
+                        <div class="order">
                             <div class="order-info">
                                 <div class="row">
-                                    <div class="col-lg-6 text-left">SEICOO STORE</div>
-                                    <div class="col-lg-6 text-right" style="font-size: 12px;">
-                                        ĐANG THEO DÕI <span>|</span> <a href="profileshop">THAM QUAN</a>
+                                    <div class="col-lg-6 text-left">{{$item['store']['storeName']}}</div>
+                                    <div class="col-lg-6 text-right" style="font-size: 12px;">ĐANG THEO DÕI <span>|</span> <a href="{{route('profileshop',$item['store']['_id'])}}">THAM QUAN</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="order-item">
                                 <div class="row">
-                                    <div class="col-lg-2">
-                                        <!-- Product Item -->
-                                        <div class="product_item is_new product-shop">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                    src="source/user/images/new_5.jpg" alt=""></div>
-                                            <div class="product_content">
-                                                <div class="product_price">$2250</div>
-                                                <div class="product_name">
-                                                    <div><a href="#" tabindex="0">Philips BT6900A</a></div>
+                                    <?php $i =1?>
+                                    @foreach ($dataProductStore[$key]['products'] as $key1 => $da)
+                                    <?php $i =$i + 1?>
+                                        <div class="col-lg-3">
+                                            <!-- Product Item -->
+                                            <div class="product_item  product-shop">
+                                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                @foreach ($dataimgproduct as $item1)
+                                                @if($item1['productId']  == $da['_id'] )
+                                                    <img src="{{$item1['imageList'][0]['imageURL']}}" alt="" width="115" height="115">
+                                                @endif
+                                                @endforeach
                                                 </div>
-                                            </div>
-                                            <ul class="product_marks">
-                                                <li class="product_mark product_discount">-25%</li>
-                                                <li class="product_mark product_new">new</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <!-- Product Item -->
-                                        <div class="product_item discount product-shop">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                    src="source/user/images/featured_1.png" alt=""></div>
-                                            <div class="product_content">
-                                                <div class="product_price">$225<span>$300</span></div>
-                                                <div class="product_name text-type-product">
-                                                    <div><a href="#" tabindex="0" class="text-type-product">Huawei MediaPad
-                                                            Huawei MediaPad Huawei MediaPad </a></div>
+                                                <div class="product_content">
+                                                    <div class="product_name">
+                                                        <div><a href="{{ route('san-pham',$da['_id'] )}}" tabindex="0">{{$da['productName']}}</a></div>
+                                                    </div>
                                                 </div>
+                                                
                                             </div>
-                                            <ul class="product_marks">
-                                                <li class="product_mark product_discount">-25%</li>
-                                                <li class="product_mark product_new">new</li>
-                                            </ul>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <!-- Product Item -->
-                                        <div class="product_item product-shop">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                    src="source/user/images/featured_1.png" alt=""></div>
-                                            <div class="product_content">
-                                                <div class="product_price">$225<span>$300</span></div>
-                                                <div class="product_name">
-                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                                </div>
-                                            </div>
-                                            <ul class="product_marks">
-                                                <li class="product_mark product_discount">-25%</li>
-                                                <li class="product_mark product_new">new</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <!-- Product Item -->
-                                        <div class="product_item product-shop">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                    src="source/user/images/featured_1.png" alt=""></div>
-                                            <div class="product_content">
-                                                <div class="product_price">$225<span>$300</span></div>
-                                                <div class="product_name">
-                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                                </div>
-                                            </div>
-                                            <ul class="product_marks">
-                                                <li class="product_mark product_discount">-25%</li>
-                                                <li class="product_mark product_new">new</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <!-- Product Item -->
-                                        <div class="product_item product-shop">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                    src="source/user/images/featured_1.png" alt=""></div>
-                                            <div class="product_content">
-                                                <div class="product_price">$225<span>$300</span></div>
-                                                <div class="product_name">
-                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                                </div>
-                                            </div>
-                                            <ul class="product_marks">
-                                                <li class="product_mark product_discount">-25%</li>
-                                                <li class="product_mark product_new">new</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <!-- Product Item -->
-                                        <div class="product_item product-shop">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img
-                                                    src="source/user/images/featured_1.png" alt=""></div>
-                                            <div class="product_content">
-                                                <div class="product_price">$225<span>$300</span></div>
-                                                <div class="product_name">
-                                                    <div><a href="#" tabindex="0">Huawei MediaPad...</a></div>
-                                                </div>
-                                            </div>
-                                            <ul class="product_marks">
-                                                <li class="product_mark product_discount">-25%</li>
-                                                <li class="product_mark product_new">new</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    @if($i>4)
+                                    @break
+                                    @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                         <div class="space10">&nbsp;</div>
+                    @endforeach
                 </div>
             </div>
         </div>

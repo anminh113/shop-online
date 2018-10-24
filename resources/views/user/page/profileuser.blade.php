@@ -53,7 +53,7 @@
             </a>
         </div>
         <div class="col-lg-5 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='profile-user-shop';">
+        <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{route('profile-user-shop',Session::get('keyuser')['info'][0]['customer']['_id'])}}';">
                 <div class=" tablink  w3-padding border-red text-center">Sản phẩm yêu thích & Gian hàng đã theo dõi</div>
             </a>
         </div>

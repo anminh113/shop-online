@@ -685,6 +685,7 @@
         }
 
         public function postCheckOut(Request $req){
+            $client1 = new \GuzzleHttp\Client();
             $amount= $req['amount'];
             $from="VND";
             $to="USD";
@@ -711,7 +712,6 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-            // dd($result1);
             if($result1->outcome->seller_message = "Payment complete."){
                 $datajson=array([
                     "propName" =>  "orderState",
@@ -730,6 +730,30 @@
                 curl_setopt_array( $ch, $options );
                 $result =  curl_exec($ch);
                 $result1 =json_decode($result);
+
+                $resOrderItem = $client1->request('GET',PageController::getUrl('orderItems/order/'.$req['orderId'].''));
+                $dataOrderItem = json_decode($resOrderItem->getBody()->getContents(), true);
+
+                for ($i=0; $i <$dataOrderItem['count'] ; $i++) { 
+                    $datajson=array([
+                        "propName" =>  "orderItemState",
+                        "value" =>  "5b9a17f3e747da371818fd9d"
+                    ]);
+                    // dd($datajson);
+                    $jsonData =json_encode($datajson);
+                    $json_url = PageController::getUrl('orderItems/'.$dataOrderItem['orderItems'][$i]['_id'].'');
+                    $ch = curl_init( $json_url );
+                    $options = array(
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                        CURLOPT_CUSTOMREQUEST => "PATCH",
+                        CURLOPT_POSTFIELDS => $jsonData
+                    );
+                    curl_setopt_array( $ch, $options );
+                    $result =  curl_exec($ch);
+                    $result1 =json_decode($result);
+                }
+                
                 session()->forget('cart');
                 session()->forget('OrderId');
                 return redirect()->route('trang-chu')->with(['flag'=>'success','title'=>'Giao dịch thành công' ,'message'=>' ']);
@@ -778,7 +802,7 @@
             session()->put('OrderId', $result1->createdOrder->_id);
             if($result1->message == "Order saved"){
                 $cart = Session::get('cart');
-                // dd($oldCart);
+                // dd($orderStateId);
                 foreach($cart->items as $key => $value){
                     $datajsonOrderItem = array(
                         "orderId" =>   $result1->createdOrder->_id,
@@ -788,9 +812,10 @@
                             "price" => $value['price'],
                             "imageURL" => $value['img']
                         ),
-                        "quantity" =>  $value['qty']
+                        "quantity" =>  $value['qty'],
+                        "orderItemStateId" => $orderStateId
                     );
-                    // dd($datajsonOrderItem);
+                    // dd( $datajsonOrderItem);
                     $jsonDataOrderItem =json_encode($datajsonOrderItem);
                     $json_urlOrderItem = PageController::getUrl('orderItems');
                     $chOrderItem = curl_init( $json_urlOrderItem );
@@ -917,7 +942,6 @@
 
         public function postwishList(Request $req){
             if(Session::has('keyuser')){
-                // dd(Session::get('keyuser')['info'][0]['customer']['_id']);
                 $datajson =array(
                     "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
                     "productId" =>  $req['productId']
@@ -936,8 +960,31 @@
                 $result1 =json_decode($result);
                 return redirect()->back()->with(['flag'=>'success','title'=>'đã lưu sản phẩm này' ,'message'=>' ']);
             }
-            
             return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để lưu sản phẩm này' ,'message'=>' ']);
+        }
+
+        public function postFollow(Request $req){
+            if(Session::has('keyuser')){
+                $datajson =array(
+                    "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
+                    "storeId" =>  $req['storeId']
+                );
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('followStores');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+                $result1 =json_decode($result);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã theo dõi gian hàng này' ,'message'=>' ']);
+            }
+            return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để theo dõi gian hàng này' ,'message'=>' ']);
         }
  
 

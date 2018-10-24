@@ -425,29 +425,48 @@
 
 
 @foreach ($data['products'] as $time => $item )
-@if(!empty($datajson1['countsar']))
-    @foreach ($datajson1['countsar'] as $da )
-        @if($da['id'] == $item['_id']) 
-        <script>
-            $(function () {
-                $(".my-rating-{{$item['_id']}}").starRating({
-                    readOnly: true,
-                    initialRating: {{$da['value']}},
-                    starGradient: {
-                        start: '#F4E800',
-                        end: '#F4E800'
-                    },
-                    starShape: '#F4E800',
-                    emptyColor: '#FFF',
-                    starSize: 20,
-                    strokeColor: '#F4E800',
-                    strokeWidth: 30,
+    @if(!empty($datajson1['countsar']))
+        @foreach ($datajson1['countsar'] as $da )
+            @if($da['id'] == $item['_id']) 
+            <script>
+                $(function () {
+                    $(".my-rating-{{$item['_id']}}").starRating({
+                        readOnly: true,
+                        initialRating: '{{$da['value']}}',
+                        starGradient: {
+                            start: '#F4E800',
+                            end: '#F4E800'
+                        },
+                        starShape: '#F4E800',
+                        emptyColor: '#FFF',
+                        starSize: 20,
+                        strokeColor: '#F4E800',
+                        strokeWidth: 30,
+                    });
                 });
-            });
-        </script>
-        @endif
-    @endforeach
-        @if($da['id'] != $item['_id']) 
+            </script>
+            @endif
+        @endforeach
+            @if($da['id'] != $item['_id']) 
+            <script>
+                $(function () {
+                    $(".my-rating-{{$item['_id']}}").starRating({
+                        readOnly: true,
+                        initialRating: 0,
+                        starGradient: {
+                            start: '#F4E800',
+                            end: '#F4E800'
+                        },
+                        starShape: '#F4E800',
+                        emptyColor: '#FFF',
+                        starSize: 20,
+                        strokeColor: '#F4E800',
+                        strokeWidth: 30,
+                    });
+                });
+            </script>
+            @endif
+    @else 
         <script>
             $(function () {
                 $(".my-rating-{{$item['_id']}}").starRating({
@@ -463,31 +482,11 @@
                     strokeColor: '#F4E800',
                     strokeWidth: 30,
                 });
+    
             });
+    
         </script>
-        @endif
-@else 
-    <script>
-        $(function () {
-            $(".my-rating-{{$item['_id']}}").starRating({
-                readOnly: true,
-                initialRating: 0,
-                starGradient: {
-                    start: '#F4E800',
-                    end: '#F4E800'
-                },
-                starShape: '#F4E800',
-                emptyColor: '#FFF',
-                starSize: 20,
-                strokeColor: '#F4E800',
-                strokeWidth: 30,
- 
-            });
- 
-        });
- 
-    </script>
-@endif
+    @endif
 
 @endforeach
     
