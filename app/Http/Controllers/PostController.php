@@ -914,6 +914,31 @@
          return redirect()->route('profile-user',Session::get('keyuser')['_id'])->with(['flag'=>'success','title'=>'Đánh giá thành công' ,'message'=>' ']);
 
         }
+
+        public function postwishList(Request $req){
+            if(Session::has('keyuser')){
+                // dd(Session::get('keyuser')['info'][0]['customer']['_id']);
+                $datajson =array(
+                    "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
+                    "productId" =>  $req['productId']
+                );
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('wishList');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+                $result1 =json_decode($result);
+                return redirect()->back()->with(['flag'=>'success','title'=>'đã lưu sản phẩm này' ,'message'=>' ']);
+            }
+            
+            return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để lưu sản phẩm này' ,'message'=>' ']);
+        }
  
 
     }

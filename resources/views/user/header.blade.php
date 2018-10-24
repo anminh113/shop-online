@@ -91,15 +91,15 @@
                     <!-- Wishlist -->
                     <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                         <div class="wishlist d-flex flex-row align-items-center justify-content-end">
+                            @if (Session::has('keyuser'))
                             <div class="wishlist_icon">
                                 <img src="source/user/images/heart.png" alt="">
                                 <div class="cart_count"><span>
-                                        12
+                                        {{$datawl}}
                                     </span></div>
                             </div>
-                            <div class="wishlist_content">
-                                <div class="wishlist_text"><a href="#"></a></div>
-                            </div>
+                          
+                            @endif
                         </div>
                         <!-- Cart -->
                         <div class="cart" onclick="window.location='cart';">

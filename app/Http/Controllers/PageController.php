@@ -286,8 +286,21 @@
                         break;
                 }
             }
+
+            $datawl = '';
+            if( Session::has('keyuser')){
+                try {
+                $reswl = $client->request('GET',PageController::getUrl('wishList/check/'.Session::get('keyuser')['info'][0]['customer']['_id'].'/'.$req->id.''));
+                $datawl = json_decode($reswl->getBody()->getContents(), true);
+                // dd($datawl);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                
+                }
+
+
+            }
          
-            return view('user/page.product',compact('timeend','resultdata','resultimg','datareview','timereview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
+            return view('user/page.product',compact('datawl','timeend','resultdata','resultimg','datareview','timereview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getProductList(){
@@ -435,7 +448,7 @@
               $result = compact('datatext');
               $resultdatareview = compact('datareview');
          
-                array_push($data,$datareview);
+              array_push($data,$datareview);
 
 
               $res3 = $client1->request('GET',PageController::getUrl('categories') );
@@ -486,8 +499,37 @@
                     }  
                 }      
             }    
-            //   dd($data);
-            return view('user/page.profileshop', compact('createdTime','datashop', 'datajson1','data','result','result1','data4','resultPrice','time','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
+
+            $resreviewshop = $client1->request('GET',PageController::getUrl('reviewStores/store/'.$req->id.''));
+            $datareviewshop = json_decode($resreviewshop->getBody()->getContents(), true);
+            $countstar_3 = 0;
+            $countstar_2 = 0;
+            $countstar_1 = 0;
+            $countstar = array();
+            for($i=0; $i<$datareviewshop['count']; $i++){
+                $dtstart = new DateTime($datareviewshop['reviewStores'][$i]['dateReview']);
+                $dtstart->setTimezone(new DateTimeZone('UTC'));
+                $timereviewshop[] =  $dtstart->format('d/m/Y');
+                $countstar[] = $datareviewshop['reviewStores'][$i]['ratingLevel']['ratingLevel'];
+                switch ($countstar[$i]) {
+                    case "3":
+                        $countstar_3 ++;
+                        break;
+                    case "2":
+                        $countstar_2 ++;
+                        break;
+                    case "1":
+                        $countstar_1 ++;
+                        break;      
+                }
+            }
+            if( $datareviewshop['count'] == 0 ){
+                $countrating = 0;
+            }else{
+                $countrating = number_format((($countstar_2 + $countstar_1)/($countstar_2 + $countstar_1 + $countstar_3))*100, 1, '.', '');
+            }
+            //   dd($countrating);
+            return view('user/page.profileshop', compact('countstar_1','countstar_2','countstar_3','countrating','timereviewshop','datareviewshop','createdTime','datashop', 'datajson1','data','result','result1','data4','resultPrice','time','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));
         }
 
         public function getCart(){
@@ -819,7 +861,6 @@
                 return view('admin/page.editproductdetail', compact('resultdata','resultimg'));        
             }
             return redirect()->guest(route('login-admin', [], false));            
-            
         }
 
         public function getAddProductDetailAdmin(Request $req){
@@ -833,13 +874,40 @@
                 return view('admin/page.addproductdetail',compact('storeId', 'res1', 'data_category','data_product_type','data_product_type_specificationtypes'));      
             }
             return redirect()->guest(route('login-admin', [], false));            
-
-           
         }
 
         public function getReview(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
-                return view('admin/page.reviewadmin');            
+                $client1 = new \GuzzleHttp\Client();
+                $resreviewshop = $client1->request('GET',PageController::getUrl('reviewStores/store/'.Session::get('key')[0]['store']['_id'].''));
+                $datareviewshop = json_decode($resreviewshop->getBody()->getContents(), true);
+                $countstar_3 = 0;
+                $countstar_2 = 0;
+                $countstar_1 = 0;
+                $countstar = array();
+                for($i=0; $i<$datareviewshop['count']; $i++){
+                    $dtstart = new DateTime($datareviewshop['reviewStores'][$i]['dateReview']);
+                    $dtstart->setTimezone(new DateTimeZone('UTC'));
+                    $timereviewshop[] =  $dtstart->format('d/m/Y');
+                    $countstar[] = $datareviewshop['reviewStores'][$i]['ratingLevel']['ratingLevel'];
+                    switch ($countstar[$i]) {
+                        case "3":
+                            $countstar_3 ++;
+                            break;
+                        case "2":
+                            $countstar_2 ++;
+                            break;
+                        case "1":
+                            $countstar_1 ++;
+                            break;      
+                    }
+                }
+                if( $datareviewshop['count'] == 0 ){
+                    $countrating = 0;
+                }else{
+                    $countrating = number_format((($countstar_2 + $countstar_1)/($countstar_2 + $countstar_1 + $countstar_3))*100, 1, '.', '');
+                }
+                return view('admin/page.reviewadmin',compact('datareviewshop','countrating','timereviewshop','countstar_1','countstar_2','countstar_3'));            
             }
             return redirect()->guest(route('login-admin', [], false));            
             

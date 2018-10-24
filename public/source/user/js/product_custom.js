@@ -383,11 +383,11 @@ $(document).ready(function()
 	function initFavs()
 	{
 		// Handle Favorites
-		var fav = $('.product_fav');
-		fav.on('click', function()
-		{
-			fav.toggleClass('active');
-		});
+		// var fav = $('.product_fav');
+		// fav.on('click', function()
+		// {
+		// 	fav.addClass('active');
+		// });
 	}
 
 	/* 

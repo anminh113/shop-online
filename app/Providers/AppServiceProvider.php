@@ -67,12 +67,22 @@ class AppServiceProvider extends ServiceProvider
                     $data1[] = json_decode($res1->getBody()->getContents(), true);
                 }
                 $result1 = compact('data1');
+                $datawl['count'] = 0;
+                try {
+                    $reswl = $client->request('GET',AppServiceProvider::getUrl('wishList/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].''));
+                    $datawl = json_decode($reswl->getBody()->getContents(), true);
+                    // dd($datawl);
+                    $view->with(['datacategory'=>$result1, 'data'=>$data['categories'], 'datawl'=>$datawl['count']]);
+                    } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    
+                    }
+               
                 // dd($result1);
             }catch (\GuzzleHttp\Exception\ClientException $e) {
                 // $view->with(['product_cart'=>$cart->items]);
                 return $e->getResponse()->getStatusCode();
             }
-            $view->with(['datacategory'=>$result1, 'data'=>$data['categories']]);
+            $view->with(['datacategory'=>$result1, 'data'=>$data['categories'], 'datawl'=>$datawl['count']]);
             
         });
 

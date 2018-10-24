@@ -11,19 +11,16 @@
 
 <style type="text/css">
     .bar-verygood {
-        width: 60%;
         height: 16px;
         background-color: #FFCC40;
     }
 
     .bar-good {
-        width: 30%;
         height: 16px;
         background-color: #FFCC40;
     }
 
     .bar-bad {
-        width: 10%;
         height: 16px;
         background-color: #FFCC40;
     }
@@ -180,7 +177,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        {{-- <div class="product_fav"><i class="fas fa-heart"></i></div> --}}
                                        
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
@@ -256,7 +253,6 @@
                     </div>
                 </div>
             </div>
-        </div>
             <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
                     <div class="row">
@@ -307,11 +303,11 @@
                     <hr>
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="section-title"> Điểm đánh giá trung bình</div>
+                            <div class="section-title">Điểm đánh giá trung bình</div>
                             <div class="rating-overview">
                                 <div class="left">
                                     <div class="score">
-                                        <label class="average">88%</label>
+                                        <label class="average">{{$countrating}}%</label>
                                     </div>
                                     <div class="count">
                                         <div class="countText">
@@ -322,17 +318,18 @@
                                 <div class="right">
                                     <div class="scoreItem">
                                         <div class="row">
+                                                @if($datareviewshop['count'] != 0)
                                             <div class="col-lg-12">
                                                 <div class="side">
                                                     <div class="tillet">Tốt</div>
                                                 </div>
                                                 <div class="middle">
                                                     <div class="bar-container">
-                                                        <div class="bar-verygood"></div>
+                                                        <div class="bar-verygood" style=" width: {{number_format(($countstar_1 / $datareviewshop['count'])*100 , 0, '', '')}}%;"></div>
                                                     </div>
                                                 </div>
                                                 <div class="side right">
-                                                    <div class="tillet"> 150</div>
+                                                    <div class="tillet">{{$countstar_1}}</div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -341,11 +338,11 @@
                                                 </div>
                                                 <div class="middle">
                                                     <div class="bar-container">
-                                                        <div class="bar-good"></div>
+                                                        <div class="bar-good" style=" width: {{number_format(($countstar_2 / $datareviewshop['count'])*100 , 0, '', '')}}%;"></div>
                                                     </div>
                                                 </div>
                                                 <div class="side right">
-                                                    <div class="tillet"> 63</div>
+                                                    <div class="tillet"> {{$countstar_2}}</div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -354,77 +351,100 @@
                                                 </div>
                                                 <div class="middle">
                                                     <div class="bar-container">
-                                                        <div class="bar-bad"></div>
+                                                        <div class="bar-bad" style=" width: {{number_format(($countstar_1 / $datareviewshop['count'])*100 , 0, '', '')}}%;"></div>
                                                     </div>
                                                 </div>
                                                 <div class="side right">
-                                                    <div class="tillet"> 20</div>
+                                                    <div class="tillet"> {{$countstar_3}}</div>
                                                 </div>
                                             </div>
+                                            @else
+                                            <div class="col-lg-12">
+                                                    <div class="side">
+                                                        <div class="tillet">Tốt</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-verygood" style=" width:0%;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div class="tillet">0</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="side">
+                                                        <div class="tillet">Trung bình</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-good" style=" width: 0%;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div class="tillet"> 0</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="side">
+                                                        <div class="tillet">Chưa tốt</div>
+                                                    </div>
+                                                    <div class="middle">
+                                                        <div class="bar-container">
+                                                            <div class="bar-bad" style=" width: 0%;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="side right">
+                                                        <div class="tillet"> 0</div>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <div class="section-title"> Nhận xét và đánh giá nhà bán hàng (40)</div>
-                            {{-- <div>
-                                <img class="filter__seller-rating" src="source/user/images/icon-verygood.png" width="24"
-                                    height="24">
-                                <img class="filter__seller-rating" src="source/user/images/icon-good.png" width="24" height="24">
-                                <img class="filter__seller-rating" src="source/user/images/icon-bad.png" width="24" height="24">
-                            </div>
-                            <div class="space10">&nbsp;</div>
-                            <div class="contact_form_text">
-                                <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
-                                    name="message" rows="7" placeholder="Đánh giá..." required="required" data-error="Please, write us a message."></textarea>
-                            </div>
-                            <div class="space10">&nbsp;</div> --}}
+                            <div class="section-title"> Nhận xét và đánh giá nhà bán hàng ({{$datareviewshop['count']}})</div>
                             <div class="sis-seller-reviews">
+                                @if($datareviewshop['count'] != 0)
+                                @foreach($datareviewshop['reviewStores'] as $item => $timereview)
                                 <div class="seller-review-item">
-                                    <div class="row rate"><img class="" src="source/user/images/icon-color-verygood.png"
-                                            width="24" height="24">&nbsp;&nbsp;<span> Tốt</span></div>
+                                    <div class="row rate">
+                                        @if($timereview['ratingLevel']['ratingLevel'] == 1)
+                                            <img class="" src="source/user/images/icon-color-verygood.png" width="24" height="24">&nbsp;&nbsp;<span> {{$timereview['ratingLevel']['description']}}</span>
+                                        @endif
+                                        @if($timereview['ratingLevel']['ratingLevel'] == 2)
+                                            <img class="" src="source/user/images/icon-color-good.png" width="24" height="24">&nbsp;&nbsp;<span> {{$timereview['ratingLevel']['description']}}</span>
+                                        @endif
+                                        @if($timereview['ratingLevel']['ratingLevel'] == 3)
+                                            <img class="" src="source/user/images/icon-color-bad.png" width="24" height="24">&nbsp;&nbsp;<span> {{$timereview['ratingLevel']['description']}}</span>
+                                        @endif
+                                     
+                                    </div>
                                     <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
-                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
-                                            hơn 5 năm chả hỏng j cả 😄</label>
+                                        <label class="comments">{{$timereview['review']}}</label>
                                     </div>
                                     <div class="row reviewer">
-                                        <label class="itemFooter">An T. - 3 tháng trước</label>
+                                        <label class="itemFooter">{{$timereview['customer']['name']}} - {{$timereviewshop[$item]}}</label>
                                     </div>
                                 </div>
-                                <div class="seller-review-item">
-                                    <div class="row rate"><img class="" src="source/user/images/icon-color-good.png" width="24"
-                                            height="24">&nbsp;&nbsp;<span> Trung bình</span></div>
+                               @endforeach
+                               @else
+                               <div class="seller-review-item">
+                                  
                                     <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
-                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
-                                            hơn 5 năm chả hỏng j cả 😄</label>
+                                        <label class="comments">Chưa có đánh giá về gian hàng</label>
                                     </div>
-                                    <div class="row reviewer">
-                                        <label class="itemFooter">An T. - 3 tháng trước</label>
-                                    </div>
+                                    
                                 </div>
-                                <div class="seller-review-item">
-                                    <div class="row rate"><img class="" src="source/user/images/icon-color-bad.png" width="24"
-                                            height="24">&nbsp;&nbsp;<span> Chưa tốt</span></div>
-                                    <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                            quá ngon cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian
-                                            mới biết đc, nhưng mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng
-                                            hơn 5 năm chả hỏng j cả 😄</label>
-                                    </div>
-                                    <div class="row reviewer">
-                                        <label class="itemFooter">An T. - 3 tháng trước</label>
-                                    </div>
-                                </div>
+                               @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>
 </div>

@@ -115,7 +115,10 @@ Route::post('check-deliveryaddress-cart', [
     'uses'=>'PostController@postdeliveryAddressCheckCart'
 ]);
 //---
-
+Route::post('wishList', [
+    'as'=>'post-wishList',
+    'uses'=>'PostController@postwishList'
+]);
 //---
 Route::get('check-out/{id}', [
     'as'=>'check-out',

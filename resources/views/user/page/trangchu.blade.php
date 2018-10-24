@@ -111,7 +111,7 @@
                                                         class="product_cart_button">Thêm vào giỏ</button></a>
                                                 </div>
                                             </div>
-                                            <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                            {{-- <div class="product_fav"><i class="fas fa-heart"></i></div> --}}
                                             <ul class="product_marks">
                                                 <li class="product_mark product_discount">-25%</li>
                                                 <li class="product_mark product_new">Hot</li>
@@ -286,7 +286,7 @@
                                                         vào giỏ </button></a>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        {{-- <div class="product_fav"><i class="fas fa-heart"></i></div> --}}
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
                                             <li class="product_mark product_new">new</li>

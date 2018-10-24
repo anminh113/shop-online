@@ -82,7 +82,13 @@
                                                 class="fas fa-chevron-down"></i></button>
                                     </div>
                                 </div>
-                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                             
+                                @if($datawl == '')
+                                <button type="submit" form="WL"  class="product_fav"  ><i class="fas fa-heart" ></i></button>
+                                @else
+                                <div class="product_fav active"  ><i class="fas fa-heart" ></i></div>
+                                @endif
+                              
                             </div>
                             <div class="button_container">
                                 <button type="submit" class="btn btn-outline-info btn-change btn-buy">
@@ -91,6 +97,11 @@
                             </div>
                             {{ csrf_field() }}
                         </form>
+
+                    <form action="{{route('post-wishList')}}" id="WL" method="post">
+                        <input type="text" hidden name="productId" value="{{$item['product']['_id']}}">
+                        {{ csrf_field() }}
+                    </form>
                     
                     </div>
                     <hr>
@@ -108,7 +119,7 @@
                 </div>
             </div>
             <div class="col-lg-7 order-3">
-                <div class="characteristics">
+                <div class="characteristics" style="    padding-top: 40px;padding-bottom: 0px;">
                     <div class="container">
                         <div class="row">
                             <!-- Char. Item -->
@@ -117,8 +128,7 @@
                                     <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png"
                                             alt=""></div>
                                     <div class="char_content">
-                                        <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 3 sản phẩm trở
-                                            lên</div>
+                                        <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 1,000,000₫</div>
                                     </div>
                                 </div>
                             </div>

@@ -159,7 +159,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
+                                        {{-- <div class="product_fav"><i class="fas fa-heart"></i></div> --}}
                                         @if(empty($item['saleOff']))
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
