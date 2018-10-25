@@ -17,7 +17,7 @@
                     <!-- RECENT PURCHASES -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><b>Đơn hàng đang chờ xử lý </b> </h3>
+                            <h3 class="panel-title"><b>Đơn hàng đã xử lý </b> </h3>
                             <div class="right">
                                 <input type="text" id="myInput" placeholder="Tìm kiếm..">
                             </div>
@@ -59,10 +59,10 @@
                         </div>
                         <div class="panel-footer">
                             <div class="row">
-                                <form id="changeState{{$item['OrderItem']['_id']}}" action="{{route('update-state-order-admin')}}" method="POST">
+                                <form id="changeState{{$item['OrderItem']['_id']}}" action="{{route('update-watning-order-admin')}}" method="POST">
                                     <input type="text" hidden name="orderId" value="{{$item['OrderItem']['_id']}}">
                                     <div class="col-md-6"><span class="panel-note" style="font-size:14px">Trạng thái: {{$item['OrderItem']['orderItemState']['orderStateName']}}</div>
-                                    <div class="col-md-6 text-right"><button type="submit" form="changeState{{$item['OrderItem']['_id']}}" class="btn btn-outline- btn-save">Chuyển trạng thái đã xử lý</button></div>
+                                    <div class="col-md-6 text-right"><button type="submit" form="changeState{{$item['OrderItem']['_id']}}" class="btn btn-outline- btn-save">Chuyển trạng thái đang giao hàng</button></div>
                                     @method('PATCH')
                                     {{ csrf_field() }}
                                 </form>
@@ -105,7 +105,7 @@
 @section('footer')
 
 <script>
-    var element = document.getElementById("order-admin");
+    var element = document.getElementById("order-admin-watning");
     element.classList.add("active");
     var element1 = document.getElementById("subPages");
     element1.classList.add("active");

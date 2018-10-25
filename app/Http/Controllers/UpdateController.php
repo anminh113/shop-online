@@ -290,6 +290,66 @@
        
     }
 
+    public function updateOrderAdmin(Request $req){
+        $datajson=array([
+            "propName" =>  "orderItemState",
+            "value" =>  "5bd01017832c13219c366d1b"
+        ]);
+        $jsonData =json_encode($datajson);
+        $json_url = PageController::getUrl('orderItems/'.$req['orderId'].'');
+        $ch = curl_init( $json_url );
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+        $result1 =json_decode($result);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+    }
+    public function updateOrderAdminWatning(Request $req){
+        $datajson=array([
+            "propName" =>  "orderItemState",
+            "value" =>  "5b9a18f8ffed2b1e60a5d780"
+        ]);
+        $jsonData =json_encode($datajson);
+        $json_url = PageController::getUrl('orderItems/'.$req['orderId'].'');
+        $ch = curl_init( $json_url );
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+        $result1 =json_decode($result);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+    }
+
+    public function updateOrderAdminShipping(Request $req){
+        $datajson=array([
+            "propName" =>  "orderItemState",
+            "value" =>  "5b9a1a1bffed2b1e60a5d783"
+        ]);
+        $jsonData =json_encode($datajson);
+        $json_url = PageController::getUrl('orderItems/'.$req['orderId'].'');
+        $ch = curl_init( $json_url );
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+        $result1 =json_decode($result);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+    }
+   
+
  
         
 

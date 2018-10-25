@@ -45,12 +45,12 @@ class Cart
 		$giohang['qty'] += $sl;
 
 		if(empty($data['product']['saleOff']) || $data['product']['saleOff']['dateEnd'] < $time){
-			$giohang['price'] = $data['product']['price'] * $giohang['qty'];
+			$giohang['price'] = $data['product']['price'] ;
 		}else if(!empty($data['product']['saleOff']) || $data['product']['saleOff']['dateEnd'] > $time){
-			$giohang['price'] = ($data['product']['price']-($data['product']['price'] * $data['product']['saleOff']['discount']/100)) * $giohang['qty'];
+			$giohang['price'] = ($data['product']['price']-($data['product']['price'] * $data['product']['saleOff']['discount']/100)) ;
 		}
 		else{
-			$giohang['price'] = $data['product']['price'] * $giohang['qty'];
+			$giohang['price'] = $data['product']['price'] ;
 		}
 
 		$this->items[$id] = $giohang;

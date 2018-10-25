@@ -81,7 +81,7 @@
                             <label for="basic">Giá sản phẩm:</label>
                             <div class="input-group">
                                 <input class="form-control" name="price" type="number">
-                                <span class="input-group-addon">.000₫</span>
+                                <span class="input-group-addon">,000₫</span>
                             </div>
                             <div id="errorprice"></div>
                             <div class="space15">&nbsp;</div>

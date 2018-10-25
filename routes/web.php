@@ -321,12 +321,50 @@ Route::post('search-saleoff-discount-admin', [
     'as'=>'search-saleoff-admin',
     'uses'=>'PostController@postSaleoffAdmin'
 ]);
-
+//---
 Route::get('order-admin', [
     'as'=>'order-admin',
     'uses'=>'PageController@getOrderAdmin'
 ]);
+
+Route::patch('order-admin-update-state', [
+    'as'=>'update-state-order-admin',
+    'uses'=>'UpdateController@updateOrderAdmin'
+]);
 //---
+
+Route::get('order-admin-watning', [
+    'as'=>'order-admin-watning',
+    'uses'=>'PageController@getOrderWatningAdmin'
+]);
+
+Route::patch('order-admin-update-watning', [
+    'as'=>'update-watning-order-admin',
+    'uses'=>'UpdateController@updateOrderAdminWatning'
+]);
+//---
+
+
+Route::get('order-admin-shipping', [
+    'as'=>'order-admin-shipping',
+    'uses'=>'PageController@getOrderShippingAdmin'
+]);
+
+Route::patch('order-admin-update-shipping', [
+    'as'=>'update-shipping-order-admin',
+    'uses'=>'UpdateController@updateOrderAdminShipping'
+]);
+//---
+
+Route::get('order-admin-done', [
+    'as'=>'order-admin-done',
+    'uses'=>'PageController@getOrderDoneAdmin'
+]);
+
+
+//---
+
+
 
 //Admin hệ thống
 

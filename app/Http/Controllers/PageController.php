@@ -760,7 +760,6 @@
         }
 
         public function getWriteReviewShop(Request $req){
-            // dd($req->id);
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
@@ -1134,13 +1133,306 @@
         }
 
         public function getOrderAdmin(){
+            $client1 = new \GuzzleHttp\Client();
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
-               
-                return view('admin/page.orderadmin');
+                $dataProductOrder = array();
+                $dataOrder = array();
+                $datatext = array();
+                $store = Session::get('key')[0]['store']['_id'];
+                $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems/getByState/5b9a17f3e747da371818fd9d'));
+
+                // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
+                $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
+                for ($i=0; $i <$dataOrderItems['count'] ; $i++) { 
+                    $resProductStore = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
+                    $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
+                    for ($j=0; $j <count($dataProductStore['products']); $j++) { 
+                        if($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']){
+                            $dataProductOrder[] =  $dataOrderItems['orderItems'][$i];
+                        }
+                    }
+                }
+                $resultProductOrder = compact('dataProductOrder');
+                for ($i=0; $i <count($resultProductOrder['dataProductOrder']) ; $i++) {
+                    $resOrder = $client1->request('GET',PageController::getUrl('orders/'.$resultProductOrder['dataProductOrder'][$i]['orderId'].''));
+                    $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
+                    if($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']){
+                        $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
+                    }
+                }
+                
+                
+                $resultOrder = compact('dataOrder');
+                $dataProductorder = array();
+                try { 
+                    $resOrderAll = $client1->request('GET',PageController::getUrl('orders/getByState/5b9a17f3e747da371818fd9d'));
+                    $dataOrderAll = json_decode($resOrderAll->getBody()->getContents(), true);
+                    for ($i=0; $i <$dataOrderAll['count'] ; $i++) {
+                        $resProductOrder = $client1->request('GET',PageController::getUrl('orderItems/order/'.$dataOrderAll['orders'][$i]['_id'].''));
+                        $dataProductorderAll[] = json_decode($resProductOrder->getBody()->getContents(), true);
+                        for ($j=0; $j < count($dataProductorderAll[$i]['orderItems']) ; $j++) {
+                            if($dataOrderAll['orders'][$i]['_id'] == $dataProductorderAll[$i]['orderItems'][$j]['orderId']){
+                                $dataOrderAll['orders'][$i]['OrderItem'] = $dataProductorderAll[$i]['orderItems'];
+                            }
+                        }   
+                    }
+                    $count = 0;
+                    $text = array();
+                    for ($i=0; $i <count($dataOrderAll['orders']) ; $i++) {
+                        for ($j=0; $j <count($dataOrderAll['orders'][$i]['OrderItem']) ; $j++) {
+                            if(($count == (count($dataOrderAll['orders'][$i]['OrderItem']) - 1)) && ($dataOrderAll['orders'][$i]['OrderItem'][$j]['orderItemState']['orderStateName'] === "Đã xử lý")){
+
+                                $text[] = $dataOrderAll['orders'][$i]['OrderItem'];
+                                $datajson=array([
+                                    "propName" =>  "orderState",
+                                    "value" =>  "5bd01017832c13219c366d1b"
+                                ]);
+                                // dd($datajson);
+                                $jsonData =json_encode($datajson);
+                                $json_url = PageController::getUrl('orders/'.$dataOrderAll['orders'][$i]['_id'].'');
+                                $ch = curl_init( $json_url );
+                                $options = array(
+                                    CURLOPT_RETURNTRANSFER => true,
+                                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                                    CURLOPT_POSTFIELDS => $jsonData
+                                );
+                                curl_setopt_array( $ch, $options );
+                                $result =  curl_exec($ch);
+                                $result1 =json_decode($result);
+                            }
+                            if($dataOrderAll['orders'][$i]['OrderItem'][$j]['orderItemState']['orderStateName'] === "Đã xử lý"){
+                                $count++;
+                            }
+                            if($j == (count($dataOrderAll['orders'][$i]['OrderItem']) - 1)){
+                                break;
+                            } 
+                        }  
+                    }
+                    // dd($text);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
+                }
+                return view('admin/page.orderadmin',compact('resultOrder','dataProductOrder'));
             }else{
                 return redirect()->guest(route('login-admin', [], false));       
             }
             return redirect()->guest(route('login-admin', [], false));           
+        }
+
+        public function getOrderWatningAdmin(){
+            $client1 = new \GuzzleHttp\Client();
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+                $dataProductOrder = array();
+                $dataOrder = array();
+                $datatext = array();
+                $store = Session::get('key')[0]['store']['_id'];
+                $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems/getByState/5bd01017832c13219c366d1b'));
+            
+                // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
+                $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
+                // dd($dataOrderItems);
+                for ($i=0; $i <$dataOrderItems['count'] ; $i++) { 
+                    $resProductStore = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
+                    $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
+                    for ($j=0; $j <count($dataProductStore['products']); $j++) { 
+                        if($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']){
+                            $dataProductOrder[] =  $dataOrderItems['orderItems'][$i];
+                        }
+                    }
+                }
+                $resultProductOrder = compact('dataProductOrder');
+                for ($i=0; $i <count($resultProductOrder['dataProductOrder']) ; $i++) {
+                    $resOrder = $client1->request('GET',PageController::getUrl('orders/'.$resultProductOrder['dataProductOrder'][$i]['orderId'].''));
+                    $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
+                    if($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']){
+                        $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
+                    }
+                }
+                
+                
+                $resultOrder = compact('dataOrder');
+
+
+
+                try { 
+                    $resOrderAll = $client1->request('GET',PageController::getUrl('orders/getByState/5bd01017832c13219c366d1b'));
+                    $dataOrderAll = json_decode($resOrderAll->getBody()->getContents(), true);
+                    for ($i=0; $i <$dataOrderAll['count'] ; $i++) {
+                        $resProductOrder = $client1->request('GET',PageController::getUrl('orderItems/order/'.$dataOrderAll['orders'][$i]['_id'].''));
+                        $dataProductorderAll[] = json_decode($resProductOrder->getBody()->getContents(), true);
+                        for ($j=0; $j < count($dataProductorderAll[$i]['orderItems']) ; $j++) {
+                            if($dataOrderAll['orders'][$i]['_id'] == $dataProductorderAll[$i]['orderItems'][$j]['orderId']){
+                                $dataOrderAll['orders'][$i]['OrderItem'] = $dataProductorderAll[$i]['orderItems'];
+                            }
+                        }   
+                    }
+                    $count = 0;
+                    $text = array();
+                    for ($i=0; $i <count($dataOrderAll['orders']) ; $i++) {
+                        for ($j=0; $j <count($dataOrderAll['orders'][$i]['OrderItem']) ; $j++) {
+                            
+                            if(($count == (count($dataOrderAll['orders'][$i]['OrderItem']) - 1)) && ($dataOrderAll['orders'][$i]['OrderItem'][$j]['orderItemState']['orderStateName'] === "Đang giao hàng")){
+
+                                $text[] = $dataOrderAll['orders'][$i]['OrderItem'];
+                                $datajson=array([
+                                    "propName" =>  "orderState",
+                                    "value" =>  "5b9a18f8ffed2b1e60a5d780"
+                                ]);
+                                // dd($datajson);
+                                $jsonData =json_encode($datajson);
+                                $json_url = PageController::getUrl('orders/'.$dataOrderAll['orders'][$i]['_id'].'');
+                                $ch = curl_init( $json_url );
+                                $options = array(
+                                    CURLOPT_RETURNTRANSFER => true,
+                                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                                    CURLOPT_POSTFIELDS => $jsonData
+                                );
+                                curl_setopt_array( $ch, $options );
+                                $result =  curl_exec($ch);
+                                $result1 =json_decode($result);
+                            }
+                            if($dataOrderAll['orders'][$i]['OrderItem'][$j]['orderItemState']['orderStateName'] === "Đang giao hàng"){
+                                $count++;
+                            }
+                            if($j == (count($dataOrderAll['orders'][$i]['OrderItem']) - 1)){
+                                break;
+                            } 
+                        }  
+                    }
+                    // dd($text);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
+                }
+                return view('admin/page.orderadminwanting',compact('resultOrder','dataProductOrder'));            
+            }
+            return redirect()->guest(route('login-admin', [], false));            
+        }
+
+        public function getOrderShippingAdmin(){
+            $client1 = new \GuzzleHttp\Client();
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+                $dataProductOrder = array();
+                $dataOrder = array();
+                $datatext = array();
+                $store = Session::get('key')[0]['store']['_id'];
+                $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems/getByState/5b9a18f8ffed2b1e60a5d780'));
+            
+                // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
+                $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
+                // dd($dataOrderItems);
+                for ($i=0; $i <$dataOrderItems['count'] ; $i++) { 
+                    $resProductStore = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
+                    $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
+                    for ($j=0; $j <count($dataProductStore['products']); $j++) { 
+                        if($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']){
+                            $dataProductOrder[] =  $dataOrderItems['orderItems'][$i];
+                        }
+                    }
+                }
+                $resultProductOrder = compact('dataProductOrder');
+                for ($i=0; $i <count($resultProductOrder['dataProductOrder']) ; $i++) {
+                    $resOrder = $client1->request('GET',PageController::getUrl('orders/'.$resultProductOrder['dataProductOrder'][$i]['orderId'].''));
+                    $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
+                    if($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']){
+                        $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
+                    }
+                }
+                
+                
+                $resultOrder = compact('dataOrder');
+
+                try { 
+                    $resOrderAll = $client1->request('GET',PageController::getUrl('orders/getByState/5b9a18f8ffed2b1e60a5d780'));
+                    $dataOrderAll = json_decode($resOrderAll->getBody()->getContents(), true);
+                    for ($i=0; $i <$dataOrderAll['count'] ; $i++) {
+                        $resProductOrder = $client1->request('GET',PageController::getUrl('orderItems/order/'.$dataOrderAll['orders'][$i]['_id'].''));
+                        $dataProductorderAll[] = json_decode($resProductOrder->getBody()->getContents(), true);
+                        for ($j=0; $j < count($dataProductorderAll[$i]['orderItems']) ; $j++) {
+                            if($dataOrderAll['orders'][$i]['_id'] == $dataProductorderAll[$i]['orderItems'][$j]['orderId']){
+                                $dataOrderAll['orders'][$i]['OrderItem'] = $dataProductorderAll[$i]['orderItems'];
+                            }
+                        }   
+                    }
+                    $count = 0;
+                    $text = array();
+                    for ($i=0; $i <count($dataOrderAll['orders']) ; $i++) {
+                        for ($j=0; $j <count($dataOrderAll['orders'][$i]['OrderItem']) ; $j++) {
+                            if(($count == (count($dataOrderAll['orders'][$i]['OrderItem']) - 1)) && ($dataOrderAll['orders'][$i]['OrderItem'][$j]['orderItemState']['orderStateName'] === "Đã giao hàng")){
+
+                                $text[] = $dataOrderAll['orders'][$i]['OrderItem'];
+
+                                $datajson=array([
+                                    "propName" =>  "orderState",
+                                    "value" =>  "5b9a1a1bffed2b1e60a5d783"
+                                ]);
+                                // dd($datajson);
+                                $jsonData =json_encode($datajson);
+                                $json_url = PageController::getUrl('orders/'.$dataOrderAll['orders'][$i]['_id'].'');
+                                $ch = curl_init( $json_url );
+                                $options = array(
+                                    CURLOPT_RETURNTRANSFER => true,
+                                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                                    CURLOPT_POSTFIELDS => $jsonData
+                                );
+                                curl_setopt_array( $ch, $options );
+                                $result =  curl_exec($ch);
+                                $result1 =json_decode($result);
+                            }
+                            if($dataOrderAll['orders'][$i]['OrderItem'][$j]['orderItemState']['orderStateName'] === "Đã giao hàng"){
+                                $count++;
+                            }
+                            if($j == (count($dataOrderAll['orders'][$i]['OrderItem']) - 1)){
+                                break;
+                            } 
+                        }  
+                    }
+                    // dd($text);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
+                }
+                return view('admin/page.orderadminshipping',compact('resultOrder','dataProductOrder'));            
+            }
+            return redirect()->guest(route('login-admin', [], false));            
+        }
+
+        public function getOrderDoneAdmin(){
+            $client1 = new \GuzzleHttp\Client();
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+                $dataProductOrder = array();
+                $dataOrder = array();
+                $datatext = array();
+                $store = Session::get('key')[0]['store']['_id'];
+                $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems/getByState/5b9a1a1bffed2b1e60a5d783'));
+            
+                // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
+                $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
+                // dd($dataOrderItems);
+                for ($i=0; $i <$dataOrderItems['count'] ; $i++) { 
+                    $resProductStore = $client1->request('GET',PageController::getUrl('products/store/'.$store.''));
+                    $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
+                    for ($j=0; $j <count($dataProductStore['products']); $j++) { 
+                        if($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']){
+                            $dataProductOrder[] =  $dataOrderItems['orderItems'][$i];
+                        }
+                    }
+                }
+                $resultProductOrder = compact('dataProductOrder');
+                for ($i=0; $i <count($resultProductOrder['dataProductOrder']) ; $i++) {
+                    $resOrder = $client1->request('GET',PageController::getUrl('orders/'.$resultProductOrder['dataProductOrder'][$i]['orderId'].''));
+                    $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
+                    if($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']){
+                        $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
+                    }
+                }
+                
+                
+                $resultOrder = compact('dataOrder');
+                return view('admin/page.orderadmindone',compact('resultOrder','dataProductOrder'));            
+            }
+            return redirect()->guest(route('login-admin', [], false));            
         }
 
         //Admin hệ thống
