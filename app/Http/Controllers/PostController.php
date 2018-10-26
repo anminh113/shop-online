@@ -505,7 +505,7 @@
                 $data1[] = json_decode($res1->getBody()->getContents(), true);
             }
             $result1 = compact('data1');
-
+            
             $datajson=array(
                 "name" =>  $req['search']
                 );
@@ -521,7 +521,7 @@
             );
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
-
+            $data = array();
             $data =json_decode($result,JSON_NUMERIC_CHECK);
 
             $datatext = array();
@@ -534,20 +534,17 @@
             $countstar = array();
             for ($i=0;  $i < count($data['products']); $i++){
          
-            $data2 = $data['products'][$i]['_id'];
-            $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-            $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                $data2 = $data['products'][$i]['_id'];
+                $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                $datatext[] = json_decode($res2->getBody()->getContents(), true);
 
-            $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
-            $datareview[] = json_decode($res3->getBody()->getContents(), true);
+                $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
+                $datareview[] = json_decode($res3->getBody()->getContents(), true);
             }
 
             $result = compact('datatext');
             $resultdatareview = compact('datareview');
-          
-
             array_push($data,$datareview);
-            // dd($data);
             for($i=0; $i < count($data['0']); $i++){
                 if(!empty($data['0'][$i])){
                     $countstar_5 = 0;

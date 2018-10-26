@@ -104,7 +104,8 @@
                 <div class="characteristics">
                     @foreach ($dataorder['orders'] as $item => $orderitem )
                         <div class="order">
-                            <div class="accordion order-info">Đơn hàng <a href="" data-toggle="modal" data-target="#InfoOrder{{$dataorder['orders'][$item]['_id']}}">#{{$dataorder['orders'][$item]['_id']}} </a> <span> |</span> <span>{{$dataorder['orders'][$item]['totalQuantity']}}</span> Sản phẩm
+                            <div class="accordion order-info">Đơn hàng <a href="" data-toggle="modal" data-target="#InfoOrder{{$dataorder['orders'][$item]['_id']}}">{{$dataorder['orders'][$item]['_id']}} </a> <span> |</span> <span>{{$dataorder['orders'][$item]['totalQuantity']}}</span> Sản phẩm
+                                <span> |</span> Trạng thái: <span><i> {{$dataorder['orders'][$item]['orderState']['orderStateName']}}</i></span>
                                 @if($dataorder['orders'][$item]['orderState']['orderStateName'] == "Đang chờ thanh toán")
                                 <span><a href="{{route('check-out',$dataorder['orders'][$item]['_id'])}}"class="btn btn-outline-warning btn-save" style="height: 36px;">Thanh Toán</a></span>
                                 @endif 
@@ -133,7 +134,7 @@
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="item-status item-capsule">
-                                                <p class="capsule">{{$dataorder['orders'][$item]['orderState']['orderStateName']}}</p>
+                                                <p class="capsule">{{$text['orderItemState']['orderStateName']}}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
@@ -154,163 +155,9 @@
     </div>
 </div>
 
-<!-- Recently Viewed -->
-<div class="viewed">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="viewed_title_container">
-                    <h3 class="viewed_title">Sản phẩm đã xem</h3>
-                    <div class="viewed_nav_container">
-                        <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
-                        <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
-                    </div>
-                </div>
-                <div class="viewed_slider_container">
-                    <!-- Recently Viewed Slider -->
-                    <div class="owl-carousel owl-theme viewed_slider">
+@include('user/RecentlyViewed')
+@include('user/Brands')
 
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
-                                        width="115" height="115" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">990.000 ₫</div>
-                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
-                                        width="115" height="115" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">990.000 ₫</div>
-                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
-                                        width="115" height="115" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">990.000 ₫</div>
-                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
-                                        width="115" height="115" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">990.000 ₫</div>
-                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
-                                        width="115" height="115" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">990.000 ₫</div>
-                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Recently Viewed Item -->
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-                                <div class="viewed_image"><img src="https://phongvu.vn/media/catalog/product/cache/23/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/o/-/o-cung-hdd-1tb-wd-wd10ezex-5.jpg"
-                                        width="115" height="115" alt=""></div>
-                                <div class="viewed_content text-center">
-                                    <div class="viewed_price">990.000 ₫</div>
-                                    <div class="viewed_name"><a href="#">Ổ cứng HDD WD 1TB WD10EZEX Sata 3 (Xanh)</a></div>
-                                </div>
-                                <ul class="item_marks">
-                                    <li class="item_mark item_discount">-25%</li>
-                                    <li class="item_mark item_new">new</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Brands -->
-<div class="brands">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="brands_slider_container">
-                    <!-- Brands Slider -->
-                    <div class="owl-carousel owl-theme brands_slider">
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_intel.png"
-                                    style="width: 140px; height: 70px;" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_amd.png"
-                                    style="width: 160px; height: 200px;" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_msi.png"
-                                    style="width: 150px; height: 45px;" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_asus.png"
-                                    style="width: 150px; height: 45px;" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_gigabyte.jpg"
-                                    style="width: 180px; height: 70px;" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/razer-logo.png"
-                                    style="width: 180px; height: 225px;" alt=""></div>
-                        </div>
-                        <div class="owl-item">
-                            <div class="brands_item d-flex flex-column justify-content-center"><img src="source/user/images/logo_corsair.png"
-                                    style="width: 250px; height: 100px;" alt=""></div>
-                        </div>
-                    </div>
-                    <!-- Brands Slider Navigation -->
-                    <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
-                    <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Modal -->
 @foreach ($dataorder['orders'] as $item => $orderitem )
 <div class="modal fade" id="InfoOrder{{$dataorder['orders'][$item]['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
