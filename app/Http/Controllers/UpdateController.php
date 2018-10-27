@@ -187,6 +187,28 @@
         return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
     }
 
+    public function updateAdmin(Request $req){
+        $datajson2=array([
+            "propName" =>  "isApprove",
+            "value" =>  false
+        ]);
+        // dd($datajson2);
+        $jsonData2 =json_encode($datajson2);
+        $json_url2 = PageController::getUrl('registeredSales/'.$req['registeredSalesId'].'');
+        $ch2 = curl_init( $json_url2 );
+        $options2 = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData2
+        );
+        curl_setopt_array( $ch2, $options2 );
+        $result2 =  curl_exec($ch2);
+        $result12 =json_decode($result2);
+        return redirect()->back()->with(['flag'=>'error','title'=>'Đã từ chối' ,'message'=>' ']);
+    }
+
+    // Admin gian hàng
     public function updateEditProductDetailAdmin(Request $req){
 
         $client = new \GuzzleHttp\Client();

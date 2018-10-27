@@ -61,7 +61,7 @@
                                 <ul class="list-unstyled list-justify">
                                     <li>Ngày tạo gian hàng <span><script>var dtstart = moment('{{$data['store']['createdDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></span></li>
                                     <li>Số điện thoại <span>{{$data['store']['phoneNumber']}}</span></li>
-                                    <li>Email <span>{{$data['store']['customers']['email']}}</span></li>
+                                    {{--  <li>Email <span>{{$data['store']['customers']['email']}}</span></li>  --}}
                                     <li>Địa chỉ <span>{{$data['store']['location']}}</span></li>
                                 </ul>
                             </div>

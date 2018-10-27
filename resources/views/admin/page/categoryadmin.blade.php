@@ -35,9 +35,11 @@
                                 </tr>
                             </thead>
                             <tbody id="myTable">
+                                    <?php $i=1;?>
+                                @if(!empty($result['data2']))
                                 @foreach ($result1['data3'] as $item )
                                     <tr>
-                                        <td><a href="#">1</a></td>
+                                        <td><a href="#"><?php echo $i;?></a></td>
                                         <td>{{$item['categoryName']}}</td>
                                         <td><button class="btn btn-info"  type="submit" form="postId{{$item['_id']}}">
                                             <i class="fa fa-plus" >  </i>
@@ -48,7 +50,25 @@
                                         <input type="text" name="categoryId" hidden value="{{$item['_id']}}">
                                         {{ csrf_field() }}
                                     </form>
+                                    <?php $i++;?>
                                 @endforeach
+                                @else 
+                                @foreach ($data['categories'] as $item )
+                                <tr>
+                                    <td><a href="#"><?php echo $i;?></a></td>
+                                    <td>{{$item['categoryName']}}</td>
+                                    <td><button class="btn btn-info"  type="submit" form="postId{{$item['_id']}}">
+                                        <i class="fa fa-plus" >  </i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <form id="postId{{$item['_id']}}" hidden action="{{route('post-danh-muc-admin')}}" method="post">
+                                    <input type="text" name="categoryId" hidden value="{{$item['_id']}}">
+                                    {{ csrf_field() }}
+                                </form>
+                                <?php $i++;?>
+                            @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>

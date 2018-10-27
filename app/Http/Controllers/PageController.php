@@ -851,12 +851,12 @@
                 $res = $client1->request('GET',PageController::getUrl('categories') );
                 $data = json_decode($res->getBody()->getContents(), true);
                 //end get json
-    
                 //get storeId
                 $res1 = $client1->request('GET',PageController::getUrl('stores/'.$store.''));
                 $data1 = json_decode($res1->getBody()->getContents(), true);
                 // dd($data1['store']['categories']);
                 //get danh muc trong store
+                $data2 = array();
                 for ($i=0;  $i < count($data1['store']['categories']); $i++){
                     $data2[] = $data1['store']['categories'][$i]['category'];
                 }
@@ -1443,13 +1443,15 @@
 
         public function getProfileShopAdmin(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+                // dd(Sessio    n::get('key'));
                 $store = Session::get('key')[0]['store']['_id'];
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('GET',PageController::getUrl('stores/'.$store.'') );
                 $data = json_decode($res->getBody()->getContents(), true);
-                $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$data['store']['account']['_id'].'') );
-                $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
-                $data['store']['customers'] =  $datacustomer['customer'];
+
+                // $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$data['store']['account']['_id'].'') );
+                // $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
+                // $data['store']['customers'] =  $datacustomer['customer'];
 
 
                 $resstoreproduct = $client->request('GET',PageController::getUrl('products/store/'.$store.''));
@@ -1505,11 +1507,8 @@
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('GET',PageController::getUrl('stores') );
                 $data = json_decode($res->getBody()->getContents(), true);
-                for ($i=0; $i <$data['count'] ; $i++) { 
-                    $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$data['stores'][$i]['account']['_id'].'') );
-                    $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
-                    $data['stores'][$i]['customers'] =  $datacustomer['customer'];
-                }
+               
+                // dd($data);
                 return view('admin/page.categoryadminshop',compact('data'));
             }
             return redirect()->guest(route('login-admin', [], false));            

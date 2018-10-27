@@ -37,11 +37,11 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                        <?php $i=1;?>
                                     @foreach ($data['categories'] as $item)
                                     <tr>
-                                        <td><a href="#">1</a></td>
+                                        <td><a href="#"><?php echo $i;?></a></td>
                                         <td>{{$item['categoryName']}}</td>
-                                        {{-- <td>2</td> --}}
                                         <td><a href="{{route('them-loai-admin',$item['_id'])}}">Xem chi tiết</a></td>
                                         <td><a data-toggle="modal" data-target="#update{{$item['_id']}}">
                                             <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
@@ -54,6 +54,7 @@
                                     @method('DELETE')
                                     {{ csrf_field() }}
                                     </form>
+                                    <?php $i++;?>
                                     @endforeach
 
                                 </tbody>

@@ -41,16 +41,16 @@ class AppServiceProvider extends ServiceProvider
             if (Session::has('key')){
                 try {
                     $client = new \GuzzleHttp\Client();
-                    $res = $client->request('GET',AppServiceProvider::getUrl('customers/account/'.Session::get('key')['_id'].''));
+                    $res = $client->request('GET',AppServiceProvider::getUrl('stores/account/'.Session::get('key')['_id'].''));
                     $data = json_decode($res->getBody()->getContents(), true);
-                    $res1 = $client->request('GET',AppServiceProvider::getUrl('stores/account/'.Session::get('key')['_id'].''));
-                    $data1 = json_decode($res1->getBody()->getContents(), true);
-                    session()->push('key',$data1);
-                    $view->with(['name'=>$data['customer']['name']]);
+                   
+                    // dd($data);
+                    session()->push('key',$data);
+                    $view->with(['name'=>$data['store']['storeName']]);
                 }catch (\GuzzleHttp\Exception\ClientException $e) {
                     // $view->with(['product_cart'=>$cart->items]);
                     // return $e->getResponse()->getStatusCode();
-                    $view->with(['name'=>'Admin']);
+                    $view->with(['name'=>'Quản trị hệ thống']);
                 }
             }
         });

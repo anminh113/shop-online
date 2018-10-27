@@ -28,22 +28,23 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Gian hàng</th>
-                                        <th>Người đại diện</th>
                                         <th>Số điện thoại</th>
                                         <th>Địa chỉ kho</th>
-                                        {{--  <th>Xem chi tiết</th>  --}}
+                                        <th>Thời gian trên hệ thống</th>
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                        <?php $i=1;?>
                                     @foreach ($data['stores'] as $item)
                                     <tr>
-                                        <td><a href="#">763648</a></td>
+                                        <td><a href="#"><?php echo $i;?></a></td>
                                         <td>{{$item['storeName']}}</td>
-                                        <td>{{$item['customers']['name']}}</td>
                                         <td>{{$item['phoneNumber']}}</td>
                                         <td>{{$item['location']}}</td>
+                                        <td>Từ ngày: <script>var dtstart = moment('{{$item['createdDate']}}').format('DD/MM/YYYY'); document.write(dtstart);</script></td>
                                         {{--  <td><a href="">Xem chi tiết</a></td>  --}}
                                     </tr>
+                                    <?php $i++;?>
                                     @endforeach
                                    
                                     
@@ -51,10 +52,7 @@
                             </table>
                         </div>
                         <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-                                <div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-                            </div>
+                          
                         </div>
                     </div>
                     <!-- END RECENT PURCHASES -->

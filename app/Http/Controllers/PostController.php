@@ -16,6 +16,7 @@
     use Illuminate\Support\Facades\Auth;
     use DateTime;
     use DateTimeZone;
+    // use Illuminate\Support\Facades\Request;
 
  
     class PostController extends Controller{
@@ -25,30 +26,30 @@
     
 
         // Đăng nhập
-        public function postLoginAdmin(Request $req){
-            $client = new \GuzzleHttp\Client();
-            try {
-                $res = $client->request('GET', PageController::getUrl('accounts/'.$req->email.''));
-                $data = json_decode($res->getBody()->getContents(), true);
-                $email = $req['email'];
-                $password = $req['password'];
-                if($password === $data['account']['password']){
-                    if($data['account']['role']['roleName'] == 'Quản lý gian hàng')
-                    {
-                    return redirect()->route('trang-chu-admin')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản lý gian hàng']);
-                    }
-                    else if($data['account']['role']['roleName'] == 'Quản trị viên')
-                    {
-                    return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản trị viên']);
-                    }
-                }else{
-                    return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
-                }
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                // return $e->getResponse()->getStatusCode();
-                return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
-            }     
-        }
+        // public function postLoginAdmin(Request $req){
+        //     $client = new \GuzzleHttp\Client();
+        //     try {
+        //         $res = $client->request('GET', PageController::getUrl('accounts/'.$req->email.''));
+        //         $data = json_decode($res->getBody()->getContents(), true);
+        //         $email = $req['email'];
+        //         $password = $req['password'];
+        //         if($password === $data['account']['password']){
+        //             if($data['account']['role']['roleName'] == 'Quản lý gian hàng')
+        //             {
+        //             return redirect()->route('trang-chu-admin')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản lý gian hàng']);
+        //             }
+        //             else if($data['account']['role']['roleName'] == 'Quản trị viên')
+        //             {
+        //             return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'success','message'=>'Dang nhap thanh cong','role'=>'Quản trị viên']);
+        //             }
+        //         }else{
+        //             return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+        //         }
+        //     }catch (\GuzzleHttp\Exception\ClientException $e) {
+        //         // return $e->getResponse()->getStatusCode();
+        //         return redirect()->back()->with(['flag'=>'danger','message'=>'Dang nhap khong thanh cong']);
+        //     }     
+        // }
 
         // Admin hệ thống
         public function postAddCategoryAdmin(Request $req){
@@ -154,6 +155,69 @@
                 $result1 =  curl_exec($ch1);
             }
                 return redirect()->back();
+        }
+
+        public function postAdmin(Request $req){
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',PageController::getUrl('registeredSales/'.$req['registeredSalesId'].''));            
+            $data = json_decode($res->getBody()->getContents(), true);
+            // dd($data);
+            $datajson=array(
+                "username" =>  $data['registeredSale']['username'],
+                "password" =>  $data['registeredSale']['password'],
+                "roleId" =>  '5b962b5389403417208b6489'
+                );
+            // dd($datajson);
+            $jsonData =json_encode($datajson);
+            $json_url = PageController::getUrl('accounts');
+            $ch = curl_init( $json_url );
+            $options = array(
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => $jsonData
+            );
+            curl_setopt_array( $ch, $options );
+            $result =  curl_exec($ch);
+            $result1 =json_decode($result);
+            if($result1->message == "Created account successfully"){
+                $datacustomerjson=array(
+                    "accountId" =>  $result1->createdAccount->_id,
+                    "storeName" =>  $data['registeredSale']['storeName'],
+                    "location" =>  $data['registeredSale']['address'],
+                    "phoneNumber" =>  $data['registeredSale']['phoneNumber']
+                );
+                $jsonData1 =json_encode($datacustomerjson);
+                $json_url1 = PageController::getUrl('stores');
+                $ch1 = curl_init( $json_url1 );
+                $options1 = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData1
+                );
+                curl_setopt_array( $ch1, $options1 );
+                $result =  curl_exec($ch1);
+                $datajson2=array([
+                    "propName" =>  "isApprove",
+                    "value" =>  true
+                ]);
+                $jsonData2 =json_encode($datajson2);
+                $json_url2 = PageController::getUrl('registeredSales/'.$data['registeredSale']['_id'].'');
+                $ch2 = curl_init( $json_url2 );
+                $options2 = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData2
+                );
+                curl_setopt_array( $ch2, $options2 );
+                $result2 =  curl_exec($ch2);
+                $result12 =json_decode($result2);
+
+            }
+
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 
         //Admin gian hàng

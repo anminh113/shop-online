@@ -377,6 +377,14 @@ Route::get('admin', [
     'as'=>'trang-chu-admin-he-thong',
     'uses'=>'PageController@getAdmin'
 ]);
+Route::post('admin-post', [
+    'as'=>'post-trang-chu-admin-he-thong',
+    'uses'=>'PostController@postAdmin'
+]);
+Route::patch('admin-patch', [
+    'as'=>'update-trang-chu-admin-he-thong',
+    'uses'=>'UpdateController@updateAdmin'
+]);
 
 Route::get('category-admin-shop', [
     'as'=>'danh-sach-shop-he-thong',

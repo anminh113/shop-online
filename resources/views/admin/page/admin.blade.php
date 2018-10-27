@@ -35,29 +35,45 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                    <?php $i=1;?>
                                     @foreach ($data['registeredSales'] as $item)
-                                    <tr>
-                                        <td><a href="#">763648</a></td>
+                                    @if($item['isApprove'] === null )
+                                    <tr data-toggle="modal" data-target="#accept{{$item['_id']}}">
+                                        <td><a href="#"><?php echo $i;?></a></td>
+                                        <td>{{$item['storeName']}}</td>
+                                        <td>{{$item['customer']['name']}}</td>
+                                        <td>{{$item['phoneNumber']}}</td>
+                                        <td><script>var dtstart = moment('{{$item['registeredDate']}}').format('DD/MM/YYYY'); document.write(dtstart);</script></td>
+                                        <td ><span class="label label-warning">Chờ xác nhận</span></td>
+                                    </tr>
+                                    <?php $i++;?>
+                                    
+                                    @elseif($item['isApprove'] === false )
+                                    <tr >
+                                        <td><a href="#"><?php echo $i;?></a></td>
                                         <td>{{$item['storeName']}}</td>
                                         <td>{{$item['customer']['name']}}</td>
                                         <td>{{$item['phoneNumber']}}</td>
                                         <td><script>var dtstart = moment('{{$item['registeredDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></td>
-                                        <td><span class="label label-warning">Chờ xác nhận</span></td>
+                                        <td ><span class="label label-danger">Đã hủy đăng ký</span></td>
                                     </tr>
+                                    <?php $i++;?>
+                                    @elseif($item['isApprove'] === true )
+                                    <tr >
+                                        <td><a href="#"><?php echo $i;?></a></td>
+                                        <td>{{$item['storeName']}}</td>
+                                        <td>{{$item['customer']['name']}}</td>
+                                        <td>{{$item['phoneNumber']}}</td>
+                                        <td><script>var dtstart = moment('{{$item['registeredDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></td>
+                                        <td ><span class="label label-success">Đã chấp nhận</span></td>
+                                    </tr>
+                                    <?php $i++;?>
+                                    @endif
                                     @endforeach
-                                   
-
-
                                 </tbody>
                             </table>
                         </div>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24
-                                        hours</span></div>
-                                <div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-                            </div>
-                        </div>
+                       
                     </div>
                     <!-- END RECENT PURCHASES -->
                 </div>
@@ -69,10 +85,12 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+@foreach ($data['registeredSales'] as $item)
+<div class="modal fade" id="accept{{$item['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <form action="{{route('post-trang-chu-admin-he-thong')}}" method="POST">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLongTitle">Xác nhận đăng ký</h4>
                 <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
@@ -80,15 +98,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                Bạn có chấp nhận người dùng Huỳnh khắc Duy đăng ký gian hàng OchoS?
+                Bạn có chấp nhận người dùng {{$item['customer']['name']}} đăng ký gian hàng {{$item['storeName']}}?
+                <input type="text" hidden value="{{$item['_id']}}" name="registeredSalesId">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Từ Chối</button>
-                <button type="button" class="btn btn-success">Chấp Nhận</button>
+                <button type="submit" form="deny{{$item['_id']}}" class="btn btn-danger">Từ Chối</button>
+                <button type="submit" class="btn btn-success">Chấp Nhận</button>
             </div>
+            {{ csrf_field() }}
+        </form>
         </div>
     </div>
 </div>
+<form action="{{route('update-trang-chu-admin-he-thong')}}" id="deny{{$item['_id']}}" method="POST" >
+        <input type="text" hidden value="{{$item['_id']}}" name="registeredSalesId">
+@method('PATCH')
+{{ csrf_field() }}
+</form>
+@endforeach
 @endsection
 
 @section('footer')
