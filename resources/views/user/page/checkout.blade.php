@@ -59,19 +59,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-12">
                             <div class="tab-content">
-                                {{-- <div role="tabpanel" class="tab-pane fade in active show" id="shippinghome">
-                                    <div class="row">
-                                        <!-- Char. Item -->
-                                        <div class="col-lg-12 col-md-12 char_col">
-                                            <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                                                <div class="char_content">
-                                                    <div class="char_title">Bạn có thể thanh toán bằng tiền mặt khi nhận hàng tại nhà</div>
-                                                    <button class="btn btn-outline- btn-change" style="width:100%">Mua ngay</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
                                 <div role="tabpanel" class="tab-pane fade in active show" id="payonline">
                              
                                     <div class="globalContent" >
@@ -126,14 +114,21 @@
                                                             <span class="message">Số thẻ của bạn không hợp lệ</span></div>
                                                             
                                                     </form>
-                                                    <div class="success" hidden>
-                                                        <div class="icon">
+                                                    <div class="success" >
+                                                            <div class="loader-ellips">
+                                                                    <span class="loader-ellips__dot"></span>
+                                                                    <span class="loader-ellips__dot"></span>
+                                                                    <span class="loader-ellips__dot"></span>
+                                                                    <span class="loader-ellips__dot"></span>
+                                                                  </div>
+                                                        <div class="icon" hidden>
                                                             <svg width="84px" height="84px" viewBox="0 0 84 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                                 <circle class="border" cx="42" cy="42" r="40" stroke-linecap="round" stroke-width="4" stroke="#000" fill="none"></circle>
                                                                 <path class="checkmark" stroke-linecap="round" stroke-linejoin="round" d="M23.375 42.5488281 36.8840688 56.0578969 64.891932 28.0500338" stroke-width="4" stroke="#000" fill="none"></path>
                                                             </svg>
                                                         </div>
-                                                        <h3 class="title" data-tid="elements_examples.success.title">Thanh toán thành công</h3>
+                                                        <h3 class="title" hidden data-tid="elements_examples.success.title">Thanh toán thành công</h3>
+                                                     
                                                         <p class="message" hidden><span data-tid="elements_examples.success.message">Thanks for trying Stripe Elements. No money was charged, but we generated a token: </span><span class="token"></span></p>
                                                         <a class="reset" href="#" hidden>
                                                             <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -153,45 +148,7 @@
 
                                     </form>
                                 </div>
-                                {{-- <div role="tabpanel" class="tab-pane fade" id="references">
-                                    <div class="row">
-                                        <!-- Char. Item -->
-                                        <div class="col-lg-12 col-md-12 char_col">
-                                            <div class="char_item d-flex flex-row align-items-center justify-content-start" style="height:auto; padding: 20px 20px 20px 20px">
-                                                <div class="char_content">
-                                                    <div class="char_title">1) Khi gửi sản phẩm, cần đảm bảo các yếu tố sau:</div>
-                                                    <div class="char_subtitle">
-                                                            - Sản phẩm gửi trả lại phải bao gồm Phiếu đăng ký đổi trả hàng và Hoá đơn VAT của CyberZone.vn, hoặc biên nhận bán hàng (nếu có).
-                                                            <br>
-                                                            - Sản phẩm được gửi kèm với đầy đủ phụ kiện (bao gồm cả hướng dẫn sử dụng, phiếu/ thẻ bảo hành, vỏ hộp sản phẩm.... ) và quà tặng kèm (nếu có).
-                                                            <br>
-                                                            - Sản phẩm còn trong thời hạn hiệu lực cho việc đổi/trả hàng (7 ngày hoặc 14 ngày kể từ ngày nhận hàng – tùy chính sách áp dụng) – xem tại Chính sách đổi trả hàng. 
-                                                            <br>
-                                                            - Lý do trả hàng phải hợp lệ và đáp ứng điều kiện chấp nhận đổi trả hàng – xem tại Điều kiện áp dụng đổi trả hàng.
-                                                            <br>
-                                                            - Những sản phẩm thuộc danh mục ngành hàng đặc biệt sẽ có những điều kiện đổi trả riêng – xem tại Chính sách đổi trả cho ngành hàng đặc biệt.
-                                                    </div>
-                                                    <div class="char_title">2) Thời gian để CyberZone.vn tiến hành quy trình đổi trả hàng sẽ kéo dài hơn nếu gặp các yếu tố sau đây:</div>
-                                                    <div class="char_subtitle">
-                                                            - Thiếu phụ kiện (trừ trường hợp quý khách gửi về vì lí do thiếu phụ kiện.
-                                                            <br>
-                                                            - Thiếu hóa đơn VAT hoặc biên nhận bán hàng.
-                                                            <br>
-                                                            - Thiếu các giấy tờ đi kèm với sản phẩm khi nhận hàng (hướng dẫn sử dụng, thẻ bảo hành, vỏ hộp sản phẩm, v.v..).
-                                                            <br>
-                                                            - Sản phẩm bị bễ vỡ (do đóng gói không cẩn thận) trong quá trình vận chuyển về cho CyberZone.vn.
-                                                            <br>
-                                                            - Phát sinh những vấn đề lỗi sản phẩm CyberZone.vn không được thông báo từ đầu qua phiếu đổi trả trực tuyến, điện thoại hoặc email.
-                                                    </div>
-                                                    <div class="char_title">3) Với lý do đổi trả là bể vỡ, giao thiếu hàng</div>
-                                                    <div class="char_subtitle">
-                                                            Chỉ hỗ trợ đổi trả nếu khách hàng thông báo cho CyberZone.vn trong vòng 48h kể từ khi nhận hàng. CyberZone.vn có thể yêu cầu quý khách cung cấp hình ảnh sản phẩm để đối chiếu với các đơn vị liên quan.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+                                
                             </div> 
                         </div>
                         <div class="col-lg-4 col-md-6">

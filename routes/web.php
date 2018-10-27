@@ -190,10 +190,15 @@ Route::get('profile-user-shop/{id}', [
 
 //---
 
-Route::get('register-shop', [
+Route::get('register-shop/{id}', [
     'as'=>'register-shop',
     'uses'=>'PageController@getRegisterShop'
 ]);
+Route::post('register-shop', [
+    'as'=>'post-register-shop',
+    'uses'=>'PostController@postRegisterShop'
+]);
+//--
 
 Route::get('review-shop/{id}', [
     'as'=>'review-shop',
@@ -440,6 +445,12 @@ Route::patch('add-specification-admin', [
     'uses'=>'UpdateController@updateAddSpecificationAdmin'
 ]);
 // ---
+
+
+Route::get('profile-shop', [
+    'as'=>'profile-shop-admin',
+    'uses'=>'PageController@getProfileShopAdmin'
+]);
 
 
 

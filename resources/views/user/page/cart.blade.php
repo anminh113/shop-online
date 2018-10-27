@@ -157,7 +157,7 @@
                                         <div class="char_icon"><img style="width: 30px;height: 30px" src="source/user/images/icons8-truck-50.png"
                                                 alt=""></div>
                                         <div class="char_content">
-                                            <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 500,000₫ trở lên</div>
+                                            <div class="char_subtitle">Miễn phí vận chuyển với đơn hàng từ 1,000,000₫ trở lên</div>
                                         </div>
                                     </div>
                                 </div>

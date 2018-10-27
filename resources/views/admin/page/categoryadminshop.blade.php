@@ -31,34 +31,21 @@
                                         <th>Người đại diện</th>
                                         <th>Số điện thoại</th>
                                         <th>Địa chỉ kho</th>
-                                        <th>Xem chi tiết</th>
+                                        {{--  <th>Xem chi tiết</th>  --}}
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                    @foreach ($data['stores'] as $item)
                                     <tr>
                                         <td><a href="#">763648</a></td>
-                                        <td>Steve</td>
-                                        <td>$Steve</td>
-                                        <td>0123456789</td>
-                                        <td>6</td>
-                                        <td><a href="detail-admin-shop">Xem chi tiết</a></td>
+                                        <td>{{$item['storeName']}}</td>
+                                        <td>{{$item['customers']['name']}}</td>
+                                        <td>{{$item['phoneNumber']}}</td>
+                                        <td>{{$item['location']}}</td>
+                                        {{--  <td><a href="">Xem chi tiết</a></td>  --}}
                                     </tr>
-                                    <tr>
-                                        <td><a href="#">763649</a></td>
-                                        <td>Amber</td>
-                                        <td>$Steve</td>
-                                        <td>0123456789</td>
-                                        <td>16</td>
-                                        <td><a href="detail-admin-shop">Xem chi tiết</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">763650</a></td>
-                                        <td>Michael</td>
-                                        <td>$34</td>
-                                        <td>0123456789</td>
-                                        <td>216</td>
-                                        <td><a href="detail-admin-shop  ">Xem chi tiết</a></td>
-                                    </tr>
+                                    @endforeach
+                                   
                                     
                                 </tbody>
                             </table>

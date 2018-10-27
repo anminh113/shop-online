@@ -45,6 +45,7 @@
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
                     <form id="fb-form" action="{{route('post-write-review-shop')}}" method="POST">
+                        <input type="text" hidden name="orderitemId" value="{{$OrderItemId}}">
                         <div class="row">
                             <div class="col-lg-7">
                                 <div style="padding-left: 5px;font-size: 15px; padding-bottom: 10px;">Nhận xét và đánh giá sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>

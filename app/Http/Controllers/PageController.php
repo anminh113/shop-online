@@ -738,19 +738,21 @@
                 $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
                 $resorder = $client->request('GET',PageController::getUrl('orders/customer/'.$datacustomer['customer']['_id'].'') );
                 $dataorder = json_decode($resorder->getBody()->getContents(), true);
-                // dd($dataorder);
+               
                 $dataorderitem = array();
                 for ($i=0; $i <count($dataorder['orders']) ; $i++) { 
                     $resorderitem = $client->request('GET',PageController::getUrl('orderItems/order/'.$dataorder['orders'][$i]['_id'].'') );
                     $dataorderitem[] = json_decode($resorderitem->getBody()->getContents(), true);
+                   
                 }
 
                 $resultorderitem = compact('dataorderitem');
-                // dd($resultorderitem);
                 $resreviewproduct = $client->request('GET',PageController::getUrl('reviewProducts/customer/'.$datacustomer['customer']['_id'].'') );
                 $datareviewproduct = json_decode($resreviewproduct->getBody()->getContents(), true);
                 $resreviewshop = $client->request('GET',PageController::getUrl('reviewStores/customer/'.$datacustomer['customer']['_id'].'') );
                 $datareviewshop = json_decode($resreviewshop->getBody()->getContents(), true);
+                $datareviewproduct['reviewStores'] = $datareviewshop['reviewStores'];
+               
                 }catch (\GuzzleHttp\Exception\RequestException $e) {
                 return $e->getResponse()->getStatusCode();
                 
@@ -760,16 +762,20 @@
         }
 
         public function getWriteReviewShop(Request $req){
+            // dd($req);
             $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET',PageController::getUrl('products/'.$req->id.'') );
+            $resOrderItem = $client->request('GET',PageController::getUrl('orderItems/'.$req->id.'') );
+            $dataOrderItem = json_decode($resOrderItem->getBody()->getContents(), true);
+            // dd($data);
+            $OrderItemId = $req->id;
+            //get anh san pham
+            $res = $client->request('GET',PageController::getUrl('products/'.$dataOrderItem['orderItem']['product']['_id'].'') );
             $data[] = json_decode($res->getBody()->getContents(), true);
             $resultdata = compact('data');
-            // dd($resultdata);
-            //get anh san pham
-            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$req->id.''));
+            $res = $client->request('GET',PageController::getUrl('productimages/product/'.$dataOrderItem['orderItem']['product']['_id'].''));
             $datatext[] = json_decode($res->getBody()->getContents(), true);
             $resultimg = compact('datatext');
-            return view('user/page.writereviewadmin',compact('resultdata','resultimg'));
+            return view('user/page.writereviewadmin',compact('resultdata','resultimg','OrderItemId'));
         }
 
         //End user
@@ -1013,7 +1019,7 @@
                     //         $datatext2[] = $data['products'][$i];
                     //     }
                     // }
-                    // $result2 = compact('datatext2');
+                    $result2 =array();
                     // dd($result2);
                     //end get json
                     $datatext = array();
@@ -1435,17 +1441,76 @@
             return redirect()->guest(route('login-admin', [], false));            
         }
 
+        public function getProfileShopAdmin(){
+            if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng'){
+                $store = Session::get('key')[0]['store']['_id'];
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',PageController::getUrl('stores/'.$store.'') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$data['store']['account']['_id'].'') );
+                $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
+                $data['store']['customers'] =  $datacustomer['customer'];
+
+
+                $resstoreproduct = $client->request('GET',PageController::getUrl('products/store/'.$store.''));
+                $datastoreproduct = json_decode($resstoreproduct->getBody()->getContents(), true);
+
+                $resreviewshop = $client->request('GET',PageController::getUrl('reviewStores/store/'.Session::get('key')[0]['store']['_id'].''));
+                $datareviewshop = json_decode($resreviewshop->getBody()->getContents(), true);
+                $countstar_3 = 0;
+                $countstar_2 = 0;
+                $countstar_1 = 0;
+                $countstar = array();
+                for($i=0; $i<$datareviewshop['count']; $i++){
+                    $dtstart = new DateTime($datareviewshop['reviewStores'][$i]['dateReview']);
+                    $dtstart->setTimezone(new DateTimeZone('UTC'));
+                    $timereviewshop[] =  $dtstart->format('d/m/Y');
+                    $countstar[] = $datareviewshop['reviewStores'][$i]['ratingLevel']['ratingLevel'];
+                    switch ($countstar[$i]) {
+                        case "3":
+                            $countstar_3 ++;
+                            break;
+                        case "2":
+                            $countstar_2 ++;
+                            break;
+                        case "1":
+                            $countstar_1 ++;
+                            break;      
+                    }
+                }
+                if( $datareviewshop['count'] == 0 ){
+                    $countrating = 0;
+                }else{
+                    $countrating = number_format((($countstar_2 + $countstar_1)/($countstar_2 + $countstar_1 + $countstar_3))*100, 1, '.', '');
+                }
+                return view('admin/page.profileshopadmin',compact('datareviewshop','countrating','timereviewshop','data','datastoreproduct'));
+            }
+            return redirect()->guest(route('login-admin'));            
+        }
+
         //Admin hệ thống
         public function getAdmin(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
-                return view('admin/page.admin');
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',PageController::getUrl('registeredSales') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                // dd($data);
+                return view('admin/page.admin',compact('data'));
             }
             return redirect()->guest(route('login-admin', [], false));            
         }
 
         public function getCategoryAdminShop(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
-                return view('admin/page.categoryadminshop');
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',PageController::getUrl('stores') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                for ($i=0; $i <$data['count'] ; $i++) { 
+                    $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$data['stores'][$i]['account']['_id'].'') );
+                    $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
+                    $data['stores'][$i]['customers'] =  $datacustomer['customer'];
+                }
+                return view('admin/page.categoryadminshop',compact('data'));
             }
             return redirect()->guest(route('login-admin', [], false));            
            
@@ -1462,8 +1527,8 @@
         public function getAddCategoryAdmin(){
             if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên'){
                 //get json danh muc all
-                $client1 = new \GuzzleHttp\Client();
-                $res = $client1->request('GET',PageController::getUrl('categories') );
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',PageController::getUrl('categories') );
                 $data = json_decode($res->getBody()->getContents(), true);
                 //end get json
                 return view('admin/page.addcategoryadmin', compact('data'));
@@ -1515,6 +1580,8 @@
              
            
         }
+
+        
 
 
     }

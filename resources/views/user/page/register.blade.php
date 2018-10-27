@@ -20,55 +20,9 @@
 
 
 
-<!-- Characteristics -->
-<div class="characteristics">
-    <div class="container">
-        <div class="row">
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_1.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_2.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_3.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_4.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- register -->
-<div class="register">
+<div class="register" style="margin-top: 70px">
     <div class="container">
         <div class="viewed_title_register">
             <h3 class="viewed_title">Tạo tài khoản CyberZone</h3>
@@ -141,7 +95,7 @@
             <div class="col-lg-6">
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Tên tài khoản hoặc Email</label>
                     <input type="email" class="form-control" id="email" form="dangky" name="email" placeholder="  ">
                 </div>
                 <div class="space10">&nbsp;</div>

@@ -34,7 +34,10 @@
                                     <li>
                                         <div class="link">{{$data4[$time]['categoryName']}}<i class="fa fa-chevron-down"></i></div>
                                         <ul class="submenu">
+                                                <li><label><input  type="checkbox" name="check[]" value="*" />   Tất cả</label></li>
+
                                         @foreach($item['productTypes'] as $text )
+                                        
                                         <li><label><input  type="checkbox" name="check[]" value=".{{$text['_id']}}" />   {{$text['productTypeName']}}</label></li>
                                         @endforeach
                                         </ul>
@@ -74,7 +77,7 @@
                                                     tăng dần</li>
                                                 <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá
                                                     giảm dần</li>
-                                                <li class="shop_sorting_button" data-isotope-option='name'>name</li>
+                                                {{--  <li class="shop_sorting_button" data-isotope-option='name'>name</li>  --}}
                                             </ul>
                                         </li>
                                     </ul>
@@ -118,6 +121,7 @@
                                                     <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div> </div>
                                                 </div>
                                             </div>
+                                            <div class="countreviewproduct" hidden>{{$data['0'][$i]['count']}}</div>
                                         </div>
                                         
                                         <div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -158,6 +162,7 @@
                                                     <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div> </div>
                                                 </div>
                                             </div>
+                                            <div class="countreviewproduct" hidden>{{$data['0'][$i]['count']}}</div>
                                         </div>
                                         {{-- <div class="product_fav"><i class="fas fa-heart"></i></div> --}}
                                         @if(empty($item['saleOff']))
@@ -341,3 +346,5 @@ var date12 = '{{$time12}}';
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
 
 @endsection
+
+

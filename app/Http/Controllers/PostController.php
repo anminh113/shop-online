@@ -490,7 +490,6 @@
         public function postProductList(Request $req){
             //get json san pham theo gian hang
             $client1 = new \GuzzleHttp\Client();
-            //  $res = $client1->request('GET',PageController::getUrl('products/store/5bb1c71a8875381e34da95ff'));
             $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
             $todaytime = new DateTime($datatime['time']);
@@ -505,89 +504,94 @@
                 $data1[] = json_decode($res1->getBody()->getContents(), true);
             }
             $result1 = compact('data1');
-            
-            $datajson=array(
-                "name" =>  $req['search']
+            if($req['search'] != null){
+                $datajson=array(
+                    "name" =>  $req['search']
+                    );
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('products/findByName');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData
                 );
-            // dd($datajson);
-            $jsonData =json_encode($datajson);
-            $json_url = PageController::getUrl('products/findByName');
-            $ch = curl_init( $json_url );
-            $options = array(
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => $jsonData
-            );
-            curl_setopt_array( $ch, $options );
-            $result =  curl_exec($ch);
-            $data = array();
-            $data =json_decode($result,JSON_NUMERIC_CHECK);
-
-            $datatext = array();
-            $countstar_5 = 0;
-            $countstar_4 = 0;
-            $countstar_3 = 0;
-            $countstar_2 = 0;
-            $countstar_1 = 0;
-            $datareview = array();
-            $countstar = array();
-            for ($i=0;  $i < count($data['products']); $i++){
-         
-                $data2 = $data['products'][$i]['_id'];
-                $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
-                $datatext[] = json_decode($res2->getBody()->getContents(), true);
-
-                $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
-                $datareview[] = json_decode($res3->getBody()->getContents(), true);
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+                $data = array();
+                $data =json_decode($result,JSON_NUMERIC_CHECK);
+    
+                $datatext = array();
+                $countstar_5 = 0;
+                $countstar_4 = 0;
+                $countstar_3 = 0;
+                $countstar_2 = 0;
+                $countstar_1 = 0;
+                $datareview = array();
+                $countstar = array();
+                for ($i=0;  $i < count($data['products']); $i++){
+                    $data2 = $data['products'][$i]['_id'];
+                    $res2 = $client1->request('GET',PageController::getUrl('productimages/product/'.$data2.''));
+                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
+    
+                    $res3 = $client1->request('GET',PageController::getUrl('reviewProducts/product/'.$data2.''));
+                    $datareview[] = json_decode($res3->getBody()->getContents(), true);
+                }
+    
+                $result = compact('datatext');
+                $resultdatareview = compact('datareview');
+                array_push($data,$datareview);
+                for($i=0; $i < count($data['0']); $i++){
+                    if(!empty($data['0'][$i])){
+                        $countstar_5 = 0;
+                        $countstar_4 = 0;
+                        $countstar_3 = 0;
+                        $countstar_2 = 0;
+                        $countstar_1 = 0;
+                        $countstar = array();
+                        for ($j=0; $j < count($data['0'][$i]['reviewProducts']); $j++) { 
+                            $IDreview[] =  $data['0'][$i]['reviewProducts'][$j]['product']['_id'];
+                            $countstar[] = $data['0'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar'];
+                             switch ($countstar[$j]) {
+                                case "5":
+                                    $countstar_5 ++;
+                                    break;
+                                case "4":
+                                    $countstar_4 ++;
+                                    break;
+                                case "3":
+                                    $countstar_3 ++;
+                                    break;
+                                case "2":
+                                    $countstar_2 ++;
+                                    break;
+                                case "1":
+                                    $countstar_1 ++;
+                                    break;      
+                            }
+                            if($j == (count($data['0'][$i]['reviewProducts']) -1)){
+                                $text12  =  number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '');
+                                $datajson1['countsar'][] = array(
+                                "id" => array_pop($IDreview) ,
+                                "value" => ($text12)
+                            ); 
+                            }
+                        }  
+                    }      
+                }    
+                return view('user/page.productlist',compact('datajson1','data','result','result1','data4','resultPrice','time12','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));        
             }
-
-            $result = compact('datatext');
-            $resultdatareview = compact('datareview');
-            array_push($data,$datareview);
-            for($i=0; $i < count($data['0']); $i++){
-                if(!empty($data['0'][$i])){
-                    $countstar_5 = 0;
-                    $countstar_4 = 0;
-                    $countstar_3 = 0;
-                    $countstar_2 = 0;
-                    $countstar_1 = 0;
-                    $countstar = array();
-                    for ($j=0; $j < count($data['0'][$i]['reviewProducts']); $j++) { 
-                        $IDreview[] =  $data['0'][$i]['reviewProducts'][$j]['product']['_id'];
-                        $countstar[] = $data['0'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar'];
-                         switch ($countstar[$j]) {
-                            case "5":
-                                $countstar_5 ++;
-                                break;
-                            case "4":
-                                $countstar_4 ++;
-                                break;
-                            case "3":
-                                $countstar_3 ++;
-                                break;
-                            case "2":
-                                $countstar_2 ++;
-                                break;
-                            case "1":
-                                $countstar_1 ++;
-                                break;      
-                        }
-                        if($j == (count($data['0'][$i]['reviewProducts']) -1)){
-                            $text12  =  number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1)/($countstar_5+$countstar_4+$countstar_3+$countstar_2+$countstar_1), 1, '.', '');
-                            $datajson1['countsar'][] = array(
-                            "id" => array_pop($IDreview) ,
-                            "value" => ($text12)
-                        ); 
-                        }
-                    }  
-                }      
-            }    
+            else{
+               
+                return redirect()->route('post-danhsach-sanpham');
+            }
+            
          
            
         return view('user/page.productlist',compact('datajson1','data','result','result1','data4','resultPrice','time12','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));        
         }
-
        
         public function postProductTypeProductList(Request $req){
             // dd($req->id);
@@ -871,7 +875,7 @@
         public function postWriteReviewShop(Request $req){
             $client = new \GuzzleHttp\Client();
             // đánh giá product
-            
+            // dd($req['orderitemId']);
             $resreviewProducts = $client->request('GET',PageController::getUrl('ratingStars'));
             $datareviewProducts = json_decode($resreviewProducts->getBody()->getContents(), true);
             for ($i=0; $i < count($datareviewProducts['ratingStars']) ; $i++) { 
@@ -899,7 +903,22 @@
             $resultreviewProducts =  curl_exec($chreviewProducts);
             $result1reviewProducts =json_decode($resultreviewProducts);
             // dd($result1reviewProducts);
-
+            $datajsonupdatestate=array([
+                "propName" =>  "isReview",
+                "value" =>  true
+            ]);
+            $jsonDataupdatestate =json_encode($datajsonupdatestate);
+            $json_urlupdatestate = PageController::getUrl('orderItems/'.$req['orderitemId'].'');
+            $chupdatestate = curl_init( $json_urlupdatestate );
+            $optionsupdatestate = array(
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                CURLOPT_CUSTOMREQUEST => "PATCH",
+                CURLOPT_POSTFIELDS => $jsonDataupdatestate
+            );
+            curl_setopt_array( $chupdatestate, $optionsupdatestate );
+            $resultupdatestate =  curl_exec($chupdatestate);
+            $result1updatestate =json_decode($resultupdatestate);
             // đánh giá store
 
 
@@ -982,6 +1001,35 @@
                 return redirect()->back()->with(['flag'=>'success','title'=>'Đã theo dõi gian hàng này' ,'message'=>' ']);
             }
             return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để theo dõi gian hàng này' ,'message'=>' ']);
+        }
+
+        public function postRegisterShop(Request $req){
+            if(Session::has('keyuser')){
+                $datajson =array(
+                    "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
+                    "storeName" =>  $req['namestore'],
+                    "address" => $req['tinh-thanhpho'],
+                    "phoneNumber" => $req['sdt'],
+                    "email" => $req['email'],
+                    "username" => $req['username'],
+                    "password" => $req['pass1']
+                );
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('registeredSales');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+                $result1 =json_decode($result);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
+            }
+            return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để thực hiện này' ,'message'=>' ']);
         }
  
 

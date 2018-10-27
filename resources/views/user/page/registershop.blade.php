@@ -17,8 +17,8 @@
 
 @endsection
 @section('content')
-  
-   
+
+
 
 <!-- Characteristics -->
 <div class="characteristics">
@@ -81,28 +81,58 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <form action="#" class="clearfix">
+                <form action="{{route('post-register-shop')}}" id="registershop" method="POST" class="clearfix">
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="text-size">Tên Gian Hàng</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <label for="namestore" class="text-size">Tên Gian Hàng</label>
+                        <input type="text" class="form-control" id="namestore" name="namestore" aria-describedby=""
+                            placeholder="">
                     </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1" class="text-size">Địa Chỉ Gian Hàng</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1" class="text-size">Số Điện Thoại</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="space10">&nbsp;</div>
                    
+                    <div class="space10">&nbsp;</div>
+                    <div class="form-group">
+                        <label for="email" class="text-size">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" aria-describedby=""
+                            placeholder="">
+                    </div>
+                   
+                    <div class="space10">&nbsp;</div>
+                    <div class="form-group">
+                        <label for="sdt" class="text-size">Số Điện Thoại</label>
+                        <input type="number" class="form-control" id="sdt" name="sdt" aria-describedby=""
+                            placeholder="">
+                    </div>
+                    <div class="space10">&nbsp;</div>
+                    <div class="form-group">
+                        <label for="" class="text-size">Địa chỉ kho</label>
+                        <select name="tinh-thanhpho" id="tinh-thanhpho" class="form-control" style="margin-left: 0px;"
+                            id="">
+                            <option value="">Chọn tỉnh thành</option>
+                        </select>
+                    </div>
+                    <div class="space10">&nbsp;</div>
+                    <div class="form-group">
+                        <label for="username" class="text-size">Tài khoản đăng nhập</label>
+                        <input type="text" class="form-control" id="username" name="username" aria-describedby=""
+                            placeholder="">
+                    </div>
+                    <div class="space10">&nbsp;</div>
+                    <div class="form-group">
+                        <label for="pass1" class="text-size">Mật khẩu</label>
+                        <input type="password" class="form-control" id="pass1" name="pass1" aria-describedby=""
+                            placeholder="">
+                    </div>
+                    <div class="space10">&nbsp;</div>
+                    <div class="form-group">
+                        <label for="pass2" class="text-size">Xác nhận mật khẩu</label>
+                        <input type="password" class="form-control" id="pass2" name="pass2" aria-describedby=""
+                            placeholder="">
+                    </div>
+                    {{ csrf_field() }}
                 </form>
-              
+
                 <div class="form-group">
-                        <div class="space20">&nbsp;</div>
-                    <button type="button" class="button register_title_button">Đăng Ký</button>
+                    <div class="space20">&nbsp;</div>
+                    <button type="submit" form="registershop" class="button register_title_button">Đăng Ký</button>
                 </div>
             </div>
         </div>
@@ -118,6 +148,36 @@
 <script src="source/user/plugins/slick-1.8.0/slick.js"></script>
 <script src="source/user/js/custom.js"></script>
 <script src="source/user/styles/js/register.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        load_json_data('tinh-thanhpho');
+
+        function load_json_data(id, parent_id) {
+            var html_code = '';
+            $.getJSON("source/user/datacontry/tinh_tp.json", function (data) {
+                html_code += '<option value="">Chọn tỉnh thành</option>';
+                $.each(data, function (key, value) {
+                    if (id == 'tinh-thanhpho') {
+                        if (value.type == 'tinh' || value.type == 'thanh-pho') {
+                            html_code += '<option value="' + value.name + '">' + value.name_with_type +
+                                '</option>';
+                        }
+                    } else {
+                        if (value.code == parent_id) {
+                            html_code += '<option value="' + value.name + '">' + value.name_with_type +
+                                '</option>';
+                        }
+                    }
+                });
+                $('#tinh-thanhpho').html(html_code);
+            });
+
+        }
+
+    });
+
+</script>
+
 @endsection
-
-

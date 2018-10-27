@@ -276,9 +276,12 @@ $(document).ready(function() {
             itemSelector: '.product_item',
             getSortData: {
                 Price: function(itemElement) {
-                    var priceEle = $(itemElement).find('.product_price').text().replace('$', '');
+                    var priceEle = $(itemElement).find('.product_price1').text().replace('$', '');
                     return parseFloat(priceEle);
-                },name: '.product_name div a'
+                },Countreview: function(itemElement) {
+                    var priceEle = $(itemElement).find('.countreviewproduct').text().replace('$', '');
+                    return parseFloat(priceEle);
+                }
             },
             animationOptions: {
                 duration: 750,
@@ -299,9 +302,9 @@ $(document).ready(function() {
                 } else if (option == 'PriceReduction') {
                     $('.product_grid').isotope('updateSortData').isotope();
                     $('.product_grid').isotope({ sortBy: 'Price', sortAscending: false });
-                } else if (option == 'name'){
+                } else if (option == 'original-order'){
                     $('.product_grid').isotope('updateSortData').isotope();
-                    $('.product_grid').isotope({ sortBy: 'name' });
+                    $('.product_grid').isotope({ sortBy: 'Countreview', sortAscending: false });
                 }else{
                     $('.product_grid').isotope('updateSortData').isotope();
                     $('.product_grid').isotope({ sortBy: 'random' });
@@ -309,6 +312,8 @@ $(document).ready(function() {
 
             });
         });
+
+        
 
         // quick search regex
         var qsRegex;

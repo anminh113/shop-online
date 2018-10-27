@@ -33,9 +33,10 @@
 						{{-- Người bán hàng --}}
 						<ul class="nav">
 							<li><a href="{{ route('trang-chu-admin')}}" id="index-admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
+							<li><a href="{{ route('profile-shop-admin')}}" id="profile-shop-admin" class=""><i class="lnr lnr-home"></i> <span>Thông tin gian hàng</span></a></li>
 							<li><a href="{{route('danh-muc-admin')}}" id="category-admin" class=""><i class="lnr lnr-code"></i> <span>Danh mục</span></a></li>
 							<li><a href="{{route('san-pham-admin')}}" id="product-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Sản phẩm</span></a></li>
-							<li><a href="{{route('xem-danh-gia')}}" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>
+							{{--  <li><a href="{{route('xem-danh-gia')}}" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>  --}}
 							<li><a href="{{route('discount-admin')}}" id="discount-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Sự kiện giảm giá </span></a></li>
 							<li>
 								<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Quản lý đơn hàng</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>

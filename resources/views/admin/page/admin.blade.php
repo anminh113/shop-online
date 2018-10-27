@@ -23,7 +23,6 @@
                             </div>
                         </div>
                         <div class="panel-body no-padding">
-
                             <table id="table_format" class="table table-striped">
                                 <thead>
                                     <tr>
@@ -36,46 +35,17 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                    @foreach ($data['registeredSales'] as $item)
                                     <tr>
                                         <td><a href="#">763648</a></td>
-                                        <td>Steve</td>
-                                        <td>$Steve</td>
-                                        <td>123456789</td>
-                                        <td>Oct 21, 2016</td>
-                                        <td><span class="label label-success">Chấp nhận</span></td>
-                                    </tr>
-                                    <tr data-toggle="modal" data-target="#exampleModalLong">
-                                        <td><a href="#">763649</a></td>
-                                        <td>Amber</td>
-                                        <td>$Steve</td>
-                                        <td>123456789</td>
-                                        <td>Oct 21, 2016</td>
+                                        <td>{{$item['storeName']}}</td>
+                                        <td>{{$item['customer']['name']}}</td>
+                                        <td>{{$item['phoneNumber']}}</td>
+                                        <td><script>var dtstart = moment('{{$item['registeredDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></td>
                                         <td><span class="label label-warning">Chờ xác nhận</span></td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="#">763650</a></td>
-                                        <td>Michael</td>
-                                        <td>$34</td>
-                                        <td>123456789</td>
-                                        <td>Oct 18, 2016</td>
-                                        <td><span class="label label-danger">Từ chối</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">763650</a></td>
-                                        <td>Michael</td>
-                                        <td>$34</td>
-                                        <td>123456789</td>
-                                        <td>Oct 18, 2016</td>
-                                        <td><span class="label label-danger">Từ chối</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">763650</a></td>
-                                        <td>Michael</td>
-                                        <td>$34</td>
-                                        <td>123456789</td>
-                                        <td>Oct 18, 2016</td>
-                                        <td><span class="label label-danger">Từ chối</span></td>
-                                    </tr>
+                                    @endforeach
+                                   
 
 
                                 </tbody>

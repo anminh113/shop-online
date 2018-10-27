@@ -31,7 +31,15 @@
                                 <div class="char_content">
                                     <div class="char_title">Tiêu chuẩn</div>
                                     <div class="char_subtitle">Nhận hàng vào 1-4 thg 9 2018</div>
-                                    <div class="char_title">10.000d</div>
+                                    @foreach ($data['deliveryPrices'] as $item)
+                                    @if($item['totalPriceMin'] <= Session::get('cart')->totalPrice && $item['totalPriceMax'] >= Session::get('cart')->totalPrice )
+                                    <div class="char_title">{{$item['transportFee']}},000₫</div>
+                                    @break
+                                    @elseif($item['totalPriceMax'] == null)
+                                    <div class="char_title">Miễn phí vận chuyển</div>
+                                    @break
+                                    @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

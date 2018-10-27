@@ -23,55 +23,8 @@
 
 
 
-<!-- Characteristics -->
-<div class="characteristics">
-    <div class="container">
-        <div class="row">
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_1.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_2.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_3.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_4.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- register -->
-<div class="login">
+<div class="login" style="margin-top: 70px">
     <div class="container">
         <div class="viewed_title_register">
             <h3 class="viewed_title">Chào mừng đến với CyberZone!</h3>
@@ -96,7 +49,7 @@
                             </div>
                             <form id="demoForm" name="demoForm" action="{{route('post-dang-nhap')}}" method="POST" accept-charset="utf-8">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">Tên tài khoản hoặc Email</label>
                                     <input type="text" class="form-control" id="email" name="email" placeholder="" required>
                                 </div>
                                 <div class="form-group">
