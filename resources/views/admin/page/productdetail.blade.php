@@ -147,177 +147,19 @@
                         </div>
                        
                     </div>
-                    <hr>
-                    <div class="row">
-
-                        <div class="col-lg-12">
-                            {{-- <div class="section-title"> Điểm đánh giá trung bình</div> --}}
-                            <div class="rating-overview">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="score">
-                                                <label class="average">3<span class="countText" style="font-size: 29px">/5</span></label>
-                                            </div>
-                                            <div class="count">
-                                                <div class="countText">
-                                                    Đánh giá tích cực
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="scoreItem">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="side">
-                                                            <div class="rating_r rating_r_5 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                                        </div>
-                                                        <div class="middle">
-                                                            <div class="bar-container">
-                                                                <div class="bar-5"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="side right">
-                                                            <div class="tillet"> 60</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="side">
-                                                            <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                                        </div>
-                                                        <div class="middle">
-                                                            <div class="bar-container">
-                                                                <div class="bar-4"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="side right">
-                                                            <div class="tillet"> 50</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="side">
-                                                            <div class="rating_r rating_r_3 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                                        </div>
-                                                        <div class="middle">
-                                                            <div class="bar-container">
-                                                                <div class="bar-3"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="side right">
-                                                            <div class="tillet"> 40</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="side">
-                                                            <div class="rating_r rating_r_2 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                                        </div>
-                                                        <div class="middle">
-                                                            <div class="bar-container">
-                                                                <div class="bar-2"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="side right">
-                                                            <div class="tillet"> 30</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="side">
-                                                            <div class="rating_r rating_r_1 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                                        </div>
-                                                        <div class="middle">
-                                                            <div class="bar-container">
-                                                                <div class="bar-1"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="side right">
-                                                            <div class="tillet"> 20</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="space10">&nbsp;</div>
-
-                            <div class="viewed_title_container">
-                                <h5 class="viewed_title">Nhận xét và đánh giá về sản phẩm</h5>
-                            </div>
-                            <div class="space10">&nbsp;</div>
-
-                            <div class="sis-seller-reviews">
-                                <div class="seller-review-item">
-                                    <div class="row reviewer">
-                                        <div class="rating_r rating_r_3 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                            <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
-                                    </div>
-                                    <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                            quá ngon
-                                            cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết
-                                            đc, nhưng
-                                            mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j
-                                            cả 😄</label>
-                                    </div>
-
-                                </div>
-                                <div class="seller-review-item">
-                                    <div class="row reviewer">
-                                        <div class="rating_r rating_r_4 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                            <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
-                                    </div>
-                                    <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                            quá ngon
-                                            cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết
-                                            đc, nhưng
-                                            mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j
-                                            cả 😄</label>
-                                    </div>
-
-                                </div>
-                                <div class="seller-review-item">
-                                    <div class="row reviewer">
-                                        <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                            <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
-                                    </div>
-                                    <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                            quá ngon
-                                            cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết
-                                            đc, nhưng
-                                            mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j
-                                            cả 😄</label>
-                                    </div>
-
-                                </div>
-                                <div class="seller-review-item">
-                                    <div class="row reviewer">
-                                        <div class="rating_r rating_r_5 product_rating"> <i></i> <i></i> <i></i> <i></i>
-                                            <i></i> <label class="itemFooter">An T. - 3 tháng trước</label></div>
-                                    </div>
-                                    <div class="row">
-                                        <label class="comments">Hàng giao rất nhanh, dung lượng thực tế là 29,7G thế là
-                                            quá ngon
-                                            cho 1 chiếc thẻ Sandisk chính hãng rồi. Về độ bền thì để thời gian mới biết
-                                            đc, nhưng
-                                            mà Sandisk quá nổi tiếng rồi mình có 1 cái 2G mà dùng hơn 5 năm chả hỏng j
-                                            cả 😄</label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="space10">&nbsp;</div>
                             <button type="button" class="btn btn-change" onclick="window.location='{{route('sua-chi-tiet-san-pham-admin',$item['product']['_id'])}}';">Cập
                                 nhật</button>
-                            <button type="button" class="btn btn-save">Xóa</button>
+                            <button type="submit" form="deleteproduct" class="btn btn-save">Xóa</button>
                         </div>
+                        <form hidden id="deleteproduct" action="{{route('delete-san-pham-admin')}}" method="post">
+                        <input type="text" hidden name="productId" value="{{$item['product']['_id']}}">
 
+                        @method('DELETE')
+                        {{ csrf_field() }}</form>
                     </div>
                 </div>
             </div>

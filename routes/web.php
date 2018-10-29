@@ -76,6 +76,10 @@ Route::post('register', [
     'as'=>'post-dang-ky',
     'uses'=>'PostController@postRegister'
 ]);
+Route::post('register-google-facebook', [
+    'as'=>'post-google-facebook-dang-ky',
+    'uses'=>'PostController@postRegisterGoogleFacebook'
+]);
 //---
 
 //---
@@ -89,6 +93,10 @@ Route::post('login', [
     'uses'=>'UserController@postLogin'
 ]);
 
+Route::post('login-GG-FB', [
+    'as'=>'post-dang-nhap-GG-FB',
+    'uses'=>'UserController@postLoginGGFB'
+]);
 //---
 
 Route::get('profileshop/{id}', [
@@ -264,9 +272,14 @@ Route::post('product-admin', [
     'uses'=>'PostController@postProductAdmin'
 ]);
 
+
 Route::get('product-detail-admin/{id}', [
     'as'=>'chi-tiet-san-pham-admin',
     'uses'=>'PageController@getProductDetailAdmin'
+]);
+Route::delete('product-detail-admin', [
+    'as'=>'delete-san-pham-admin',
+    'uses'=>'DeleteController@deleteProductAdmin'
 ]);
 
 //---

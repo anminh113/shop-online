@@ -12,37 +12,37 @@
   $("document").ready(function() {
       $('#file-upload1').on("change", function() {
         
-            var bla = $('#img1').val();
-            option = bla.split("/", 6);
-            console.log(option[3].slice(0,7));
+            // var bla = $('#img1').val();
+            // option = bla.split("/", 6);
+            // console.log(option[3].slice(0,7));
 
 
-            var idImage = option[3].slice(0,7);
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
-                "method": "GET",
-                "headers": {
-                    "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-                }
-            }
-            $.ajax(settings).done(function(res) {
-                var settings1 = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
-                    "method": "DELETE",
-                    "headers": {
-                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-                    }
-                }
+            // var idImage = option[3].slice(0,7);
+            // var settings = {
+            //     "async": true,
+            //     "crossDomain": true,
+            //     "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
+            //     "method": "GET",
+            //     "headers": {
+            //         "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+            //     }
+            // }
+            // $.ajax(settings).done(function(res) {
+            //     var settings1 = {
+            //         "async": true,
+            //         "crossDomain": true,
+            //         "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
+            //         "method": "DELETE",
+            //         "headers": {
+            //             "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+            //         }
+            //     }
     
-                $.ajax(settings1).done(function(response) {
-                    console.log(response);
-                });
+            //     $.ajax(settings1).done(function(response) {
+            //         console.log(response);
+            //     });
     
-            });
+            // });
 
           var $files = $(this).get(0).files;
 
@@ -127,39 +127,39 @@
 
   $("document").ready(function() {
       $('#file-upload2').on("change", function() {
-        var bla = $('#img2').val();
-        option = bla.split("/", 6);
-        console.log(option[3].slice(0,7));
+        // var bla = $('#img2').val();
+        // option = bla.split("/", 6);
+        // console.log(option[3].slice(0,7));
 
 
-            var idImage = option[3].slice(0,7);
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
-                "method": "GET",
-                "headers": {
-                    "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-                }
-            }
-            $.ajax(settings).done(function(res) {
-                var settings1 = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
-                    "method": "DELETE",
-                    "headers": {
-                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-                    }
-                }
+        //     var idImage = option[3].slice(0,7);
+        //     var settings = {
+        //         "async": true,
+        //         "crossDomain": true,
+        //         "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
+        //         "method": "GET",
+        //         "headers": {
+        //             "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+        //         }
+        //     }
+        //     $.ajax(settings).done(function(res) {
+        //         var settings1 = {
+        //             "async": true,
+        //             "crossDomain": true,
+        //             "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
+        //             "method": "DELETE",
+        //             "headers": {
+        //                 "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+        //             }
+        //         }
     
-                $.ajax(settings1).done(function(response) {
-                    console.log(response);
-                });
+        //         $.ajax(settings1).done(function(response) {
+        //             console.log(response);
+        //         });
     
-            });
+        //     });
 
-          var $files = $(this).get(0).files;
+        //   var $files = $(this).get(0).files;
 
           var $files = $(this).get(0).files;
 
@@ -240,39 +240,39 @@
 
   $("document").ready(function() {
       $('#file-upload3').on("change", function() {
-        var bla = $('#img3').val();
-        option = bla.split("/", 6);
-        console.log(option[3].slice(0,7));
+        // var bla = $('#img3').val();
+        // option = bla.split("/", 6);
+        // console.log(option[3].slice(0,7));
 
 
-            var idImage = option[3].slice(0,7);
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
-                "method": "GET",
-                "headers": {
-                    "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-                }
-            }
-            $.ajax(settings).done(function(res) {
-                var settings1 = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
-                    "method": "DELETE",
-                    "headers": {
-                        "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
-                    }
-                }
+        //     var idImage = option[3].slice(0,7);
+        //     var settings = {
+        //         "async": true,
+        //         "crossDomain": true,
+        //         "url": "https://api.imgur.com/3/album/OXLigJs/image/" + idImage,
+        //         "method": "GET",
+        //         "headers": {
+        //             "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+        //         }
+        //     }
+        //     $.ajax(settings).done(function(res) {
+        //         var settings1 = {
+        //             "async": true,
+        //             "crossDomain": true,
+        //             "url": "https://api.imgur.com/3/image/" + res.data.deletehash,
+        //             "method": "DELETE",
+        //             "headers": {
+        //                 "Authorization": "Bearer 9c2fca8227f628d8d2888728b82fe53529a4e400"
+        //             }
+        //         }
     
-                $.ajax(settings1).done(function(response) {
-                    console.log(response);
-                });
+        //         $.ajax(settings1).done(function(response) {
+        //             console.log(response);
+        //         });
     
-            });
+        //     });
 
-          var $files = $(this).get(0).files;
+        //   var $files = $(this).get(0).files;
 
           var $files = $(this).get(0).files;
 

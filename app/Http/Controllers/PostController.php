@@ -307,10 +307,12 @@
             $res = $client->request('GET',PageController::getUrl('stores/'.$store.''));
             $data = json_decode($res->getBody()->getContents(), true);
             $count = 0;
+          
             for ($i=0;  $i < count($data['store']['categories']); $i++){
                 $value[]= (["category" => $data['store']['categories'][$i]['category']['_id'],]);
                 $count ++;
             }
+           
             if($count>0){
                 $value1 =(["category" => $req->categoryId]);
                 array_push($value,$value1);
@@ -330,9 +332,32 @@
                 );
                 curl_setopt_array( $ch, $options );
                 $result =  curl_exec($ch);
-                // dd($result);
+                
             return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
-            }   
+            }   elseif($count == 0){
+                $value1 =(["category" => $req->categoryId]);
+                $datajson=array([
+                    "propName" => "categories",
+                    "value" => $value1
+                ]);
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('stores/'.$store.'');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+                $result1 =json_decode($result);
+                // dd($result1);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+            }
+          
+            return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>' ']);
         }
 
         public function postSearchDiscount(Request $req){
@@ -449,7 +474,7 @@
         public function postRegister(Request $req){
               
             $datajson=array(
-                "username" =>  $req['email'],
+                "username" =>  $req['user'],
                 "password" =>  $req['pass'],
                 "roleId" =>  $req['role']
                 );
@@ -492,6 +517,29 @@
                 $result =  curl_exec($ch1);
             }
         return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        }
+
+        public function postRegisterGoogleFacebook(Request $req){
+                $datacustomerjson=array(
+                    "accountId" =>  $req['Id'],
+                    "name" =>  $req['User'],
+                    "email" =>  $req['Email']
+                );
+                // dd($datacustomerjson);
+                $jsonData1 =json_encode($datacustomerjson);
+                $json_url1 = PageController::getUrl('customers');
+                $ch1 = curl_init( $json_url1 );
+                $options1 = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData1
+                );
+                curl_setopt_array( $ch1, $options1 );
+                $result =  curl_exec($ch1);
+                $result1 =json_decode($result);
+                // dd($result1);
+        return redirect()->route('dang-nhap')->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 
         public function postUpdateProfileUser(Request $req){
@@ -932,7 +980,7 @@
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
 
-         return redirect()->route('profile-user',Session::get('keyuser')['_id'])->with(['flag'=>'success','title'=>'Đơn hàng đã được hủy' ,'message'=>' ']);
+         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'])->with(['flag'=>'success','title'=>'Đơn hàng đã được hủy' ,'message'=>' ']);
 
         }
 
@@ -1016,7 +1064,7 @@
             $resultreviewStore =  curl_exec($chreviewStore);
             $result1reviewStore =json_decode($resultreviewStore);
 
-         return redirect()->route('profile-user',Session::get('keyuser')['_id'])->with(['flag'=>'success','title'=>'Đánh giá thành công' ,'message'=>' ']);
+         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'])->with(['flag'=>'success','title'=>'Đánh giá thành công' ,'message'=>' ']);
 
         }
 

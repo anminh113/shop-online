@@ -82,9 +82,10 @@
                                 </tr>
                             </thead>
                             <tbody id="myTable">
+                                    <?php $i=1;?>
                                 @foreach ($result['data2'] as $da)
                                 <tr>
-                                    <td><a href="#">1</a></td>
+                                    <td><a href="#"><?php echo $i;?></a></td>
                                     <td>{{$da['categoryName']}}</td>
                                     <td><button class="btn btn-danger"  type="submit" form="deleteid{{$da['_id']}}">
                                         <i class="fa fa-trash" >  </i>
@@ -96,6 +97,7 @@
                                     @method('DELETE')
                                     {{ csrf_field() }}
                                 </form>
+                                <?php $i++;?>
                                 @endforeach
                             </tbody>
                         </table>

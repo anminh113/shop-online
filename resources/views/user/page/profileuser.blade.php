@@ -48,7 +48,7 @@
             </a>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{route('review-shop',Session::get('keyuser')['_id'])}}';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{route('review-shop',Session::get('keyuser')['info'][0]['customer']['account'])}}';">
                 <div class=" tablink bottombar w3-padding text-center">Nhận xét của tôi</div>
             </a>
         </div>
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Char. Item -->
+                        {{--  <!-- Char. Item -->  --}}
                         <div class="col-lg-6 col-md-6 char_col">
                             <div class="char_item " style="height: 235px;">
                                 <div class="char_title_top"><b> Địa chỉ </b><span>|</span> <a href="" data-toggle="modal"
@@ -96,7 +96,50 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="space10">&nbsp;</div>
                         </div>
+                       
+                        @if(!empty($dataregisterstore))
+                        <div class="col-lg-12 col-md-12 char_col">
+                            <div class="char_item" style="height: auto">
+                                <div class="char_title_top"><b> Thông tin đăng ký gian hàng trên hệ thống </b></div>
+                                <div class="row">
+                                    @foreach ($dataregisterstore['registeredSales'] as $item)
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="d-flex flex-row align-items-center justify-content-start">
+                                            <div class="char_content" style="width:98%">
+                                                <ul class="list-unstyled list-justify">
+                                                    <li class="char_title" style="padding-bottom: 7px; font-size: 15px">Tên gian hàng <span>{{$item['storeName']}}</span></li>
+                                                    <li class="char_title" style="padding-bottom: 7px; font-size: 15px">Địa chỉ kho <span>{{$item['address']}}</span></li>
+                                                    <li class="char_title" style="padding-bottom: 7px; font-size: 15px">Số điện thoại <span>{{$item['phoneNumber']}}</span></li>
+                                                    <li class="char_title" style="padding-bottom: 7px; font-size: 15px">Email <span>{{$item['email']}}</span></li>
+                                                    <li class="char_title" style="padding-bottom: 7px; font-size: 15px">Ngày đăng ký <span><script>var dtstart = moment('{{$item['registeredDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></span></span></li>
+
+                                                    <li class="char_title" style="padding-bottom: 7px; font-size: 15px">Trạng thái
+                                                        @if($item['isApprove'] === true) 
+                                                        <span class="badge badge-pill badge-success">Đã tạo gian hàng</span>
+                                                        @endif
+                                                        @if($item['isApprove'] === null) 
+                                                        <span class="badge badge-pill badge-warning">Chờ xác nhận</span>
+                                                        @endif
+                                                        @if($item['isApprove'] === false) 
+                                                        <span class="badge badge-pill badge-danger">Đã từ chối</span>
+                                                        @endif
+                                                    </li>
+                                                    @if($item['isApprove'] === true) 
+                                                    <li class="char_title" style="padding-bottom: 7px; font-size: 15px"> <span><a href="{{route('trang-chu-admin')}}">Đến trang quản lý gian hàng </a></span></li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="space10">&nbsp;</div>
+
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -712,7 +755,7 @@
      
         $(document).one('click', '#tinh-thanhpho-user{{$item['_id']}}', function() {
             var country_id = $(this).val();
-            console.log("ID: " + country_id);
+            {{--  console.log("ID: " + country_id);  --}}
             if (country_id != '') {
                 load_json_data1('quan-huyen', country_id);
             } else {
@@ -724,7 +767,7 @@
 
         $(document).one('click', '#quan-huyen-user{{$item['_id']}}', function() {
             var state_id = $(this).val();
-            console.log("ID: " + state_id);
+            {{--  console.log("ID: " + state_id);  --}}
             if (state_id != '') {
                 load_json_data2('xa-phuong', state_id);
             } else {
@@ -735,7 +778,7 @@
 
         $(document).on('change', '#tinh-thanhpho-user{{$item['_id']}}', function() {
             var country_id = $(this).val();
-            console.log("ID: " + country_id);
+            {{--  console.log("ID: " + country_id);  --}}
             if (country_id != '') {
                 load_json_data1('quan-huyen', country_id);
             } else {

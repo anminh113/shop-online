@@ -173,6 +173,19 @@
                 return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
             }
         }
+
+
+        public function deleteProductAdmin(Request $req){
+            // dd($req['productId']);
+            try {
+                $client1 = new \GuzzleHttp\Client();
+                $resfollow = $client1->request('DELETE',PageController::getUrl('products/'.$req['productId'].''));
+                $datafollow = json_decode($resfollow->getBody()->getContents(), true);
+                return redirect()->route('san-pham-admin')->with(['flag'=>'success','title'=>'Đã xóa sản phẩm' ,'message'=>' ']);
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
+            }
+        }
  
         
 

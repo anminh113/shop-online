@@ -216,3 +216,7 @@ textarea {
 .text_field:hover {
     border-color: #b2b2b2;
 }
+
+ul.list-justify>li span {
+    float: right;
+}

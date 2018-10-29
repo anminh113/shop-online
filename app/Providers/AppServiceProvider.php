@@ -57,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('user/header', function($view){
             try {
+                // dd(Session::get('keyuser'));
                 $data1 = array();
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('GET',AppServiceProvider::getUrl('categories') );
@@ -71,10 +72,10 @@ class AppServiceProvider extends ServiceProvider
                 try {
                     $reswl = $client->request('GET',AppServiceProvider::getUrl('wishList/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].''));
                     $datawl = json_decode($reswl->getBody()->getContents(), true);
-                    // dd($datawl);
+                   
                     $view->with(['datacategory'=>$result1, 'data'=>$data['categories'], 'datawl'=>$datawl['count']]);
                     } catch (\GuzzleHttp\Exception\RequestException $e) {
-                    
+                        $view->with(['datacategory'=>$result1, 'data'=>$data['categories'], 'datawl'=>0]);
                     }
                
                 // dd($result1);

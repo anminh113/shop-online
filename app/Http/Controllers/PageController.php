@@ -115,9 +115,12 @@
           
             for ($i=0;  $i < count($dataproductPurchase['productPurchases']); $i++){
             $dataproductPurchase1 = $dataproductPurchase['productPurchases'][$i]['_id']['_id'];
-            $res4 = $client1->request('GET',PageController::getUrl('products/'.$dataproductPurchase1.''));
-            // $datatextproductPurchase[] = $dataproductPurchase1;
-            $datatextproductPurchase[] = json_decode($res4->getBody()->getContents(), true);
+                try {
+                $res4 = $client1->request('GET',PageController::getUrl('products/'.$dataproductPurchase1.''));
+                $datatextproductPurchase[] = json_decode($res4->getBody()->getContents(), true);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    continue;
+                }
             }
             $resultproductPurchase = compact('datatextproductPurchase');  
             
@@ -551,18 +554,23 @@
 
         public function getCart(){
             //get thong tin san pham
-            $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
-            $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
-            $todaytime->setTimezone(new DateTimeZone('UTC'));
-            $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
-            $res = $client->request('GET',PageController::getUrl('deliveryprices') );
-            $data = json_decode($res->getBody()->getContents(), true);
-            $oldCart = Session::get('cart');
-            $cart = new Cart($oldCart);
-            $product_cart = $cart->items;           
-            return view('user/page.cart',compact('product_cart','data','time'));
+            if (Session::has('keyuser')){
+                $client = new \GuzzleHttp\Client();
+                $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+                $datatime = json_decode($restime->getBody()->getContents(), true);
+                $todaytime = new DateTime($datatime['time']);
+                $todaytime->setTimezone(new DateTimeZone('UTC'));
+                $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
+                $res = $client->request('GET',PageController::getUrl('deliveryprices') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                $oldCart = Session::get('cart');
+                $cart = new Cart($oldCart);
+                $product_cart = $cart->items;           
+                return view('user/page.cart',compact('product_cart','data','time'));
+            }else{
+                return redirect()->guest(route('dang-nhap   '));   
+            }
+            
         }
 
         public function getCheckCart(){
@@ -645,16 +653,19 @@
             try {
                 $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$req->id.'') );
                 $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
-                $resaddress = $client->request('GET',PageController::getUrl('deliveryaddresses/customer/'.$datacustomer['customer']['_id'].'') );
+                $resaddress = $client->request('GET',PageController::getUrl('deliveryaddresses/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].'') );
                 $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
                 // dd($dataaddress);
-               
-                
-                $dtstart = new DateTime( $datacustomer['customer']['birthday']);
-                $dtstart->setTimezone(new DateTimeZone('UTC'));
-                $start =  $dtstart->format('Y-m-d');
-
-                $resorder = $client->request('GET',PageController::getUrl('orders/customer/'.$datacustomer['customer']['_id'].'') );
+                if($datacustomer['customer']['birthday'] != null){
+                    $dtstart = new DateTime( $datacustomer['customer']['birthday']);
+                    $dtstart->setTimezone(new DateTimeZone('UTC'));
+                    $start =  $dtstart->format('Y-m-d');
+                }
+                // $dtstart = new DateTime( $datacustomer['customer']['birthday']);
+                // $dtstart->setTimezone(new DateTimeZone('UTC'));
+                // $start =  $dtstart->format('Y-m-d');
+                $start = '1999-01-1';
+                $resorder = $client->request('GET',PageController::getUrl('orders/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].'') );
                 $dataorder = json_decode($resorder->getBody()->getContents(), true);
                 // dd($dataorder);
                 $dataorderitem = array();
@@ -666,8 +677,10 @@
                 $resultorderitem = compact('dataorderitem');
                 // dd($resultorderitem);
 
-
-                return view('user/page.profileuser',compact('datacustomer','dataaddress','start','dataorder','resultorderitem'));
+                $resregisterstore = $client->request('GET',PageController::getUrl('registeredSales/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].'') );
+                $dataregisterstore = json_decode($resregisterstore->getBody()->getContents(), true);
+                // dd($dataregisterstore);
+                return view('user/page.profileuser',compact('dataregisterstore','datacustomer','dataaddress','start','dataorder','resultorderitem'));
 
             }catch (\GuzzleHttp\Exception\ClientException $e) {
                 return $e->getResponse()->getStatusCode();
@@ -690,18 +703,21 @@
                 $datawl = json_decode($reswl->getBody()->getContents(), true);
                 // dd($datawl);
                 $dataproduct = array();
-                for ($i=0; $i < count($datawl['wishList']) ; $i++) { 
-                    $resproduct = $client->request('GET',PageController::getUrl('products/'.$datawl['wishList'][$i]['product']['_id'].'') );
-                    $dataproduct[] = json_decode($resproduct->getBody()->getContents(), true);
-
-                    $resproduct = $client->request('GET',PageController::getUrl('productimages/product/'.$datawl['wishList'][$i]['product']['_id'].'') );
-                    $dataproductimgae[] = json_decode($resproduct->getBody()->getContents(), true);
-
+                for ($i=0; $i < $datawl['count'] ; $i++) { 
+                    if($datawl['wishList'][$i]['product']['_id'] != null){
+                        $resproduct = $client->request('GET',PageController::getUrl('products/'.$datawl['wishList'][$i]['product']['_id'].'') );
+                        $dataproduct[] = json_decode($resproduct->getBody()->getContents(), true);
+                        $resproduct = $client->request('GET',PageController::getUrl('productimages/product/'.$datawl['wishList'][$i]['product']['_id'].'') );
+                        $dataproductimgae[] = json_decode($resproduct->getBody()->getContents(), true);
+                    }else{
+                        
+                        continue;
+                    }
+                 
                 }
                 $resultproduct = compact('dataproduct');
-                // dd($resultproduct);
                 $resultproductimage = compact('dataproductimgae');
-
+                // dd($resultproduct);
                 $dataStore =array();
                 $resfollowStore = $client->request('GET',PageController::getUrl('followStores/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].'') );
                 $datafollow = json_decode($resfollowStore->getBody()->getContents(), true);
@@ -719,9 +735,11 @@
                 $resultStore = compact('dataStore');
                 // dd($dataimgproduct);
                 // dd($resultProductStore);
-                return view('user/page.profileusershop',compact('dataimgproduct','dataProductStore','resultStore','time12','datawl','resultproduct','dataproductimgae','resultproductimage'));
+                return view('user/page.profileusershop',compact('dataproduct','dataimgproduct','dataProductStore','resultStore','time12','datawl','resultproduct','dataproductimgae','resultproductimage'));
             }catch (\GuzzleHttp\Exception\RequestException $e) {
-                return $e->getResponse()->getStatusCode();
+                // return $e->getResponse()->getStatusCode();
+                return view('user/page.profileusershop',compact('dataproduct','dataimgproduct','dataProductStore','resultStore','time12','datawl','resultproduct','dataproductimgae','resultproductimage'));
+
                 
             }
             return view('user/page.profileusershop',compact('datawl','dataproduct','resultproductimage'));

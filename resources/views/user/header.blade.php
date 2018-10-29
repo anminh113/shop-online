@@ -15,14 +15,14 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <a class="fix" href="{{route('register-shop',Session::get('keyuser')['info'][0]['customer']['_id'])}}">Bán hàng cùng CyberZone</a>
+                                    <a class="fix" href="{{route('register-shop',Session::get('keyuser')['info'][0]['customer']['account'])}}">Bán hàng cùng CyberZone</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <a class="fix" href="{{ route('profile-user',Session::get('keyuser')['_id'] )}}">Tài khoản {{Session::get('keyuser')['info'][0]['customer']['name']}}</a>
+                                    <a class="fix" href="{{ route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'] )}}">Tài khoản {{Session::get('keyuser')['info'][0]['customer']['name']}}</a>
                                 </li>
                             </ul>
                         </div>

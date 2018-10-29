@@ -13,6 +13,7 @@
              document.getElementById('status').innerHTML = 'We are connected.';
          } else if (response.status === 'not_authorized') {
              document.getElementById('status').innerHTML = 'We are not logged in.'
+            
          } else {
              document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
          }
@@ -36,12 +37,32 @@
      FB.login(function(response) {
          if (response.status === 'connected') {
              FB.api('/me', 'GET', { fields: 'first_name,last_name,name,id,email,gender' }, function(response) {
-                document.getElementById('name').innerText = "Signed in: " +response.name;
-                 document.getElementById('hoten').value = response.name;
-                 document.getElementById('email').value = response.email;
+                var form = document.getElementById('postggfb');
+                form.setAttribute('method', 'post');
+
+                var hiddenInputId = document.createElement('input');
+                hiddenInputId.setAttribute('type', 'hidden');
+                hiddenInputId.setAttribute('name', 'Id');
+                hiddenInputId.setAttribute('value', response.id);
+
+                var hiddenInputUser = document.createElement('input');
+                hiddenInputUser.setAttribute('type', 'hidden');
+                hiddenInputUser.setAttribute('name', 'User');
+                hiddenInputUser.setAttribute('value', response.name);
+
+                var hiddenInputEmail = document.createElement('input');
+                hiddenInputEmail.setAttribute('type', 'hidden');
+                hiddenInputEmail.setAttribute('name', 'Email');
+                hiddenInputEmail.setAttribute('value', response.email);
+                form.appendChild(hiddenInputId);
+                form.appendChild(hiddenInputEmail);
+                form.appendChild(hiddenInputUser);
+                document.body.appendChild(form);   
+                form.submit();
              });
          } else if (response.status === 'not_authorized') {
              document.getElementById('status').innerHTML = 'We are not logged in.'
+             
          } else {
              document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
          }

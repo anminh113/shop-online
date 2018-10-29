@@ -57,29 +57,45 @@ class UserController extends Controller
 
     public function postLogin(Request $req){
         $client = new \GuzzleHttp\Client();
+        
         try {
-     
-
             $res = $client->request('GET', PageController::getUrl('accounts/'.$req['email'].''));
             $data = json_decode($res->getBody()->getContents(), true);
+           
             $email = $req['email'];
             $password = $req['pass'];
 
-            if($password === $data['account']['password']){
-                if($data['account']['role']['roleName'] == "Khách hàng")
-                {
+            if($password === $data['account']['password'] && $data['account']['role']['roleName'] == "Khách hàng"){
+             
+             
                 $req->session()->put('keyuser',$data['account'] );
-                $res = $client->request('GET',PageController::getUrl('customers/account/'.Session::get('keyuser')['_id'].'') );
-                $datacustomer = json_decode($res->getBody()->getContents(), true);
+                $res1 = $client->request('GET',PageController::getUrl('customers/account/'.$data['account']['_id'].'') );
+                $datacustomer = json_decode($res1->getBody()->getContents(), true);
+                $req->session()->put('keyuser',$datacustomer );
                 session()->push('keyuser.info', $datacustomer);
+              
                 return redirect()->route('trang-chu')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Khách hàng']);
-                }
+              
                
             }else{
-                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!!!!','message'=>'Đăng nhập không thành công']);
             }
         }catch (\GuzzleHttp\Exception\ClientException $e) {
             // return $e->getResponse()->getStatusCode();
+            return redirect()->route('dang-nhap')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
+        }
+    }
+
+    public function postLoginGGFB(Request $req){
+        $client = new \GuzzleHttp\Client();
+        try {
+            $res = $client->request('GET', PageController::getUrl('customers/account/'.$req['Id'].''));
+            $data = json_decode($res->getBody()->getContents(), true);              
+            $req->session()->put('keyuser',$data );
+            session()->push('keyuser.info', $data);
+            return redirect()->route('trang-chu')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Khách hàng']);
+            
+        }catch (\GuzzleHttp\Exception\RequestException $e) {
             return redirect()->route('dang-nhap')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
         }
     }

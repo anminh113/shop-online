@@ -5,9 +5,9 @@
 <meta name="google-signin-scope" content="profile email">
 <meta name="google-signin-client_id" content="981798466996-2gmgpq22iitri14mbqigmq2srrcp55co.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="source/user/styles/js/loginGG.js"></script>
+<script src="source/user/styles/js/CheckLoginGG.js"></script>
 <!-- login in fb -->
-<script src="source/user/styles/js/loginFB.js"></script>
+<script src="source/user/styles/js/CheckLoginFB.js"></script>
 
 <link rel="stylesheet" type="text/css" href="source/user/styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/responsive.css">
@@ -25,6 +25,8 @@
 
 <!-- register -->
 <div class="login" style="margin-top: 70px">
+
+        
     <div class="container">
         <div class="viewed_title_register">
             <h3 class="viewed_title">Chào mừng đến với CyberZone!</h3>
@@ -49,7 +51,7 @@
                             </div>
                             <form id="demoForm" name="demoForm" action="{{route('post-dang-nhap')}}" method="POST" accept-charset="utf-8">
                                 <div class="form-group">
-                                    <label for="email">Tên tài khoản hoặc Email</label>
+                                    <label for="email">Tên Tài Khoản</label>
                                     <input type="text" class="form-control" id="email" name="email" placeholder="" required>
                                 </div>
                                 <div class="form-group">
@@ -80,6 +82,9 @@
                                 </div>
                                 
                             </div>
+                            <form id="LoginFormGGFB" action="{{route('post-dang-nhap-GG-FB')}}" method="POST" accept-charset="utf-8">
+                                {{ csrf_field() }}
+                            </form>
                             <div id="status"></div>
                             <div class="space10">&nbsp;</div>
                         </div>

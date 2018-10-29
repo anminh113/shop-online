@@ -39,7 +39,7 @@
 
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
             <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="openCity(event, 'sanpham');">
-                <div class=" tablink bottombar w3-padding border-red text-center">Danh sách yêu thích(4)</div>
+                <div class=" tablink bottombar w3-padding border-red text-center">Danh sách yêu thích</div>
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
@@ -48,25 +48,56 @@
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['_id'] )}}';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'])}}';">
                 <div class=" tablink  w3-padding border-red text-center">Thông tin cá nhân</div>
             </a>
         </div>
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
-                    @foreach ($resultproduct['dataproduct'] as $key => $item)
-                    {{-- @foreach ($item as  $da) --}}
+                    @foreach ($datawl['wishList'] as $item1)
+                    @if($item1['product'] === null)
                     <div class="order">
                         <div class="order-item">
                             <div class="row">
                                 <div class="col-lg-2">
-                                    <div class="item-pic"><img src="{{$dataproductimgae[$key]['imageList'][0]['imageURL']}}" width="115" height="115"> </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="item-main item-main-mini">
                                         <div>
-                                        <div class="text title item-title" style="font-size:16px"><a href="{{ route('san-pham',$item['product']['_id'] )}}">{{$item['product']['productName']}}</a> </div>
+                                            <div class="text title item-title" style="font-size:16px">Sản phẩm không
+                                                tồn tại </div>
+                                            <p class="text desc"></p>
+                                            <p class="text desc bold"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+
+
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space10">&nbsp;</div>
+                    @else
+                    @foreach ($resultproduct['dataproduct'] as $key => $item)
+                    @if(!empty($dataproduct))
+                    <div class="order">
+                        <div class="order-item">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="item-pic"><img src="{{$dataproductimgae[$key]['imageList'][0]['imageURL']}}"
+                                            width="115" height="115"> </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="item-main item-main-mini">
+                                        <div>
+                                            <div class="text title item-title" style="font-size:16px"><a href="{{ route('san-pham',$item['product']['_id'] )}}">{{$item['product']['productName']}}</a>
+                                            </div>
                                             <p class="text desc"></p>
                                             <p class="text desc bold"></p>
                                         </div>
@@ -74,93 +105,147 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="item-quantity">
-                                        @if(!empty($item['product']['saleOff']) && $item['product']['saleOff']['dateEnd'] > $time12)
-                                        <div class="price"><span class="currPrice">{{number_format($item['product']['price'] - ($item['product']['price'] * $item['product']['saleOff']['discount'])/100)}},000₫</span>
+                                        @if(!empty($item['product']['saleOff']) &&
+                                        $item['product']['saleOff']['dateEnd'] >
+                                        $time12)
+                                        <div class="price"><span class="currPrice">{{number_format($item['product']['price']
+                                                - ($item['product']['price'] *
+                                                $item['product']['saleOff']['discount'])/100)}},000₫</span>
                                             <div class="originPrice">
-                                            <span class="origin-price-value">{{number_format($item['product']['price'])}},000₫</span> <span class="promotion">-{{$item['product']['saleOff']['discount']}}%</span>
+                                                <span class="origin-price-value">{{number_format($item['product']['price'])}},000₫</span>
+                                                <span class="promotion">-{{$item['product']['saleOff']['discount']}}%</span>
                                             </div>
                                         </div>
-                                        @elseif(empty($item['product']['saleOff']) || $item['product']['saleOff']['dateEnd'] < $time12)
-                                        <div class="price">
+                                        @elseif(empty($item['product']['saleOff']) ||
+                                        $item['product']['saleOff']['dateEnd'] < $time12) <div class="price">
                                             <span class="currPrice">{{number_format($item['product']['price'])}},000₫</span>
-                                        </div>
-                                        @endif
-
                                     </div>
+                                    @endif
+
                                 </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <div class="price">
-                                            <a href="{{route('gio-hang',$item['product']['_id'])}}"  class="btn btn-outline-info btn-save" style="width: 125px;font-size: 14px">Thêm
-                                                vào giỏ</a>
-                                            <div style="margin-bottom: 10px "></div>
-                                            <button type="submit" form="wishList{{$item['product']['_id']}}" class="btn btn-outline-danger" style="width: 125px;font-size: 14px">Xóa</button>
-                                        </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="item-status item-capsule">
+                                    <div class="price">
+                                        <a href="{{route('gio-hang',$item['product']['_id'])}}" class="btn btn-outline-info btn-save"
+                                            style="width: 125px;font-size: 14px">Thêm
+                                            vào giỏ</a>
+                                        <div style="margin-bottom: 10px "></div>
+                                        <button type="submit" form="wishList{{$item['product']['_id']}}" class="btn btn-outline-danger"
+                                            style="width: 125px;font-size: 14px">Xóa</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="space10">&nbsp;</div>
-                    {{-- @endforeach --}}
                     <form action="{{route('delete-wishList')}}" id="wishList{{$item['product']['_id']}}" method="post">
-                            <input type="text" hidden name="productId" value="{{$item['product']['_id']}}">
-                            @method('DELETE')
-                            {{ csrf_field() }}
+                        <input type="text" hidden name="productId" value="{{$item['product']['_id']}}">
+                        @method('DELETE')
+                        {{ csrf_field() }}
                     </form>
-                    @endforeach
-
-
-                </div>
-            </div>
-            <div id="hoso" class="tabcontent" style="display:none">
-                <div class="characteristics">
-                    @foreach ($resultStore['dataStore'] as $key =>$item)
-                        <div class="order">
-                            <div class="order-info">
-                                <div class="row">
-                                    <div class="col-lg-6 text-left">{{$item['store']['storeName']}}</div>
-                                    <div class="col-lg-6 text-right" style="font-size: 12px;">ĐANG THEO DÕI <span>|</span> <a href="{{route('profileshop',$item['store']['_id'])}}">THAM QUAN</a>
+                    @else
+                    <div class="order">
+                        <div class="order-item">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    {{-- <div class="item-pic"><img src="{{$dataproductimgae[$key]['imageList'][0]['imageURL']}}"
+                                            width="115" height="115"> </div> --}}
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="item-main item-main-mini">
+                                        <div>
+                                            <div class="text title item-title" style="font-size:16px">Sản phẩm không
+                                                tồn
+                                                tại
+                                            </div>
+                                            <p class="text desc"></p>
+                                            <p class="text desc bold"></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="order-item">
-                                <div class="row">
-                                    <?php $i =1?>
-                                    @foreach ($dataProductStore[$key]['products'] as $key1 => $da)
-                                    <?php $i =$i + 1?>
-                                        <div class="col-lg-3">
-                                            <!-- Product Item -->
-                                            <div class="product_item  product-shop">
-                                                <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                @foreach ($dataimgproduct as $item1)
-                                                @if($item1['productId']  == $da['_id'] )
-                                                    <img src="{{$item1['imageList'][0]['imageURL']}}" alt="" width="115" height="115">
-                                                @endif
-                                                @endforeach
-                                                </div>
-                                                <div class="product_content">
-                                                    <div class="product_name">
-                                                        <div><a href="{{ route('san-pham',$da['_id'] )}}" tabindex="0">{{$da['productName']}}</a></div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    @if($i>4)
-                                    @break
-                                    @endif
-                                    @endforeach
+                                <div class="col-lg-3">
+
+
                                 </div>
                             </div>
+                            <div class="col-lg-2">
+                                {{-- <div class="item-status item-capsule">
+                                    <div class="price">
+                                        <a href="{{route('gio-hang',$item['product']['_id'])}}" class="btn btn-outline-info btn-save"
+                                            style="width: 125px;font-size: 14px">Thêm
+                                            vào giỏ</a>
+                                        <div style="margin-bottom: 10px "></div>
+                                        <button type="submit" form="wishList{{$item['product']['_id']}}" class="btn btn-outline-danger"
+                                            style="width: 125px;font-size: 14px">Xóa</button>
+                                    </div>
+                                </div> --}}
+                            </div>
                         </div>
-                        <div class="space10">&nbsp;</div>
+                    </div>
+                    <div class="space10">&nbsp;</div>
+                    @endif
+
+                    @endforeach
+                    @endif
                     @endforeach
                 </div>
             </div>
+
+        </div>
+        <div class="col-lg-12">
+        <div id="hoso" class="tabcontent" style="display:none">
+            <div class="characteristics">
+                @foreach ($resultStore['dataStore'] as $key =>$item)
+                <div class="order">
+                    <div class="order-info">
+                        <div class="row">
+                            <div class="col-lg-6 text-left">{{$item['store']['storeName']}}</div>
+                            <div class="col-lg-6 text-right" style="font-size: 12px;">ĐANG THEO DÕI <span>|</span>
+                                <a href="{{route('profileshop',$item['store']['_id'])}}">THAM
+                                    QUAN</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="row">
+                            <?php $i =1?>
+                            @foreach ($dataProductStore[$key]['products'] as $key1 => $da)
+                            <?php $i =$i + 1?>
+                            <div class="col-lg-3">
+                                <!-- Product Item -->
+                                <div class="product_item  product-shop">
+                                    <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                        @foreach ($dataimgproduct as $item1)
+                                        @if($item1['productId'] == $da['_id'] )
+                                        <img src="{{$item1['imageList'][0]['imageURL']}}" alt="" width="115" height="115">
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                    <div class="product_content">
+                                        <div class="product_name">
+                                            <div><a href="{{ route('san-pham',$da['_id'] )}}" tabindex="0">{{$da['productName']}}</a></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            @if($i>4)
+                            @break
+                            @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="space10">&nbsp;</div>
+                @endforeach
+            </div>
+        </div>
         </div>
     </div>
 </div>
+
+
 
 @include('user/RecentlyViewed')
 @include('user/Brands')

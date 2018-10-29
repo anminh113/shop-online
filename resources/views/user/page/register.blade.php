@@ -91,11 +91,21 @@
                 </div>
                 {{ csrf_field() }}
             </form>
+
+            <form id="postggfb" action="{{route('post-google-facebook-dang-ky')}}" method="POST">
+              
+              {{ csrf_field() }}
+            </form>
             </div>
             <div class="col-lg-6">
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
-                    <label for="email">Tên tài khoản hoặc Email</label>
+                    <label for="user">Tên tài khoản</label>
+                    <input type="text" class="form-control" id="user" form="dangky" name="email" placeholder="  ">
+                </div>
+                <div class="space10">&nbsp;</div>
+                <div class="form-group">
+                    <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" form="dangky" name="email" placeholder="  ">
                 </div>
                 <div class="space10">&nbsp;</div>
