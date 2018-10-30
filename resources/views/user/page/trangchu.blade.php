@@ -419,7 +419,6 @@
 </div>
 
 
-@include('user/RecentlyViewed')
 @include('user/Brands')
 
 @endsection

@@ -56,8 +56,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('user/header', function($view){
+           
             try {
-                // dd(Session::get('keyuser'));
                 $data1 = array();
                 $client = new \GuzzleHttp\Client();
                 $res = $client->request('GET',AppServiceProvider::getUrl('categories') );
@@ -72,7 +72,6 @@ class AppServiceProvider extends ServiceProvider
                 try {
                     $reswl = $client->request('GET',AppServiceProvider::getUrl('wishList/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].''));
                     $datawl = json_decode($reswl->getBody()->getContents(), true);
-                   
                     $view->with(['datacategory'=>$result1, 'data'=>$data['categories'], 'datawl'=>$datawl['count']]);
                     } catch (\GuzzleHttp\Exception\RequestException $e) {
                         $view->with(['datacategory'=>$result1, 'data'=>$data['categories'], 'datawl'=>0]);
@@ -86,6 +85,28 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['datacategory'=>$result1, 'data'=>$data['categories'], 'datawl'=>$datawl['count']]);
             
         });
+
+        view()->composer('user/RecentlyViewed', function($view){
+        
+            try {
+                $client = new \GuzzleHttp\Client();
+                $res = $client->request('GET',AppServiceProvider::getUrl('products'));
+                $data1 = json_decode($res->getBody()->getContents(), true);
+                for ($i=0;  $i < count($data1['products']); $i++){
+                    $res2 = $client->request('GET',AppServiceProvider::getUrl('productimages/product/'.$data1['products'][$i]['_id'].''));
+                    $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                    if($datatext[$i]['productId'] == $data1['products'][$i]['_id']){
+                        $data1['products'][$i]['image']= $datatext[$i]['imageList'][0]['imageURL'];
+                    }
+                }
+                $view->with(['data1'=>$data1]);
+            }catch (\GuzzleHttp\Exception\ClientException $e) {
+                // return $e->getResponse()->getStatusCode();
+                $view->with(['data'=>'data1']);
+            }
+           
+        });
+
 
        
     }

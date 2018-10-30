@@ -1,7 +1,7 @@
 @extends('admin/master')
 
 @section('head')
-<link href="{{ URL::asset('source/admin/assets/css/product.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ URL::asset('source/admin/assets/css/product.css') }}" rel="stylesheet" type="text/css">
 <style>
         ul.activity-timeline>li:after{
             left: 11px;
@@ -149,7 +149,7 @@
                             </div>
                             <div class="tab-pane fade" id="tab-bottom-left2">
                                 <div class="table-responsive">
-                                    <table class="table project-table">
+                                    {{-- <table class="table project-table">
                                         <thead>
                                             <tr>
                                                 <th>Title</th>
@@ -246,7 +246,7 @@
                                                 <td><span class="label label-default">CLOSED</span></td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> --}}
                                 </div>
                             </div>
                         </div>
@@ -267,9 +267,9 @@
 
 @section('footer')
 <script>
-    var element = document.getElementById("profile-shop-admin");
-    element.classList.add("active");
-
-</script>
+        var element = document.getElementById("profile-shop-admin");
+        element.classList.add("active");
+    
+    </script>
 
 @endsection

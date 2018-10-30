@@ -8,10 +8,10 @@
 
 <script>
     var test1 = '{{Session::get('message')}}';
-    if (test1 != '') {
-    setTimeout(function() {
-        document.getElementById('test').click();
-    }, 100);
+        if (test1 != '') {
+        setTimeout(function() {
+            document.getElementById('test').click();
+        }, 100);
     }
 </script>
 <script>
