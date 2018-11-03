@@ -33,10 +33,10 @@
             <!-- Selected Image -->
             <div class="col-lg-5 order-lg-2 order-1">
                 @foreach ($resultimg['datatext'] as $da )
-                @foreach ($da['imageList'] as $da1)
-                <div class="image_selected"><img src={{$da1["imageURL"]}} alt=""></div>
-                @break
-                @endforeach
+                    @foreach ($da['imageList'] as $da1)
+                    <div class="image_selected"><img src={{$da1["imageURL"]}} alt=""></div>
+                    @break
+                    @endforeach
                 @endforeach
             </div>
             <!-- Description -->
@@ -70,18 +70,12 @@
                             <div class="clearfix" style="z-index: 1000;">
                                 <input type="text" hidden name="productid" value="{{$item['product']['_id']}}">
                                 <!-- Product Quantity -->
-                                <div class="product_quantity ">
 
+                                <div class="quantity">
                                     <span>Số Lượng: </span>
-                                    <input type="text" name="qty" class="form-control text-center" min="1" max="{{$item['product']['quantity']}}"
-                                        value="1">
-                                    <div class="quantity_buttons">
-                                        <button type="button" class="quantity_inc quantity_control btn-pluss"><i
-                                                class="fas fa-chevron-up"></i></button>
-                                        <button type="button" class="quantity_dec quantity_control btn-minuse"><i
-                                                class="fas fa-chevron-down"></i></button>
-                                    </div>
+                                    <input type="number" name="qty" min="1" max="{{$item['product']['quantity']}}" step="1" value="1">
                                 </div>
+
                              
                                 @if($datawl == '')
                                 <button type="submit" form="WL"  class="product_fav"  ><i class="fas fa-heart" ></i></button>
@@ -552,20 +546,40 @@
 
 
 <script>
-    $('.btn-minuse').on('click', function () {
-        if( parseInt($(this).parent().siblings('input').val()) > 0){
-            $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) - 1)
-        }else{
-           parseInt($(this).parent().siblings('input').val()) = 1;
-        }
-      
-    })
+    jQuery('<div class="quantity_buttons" style="width: 1px;"><div class="quantity-button quantity_inc btn-pluss"><i\n' + 'class="fas fa-chevron-up"></i></div>' +
+        '<div class="quantity-button quantity_dec btn-minuse"><i\n' +
+        'class="fas fa-chevron-down"></i></div></div>').insertAfter('.quantity input');
+    jQuery('.quantity').each(function() {
+        var spinner = jQuery(this),
+            input = spinner.find('input[type="number"]'),
+            btnUp = spinner.find('.quantity_inc'),
+            btnDown = spinner.find('.quantity_dec'),
+            min = input.attr('min'),
+            max = input.attr('max');
 
-    $('.btn-pluss').on('click', function () {
-      
-            $(this).parent().siblings('input').val(parseInt($(this).parent().siblings('input').val()) + 1)
-       
-    })
+        btnUp.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue >= max) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue + 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
+
+        btnDown.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue <= min) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue - 1;
+            }
+            spinner.find("input").val(newVal);
+            spinner.find("input").trigger("change");
+        });
+
+    });
 
 </script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>

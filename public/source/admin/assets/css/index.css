@@ -95,6 +95,11 @@ em{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.metric .number {
+    display: block;
+    font-size: 20px;
+    font-weight: 300;
+}
 /*.sidebar .nav > li > a:hover, .sidebar .nav > li > a:focus, .sidebar .nav > li > a.active{
 	color: #000;
 }*/

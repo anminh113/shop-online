@@ -135,8 +135,9 @@
                                         </div>
                                     </div>
                                 @else
-                                    <?php $i = 1?>
-                                    @foreach($dataaddress['deliveryAddresses'] as $item)
+                                    @if(!empty($dataaddress['deliveryAddresses'] ))
+                                        <?php $i = 1?>
+                                        @foreach($dataaddress['deliveryAddresses'] as $item)
                                     <?php $i = $i + 1?>
                                         <div class="row"  >     
                                             <div class="col-lg-12">
@@ -156,6 +157,7 @@
                                         @break
                                         @endif
                                     @endforeach
+                                    @endif
                                 @endif
                             </div>
                             {{-- @endforeach --}}
@@ -277,6 +279,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(!empty($dataaddress['deliveryAddresses'] ))
                             <div class="order_total_content ">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -284,6 +287,16 @@
                                     </div>
                                 </div>
                             </div>
+                                @else
+                                <div class="order_total_content ">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <button type="button"  class="button cart_button_checkout" data-dismiss="modal" aria-label="Close" data-toggle="modal"
+                                                    data-target="#information1"> Thêm địa chỉ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                         </div>
                     </div>
                 </div>

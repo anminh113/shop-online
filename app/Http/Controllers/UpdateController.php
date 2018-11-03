@@ -331,6 +331,7 @@
         $result1 =json_decode($result);
         return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
     }
+
     public function updateOrderAdminWatning(Request $req){
         $datajson=array([
             "propName" =>  "orderItemState",
@@ -370,13 +371,6 @@
         $result1 =json_decode($result);
         return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
     }
-   
-
- 
-        
-
-      
-
 
     }
 

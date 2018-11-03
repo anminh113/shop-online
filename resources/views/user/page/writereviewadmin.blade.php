@@ -32,12 +32,12 @@
             </a>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{route('review-shop',Session::get('keyuser')['_id'])}}';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{route('review-shop',Session::get('keyuser')['info'][0]['customer']['_id'])}}';">
                 <div class=" tablink bottombar w3-padding text-center">Nhận xét của tôi</div>
             </a>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'] )}}';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'] )}}';">
                 <div class=" tablink  w3-padding border-red text-center">Thông tin cá nhân</div>
             </a>
         </div>
@@ -54,6 +54,7 @@
                                         @foreach ($resultimg['datatext'] as $da )
                                         @foreach ($da['imageList'] as $da1)
                                           <img src={{$da1["imageURL"]}} width="85" height="85">
+                                                <input type="text" hidden name="image" value="{{$da1["imageURL"]}}">
                                         @break
                                         @endforeach
                                         @endforeach
@@ -61,6 +62,7 @@
                                     </div>
                                     <div class="col-lg-10">
                                         <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;">{{$resultdata['data'][0]['product']['productName']}}</div>
+                                        <input type="text" hidden name="ProductName" value="{{$resultdata['data'][0]['product']['productName']}}">
                                         <span class="content-star-rate">
                                             <fieldset class="rating">
                                                 <input type="radio" id="star5" name="ratingproduct" value="5" form="fb-form" />

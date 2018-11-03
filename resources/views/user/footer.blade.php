@@ -13,12 +13,7 @@
                                     </a>
                                 </div>
                     </div>
-                    <div class="footer_title">Got Question? Call Us 24/7</div>
-                    <div class="footer_phone">+38 068 005 3570</div>
-                    <div class="footer_contact_text">
-                        <p>17 Princess Road, London</p>
-                        <p>Grester London NW18JR, UK</p>
-                    </div>
+
                     <div class="footer_social">
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -30,44 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 offset-lg-2">
-                <div class="footer_column">
-                    <div class="footer_title">Danh mục</div>
-                    <ul class="footer_list">
-                        <li><a href="#">Computers & Laptops</a></li>
-                        <li><a href="#">Cameras & Photos</a></li>
-                        <li><a href="#">Hardware</a></li>
-                        <li><a href="#">Smartphones & Tablets</a></li>
-                        <li><a href="#">TV & Audio</a></li>
-                    </ul>
-                   x1
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="footer_column">
-                    <ul class="footer_list footer_list_2">
-                        <li><a href="#">Video Games & Consoles</a></li>
-                        <li><a href="#">Accessories</a></li>
-                        <li><a href="#">Cameras & Photos</a></li>
-                        <li><a href="#">Hardware</a></li>
-                        <li><a href="#">Computers & Laptops</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="footer_column">
-                    <div class="footer_title">Customer Care</div>
-                    <ul class="footer_list">
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Order Tracking</a></li>
-                        <li><a href="#">Wish List</a></li>
-                        <li><a href="#">Customer Services</a></li>
-                        <li><a href="#">Returns / Exchange</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Product Support</a></li>
-                    </ul>
-                </div>
-            </div>
+
         </div>
     </div>
 </footer>
@@ -99,21 +57,22 @@
 <script>
     var test1 = '{{Session::get('message')}}';
     if (test1 != '') {
-    setTimeout(function() {
-        document.getElementById('test').click();
-    }, 100);
+        setTimeout(function() {
+            document.getElementById('test').click();
+        }, 100);
     }
 </script>
 <script>
-        iziToast.settings({
-          timeout: 3000,
-          resetOnHover: true,
-          transitionIn: 'flipInX',
-          transitionOut: 'flipOutX',
-          position: 'bottomRight',
-          theme: 'light',
-        });
-      </script>
+    iziToast.settings({
+      timeout: 3000,
+      resetOnHover: true,
+      transitionIn: 'flipInX',
+      transitionOut: 'flipOutX',
+      position: 'bottomRight',
+      theme: 'light',
+    });
+</script>
+
 <script>
     function myAlertTop_warning() {
         iziToast.{{Session::get('flag')}} ({
@@ -122,4 +81,50 @@
         });
     }
 </script>
-@endif	
+@endif
+
+
+<script>
+    $('#delete').click(function(e){
+        e.preventDefault();
+        var link = $(this).attr('href');
+        console.log(link);
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#008496',
+            cancelButtonColor: '#EE093D',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = link;
+            }
+        })
+    });
+</script>
+
+<script >
+    function archiveFunction() {
+        event.preventDefault(); // prevent form submit
+        var form = event.target.form; // storing the form
+        console.log(form);
+        swal({
+            title: 'Xác nhận?',
+            text: "",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#008496',
+            cancelButtonColor: '#EE093D',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    }
+</script>

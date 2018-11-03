@@ -110,7 +110,8 @@
                                         <div class="product_content">
                                             <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
                                                 - ($item['price'] * $item['saleOff']['discount'])/100, 0, '',
-                                                '')}}@if( $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}}</span>@endif</div>
+                                                '')}}@if( $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'], 0, '',
+                                                '')}}</span>@endif</div>
                                             <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
                                                 - ($item['price'] *
                                                 $item['saleOff']['discount'])/100)}},000₫@if($item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
@@ -151,7 +152,8 @@
                                             @endforeach
                                         </div>
                                         <div class="product_content">
-                                            <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'],0, '', '')}}</div>
+                                            <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'],0, '', '')}}<span>{{number_format($item['price'], 0, '',
+                                                '')}}</span></div>
 
                                             <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price'])}},000₫</div>
 
@@ -219,7 +221,6 @@
 <script src="source/user/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="source/user/js/shop_custom.js"></script>
 <script>
-
     // init Isotope
     var $container = $('.product_grid').isotope({
     itemSelector: '.product_item'
@@ -344,6 +345,7 @@
 var date12 = '{{$time12}}';
 </script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
+
 
 @endsection
 

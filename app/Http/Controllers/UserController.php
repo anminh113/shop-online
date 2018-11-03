@@ -27,15 +27,20 @@ class UserController extends Controller
     {
         $client = new \GuzzleHttp\Client();
         try {
-            $res = $client->request('GET', PageController::getUrl('accounts/'.$req->email.''));
+            $res = $client->request('GET', PageController::getUrl('accounts/username/'.$req->email.''));
             $data = json_decode($res->getBody()->getContents(), true);
-            // dd($data);
+//             dd($data);
             $email = $req['email'];
             $password = $req['password'];
             if($password === $data['account']['password']){
                 if($data['account']['role']['roleName'] == 'Quản lý gian hàng')
                 {
-                $req->session()->put('key',$data['account'] );
+                    $req->session()->put('key',$data['account'] );
+                    $resstore = $client->request('GET', PageController::getUrl('stores/account/'.$data['account']['_id'].''));
+                    $datastore = json_decode($resstore->getBody()->getContents(), true);
+
+                    $req->session()->push('key', $datastore );
+
 
                 return redirect()->route('trang-chu-admin')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Quản lý gian hàng']);
                 }
@@ -58,21 +63,21 @@ class UserController extends Controller
         $client = new \GuzzleHttp\Client();
         
         try {
-            $res = $client->request('GET', PageController::getUrl('accounts/'.$req['email'].''));
+            $res = $client->request('GET', PageController::getUrl('accounts/username/'.$req['email'].''));
             $data = json_decode($res->getBody()->getContents(), true);
-           
+//            dd($data);
             $email = $req['email'];
             $password = $req['pass'];
 
             if($password === $data['account']['password'] && $data['account']['role']['roleName'] == "Khách hàng"){
              
              
-                $req->session()->put('keyuser',$data['account'] );
+//                $req->session()->put('keyuser',$data['account'] );
                 $res1 = $client->request('GET',PageController::getUrl('customers/account/'.$data['account']['_id'].'') );
                 $datacustomer = json_decode($res1->getBody()->getContents(), true);
                 $req->session()->put('keyuser',$datacustomer );
                 session()->push('keyuser.info', $datacustomer);
-              
+//                dd(Session::get('keyuser'));
                 return redirect()->route('trang-chu')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Khách hàng']);
               
                
@@ -92,8 +97,8 @@ class UserController extends Controller
             $data = json_decode($res->getBody()->getContents(), true);              
             $req->session()->put('keyuser',$data );
             session()->push('keyuser.info', $data);
+//            dd(Session::get('keyuser'));
             return redirect()->route('trang-chu')->with(['flag'=>'info','title'=>'Welcome' ,'message'=>'back!','role'=>'Khách hàng']);
-            
         }catch (\GuzzleHttp\Exception\RequestException $e) {
             return redirect()->route('dang-nhap')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
         }

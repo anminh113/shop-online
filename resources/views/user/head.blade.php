@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/iziToast.min.css">
 <script src="https://momentjs.com/downloads/moment.min.js"></script>
 <script src="source/user/js/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 
 
 

@@ -276,17 +276,13 @@
             // get data json
             $.getJSON(option, function (data) {
                 var test_data = '';
-                var html ='';
                 var count =0;
                 var len = data['specificationType']['specificationTitle'].length;
                 $('#table tbody tr').remove();
                 $.each(data['specificationType']['specificationTitle'], function (key, value) {
                     test_data += '<tr>';
-                    test_data += '<td> <div class="text-table">' + value['title'] +
-                        '</div> </td>';
-                    test_data +=
-                        '<td><input type="text" name="title1[]" class="form-control" placeholder="Nhập ' +
-                        value['title'] + '... " required autofocus></td>';
+                    test_data += '<td> <div class="text-table">' + value['title'] + '</div> </td>';
+                    test_data += '<td><input type="text" name="title1[]" class="form-control" placeholder="Nhập ' + value['title'] + '... " required autofocus></td>';
                     test_data += '</tr>';
                     count = count+1;
                 });

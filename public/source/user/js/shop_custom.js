@@ -276,10 +276,10 @@ $(document).ready(function() {
             itemSelector: '.product_item',
             getSortData: {
                 Price: function(itemElement) {
-                    var priceEle = $(itemElement).find('.product_price1').text().replace('$', '');
+                    var priceEle = $(itemElement).find('.product_price1').text();
                     return parseFloat(priceEle);
                 },Countreview: function(itemElement) {
-                    var priceEle = $(itemElement).find('.countreviewproduct').text().replace('$', '');
+                    var priceEle = $(itemElement).find('.countreviewproduct').text();
                     return parseFloat(priceEle);
                 }
             },
@@ -309,7 +309,6 @@ $(document).ready(function() {
                     $('.product_grid').isotope('updateSortData').isotope();
                     $('.product_grid').isotope({ sortBy: 'random' });
                 }
-
             });
         });
 

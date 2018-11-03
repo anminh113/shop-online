@@ -246,7 +246,7 @@
             $result1 =json_decode($result);
            
 
-            if(!empty($result1[0]->createdProduct->_id)){
+            if(!empty($result1->createdProduct->_id)){
                 //post data json
                 $datajson1=array(
                     "productId" => $result1->createdProduct->_id,
@@ -429,22 +429,28 @@
 
         public function postAddToCart(Request $req){
             $client = new \GuzzleHttp\Client();
-
             $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
             $todaytime = new DateTime($datatime['time']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
-         
-         
-
-            $oldCart = Session('cart')?Session::get('cart'):null;
-            $cart = new Cart($oldCart);
-            // dd($req->productid);
-           
-            // dd($datatext[0]['images'][0]['imageList'][0]['imageURL']);
-            $cart->add($req->productid, $req->qty ,$time);
-            $req->session()->put('cart', $cart);
+//            dd(Session::get('cart'));
+            if(is_array(Input::get('productid')) && is_array( Input::get('qty'))){
+                $productid = Input::get('productid');
+                $qty = Input::get('qty');
+                session()->forget('cart');
+                for($i=0; $i< count($productid); $i++){
+                     $oldCart = Session('cart')?Session::get('cart'):null;
+                     $cart = new Cart($oldCart);
+                     $cart->add($productid[$i], $qty[$i] ,$time);
+                     $req->session()->put('cart', $cart);
+                 }
+            }else{
+                $oldCart = Session('cart')?Session::get('cart'):null;
+                $cart = new Cart($oldCart);
+                $cart->add($req->productid, $req->qty ,$time);
+                $req->session()->put('cart', $cart);
+            }
         return redirect()->route('cart');
         }
 
@@ -683,8 +689,6 @@
         }
        
         public function postProductTypeProductList(Request $req){
-            // dd($req->id);
-            //get json san pham theo gian hang
             $client1 = new \GuzzleHttp\Client();
             $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
@@ -905,7 +909,6 @@
                         "quantity" =>  $value['qty'],
                         "orderItemStateId" => $orderStateId
                     );
-                    // dd( $datajsonOrderItem);
                     $jsonDataOrderItem =json_encode($datajsonOrderItem);
                     $json_urlOrderItem = PageController::getUrl('orderItems');
                     $chOrderItem = curl_init( $json_urlOrderItem );
@@ -918,6 +921,23 @@
                     curl_setopt_array( $chOrderItem, $optionsOrderItem );
                     $resultOrderItem =  curl_exec($chOrderItem);
                     $result1OrderItem =json_decode($resultOrderItem);
+
+                    $datajsonupdate = array([
+                        "propName" =>  "quantity",
+                        "value" =>  ($value['item']['quantity'] - $value['qty'])
+                    ]);
+                    $jsonDataupdate =json_encode($datajsonupdate);
+                    $json_urlupdate = PageController::getUrl('products/'.$key.'');
+                    $chupdate = curl_init( $json_urlupdate );
+                    $optionsupdate = array(
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                        CURLOPT_CUSTOMREQUEST => "PATCH",
+                        CURLOPT_POSTFIELDS => $jsonDataupdate
+                    );
+                    curl_setopt_array( $chupdate, $optionsupdate );
+                    $resultupdate =  curl_exec($chupdate);
+                    $result1update =json_decode($resultupdate);
                 }
                 if($req['paymentMethod'] == '5b98c7806481170514777564'){
                      session()->forget('cart');
@@ -972,13 +992,17 @@
                 $countStar = $datareviewProducts['ratingStars'][$i]['_id'];
                }
             }
-            $datajsonreviewProducts =array(
+            $datajsonreviewProducts = array(
                 "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
-                "productId" =>  $req['productId'],
+                "product" => array(
+                    "_id" => $req['productId'],
+                    "productName" => $req['ProductName'],
+                    "imageURL" => $req['image']
+                ),
                 "ratingStarId" =>  $countStar,
                 "review" => $req['reviewProduct']
             );
-            // dd($datajsonreviewProducts);
+//             dd($datajsonreviewProducts);
             $jsonDatareviewProducts =json_encode($datajsonreviewProducts);
             $json_urlreviewProducts = PageController::getUrl('reviewProducts');
             $chreviewProducts = curl_init( $json_urlreviewProducts );
@@ -991,7 +1015,6 @@
             curl_setopt_array( $chreviewProducts, $optionsreviewProducts );
             $resultreviewProducts =  curl_exec($chreviewProducts);
             $result1reviewProducts =json_decode($resultreviewProducts);
-            // dd($result1reviewProducts);
             $datajsonupdatestate=array([
                 "propName" =>  "isReview",
                 "value" =>  true
@@ -1041,7 +1064,7 @@
             $resultreviewStore =  curl_exec($chreviewStore);
             $result1reviewStore =json_decode($resultreviewStore);
 
-         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'])->with(['flag'=>'success','title'=>'Đánh giá thành công' ,'message'=>' ']);
+         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Đánh giá thành công' ,'message'=>' ']);
 
         }
 

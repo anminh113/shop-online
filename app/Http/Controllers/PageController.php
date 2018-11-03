@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use View, Input, Redirect;
 use App\Cart;
 use Session;
@@ -17,6 +16,15 @@ use DateTimeZone;
 class PageController extends Controller
 {
 
+
+
+    public static function getUrl($text)
+    {
+        $urlAPI = "http://localhost:3000/" . $text;
+//         $urlAPI = "http://172.16.198.84:3000/".$text;
+        return $urlAPI;
+    }
+
     // Đăng nhập admin
     public function getLoginAdmin()
     {
@@ -28,14 +36,6 @@ class PageController extends Controller
     }
 
     //User
-
-    public static function getUrl($text)
-    {
-        $urlAPI = "http://localhost:3000/" . $text;
-        // $urlAPI = "http://172.16.198.84:3000/".$text;
-        return $urlAPI;
-    }
-
     public function getIndex()
     {
         $client1 = new \GuzzleHttp\Client();
@@ -119,7 +119,7 @@ class PageController extends Controller
         $datatextproductPurchase = array();
 
         for ($i = 0; $i < count($dataproductPurchase['productPurchases']); $i++) {
-            $dataproductPurchase1 = $dataproductPurchase['productPurchases'][$i]['_id']['_id'];
+            $dataproductPurchase1 = $dataproductPurchase['productPurchases'][$i]['_id'];
             try {
                 $res4 = $client1->request('GET', PageController::getUrl('products/' . $dataproductPurchase1 . ''));
                 $datatextproductPurchase[] = json_decode($res4->getBody()->getContents(), true);
@@ -539,7 +539,6 @@ class PageController extends Controller
         $resfollowcount = $client1->request('GET', PageController::getUrl('followStores/store/' . $req->id . ''));
         $datafollowcount = json_decode($resfollowcount->getBody()->getContents(), true);
 
-
         $datafollow = '';
         if (Session::has('keyuser')) {
             try {
@@ -549,10 +548,7 @@ class PageController extends Controller
             } catch (\GuzzleHttp\Exception\RequestException $e) {
 
             }
-
-
         }
-
         //   dd($countrating);
         return view('user/page.profileshop', compact('datafollowcount', 'datafollow', 'countstar_1', 'countstar_2', 'countstar_3', 'countrating', 'timereviewshop', 'datareviewshop', 'createdTime', 'datashop', 'datajson1', 'data', 'result', 'result1', 'data4', 'resultPrice', 'time12', 'resultdatareview', 'countstar_5', 'countstar_4', 'countstar_3', 'countstar_2', 'countstar_1'));
     }
@@ -560,7 +556,7 @@ class PageController extends Controller
     public function getCart()
     {
         //get thong tin san pham
-        if (Session::has('keyuser')) {
+        if (Session::has('cart')) {
             $client = new \GuzzleHttp\Client();
             $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
             $datatime = json_decode($restime->getBody()->getContents(), true);
@@ -574,7 +570,7 @@ class PageController extends Controller
             $product_cart = $cart->items;
             return view('user/page.cart', compact('product_cart', 'data', 'time'));
         } else {
-            return redirect()->guest(route('dang-nhap   '));
+            return redirect()->back()->with(['flag'=>'info','title'=>'Thông báo' ,'message'=>'Chưa có sản phẩm trong giỏ hàng']);
         }
 
     }
@@ -602,9 +598,10 @@ class PageController extends Controller
 
             $resaddressone = $client->request('GET', PageController::getUrl('deliveryAddresses/' . Session::get('Idaddress') . ''));
             $dataaddressone = json_decode($resaddressone->getBody()->getContents(), true);
+
             $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
-            // dd($dataaddress);
+
             return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataaddressone', 'dataPaymentMethods'));
         }
         if (Session::has('keyuser')) {
@@ -624,6 +621,7 @@ class PageController extends Controller
 
             $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
+//            dd($dataaddress);
             return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataPaymentMethods'));
         } else {
             return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập', 'message' => ' ']);
@@ -660,8 +658,9 @@ class PageController extends Controller
     {
         $client = new \GuzzleHttp\Client();
         try {
-            $rescustomer = $client->request('GET', PageController::getUrl('customers/account/' . $req->id . ''));
+            $rescustomer = $client->request('GET', PageController::getUrl('customers/' . $req->id . ''));
             $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
+//            dd($datacustomer);
             $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
             // dd($dataaddress);
@@ -670,9 +669,7 @@ class PageController extends Controller
                 $dtstart->setTimezone(new DateTimeZone('UTC'));
                 $start = $dtstart->format('Y-m-d');
             }
-            // $dtstart = new DateTime( $datacustomer['customer']['birthday']);
-            // $dtstart->setTimezone(new DateTimeZone('UTC'));
-            // $start =  $dtstart->format('Y-m-d');
+
             $start = '1999-01-1';
             $resorder = $client->request('GET', PageController::getUrl('orders/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataorder = json_decode($resorder->getBody()->getContents(), true);
@@ -720,14 +717,11 @@ class PageController extends Controller
                     $resproduct = $client->request('GET', PageController::getUrl('productimages/product/' . $datawl['wishList'][$i]['product']['_id'] . ''));
                     $dataproductimgae[] = json_decode($resproduct->getBody()->getContents(), true);
                 } else {
-
                     continue;
                 }
-
             }
             $resultproduct = compact('dataproduct');
             $resultproductimage = compact('dataproductimgae');
-            // dd($resultproduct);
             $dataStore = array();
             $resfollowStore = $client->request('GET', PageController::getUrl('followStores/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $datafollow = json_decode($resfollowStore->getBody()->getContents(), true);
@@ -764,18 +758,19 @@ class PageController extends Controller
     {
         $client = new \GuzzleHttp\Client();
         try {
-            $rescustomer = $client->request('GET', PageController::getUrl('customers/account/' . $req->id . ''));
+            $rescustomer = $client->request('GET', PageController::getUrl('customers/' . $req->id . ''));
             $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
             $resorder = $client->request('GET', PageController::getUrl('orders/customer/' . $datacustomer['customer']['_id'] . ''));
             $dataorder = json_decode($resorder->getBody()->getContents(), true);
-
+//            dd($dataorder);
             $dataorderitem = array();
+
             for ($i = 0; $i < count($dataorder['orders']); $i++) {
                 $resorderitem = $client->request('GET', PageController::getUrl('orderItems/order/' . $dataorder['orders'][$i]['_id'] . ''));
                 $dataorderitem[] = json_decode($resorderitem->getBody()->getContents(), true);
 
             }
-
+//            dd($dataorderitem);
             $resultorderitem = compact('dataorderitem');
             $resreviewproduct = $client->request('GET', PageController::getUrl('reviewProducts/customer/' . $datacustomer['customer']['_id'] . ''));
             $datareviewproduct = json_decode($resreviewproduct->getBody()->getContents(), true);
@@ -785,7 +780,6 @@ class PageController extends Controller
 
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             return $e->getResponse()->getStatusCode();
-
         }
 
         return view('user/page.reviewshop', compact('datareviewshop', 'datareviewproduct', 'dataorder', 'resultorderitem'));
@@ -809,14 +803,111 @@ class PageController extends Controller
         return view('user/page.writereviewadmin', compact('resultdata', 'resultimg', 'OrderItemId'));
     }
 
+    public function getContact(){
+        return view('user/page.contact');
+    }
     //End user
 
 
     //Admin gian hàng
     public function getIndexAdmin()
     {
+        $client = new \GuzzleHttp\Client();
         if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng') {
-            return view('admin/page.trangchu');
+            $store = Session::get('key')[0]['store']['_id'];
+            $resOrderItems = $client->request('GET', PageController::getUrl('orderItems/getByState/5b9a1a1bffed2b1e60a5d783'));
+            $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
+            for ($i = 0; $i < $dataOrderItems['count']; $i++) {
+                $resProductStore = $client->request('GET', PageController::getUrl('products/store/' . $store . ''));
+                $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
+                for ($j = 0; $j < count($dataProductStore['products']); $j++) {
+                    if ($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']) {
+                        $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
+                    }
+                }
+            }
+            $resultProductOrder = compact('dataProductOrder');
+            $rescategorystore = $client->request('GET', PageController::getUrl('stores/' . $store . ''));
+            $datacategorystore = json_decode($rescategorystore->getBody()->getContents(), true);
+//            dd($datacategorystore);
+            $totalprice = 0;
+            if(!empty($resultProductOrder['dataProductOrder'])){
+                for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
+                    $totalprice += ($resultProductOrder['dataProductOrder'][$i]['product']['price'] * $resultProductOrder['dataProductOrder'][$i]['quantity']);
+                }
+                //            CustomOrder
+                for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
+                    $resOrder = $client->request('GET', PageController::getUrl('orders/' . $resultProductOrder['dataProductOrder'][$i]['orderId'] . ''));
+                    $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
+                    if ($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
+                        $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
+                        $dataOrder[$i]['total'] = ($resultProductOrder['dataProductOrder'][$i]['product']['price'] * $resultProductOrder['dataProductOrder'][$i]['quantity']);
+                        $resProductType = $client->request('GET', PageController::getUrl('products/' . $dataOrder[$i]['OrderItem']['product']['_id'] . ''));
+                        $dataProductType = json_decode($resProductType->getBody()->getContents(), true);
+                        $dataOrder[$i]['OrderItem']['ProductType'] = $dataProductType['product']['productType'];
+                        $resCategory = $client->request('GET', PageController::getUrl('productTypes/' . $dataOrder[$i]['OrderItem']['ProductType']['_id'] . ''));
+                        $dataCategory = json_decode($resCategory->getBody()->getContents(), true);
+                        $dataOrder[$i]['OrderItem']['Category'] = $dataCategory['productType']['category'];
+                    }
+                }
+
+                $resultOrder = compact('dataOrder');
+                $count = 0;
+                $counttotal = array();
+                for ($i = 0; $i < count($dataOrder); $i++) {
+                    for ($j = 0; $j < count($datacategorystore['store']['categories']); $j++) {
+                        if($datacategorystore['store']['categories'][$j]['category']['_id'] == $dataOrder[$i]['OrderItem']['Category']['_id']  ){
+                            $count ++;
+                        }
+                        if (($j++) ) {
+                            $counttotal[]= $dataOrder[$i]['OrderItem']['Category']['_id'];
+                            $count = 1;
+                        }
+                    }
+                }
+                $countcategory = array_count_values($counttotal);
+//                dd($countcategory);
+            }else{
+                $resultProductOrder['dataProductOrder'] = array();
+                $resultOrder['dataOrder'] = array();
+                $countcategory = array();
+            }
+//            reviewStore
+            $resreviewshop = $client->request('GET', PageController::getUrl('reviewStores/store/' .$store. ''));
+            $datareviewshop = json_decode($resreviewshop->getBody()->getContents(), true);
+            $countstar_3 = 0;
+            $countstar_2 = 0;
+            $countstar_1 = 0;
+            $countstar = array();
+            for ($i = 0; $i < $datareviewshop['count']; $i++) {
+                $dtstart = new DateTime($datareviewshop['reviewStores'][$i]['dateReview']);
+                $dtstart->setTimezone(new DateTimeZone('UTC'));
+                $timereviewshop[] = $dtstart->format('d/m/Y');
+                $countstar[] = $datareviewshop['reviewStores'][$i]['ratingLevel']['ratingLevel'];
+                switch ($countstar[$i]) {
+                    case "3":
+                        $countstar_3++;
+                        break;
+                    case "2":
+                        $countstar_2++;
+                        break;
+                    case "1":
+                        $countstar_1++;
+                        break;
+                }
+            }
+            if ($datareviewshop['count'] == 0) {
+                $countrating = 0;
+            } else {
+                $countrating = number_format((($countstar_2 + $countstar_1) / ($countstar_2 + $countstar_1 + $countstar_3)) * 100, 1, '.', '');
+            }
+//            followStore
+            $resfollowStore = $client->request('GET', PageController::getUrl('followStores/store/' .$store. ''));
+            $datafollowStore = json_decode($resfollowStore->getBody()->getContents(), true);
+
+
+
+            return view('admin/page.trangchu',compact('resultProductOrder','countrating','datafollowStore','resultOrder','totalprice','datacategorystore','countcategory'));
         }
         return redirect()->guest(route('login-admin'));
     }
@@ -884,11 +975,9 @@ class PageController extends Controller
             $client1 = new \GuzzleHttp\Client();
             $res = $client1->request('GET', PageController::getUrl('categories'));
             $data = json_decode($res->getBody()->getContents(), true);
-            //end get json
             //get storeId
             $res1 = $client1->request('GET', PageController::getUrl('stores/' . $store . ''));
             $data1 = json_decode($res1->getBody()->getContents(), true);
-            // dd($data1['store']['categories']);
             //get danh muc trong store
             $data2 = array();
             for ($i = 0; $i < count($data1['store']['categories']); $i++) {
@@ -1182,11 +1271,8 @@ class PageController extends Controller
         if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng') {
             $dataProductOrder = array();
             $dataOrder = array();
-            $datatext = array();
             $store = Session::get('key')[0]['store']['_id'];
             $resOrderItems = $client1->request('GET', PageController::getUrl('orderItems/getByState/5b9a17f3e747da371818fd9d'));
-
-            // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
             $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
             for ($i = 0; $i < $dataOrderItems['count']; $i++) {
                 $resProductStore = $client1->request('GET', PageController::getUrl('products/store/' . $store . ''));
@@ -1208,7 +1294,6 @@ class PageController extends Controller
 
 
             $resultOrder = compact('dataOrder');
-            $dataProductorder = array();
             try {
                 $resOrderAll = $client1->request('GET', PageController::getUrl('orders/getByState/5b9a17f3e747da371818fd9d'));
                 $dataOrderAll = json_decode($resOrderAll->getBody()->getContents(), true);
@@ -1232,7 +1317,6 @@ class PageController extends Controller
                                 "propName" => "orderState",
                                 "value" => "5bd01017832c13219c366d1b"
                             ]);
-                            // dd($datajson);
                             $jsonData = json_encode($datajson);
                             $json_url = PageController::getUrl('orders/' . $dataOrderAll['orders'][$i]['_id'] . '');
                             $ch = curl_init($json_url);
@@ -1244,7 +1328,6 @@ class PageController extends Controller
                             );
                             curl_setopt_array($ch, $options);
                             $result = curl_exec($ch);
-                            $result1 = json_decode($result);
                         }
                         if ($dataOrderAll['orders'][$i]['OrderItem'][$j]['orderItemState']['orderStateName'] === "Đã xử lý") {
                             $count++;
@@ -1539,7 +1622,6 @@ class PageController extends Controller
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET', PageController::getUrl('registeredSales'));
             $data = json_decode($res->getBody()->getContents(), true);
-            // dd($data);
             return view('admin/page.admin', compact('data'));
         }
         return redirect()->guest(route('login-admin', [], false));
@@ -1627,7 +1709,6 @@ class PageController extends Controller
 
 
     }
-
 
 }
 

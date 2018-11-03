@@ -17,11 +17,6 @@
         
         //User
 
-        // public static function getUrl($text){
-        //     // $urlAPI = "http://172.16.198.84:3000/".$text;
-        //     $urlAPI = "http://localhost:3000/".$text;
-        //     return $urlAPI;
-        // }
 
         public function deleteDeliveryProfileUser(Request $req){
             //get json danh muc all

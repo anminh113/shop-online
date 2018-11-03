@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
 
     public static function getUrl($text){
-        // $urlAPI = "http://172.16.198.84:3000/".$text;
+//         $urlAPI = "http://172.16.198.84:3000/".$text;
         $urlAPI = "http://localhost:3000/".$text;
         return $urlAPI;
     }

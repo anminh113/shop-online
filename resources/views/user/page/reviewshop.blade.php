@@ -38,71 +38,67 @@
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'] )}}';">
+            <a href="javascript:void(0)" style="text-decoration: none;color: #000" onclick="window.location='{{ route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'] )}}';">
                 <div class=" tablink  w3-padding border-red text-center">Thông tin cá nhân</div>
             </a>
         </div>
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
-                       
                     @foreach ($dataorder['orders'] as $item => $orderitem )
-                    @foreach($resultorderitem['dataorderitem'][$item]['orderItems'] as $text )
-                    @if($dataorder['orders'][$item]['orderState']['orderStateName'] == "Đã giao hàng"  && $text['isReview'] == false)
-                    <div class="order">
-                        <div class="accordion order-info">Đơn hàng {{$dataorder['orders'][$item]['_id']}} <span> |</span>
-                            <span>{{$dataorder['orders'][$item]['totalQuantity']}}</span> Sản phẩm
-                        </div>
-                        <div class="panel order-item">
-                              
-                            @foreach($resultorderitem['dataorderitem'][$item]['orderItems'] as $text )
-                            @if($text['orderItemState']['orderStateName'] == "Đã giao hàng"  && $text['isReview'] == false)
-                         
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="item-pic"><img src="{{$text['product']['imageURL']}}" width="115"
-                                            height="115"> </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-main item-main-mini">
-                                        <div>
-                                            <div class="text title item-title" data-spm="details_title">
-                                                {{$text['product']['productName']}}
-                                            </div>
-                                            <p class="text desc"></p>
-                                            <p class="text desc bold"></p>
-                                        </div>
+                        @foreach($resultorderitem['dataorderitem'][$item]['orderItems'] as $text )
+                            @if($dataorder['orders'][$item]['orderState']['orderStateName'] == "Đã giao hàng"  && $text['isReview'] == false && $text['orderItemState']['orderStateName'] == "Đã giao hàng")
+                                <div class="order">
+                                    <div class="accordion order-info">Đơn hàng {{$dataorder['orders'][$item]['_id']}}
                                     </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-quantity" style=" width: 100%; "><span><span class="text desc info multiply">Số
-                                                lượng:&nbsp;{{$text['quantity']}}</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="item-status item-capsule">
-                                        <p class="capsule">{{$dataorder['orders'][$item]['orderState']['orderStateName']}}</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="item-info">
-                                        <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='{{route('write-review-shop',$text['_id'])}}';"
-                                            style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                           
-                          
-                            @endif
-                           
-                            @endforeach
+                                    <div class="panel order-item">
 
-                        </div>
-                    </div>
-                    <div class="space10">&nbsp;</div>
-                    @endif
-                    @endforeach
+            {{--                            @if($text['orderItemState']['orderStateName'] == "Đã giao hàng"  && $text['isReview'] == false)--}}
+
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <div class="item-pic"><img src="{{$text['product']['imageURL']}}" width="115"
+                                                        height="115"> </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="item-main item-main-mini">
+                                                    <div>
+                                                        <div class="text title item-title" data-spm="details_title">
+                                                            {{$text['product']['productName']}}
+                                                        </div>
+                                                        <p class="text desc"></p>
+                                                        <p class="text desc bold"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="item-quantity" style=" width: 100%; "><span class="text desc info multiply">Số lượng:&nbsp;{{$text['quantity']}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="item-status item-capsule">
+                                                    <p class="capsule">{{$dataorder['orders'][$item]['orderState']['orderStateName']}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="item-info">
+                                                    <button type="button" class="btn btn-outline-warning btn-save" onclick="window.location='{{route('write-review-shop',$text['_id'])}}';"
+                                                        style="width: 100%;font-size: 14px; margin-top: 10px">Viết đánh giá</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+
+                                        {{--@endif--}}
+
+
+
+                                    </div>
+                                </div>
+                                <div class="space10">&nbsp;</div>
+                            @endif
+                        @endforeach
                     @endforeach
 
 
@@ -112,16 +108,10 @@
             <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
                     <div class="row">
-                        
-                      
-                        
                         <div class="col-lg-7">
-                         
-                                @foreach($datareviewproduct['reviewProducts'] as $key => $item)
-                                <div style="padding-left: 5px;font-size: 13px; padding-bottom: 12px;">Nhận xét và đánh giá
-                                        sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
-                            <div class="row" style="padding-left: 5px;">
-
+                            @foreach($datareviewproduct['reviewProducts'] as $key => $item)
+                            <div style="padding-left: 5px;font-size: 13px; padding-bottom: 12px;">Nhận xét và đánh giá sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
+                                <div class="row" style="padding-left: 5px;">
                                 <div class="col-lg-12">
                                     <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;"><a href="{{ route('san-pham',$item['product']['_id'] )}}"
                                             tabindex="0">{{$item['product']['productName']}}</a></div>
@@ -134,7 +124,9 @@
                                         <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết:
                                             {{$item['review']}}</div>
                                         <div class="contact_form_text" style="margin-left: 10px"></div>
-                                       
+                                    </div>
+                                    <div class="item-pic" style="float: right;margin-top:-150px">
+                                        <img src="{{$item['product']['imageURL']}}" width="115" height="115">
                                     </div>
                                 </div>
                             </div>

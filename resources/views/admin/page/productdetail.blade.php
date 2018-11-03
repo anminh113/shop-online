@@ -101,15 +101,20 @@
                             <div class="space10">&nbsp;</div>
                             <label for="basic" style="font-size: 19px">Giá sản phẩm: </label>
                             <div id="giasp">
-                                <span style="font-size: 20px" id="price">{{$item['product']['price']}}.000₫</span>
+                                <span style="font-size: 20px" id="price">{{$item['product']['price']}},000₫</span>
                                 <br>
                                 @if(!empty($item['product']['saleOff']))
-                                <span style="font-size: 18px; text-decoration: line-through;">{{$item['product']['price']}}.000₫</span>
+                                <span style="font-size: 18px; text-decoration: line-through;">{{number_format($item['product']['price'])}},000₫</span>
                                 <span style="font-size: 20px"> -{{$item['product']['saleOff']['discount']}}%</span>
                                 {{-- @else --}}
-
                                 @endif
                             </div>
+                            <div class="space15">&nbsp;</div>
+                            <label for="basic">Số lượng nhập kho:</label>
+
+                                <span >{{$item['product']['quantity']}} Chiếc</span>
+
+
                             <div class="space15">&nbsp;</div>
                             <label for="basic" style="font-size: 19px">Thông số kỹ thuật:</label>
                             <div class="space10">&nbsp;</div>
@@ -208,9 +213,9 @@
 
 @if(!empty($item['product']['saleOff']))
 <script>
-       var a = ('{{$item['product']['price']}}' - ('{{$item['product']['price']}}' * '{{$item['product']['saleOff']['discount']}}' / 100));
+       var a = "{{number_format($item['product']['price']- ($item['product']['price'] *$item['product']['saleOff']['discount'])/100)}},000₫";
 
-    document.getElementById('price').innerHTML = a.toPrecision(4) + ".000₫";
+    document.getElementById('price').innerHTML = a;
 
 </script>
 @endif

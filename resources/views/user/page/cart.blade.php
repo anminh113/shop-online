@@ -45,56 +45,42 @@
                                 {{number_format($item['item']['price'] - ($item['item']['price'] *$item['item']['saleOff']['discount'])/100)}},000₫ 
                             @endif
                         </div>
+
                         <div class="product-quantity">
-                            @if($item['qty']<$item['item']['quantity']) 
                             <span class="input-group-btn btn-count-price" >
-                                <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
-                                    onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['_id'])}}';">
+                                <div class="btn btn-number quantity_inc" >
                                     <i class="fas fa-minus"></i>
                                 </div>
                             </span>
-                            <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center input-count-price"
-                                min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
-                                disabled style="background-color: #fff; ">
-                            <span class="input-group-btn btn-count-price"  >
-                                <div class="btn  btn-number" data-type="plus" data-field="quant[<?php echo $i?>]"
-                                    onclick="window.location='{{route('gio-hang',$item['item']['_id'])}}';">
+                            <input  type="number" form="add" name="qty[]" class="form-control input-number text-center"
+                                min="1" max="{{$item['item']['quantity']}}" step="1" value="{{$item['qty']}}"
+                                 style="background-color: #fff; " required  readonly>
+                            <span class="input-group-btn btn-count-price">
+                                <div class="btn  btn-number quantity_dec">
                                     <i class="fas fa-plus"></i>
                                 </div>
                             </span>
-                            @endif
-                            @if($item['qty']>=$item['item']['quantity'])
-                            <span class="input-group-btn btn-count-price"  >
-                                <div class="btn btn-number" data-type="minus" data-field="quant[<?php echo $i?>]"
-                                    onclick="window.location='{{Route('xoa-mot-gio-hang',$item['item']['_id'])}}';">
-                                    <i class="fas fa-minus"></i>
-                                </div>
-                            </span>
-                            <input type="text" name="quant[<?php echo $i?>]" class="form-control input-number text-center input-count-price"
-                                min="1" max="{{$item['item']['quantity']}}" value="{{$item['qty']}}"
-                                disabled style="background-color: #fff; ">
-                            <span class="input-group-btn btn-count-price" >
-                                <div class="btn  btn-number" data-type="plus" data-field="quant[<?php echo $i?>]">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                            </span>
+                        </div>
+                        <div class="product-line-price">
+                            @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
+                                {{number_format($item['qty'] * $item['item']['price'])}},000₫
+                            @else
+                                {{number_format($item['qty'] * ($item['item']['price'] - ($item['item']['price'] *$item['item']['saleOff']['discount'])/100))}},000₫
                             @endif
                         </div>
-                        
-                        <div class="product-line-price"> @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
-                            {{number_format($item['qty'] * $item['item']['price'])}},000₫
-                        @else
-                            {{number_format($item['qty'] * ($item['item']['price'] -($item['item']['price'] *$item['item']['saleOff']['discount'])/100))}},000₫
-                        @endif </div>
                         <div class="product-removal">
-                        
-                                    <a href="{{Route('xoa-gio-hang',$item['item']['_id'])}}"
-                                    style="color:#5F6368"><i class="fas fa-trash"></i></a>
-                           
+                            <a href="{{Route('xoa-gio-hang',$item['item']['_id'])}}" style="color:#5F6368"><i class="fas fa-trash"></i></a>
                         </div>
+                        <input hidden type="text" form="add" name="productid[]" value="{{$item['item']['_id']}}">
                     </div>
+
                     @endforeach
                     @endif
+
+                    <form action="{{route('post-gio-hang')}}" id="add" method="post">
+                        <button type="submit" class="btn btn-outline- btn-save" style="display: none">Cập nhật giỏ hàng</button>
+                        {{ csrf_field() }}
+                    </form>
                     <div class="order_total">
                         <div class="row">
                             @if(Session::has('cart'))
@@ -147,8 +133,6 @@
                             </div>
                         </div>
                     </div>
-    
-                   
                     <div class="characteristics">
                             <div class="row">
                                 <!-- Char. Item -->
@@ -184,10 +168,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-                   
                 </div>
             </div>
            
@@ -202,7 +182,42 @@
 @section('footer')
 <script src="source/user/js/cart_custom.js"></script>
 <script src="source/user/styles/js/cart.js"></script>
+<script>
+    jQuery('.product-quantity').each(function() {
+        var spinner = jQuery(this),
+            input = spinner.find('input[type="number"]'),
+            btnUp = spinner.find('.quantity_dec'),
+            btnDown = spinner.find('.quantity_inc'),
+            min = input.attr('min'),
+            max = input.attr('max');
 
+        btnUp.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue >= max) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue + 1;
+            }
+            spinner.find("input").val(newVal);
+            jQuery('.btn-save').css( "display", "block" );
+            spinner.find("input").trigger("change");
+        });
+
+        btnDown.click(function() {
+            var oldValue = parseFloat(input.val());
+            if (oldValue <= min) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue - 1;
+            }
+            spinner.find("input").val(newVal);
+            jQuery('.btn-save').css( "display", "block" );
+            spinner.find("input").trigger("change");
+        });
+
+    });
+
+</script>
 
 
 

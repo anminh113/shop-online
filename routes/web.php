@@ -224,6 +224,10 @@ Route::post('write-review-shop', [
 
 
 //---
+Route::get('contact', [
+    'as'=>'contact',
+    'uses'=>'PageController@getContact'
+]);
 
 // Đăng nhập admin
 Route::get('login-admin', [
