@@ -10,12 +10,7 @@
 
 <!-- MAIN -->
 <div class="main">
-    <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Pictures</a></li>
-        <li><a href="#">Summer 15</a></li>
-        <li>Italy</li>
-    </ul>
+
     <!-- MAIN CONTENT -->
     <div class="main-content">
         <div class="container-fluid">
@@ -31,7 +26,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Danh mục hệ thống </th>
-                                    <th>Cập nhật</th>
+                                    <th>Thêm</th>
                                 </tr>
                             </thead>
                             <tbody id="myTable">
@@ -41,7 +36,7 @@
                                     <tr>
                                         <td><a href="#"><?php echo $i;?></a></td>
                                         <td>{{$item['categoryName']}}</td>
-                                        <td><button class="btn btn-info"  type="submit" form="postId{{$item['_id']}}">
+                                        <td><button class="btn btn-info" onclick="archiveFunction()" type="submit" form="postId{{$item['_id']}}">
                                             <i class="fa fa-plus" >  </i>
                                             </button>
                                         </td>
@@ -57,7 +52,7 @@
                                 <tr>
                                     <td><a href="#"><?php echo $i;?></a></td>
                                     <td>{{$item['categoryName']}}</td>
-                                    <td><button class="btn btn-info"  type="submit" form="postId{{$item['_id']}}">
+                                    <td><button class="btn btn-info"  onclick="archiveFunction()" type="submit" form="postId{{$item['_id']}}">
                                         <i class="fa fa-plus" >  </i>
                                         </button>
                                     </td>
@@ -75,30 +70,31 @@
                     <div class="row">
                         <table id="table_format" class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Danh mục gian hàng </th>
-                                    <th>Cập nhật</th>
-                                </tr>
+                            <tr>
+                                <th>STT</th>
+                                <th>Danh mục gian hàng </th>
+                                <th>Xóa</th>
+                            </tr>
                             </thead>
                             <tbody id="myTable">
-                                    <?php $i=1;?>
-                                @foreach ($result['data2'] as $da)
+                            <?php $i=1;?>
+                            @foreach ($result['data2'] as $da)
                                 <tr>
                                     <td><a href="#"><?php echo $i;?></a></td>
                                     <td>{{$da['categoryName']}}</td>
-                                    <td><button class="btn btn-danger"  type="submit" form="deleteid{{$da['_id']}}">
-                                        <i class="fa fa-trash" >  </i>
+                                    <td><button class="btn btn-danger" onclick="archiveFunction()"  type="submit" form="deleteid{{$da['_id']}}">
+                                            <i class="fa fa-trash" >  </i>
                                         </button>
                                     </td>
                                 </tr>
-                                <form id="deleteid{{$da['_id']}}" hidden action="{{route('delete-danh-muc-admin')}}" method="post">
+                                <form id="deleteid{{$da['_id']}}" hidden action="{{route('delete-danh-muc-admin')}}" method="post" >
                                     <input type="text" name="categoryId" hidden value="{{$da['_id']}}">
                                     @method('DELETE')
                                     {{ csrf_field() }}
                                 </form>
                                 <?php $i++;?>
-                                @endforeach
+
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -120,7 +116,6 @@
     element.classList.add("active");
 
 </script>
-<script>
 
-</script>
+
 @endsection

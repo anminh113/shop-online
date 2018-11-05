@@ -262,7 +262,7 @@
                                         <div class="order_cart_title " >
                                         <div class="order_cart_title order_cart_title_text"  style="margin-left: 20px">{{$item['paymentMethodName']}}</div>
                                         <label for="rdo-{{$item['_id']}}" class="btn-radio">
-                                        <input type="radio" id="rdo-{{$item['_id']}}" form="deliveryAddress" name="paymentMethod" value="{{$item['_id']}}">
+                                        <input type="radio" required="required" id="rdo-{{$item['_id']}}" form="deliveryAddress" name="paymentMethod" value="{{$item['_id']}}">
                                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                                 <circle cx="10" cy="10" r="9"></circle>
                                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z"
@@ -378,7 +378,7 @@
                         <div class="col-lg-1 col-md-1">
                         
                                 <label for="rdo-<?php echo $i?>" class="btn-radio">
-                                <input type="radio" id="rdo-<?php echo $i?>" name="radio-grp" value="{{$item['_id']}}">
+                                <input type="radio" required="required" id="rdo-<?php echo $i?>" name="radio-grp" value="{{$item['_id']}}">
                                     <svg width="20px" height="20px" viewBox="0 0 20 20">
                                         <circle cx="10" cy="10" r="9"></circle>
                                         <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z"
@@ -418,7 +418,7 @@
                         <div class="col-lg-6 order-lg-1 order-1">
                             <div class="form-group">
                                 <label for="">Họ tên</label>
-                                <input type="text" class="form-control" id="" name="hoten"  placeholder="">
+                                <input type="text" required="required" class="form-control" id="" name="hoten"  placeholder="">
                                 <input type="text" hidden name="customerid" value="{{Session::get('keyuser')['info'][0]['customer']['_id']}}">
                             </div>
                         </div>
@@ -434,7 +434,7 @@
                         <div class="col-lg-6 order-lg-3 order-2">
                             <div class="form-group">
                                 <label for="">Số điện thoại</label>
-                                <input type="text" class="form-control" id="" name="sdt">
+                                <input type="number" required="required" class="form-control" id="" name="sdt">
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-4 order-5">
@@ -447,7 +447,7 @@
                         <div class="col-lg-6 order-lg-5 order-3">
                             <div class="form-group">
                                 <label for="">Địa chỉ nhận hàng</label>
-                                <input type="text" class="form-control" id="" name="diachi">
+                                <input type="text" required="required" class="form-control" id="" name="diachi">
                             </div>
                         </div>
                         <div class="col-lg-6 order-lg-6 order-6">

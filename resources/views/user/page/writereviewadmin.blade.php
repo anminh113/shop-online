@@ -65,7 +65,7 @@
                                         <input type="text" hidden name="ProductName" value="{{$resultdata['data'][0]['product']['productName']}}">
                                         <span class="content-star-rate">
                                             <fieldset class="rating">
-                                                <input type="radio" id="star5" name="ratingproduct" value="5" form="fb-form" />
+                                                <input type="radio" required="required" id="star5" name="ratingproduct" value="5" form="fb-form" />
                                                 <label class="full" for="star5" data-toggle="tooltip" title="Tuyệt vời - 5 sao"></label>
 
                                                 <input type="radio" id="star4" name="ratingproduct" value="4" form="fb-form" />
@@ -114,7 +114,7 @@
                             <div class="col-lg-9"></div>
                             <div class="col-lg-3"><button type="submit" class="btn btn-outline-warning btn-save" style="right:0;height: 50px;width: 100%;font-size: 16px; margin-top: 10px">Gửi đánh giá</button></div>
                         </div>
-                        <div id="RatingLevelShop"></div>
+                        <div id="RatingLevelShop"><input hidden type="text" name="ratingLevel" value="2"></div>
                         <input type="text" hidden name="productId" value="{{$resultdata['data'][0]['product']['_id']}}">
                         <input type="text" hidden name="storeId" value="{{$resultdata['data'][0]['product']['store']['_id']}}">
                         {{ csrf_field() }}

@@ -34,7 +34,6 @@
                                     <tr>
                                         <th>STT</th>
                                         <th>Danh mục</th>
-                                        {{-- <th>Số loại sản phẩm</th> --}}
                                         <th>Xem chi tiết</th>
                                         <th>Cập nhật</th>
                                     </tr>
@@ -49,7 +48,7 @@
                                             </td>
                                             <td><a data-toggle="modal" data-target="#update{{$item['_id']}}">
                                                     <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
-                                                <button class="btn btn-danger" type="submit"
+                                                <button class="btn btn-danger" onclick="archiveFunction()" type="submit"
                                                         form="deleteid{{$item['_id']}}">
                                                     <i class="fa fa-trash"> </i>
                                                 </button>
@@ -105,6 +104,7 @@
             </div>
         </div>
     </div>
+
     @foreach ($data['categories'] as $item)
         <div class="modal fade" id="update{{$item['_id']}}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLongTitle"
@@ -131,7 +131,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                            <button type="submit" class="btn btn-info">Lưu thông tin</button>
+                            <button type="submit" onclick="archiveFunction()" class="btn btn-info">Lưu thông tin</button>
                         </div>
                         @method('PATCH')
                         {{ csrf_field() }}

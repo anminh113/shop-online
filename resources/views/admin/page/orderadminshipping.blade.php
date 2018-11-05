@@ -62,7 +62,7 @@
                                 <form id="changeState{{$item['OrderItem']['_id']}}" action="{{route('update-shipping-order-admin')}}" method="POST">
                                     <input type="text" hidden name="orderId" value="{{$item['OrderItem']['_id']}}">
                                     <div class="col-md-6"><span class="panel-note" style="font-size:14px">Trạng thái: {{$item['OrderItem']['orderItemState']['orderStateName']}}</div>
-                                    <div class="col-md-6 text-right"><button type="submit" form="changeState{{$item['OrderItem']['_id']}}" class="btn btn-outline- btn-save">Chuyển trạng thái đã giao hàng</button></div>
+                                    <div class="col-md-6 text-right"><button type="submit" onclick="archiveFunction()" form="changeState{{$item['OrderItem']['_id']}}" class="btn btn-outline- btn-save">Chuyển trạng thái đã giao hàng</button></div>
                                     @method('PATCH')
                                     {{ csrf_field() }}
                                 </form>

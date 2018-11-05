@@ -668,9 +668,11 @@ class PageController extends Controller
                 $dtstart = new DateTime($datacustomer['customer']['birthday']);
                 $dtstart->setTimezone(new DateTimeZone('UTC'));
                 $start = $dtstart->format('Y-m-d');
+            }else{
+                $start = 'Y-m-d';
             }
 
-            $start = '1999-01-1';
+
             $resorder = $client->request('GET', PageController::getUrl('orders/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataorder = json_decode($resorder->getBody()->getContents(), true);
             // dd($dataorder);
@@ -764,13 +766,27 @@ class PageController extends Controller
             $dataorder = json_decode($resorder->getBody()->getContents(), true);
 //            dd($dataorder);
             $dataorderitem = array();
-
+            $dataproduct = array();
             for ($i = 0; $i < count($dataorder['orders']); $i++) {
                 $resorderitem = $client->request('GET', PageController::getUrl('orderItems/order/' . $dataorder['orders'][$i]['_id'] . ''));
                 $dataorderitem[] = json_decode($resorderitem->getBody()->getContents(), true);
+                for ($j = 0; $j < count($dataorderitem[$i]['orderItems']); $j++) {
+                    for ($h = 0; $h < count($dataorderitem[$i]['orderItems'][$j]); $h++) {
+                        if($dataorderitem[$i]['orderItems'][$j]['isReview'] === false && $dataorderitem[$i]['orderItems'][$j]['orderItemState']['_id'] === '5b9a1a1bffed2b1e60a5d783'){
+                            try {
+                                $resproduct = $client->request('GET', PageController::getUrl('products/' . $dataorderitem[$i]['orderItems'][$j]['product']['_id']. ''));
+                                $dataproduct[] = $dataorderitem[$i]['orderItems'][$j];
+                                break;
+                            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                                break;
+                            }
+                        }
 
+
+                    }
+                }
             }
-//            dd($dataorderitem);
+//            dd($dataproduct);
             $resultorderitem = compact('dataorderitem');
             $resreviewproduct = $client->request('GET', PageController::getUrl('reviewProducts/customer/' . $datacustomer['customer']['_id'] . ''));
             $datareviewproduct = json_decode($resreviewproduct->getBody()->getContents(), true);
@@ -782,7 +798,7 @@ class PageController extends Controller
             return $e->getResponse()->getStatusCode();
         }
 
-        return view('user/page.reviewshop', compact('datareviewshop', 'datareviewproduct', 'dataorder', 'resultorderitem'));
+        return view('user/page.reviewshop', compact('datareviewshop','dataproduct', 'datareviewproduct', 'dataorder', 'resultorderitem'));
     }
 
     public function getWriteReviewShop(Request $req)
@@ -852,21 +868,34 @@ class PageController extends Controller
                 }
 
                 $resultOrder = compact('dataOrder');
-                $count = 0;
                 $counttotal = array();
                 for ($i = 0; $i < count($dataOrder); $i++) {
                     for ($j = 0; $j < count($datacategorystore['store']['categories']); $j++) {
-                        if($datacategorystore['store']['categories'][$j]['category']['_id'] == $dataOrder[$i]['OrderItem']['Category']['_id']  ){
-                            $count ++;
-                        }
                         if (($j++) ) {
                             $counttotal[]= $dataOrder[$i]['OrderItem']['Category']['_id'];
-                            $count = 1;
                         }
                     }
                 }
                 $countcategory = array_count_values($counttotal);
-//                dd($countcategory);
+//
+//                $counttotalprice1 = array();
+//                $counttotalprice2 = array();
+//                $counttotalprice = array();
+//                for ($i = 0; $i < count($dataOrder); $i++) {
+////                    $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] = 0;
+//                    for ($j = 0; $j < count($datacategorystore['store']['categories']); $j++) {
+//
+//                        if (($j++)) {
+//                            $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] = 0;
+////                            $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] = ($dataOrder[$i]['total']);
+//                            $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] += ($dataOrder[$i]['total']);
+//                            $counttotalprice[$dataOrder[$i]['OrderItem']['Category']['_id']] = $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']];
+//                        }
+//                    }
+//                }
+////                array_push($counttotalprice,$counttotalprice2);
+////                $countcategoryprice = array_count_values(array_column($counttotalprice, 0));
+////                dd($counttotalprice);
             }else{
                 $resultProductOrder['dataProductOrder'] = array();
                 $resultOrder['dataOrder'] = array();

@@ -2,35 +2,7 @@
 
 @section('head')
 <link href="{{ URL::asset('source/admin/assets/css/product.css') }}" rel="stylesheet" type="text/css">
-<style type="text/css">
-    .bar-verygood {
-        width: 60%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
 
-    .bar-good {
-        width: 30%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
-
-    .bar-bad {
-        width: 10%;
-        height: 16px;
-        background-color: #FFCC40;
-    }
-
-    .product_item {
-        position: inherit;
-        display: table-column;
-    }
-
-    .page-active {
-        display: block;
-    }
-
-</style>
 @endsection
 
 @section('content')
@@ -82,7 +54,7 @@
                                                 chi tiết</a></td>
                                         <td style=" vertical-align: middle;"><a data-toggle="modal" data-target="#update{{$item['_id']}}">
                                                 <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
-                                            <button class="btn btn-danger" type="submit" form="deleteid{{$item['_id']}}">
+                                            <button class="btn btn-danger" onclick="archiveFunction()" type="submit" form="deleteid{{$item['_id']}}">
                                                 <i class="fa fa-trash"> </i>
                                             </button>
                                         </td>
@@ -138,7 +110,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                    <button type="submit" id="save" class="btn btn-info">Lưu thông tin</button>
+                    <button type="submit" id="save"  class="btn btn-info">Lưu thông tin</button>
                 </div>
                 <div style="hidden" id="imgur"></div>
                 <input type="text" hidden name="categoryId" value="{{$data['category']['_id']}}">
@@ -178,7 +150,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
-                    <button type="submit" id="update" class="btn btn-info">Lưu thông tin</button>
+                    <button type="submit" id="update" onclick="archiveFunction()" class="btn btn-info">Lưu thông tin</button>
                 </div>
                 @method('PATCH')
                 {{ csrf_field() }}

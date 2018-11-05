@@ -34,12 +34,12 @@
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
                     <label for="sdt">Số Điện Thoại</label>
-                    <input type="text" class="form-control" id="sdt" name="sdt" placeholder="">
+                    <input type="number" required="required" class="form-control" id="sdt" name="sdt" placeholder="">
                 </div>
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
                     <label for="hoten">Họ Tên</label>
-                    <input type="text" class="form-control" id="hoten" name="hoten" placeholder="">
+                    <input type="text" required="required" class="form-control" id="hoten" name="hoten" placeholder="">
                     <input type="text" hidden name="role" value="5b962b3289403417208b6488">
                 </div>
                 <div class="space10">&nbsp;</div>
@@ -101,17 +101,17 @@
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
                     <label for="user">Tên tài khoản</label>
-                    <input type="text" class="form-control" id="user" form="dangky" name="email" placeholder="  ">
+                    <input type="text" required="required" class="form-control" id="user" form="dangky" name="email" placeholder="  ">
                 </div>
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" form="dangky" name="email" placeholder="  ">
+                    <input type="email"  required="required" class="form-control" id="email" form="dangky" name="email" placeholder="  ">
                 </div>
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">
                     <label for="pass">Mật Khẩu</label>
-                    <input type="password" class="form-control" id="pass"  form="dangky" name="pass" placeholder="">
+                    <input type="password" required="required" class="form-control" id="pass"  form="dangky" name="pass" placeholder="">
                 </div>
                 <div class="space10">&nbsp;</div>
                 <div class="form-group">

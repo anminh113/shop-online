@@ -271,6 +271,10 @@ $(document).ready(function() {
 
 
     function initIsotope() {
+
+
+
+
         var sortingButtons = $('.shop_sorting_button');
         $('.product_grid').isotope({
             itemSelector: '.product_item',
@@ -311,41 +315,6 @@ $(document).ready(function() {
                 }
             });
         });
-
-        
-
-        // quick search regex
-        var qsRegex;
-
-        // init Isotope
-        var $grid = $('.product_grid').isotope({
-        itemSelector: '.product_name div a',
-        layoutMode: 'fitRows',
-        filter: function() {
-            return qsRegex ? $(this).text().match( qsRegex ) : true;
-        }
-        });
-
-        // use value of search field to filter
-        var $quicksearch = $('#quicksearch').keyup( debounce( function() {
-        qsRegex = new RegExp( $quicksearch.val(), 'gi' );
-        $grid.isotope();
-        }, 50 ) );
-
-        // debounce so filtering doesn't happen every millisecond
-        function debounce( fn, threshold ) {
-        var timeout;
-        threshold = threshold || 100;
-        return function debounced() {
-            clearTimeout( timeout );
-            var args = arguments;
-            var _this = this;
-            function delayed() {
-            fn.apply( _this, args );
-            }
-            timeout = setTimeout( delayed, threshold );
-        };
-        }
 
     }
 
@@ -412,7 +381,7 @@ $(document).ready(function() {
             });
         }
     }
-});
+    });
 
     jQuery.each(jQuery('textarea[data-autoresize]'), function() {
         var offset = this.offsetHeight - this.clientHeight;

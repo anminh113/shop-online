@@ -471,8 +471,6 @@
                             </div>
                         @endforeach
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
@@ -497,7 +495,7 @@
                             <div class="col-lg-6 order-lg-1 order-1">
                                 <div class="form-group">
                                     <label for="">Họ tên</label>
-                                    <input type="text" class="form-control" id="" name="hoten" placeholder="">
+                                    <input type="text" required="required" class="form-control" id="" name="hoten" placeholder="">
                                     <input type="text" hidden name="customerid"
                                            value="{{$datacustomer['customer']['_id']}}">
                                 </div>
@@ -515,7 +513,7 @@
                             <div class="col-lg-6 order-lg-3 order-2">
                                 <div class="form-group">
                                     <label for="">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="" name="sdt">
+                                    <input type="number" required="required" class="form-control" id="" name="sdt">
                                 </div>
                             </div>
                             <div class="col-lg-6 order-lg-4 order-5">
@@ -530,7 +528,7 @@
                             <div class="col-lg-6 order-lg-5 order-3">
                                 <div class="form-group">
                                     <label for="">Địa chỉ nhận hàng</label>
-                                    <input type="text" class="form-control" id="" name="diachi">
+                                    <input type="text" required="required" class="form-control" id="" name="diachi">
                                 </div>
                             </div>
                             <div class="col-lg-6 order-lg-6 order-6">
@@ -574,7 +572,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="hoten">Họ Tên</label>
-                                        <input type="text" class="form-control" id="hoten" name="hoten"
+                                        <input type="text" required="required" class="form-control" id="hoten" name="hoten"
                                                aria-describedby=""
                                                value="{{$datacustomer['customer']['name']}}">
                                         <input type="text" hidden name="customerid"
@@ -583,25 +581,25 @@
                                     <div class="space10">&nbsp;</div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email"
+                                        <input type="email" required="required" class="form-control" id="email" name="email"
                                                aria-describedby="" value="{{$datacustomer['customer']['email']}}">
                                     </div>
                                     <div class="space10">&nbsp;</div>
                                     <div class="form-group">
                                         <label for="sdt">Số Điện Thoại</label>
-                                        <input type="text" class="form-control" id="sdt" name="sdt" aria-describedby=""
+                                        <input type="number" required="required" class="form-control" id="sdt" name="sdt" aria-describedby=""
                                                value="{{$datacustomer['customer']['phoneNumber']}}">
                                     </div>
                                     <div class="form-group row" hidden>
                                         <label for="example-date-input" class="col-2 col-form-label">Date</label>
                                         <div class="col-10">
-                                            <input class="form-control" type="date" value="2011-08-19"
+                                            <input class="form-control"  type="date" value="2011-08-19"
                                                    id="example-date-input">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="example-date-input">Ngày sinh</label>
-                                        <input class="form-control" type="date" name="date" value="{{$start}}"
+                                        <input class="form-control" required="required" type="date" name="date" value="{{$start}}"
                                                id="example-date-input">
                                     </div>
                                 </div>
@@ -656,7 +654,7 @@
                                 <div class="col-lg-6 order-lg-1 order-1">
                                     <div class="form-group">
                                         <label for="">Họ tên</label>
-                                        <input type="text" class="form-control" name="hoten"
+                                        <input type="text" required="required" class="form-control" name="hoten"
                                                value="{{$item['presentation']}}">
                                         <input type="text" hidden name="id" value="{{$item['_id']}}">
                                     </div>
@@ -674,7 +672,7 @@
                                 <div class="col-lg-6 order-lg-3 order-2">
                                     <div class="form-group">
                                         <label for="">Số điện thoại</label>
-                                        <input type="text" class="form-control" value="{{$item['phoneNumber']}}"
+                                        <input type="text" required="required" class="form-control" value="{{$item['phoneNumber']}}"
                                                name="sdt">
                                     </div>
                                 </div>
@@ -689,7 +687,7 @@
                                 <div class="col-lg-6 order-lg-5 order-3">
                                     <div class="form-group">
                                         <label for="">Địa chỉ nhận hàng</label>
-                                        <input type="text" class="form-control" id="diachi{{$item['_id']}}"
+                                        <input type="text" required="required" class="form-control" id="diachi{{$item['_id']}}"
                                                name="diachi">
                                     </div>
                                 </div>
@@ -934,21 +932,21 @@
                             <div class="col-lg-12 order-lg-1 order-1">
                                 <div class="form-group">
                                     <label for="">Mật khẩu cũ</label>
-                                    <input type="password" class="form-control" name="oldpass">
+                                    <input type="password" required="required" class="form-control" name="oldpass">
                                 </div>
                             </div>
 
                             <div class="col-lg-12 order-lg-3 order-2">
                                 <div class="form-group">
                                     <label for="">Mật khẩu mới</label>
-                                    <input type="password" class="form-control" name="newpass">
+                                    <input type="password" required="required" class="form-control" name="newpass">
                                 </div>
                             </div>
 
                             <div class="col-lg-12 order-lg-5 order-3">
                                 <div class="form-group">
                                     <label for="">Xác nhận mật khẩu mới</label>
-                                    <input type="password" class="form-control" name="checkpass">
+                                    <input type="password" required="required" class="form-control" name="checkpass">
                                 </div>
                             </div>
                         </div>

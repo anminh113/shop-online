@@ -162,7 +162,8 @@
                     "accountId" =>  $result1->createdAccount->_id,
                     "storeName" =>  $data['registeredSale']['storeName'],
                     "location" =>  $data['registeredSale']['address'],
-                    "phoneNumber" =>  $data['registeredSale']['phoneNumber']
+                    "phoneNumber" =>  $data['registeredSale']['phoneNumber'],
+                    "email" =>  $data['registeredSale']['email']
                 );
                 $jsonData1 =json_encode($datacustomerjson);
                 $json_url1 = PageController::getUrl('stores');
@@ -381,48 +382,58 @@
 
         public function postAddDiscount(Request $req){
             $quantities = Input::get('productDiscount');
-            for($i=0; $i< count($quantities); $i++){
-                $datajson=array([
-                    "propName" => "saleOff",
-                    "value" => $req->discount
-                ]);
+//            dd($req->discount);
+            if($req->discount != null && $quantities != null){
+                for($i=0; $i< count($quantities); $i++){
+                    $datajson=array([
+                        "propName" => "saleOff",
+                        "value" => $req->discount
+                    ]);
 
-                $jsonData =json_encode($datajson);
-                $json_url = PageController::getUrl('products/'.$quantities[$i].'');
-                $ch = curl_init( $json_url );
-                $options = array(
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                    CURLOPT_CUSTOMREQUEST => "PATCH",
-                    CURLOPT_POSTFIELDS => $jsonData
-                );
-                curl_setopt_array( $ch, $options );
-                $result =  curl_exec($ch);
+                    $jsonData =json_encode($datajson);
+                    $json_url = PageController::getUrl('products/'.$quantities[$i].'');
+                    $ch = curl_init( $json_url );
+                    $options = array(
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                        CURLOPT_CUSTOMREQUEST => "PATCH",
+                        CURLOPT_POSTFIELDS => $jsonData
+                    );
+                    curl_setopt_array( $ch, $options );
+                    $result =  curl_exec($ch);
+                    return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                }
+            }else{
+                return redirect()->back()->with(['flag'=>'warning','title'=>'Thông báo' ,'message'=>'Bạn phải chọn sản phẩm và sự kiện giảm giá!!!']);
             }
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 
         public function postDeleteDiscount(Request $req){
             $quantities = Input::get('DeleteProductDiscount');
-            for($i=0; $i< count($quantities); $i++){
-                $datajson=array([
-                    "propName" => "saleOff",
-                    "value" => null
-                ]);
+             if($quantities != null){
+                for($i=0; $i< count($quantities); $i++){
+                    $datajson=array([
+                        "propName" => "saleOff",
+                        "value" => null
+                    ]);
+                    $jsonData =json_encode($datajson);
+                    $json_url = PageController::getUrl('products/'.$quantities[$i].'');
+                    $ch = curl_init( $json_url );
+                    $options = array(
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                        CURLOPT_CUSTOMREQUEST => "PATCH",
+                        CURLOPT_POSTFIELDS => $jsonData
+                    );
+                    curl_setopt_array( $ch, $options );
+                    $result =  curl_exec($ch);
+                    return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã xóa khỏi sự kiện']);
+                }
+             }else{
+                 return redirect()->back()->with(['flag'=>'warning','title'=>'Thông báo' ,'message'=>'Bạn phải chọn sản phẩm!!!']);
 
-                $jsonData =json_encode($datajson);
-                $json_url = PageController::getUrl('products/'.$quantities[$i].'');
-                $ch = curl_init( $json_url );
-                $options = array(
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                    CURLOPT_CUSTOMREQUEST => "PATCH",
-                    CURLOPT_POSTFIELDS => $jsonData
-                );
-                curl_setopt_array( $ch, $options );
-                $result =  curl_exec($ch);
-            }
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+             }
+
         }
 
         // User

@@ -34,7 +34,6 @@
                                     <li>
                                         <div class="link">{{$data4[$time]['categoryName']}}<i class="fa fa-chevron-down"></i></div>
                                         <ul class="submenu">
-                                                <li><label><input  type="checkbox" name="check[]" value="*" />   Tất cả</label></li>
 
                                         @foreach($item['productTypes'] as $text )
                                         
@@ -77,7 +76,6 @@
                                                     tăng dần</li>
                                                 <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá
                                                     giảm dần</li>
-                                                {{--  <li class="shop_sorting_button" data-isotope-option='name'>name</li>  --}}
                                             </ul>
                                         </li>
                                     </ul>
@@ -85,7 +83,7 @@
                             </div>
 
 
-                            <div class="product_grid">
+                            <div class="product_grid" >
                                 <div class="product_grid_border"></div>
                                 <?php $i = 0?>
                                 @foreach ($data['products'] as $item )
@@ -177,9 +175,6 @@
                                             style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
                                     </div>
                                 @endif
-                              
-
-
                                 <?php $i = $i + 1?>
                                 @endforeach
 
@@ -188,7 +183,7 @@
                             <!-- Shop Page Navigation -->
                             <div class="shop_page_nav d-flex flex-row">
                                 <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i
-                                        class="fas fa-chevron-left"></i></div>
+                                            class="fas fa-chevron-left"></i></div>
                                 <ul class="page_nav d-flex flex-row">
                                     <li><a href="#">1</a></li>
                                     <li><a href="#">2</a></li>
@@ -197,8 +192,9 @@
                                     <li><a href="#">21</a></li>
                                 </ul>
                                 <div class="page_next d-flex flex-column align-items-center justify-content-center"><i
-                                        class="fas fa-chevron-right"></i></div>
+                                            class="fas fa-chevron-right"></i></div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -220,6 +216,7 @@
 
 <script src="source/user/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="source/user/js/shop_custom.js"></script>
+
 <script>
     // init Isotope
     var $container = $('.product_grid').isotope({
@@ -236,11 +233,12 @@
         }
     });
     var filterValue = inclusives.length ? inclusives.join(', ') : '*';
-        console.log(filterValue);
     $container.isotope({ filter: filterValue })
     });
 
 </script>
+
+
 
          
 
@@ -273,6 +271,8 @@
     });
 
 </script>
+
+
 
 
 @foreach ($data['products'] as $time => $item )
@@ -345,6 +345,7 @@
 var date12 = '{{$time12}}';
 </script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
+<script src="source/user/js/pagination.js"></script>
 
 
 @endsection

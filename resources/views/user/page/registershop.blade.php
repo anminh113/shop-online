@@ -84,21 +84,21 @@
                 <form action="{{route('post-register-shop')}}" id="registershop" method="POST" class="clearfix">
                     <div class="form-group">
                         <label for="namestore" class="text-size">Tên Gian Hàng</label>
-                        <input type="text" class="form-control" id="namestore" name="namestore" aria-describedby=""
+                        <input type="text" required="required" class="form-control" id="namestore" name="namestore" aria-describedby=""
                             placeholder="">
                     </div>
                    
                     <div class="space10">&nbsp;</div>
                     <div class="form-group">
                         <label for="email" class="text-size">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" aria-describedby=""
+                        <input type="email" required="required" class="form-control" id="email" name="email" aria-describedby=""
                             placeholder="">
                     </div>
                    
                     <div class="space10">&nbsp;</div>
                     <div class="form-group">
                         <label for="sdt" class="text-size">Số Điện Thoại</label>
-                        <input type="number" class="form-control" id="sdt" name="sdt" aria-describedby=""
+                        <input type="number" required="required" class="form-control" id="sdt" name="sdt" aria-describedby=""
                             placeholder="">
                     </div>
                     <div class="space10">&nbsp;</div>
@@ -112,19 +112,19 @@
                     <div class="space10">&nbsp;</div>
                     <div class="form-group">
                         <label for="username" class="text-size">Tài khoản đăng nhập</label>
-                        <input type="text" class="form-control" id="username" name="username" aria-describedby=""
+                        <input type="text" required="required" class="form-control" id="username" name="username" aria-describedby=""
                             placeholder="">
                     </div>
                     <div class="space10">&nbsp;</div>
                     <div class="form-group">
                         <label for="pass1" class="text-size">Mật khẩu</label>
-                        <input type="password" class="form-control" id="pass1" name="pass1" aria-describedby=""
+                        <input type="password" required="required" class="form-control" id="pass1" name="pass1" aria-describedby=""
                             placeholder="">
                     </div>
                     <div class="space10">&nbsp;</div>
                     <div class="form-group">
                         <label for="pass2" class="text-size">Xác nhận mật khẩu</label>
-                        <input type="password" class="form-control" id="pass2" name="pass2" aria-describedby=""
+                        <input type="password" required="required" class="form-control" id="pass2" name="pass2" aria-describedby=""
                             placeholder="">
                     </div>
                     {{ csrf_field() }}

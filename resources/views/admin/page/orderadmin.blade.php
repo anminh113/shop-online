@@ -62,7 +62,7 @@
                                 <form id="changeState{{$item['OrderItem']['_id']}}" action="{{route('update-state-order-admin')}}" method="POST">
                                     <input type="text" hidden name="orderId" value="{{$item['OrderItem']['_id']}}">
                                     <div class="col-md-6"><span class="panel-note" style="font-size:14px">Trạng thái: {{$item['OrderItem']['orderItemState']['orderStateName']}}</div>
-                                    <div class="col-md-6 text-right"><button type="submit" form="changeState{{$item['OrderItem']['_id']}}" class="btn btn-outline- btn-save">Chuyển trạng thái đã xử lý</button></div>
+                                    <div class="col-md-6 text-right"><button type="submit" onclick="archiveFunction()" form="changeState{{$item['OrderItem']['_id']}}" class="btn btn-outline- btn-save">Chuyển trạng thái đã xử lý</button></div>
                                     @method('PATCH')
                                     {{ csrf_field() }}
                                 </form>
@@ -80,26 +80,7 @@
     <!-- END MAIN CONTENT -->
 </div>
 <!-- END MAIN -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle">Xác nhận đăng ký</h4>
-                <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Bạn có chấp nhận người dùng Huỳnh khắc Duy đăng ký gian hàng OchoS?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Từ Chối</button>
-                <button type="button" class="btn btn-success">Chấp Nhận</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
 
 @section('footer')

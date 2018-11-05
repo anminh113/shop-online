@@ -59,8 +59,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <canvas id="doughnut-chart" width="800" height="450"></canvas>
+                        <div class="col-lg-6" style="border-right:solid 1px #dadada;">
+                            <canvas id="doughnut-chart"></canvas>
+                        </div>
+                        <div class="col-lg-6">
+                            <canvas id="doughnut-chart1"></canvas>
                         </div>
                     </div>
                 </div>
@@ -161,6 +164,49 @@
                 title: {
                     display: true,
                     text: 'Sản phẩm bán ra dựa theo danh mục sản phẩm'
+                }
+            }
+        });
+
+    });
+</script>
+<script>
+    $(function() {
+
+        new Chart(document.getElementById("doughnut-chart1"), {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    @foreach($datacategorystore['store']['categories'] as $item)
+                        "{{$item['category']['categoryName']}}",
+                    @endforeach
+                ],
+                datasets: [
+                    {
+                        label: "doanh thu dựa theo danh mục sản phẩm",
+                        backgroundColor: [
+                            @foreach($datacategorystore['store']['categories'] as $item)
+                            (function(m, s, c) {
+                                return (c ? arguments.callee(m, s, c - 1) : '#') + s[m.floor(m.random() * s.length)]
+                            })(Math, 'ABCDEF0123456789', 5),
+                            @endforeach
+                        ],
+                        data: [
+                            @foreach($datacategorystore['store']['categories'] as $key => $item)
+                            @foreach($countcategory as $key1 => $value)
+                            @if($item['category']['_id'] ==  $key1)
+                            {{$value}},
+                            @endif
+                            @endforeach
+                            @endforeach
+                        ]
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'doanh thu dựa theo danh mục sản phẩm'
                 }
             }
         });

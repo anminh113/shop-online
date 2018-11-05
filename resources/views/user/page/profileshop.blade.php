@@ -647,4 +647,6 @@
 
 </script>
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
+<script src="source/user/js/pagination.js"></script>
+
 @endsection

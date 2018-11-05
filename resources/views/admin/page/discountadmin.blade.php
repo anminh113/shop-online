@@ -11,12 +11,7 @@
 
 <!-- MAIN -->
 <div class="main">
-    <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Pictures</a></li>
-        <li><a href="#">Summer 15</a></li>
-        <li>Italy</li>
-    </ul>
+
     <!-- MAIN CONTENT -->
     <div class="main-content">
         <div class="container-fluid">
@@ -36,7 +31,7 @@
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">% giảm giá:</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="number" name="DiscountNumber" min="1" value="1"
+                                    <input class="form-control" type="number"  required="required" name="DiscountNumber" min="1" value="1"
                                         max="99">
                                     <span class="input-group-addon">%</span>
                                 </div>
@@ -44,13 +39,13 @@
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">Ngày bắt đầu:</label>
                                 <div class="input-group">
-                                    <input class="form-control" name="startdate" id="stardate" type="datetime-local">
+                                    <input class="form-control"  required="required" name="startdate" id="stardate" type="datetime-local">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">Ngày kết thúc:</label>
                                 <div class="input-group">
-                                    <input class="form-control" name="enddate" id="enddate" type="datetime-local">
+                                    <input class="form-control"  required="required" name="enddate" id="enddate" type="datetime-local">
                                 </div>
                             </div>
                             <div class="col-lg-1 col-md-4">
@@ -86,7 +81,23 @@
                 </div>
                 <div class="tab-content">
                     <div id="tab-bottom-left1" class="tab-pane fade active in " >
-                       
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <h4>Thêm sự kiện giảm giá cho sản phẩm:</h4>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="panel-title">
+                                    <select class="form-control" id="discount" form="adddiscount" name="discount">
+                                        <option value="">- % -</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <button type="submit" form="adddiscount" class="btn btn-outline- btn-save" style="min-width:150px;">Thêm vào đợt giảm giá </button>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="row">
                             <div class="col-lg-3 col-md-6">
                                 <h4>Tìm kiếm sản phẩm:</h4>
@@ -113,19 +124,6 @@
                             </form>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <h4>Thêm sự kiện giảm giá cho sản phẩm:</h4>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="panel-title">
-                                    <select class="form-control" id="discount" form="adddiscount" name="discount">
-                                        <option value="">- % -</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                           
                         <form id="adddiscount" action="{{route('post-add-discount-admin')}}" method="POST">
                             <div class="space10">&nbsp;</div>
                             <div>
@@ -181,11 +179,7 @@
                                 @endforeach
 
                             </div>
-                            <div class="input-group">
-                                <button type="submit" class="btn btn-outline- btn-save" style="min-width:150px;">Thêm
-                                    vào đợt
-                                    giảm giá </button>
-                            </div>
+
                             {{ csrf_field() }}
                         </form>
                     </div>
@@ -251,7 +245,7 @@
                                     </div>
                                     <div class="space10">&nbsp;</div>
                                 </div>
-                                <label >
+                                <label>
                                     <div hidden>
                                         <input type="checkbox" id="product{{$item['_id']}}" name="DeleteProductDiscount[]"
                                             value="{{$item['_id']}}">

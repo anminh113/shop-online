@@ -40,10 +40,10 @@
                     </div>
                     <div class="logos ml-sm-auto">
                         <ul class="logos_list">
-                            <li><a href="#"><img src="source/user/images/logos_1.png" alt=""></a></li>
-                            <li><a href="#"><img src="source/user/images/logos_2.png" alt=""></a></li>
-                            <li><a href="#"><img src="source/user/images/logos_3.png" alt=""></a></li>
-                            <li><a href="#"><img src="source/user/images/logos_4.png" alt=""></a></li>
+                            <li><a ><img src="source/user/images/logos_1.png" alt=""></a></li>
+                            <li><a ><img src="source/user/images/logos_2.png" alt=""></a></li>
+                            <li><a ><img src="source/user/images/logos_3.png" alt=""></a></li>
+                            <li><a ><img src="source/user/images/logos_4.png" alt=""></a></li>
                         </ul>
                     </div>
                 </div>
@@ -93,6 +93,7 @@
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
             type: 'warning',
+            position: 'top',
             showCancelButton: true,
             confirmButtonColor: '#008496',
             cancelButtonColor: '#EE093D',
@@ -116,6 +117,7 @@
             title: 'Xác nhận?',
             text: "",
             type: 'warning',
+            position: 'top',
             showCancelButton: true,
             confirmButtonColor: '#008496',
             cancelButtonColor: '#EE093D',

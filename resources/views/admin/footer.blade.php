@@ -16,7 +16,7 @@
 </script>
 <script>
         iziToast.settings({
-          timeout: 3000,
+          timeout: 5000,
           resetOnHover: true,
           transitionIn: 'flipInX',
           transitionOut: 'flipOutX',
@@ -38,3 +38,27 @@
         <p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
     </div>
 </footer>
+
+<script >
+    function archiveFunction() {
+        event.preventDefault(); // prevent form submit
+        var form = event.target.form; // storing the form
+        console.log(form);
+        swal({
+            title: 'Xác nhận?',
+            text: "Bạn có muốn thực hiện hành động này",
+            type: 'warning',
+            position: 'top',
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            confirmButtonColor: '#008496',
+            cancelButtonColor: '#EE093D',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    }
+</script>
