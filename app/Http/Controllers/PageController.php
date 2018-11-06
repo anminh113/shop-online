@@ -675,15 +675,15 @@ class PageController extends Controller
 
             $resorder = $client->request('GET', PageController::getUrl('orders/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataorder = json_decode($resorder->getBody()->getContents(), true);
-            // dd($dataorder);
+//             dd($dataorder);
             $dataorderitem = array();
             for ($i = 0; $i < count($dataorder['orders']); $i++) {
                 $resorderitem = $client->request('GET', PageController::getUrl('orderItems/order/' . $dataorder['orders'][$i]['_id'] . ''));
                 $dataorderitem[] = json_decode($resorderitem->getBody()->getContents(), true);
-
+                $dataorder['orders'][$i]['OrderItem'] = $dataorderitem[$i];
             }
             $resultorderitem = compact('dataorderitem');
-            // dd($resultorderitem);
+//             dd($dataorder);
 
             $resregisterstore = $client->request('GET', PageController::getUrl('registeredSales/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataregisterstore = json_decode($resregisterstore->getBody()->getContents(), true);

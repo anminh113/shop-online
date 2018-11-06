@@ -207,7 +207,6 @@
                                             </div>
                                         </div>
 
-                                        {{-- <div class="product_fav"><i class="fas fa-heart"></i></div> --}}
 
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
@@ -251,7 +250,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product_fav"><i class="fas fa-heart"></i></div>
                                         @if(empty($item['saleOff']))
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
@@ -269,19 +267,12 @@
                             </div>
 
                             <!-- Shop Page Navigation -->
-                            <div class="shop_page_nav d-flex flex-row">
-                                <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i
-                                        class="fas fa-chevron-left"></i></div>
-                                <ul class="page_nav d-flex flex-row">
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#">21</a></li>
-                                </ul>
-                                <div class="page_next d-flex flex-column align-items-center justify-content-center"><i
-                                        class="fas fa-chevron-right"></i></div>
-                            </div>
+                                <div class="shop_page_nav d-flex flex-row">
+                                    <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+                                    <ul class="page_nav d-flex flex-row" id="test">
+                                    </ul>
+                                    <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+                                </div>
                         </div>
 
                     </div>

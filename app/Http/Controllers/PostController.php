@@ -974,7 +974,7 @@
                 "propName" =>  "orderState",
                 "value" =>  "5b9a19d4ffed2b1e60a5d782"
             ]);
-            // dd($datajson);
+//             dd($datajson);
             $jsonData =json_encode($datajson);
             $json_url = PageController::getUrl('orders/'.$req['orderId'].'');
             $ch = curl_init( $json_url );
@@ -988,7 +988,30 @@
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
 
-         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['account'])->with(['flag'=>'success','title'=>'Đơn hàng đã được hủy' ,'message'=>' ']);
+            $client = new \GuzzleHttp\Client();
+            $resOrderItems = $client->request('GET', PageController::getUrl('orderItems/order/'.$req['orderId'].''));
+            $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
+//            dd($dataOrderItems);
+            for ($i=0;$i<count($dataOrderItems['orderItems']); $i++){
+                $datajson1 = array([
+                    "propName" => "orderItemState",
+                    "value" => "5b9a19d4ffed2b1e60a5d782"
+                ]);
+                $jsonData1 = json_encode($datajson1);
+                $json_url1 = PageController::getUrl('orderItems/' . $dataOrderItems['orderItems'][$i]['_id']. '');
+                $ch1 = curl_init($json_url1);
+                $options1 = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData1
+                );
+                curl_setopt_array($ch1, $options1);
+                $result11 = curl_exec($ch1);
+            }
+//
+
+         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Đơn hàng đã được hủy' ,'message'=>' ']);
 
         }
 

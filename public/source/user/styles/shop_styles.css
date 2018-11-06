@@ -2586,3 +2586,6 @@ select option
 	overflow: hidden;
    
 }
+.page_nav li.active{
+	border: solid 1px #008496;
+}

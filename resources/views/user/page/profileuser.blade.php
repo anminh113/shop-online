@@ -261,7 +261,6 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
                         @foreach($resultorderitem['dataorderitem'][$item]['orderItems'] as $text )
                             <div class="row">
                                 <div class="col-lg-2">
@@ -422,11 +421,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-
-                        @if($orderitem['orderState']['orderStateName'] == "Đang xử lý" || $orderitem['orderState']['orderStateName'] == "Đang chờ thanh toán")
-                            <button type="submit" form="deleteOrder" class="btn btn-outline-warning btn-save">Hủy đơn
-                                hàng
-                            </button>
+                        @if($orderitem['orderState']['orderStateName'] == "Đang chờ thanh toán" || $orderitem['orderState']['orderStateName'] == "Đang xử lý" && $orderitem['paymentMethod']['paymentMethodName'] != "Thanh toán trực tuyến" )
+                            <button type="submit" form="deleteOrder" class="btn btn-outline-warning btn-save">Hủy đơn hàng</button>
                             <form id="deleteOrder" action="{{route('post-profile-user')}}" method="POST">
                                 <input type="text" hidden name="orderId" value="{{$dataorder['orders'][$item]['_id']}}">
                                 {{ csrf_field() }}
