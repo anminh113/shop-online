@@ -28,16 +28,16 @@
     <!-- MAIN CONTENT -->
     <div class="main-content">
         <div class="container-fluid">
-            <div class="panel panel-profile">
+            <div class="panel panel-profile" style="    background-color: transparent;">
                 <div class="clearfix">
                     <!-- LEFT COLUMN -->
-                    <div class="profile-left">
+                    <div class="profile-left"  style="position: inherit">
                         <!-- PROFILE HEADER -->
                         <div class="profile-header">
                             <div class="overlay"></div>
                             <div class="profile-main">
                                 <h3 class="name">{{$data['store']['storeName']}}</h3>
-                                <span class="online-status status-available">Available</span>
+                                <span class="online-status status-available">Đang hoạt động</span>
                             </div>
                             <div class="profile-stat">
                                 <div class="row">
@@ -61,17 +61,18 @@
                                 <ul class="list-unstyled list-justify">
                                     <li>Ngày tạo gian hàng <span><script>var dtstart = moment('{{$data['store']['createdDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></span></li>
                                     <li>Số điện thoại <span>{{$data['store']['phoneNumber']}}</span></li>
-                                      {{--<li>Email <span>{{$data['store']['customers']['email']}}</span></li>  --}}
+                                      <li>Email <span>{{$data['store']['email']}}</span></li>
                                     <li>Địa chỉ <span>{{$data['store']['location']}}</span></li>
                                 </ul>
                             </div>
-                            {{--<div class="text-center"><a href="#" class="btn btn-primary">Cập nhật</a></div>--}}
+                            <div class="text-center"><a href=""   data-toggle="modal"
+                                                        data-target="#informationshop" class="btn btn-primary">Cập nhật</a></div>
                         </div>
                         <!-- END PROFILE DETAIL -->
                     </div>
                     <!-- END LEFT COLUMN -->
                     <!-- RIGHT COLUMN -->
-                    <div class="profile-right">
+                    <div class="profile-right"  style="background-color: #fff; ">
 
                         <!-- TABBED CONTENT -->
                         <div class="custom-tabs-line tabs-line-bottom left-aligned">
@@ -83,7 +84,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab-bottom-left1">
                                     @if($datareviewshop['count'] != 0)
-                                    @foreach($datareviewshop['reviewStores'] as $item => $timereview)
+                                    @foreach(array_reverse($datareviewshop['reviewStores']) as $item => $timereview)
                                 <ul class="list-unstyled activity-timeline">
                                     <li>
                                         @if($timereview['ratingLevel']['ratingLevel'] == 1)
@@ -125,6 +126,65 @@
 </div>
 <!-- END MAIN -->
 
+<div class="modal fade" id="informationshop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="viewed_title" style="border-right:solid 1px #dadada;" id="exampleModalLabel">Cập nhật gian hàng&nbsp;</h4>&nbsp;
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('update-profile-shop-admin')}}" method="POST" id="update" name="update">
+                    <div class="row">
+                        <div class="col-lg-6 order-lg-1 order-1">
+                            <div class="form-group">
+                                <label for="">Địa điểm</label>
+                                <select name="tinh-thanhpho" id="tinh-thanhpho" class="form-control" required="required" style="margin-left: 0px;"
+                                        id="">
+                                    <option value="">Chọn tỉnh thành</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-3 order-2">
+                            <div class="form-group">
+                                <label for="">Số điện thoại</label>
+                                <input type="number" required="required" value="{{$data['store']['phoneNumber']}}" class="form-control" id="" name="sdt">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-3 order-2">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" required="required" value="{{$data['store']['email']}}" class="form-control" id="" name="email">
+                            </div>
+                        </div>
+                        <input type="text" hidden value="{{$data['store']['_id']}}" name="storeId">
+
+                    </div>
+                    @method('PATCH')
+                    {{ csrf_field() }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                <button type="submit" form="update" class="btn btn-outline-warning btn-save text-right">Lưu thông tin
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("form[name='update']").validate({
+                errorElement: "em",
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</div>
 
 
 @endsection
@@ -134,6 +194,33 @@
     var element = document.getElementById("profile-shop-admin");
     element.classList.add("active");
     
+</script>
+<script>
+    $(document).ready(function () {
+
+        load_json_data('tinh-thanhpho');
+
+        function load_json_data(id, parent_id) {
+            var html_code = '';
+            $.getJSON("source/user/datacontry/tinh_tp.json", function (data) {
+                html_code += '<option value="">Chọn tỉnh thành</option>';
+                $.each(data, function (key, value) {
+                    if (id == 'tinh-thanhpho') {
+                        if (value.type == 'tinh' || value.type == 'thanh-pho') {
+                            html_code += '<option value="' + value.name + '">' + value.name_with_type +
+                                '</option>';
+                        }
+                    } else {
+                        if (value.code == parent_id) {
+                            html_code += '<option value="' + value.name + '">' + value.name_with_type +
+                                '</option>';
+                        }
+                    }
+                });
+                $('#tinh-thanhpho').html(html_code);
+            });
+        }
+    });
 </script>
 
 @endsection

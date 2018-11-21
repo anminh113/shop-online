@@ -48,7 +48,7 @@
              Log::info($result);
              curl_close($ch);
              //end post json
-             return redirect()->back();
+             return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 
         public function postAddProductTypeAdmin(Request $req){
@@ -76,7 +76,7 @@
             Log::info($result);
             curl_close($ch);
             //end post json
-            return redirect()->back();
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 
         public function postAddSpecificationAdmin(Request $req){
@@ -131,7 +131,7 @@
                 curl_setopt_array( $ch1, $options1 );
                 $result1 =  curl_exec($ch1);
             }
-                return redirect()->back();
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 
         public function postAdmin(Request $req){
@@ -245,8 +245,6 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-           
-
             if(!empty($result1->createdProduct->_id)){
                 //post data json
                 $datajson1=array(
@@ -335,7 +333,7 @@
                 return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
             }
           
-            return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>' ']);
+            return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Thêm danh mục không thành công']);
         }
 
         public function postSearchDiscount(Request $req){
@@ -382,7 +380,6 @@
 
         public function postAddDiscount(Request $req){
             $quantities = Input::get('productDiscount');
-//            dd($req->discount);
             if($req->discount != null && $quantities != null){
                 for($i=0; $i< count($quantities); $i++){
                     $datajson=array([
@@ -440,9 +437,9 @@
 
         public function postAddToCart(Request $req){
             $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client->request('GET','https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
 //            dd(Session::get('cart'));
@@ -466,13 +463,11 @@
         }
 
         public function postRegister(Request $req){
-              
             $datajson=array(
                 "username" =>  $req['user'],
                 "password" =>  $req['pass'],
                 "roleId" =>  $req['role']
                 );
-            // dd($datajson);
             $jsonData =json_encode($datajson);
             $json_url = PageController::getUrl('accounts');
             $ch = curl_init( $json_url );
@@ -485,7 +480,7 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-            // dd($result1->createdAccount->_id);
+
             if($result1->message == "Created account successfully"){
                 $dtstart = new DateTime("".$req['year']."-".$req['month']."-".$req['day']."");
                 $dtstart->setTimezone(new DateTimeZone('UTC'));
@@ -509,17 +504,26 @@
                 );
                 curl_setopt_array( $ch1, $options1 );
                 $result =  curl_exec($ch1);
+                  return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+            }else{
+                return redirect()->back()->with(['flag'=>'warning','title'=>'Thất bại' ,'message'=>'Tên tài khoản đã được sử dụng']);
             }
         return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
         }
 
         public function postRegisterGoogleFacebook(Request $req){
-                $datacustomerjson=array(
+                $client = new \GuzzleHttp\Client();
+            try {     
+                $res = $client->request('GET', PageController::getUrl('customers/account/' . $req['Id'] . ''));
+                $data = json_decode($res->getBody()->getContents(), true);
+                return redirect()->route('dang-nhap')->with(['flag'=>'info','title'=>' ' ,'message'=>'Bạn đã có tài khoản hãy đăng nhập']);
+
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+               $datacustomerjson=array(
                     "accountId" =>  $req['Id'],
                     "name" =>  $req['User'],
                     "email" =>  $req['Email']
                 );
-                // dd($datacustomerjson);
                 $jsonData1 =json_encode($datacustomerjson);
                 $json_url1 = PageController::getUrl('customers');
                 $ch1 = curl_init( $json_url1 );
@@ -532,8 +536,8 @@
                 curl_setopt_array( $ch1, $options1 );
                 $result =  curl_exec($ch1);
                 $result1 =json_decode($result);
-                // dd($result1);
-        return redirect()->route('dang-nhap')->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                return redirect()->route('dang-nhap')->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã tạo tài khoản']);
+            }
         }
 
         public function postUpdateProfileUser(Request $req){
@@ -567,7 +571,7 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm thông tin']);
         }
 
         public function postDeliveryProfileUser(Request $req){
@@ -590,15 +594,15 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm địa chỉ']);
         }
 
         public function postProductList(Request $req){
             //get json san pham theo gian hang
             $client1 = new \GuzzleHttp\Client();
-            $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client1->request('GET','https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time12 =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
@@ -693,17 +697,14 @@
                
                 return redirect()->route('post-danhsach-sanpham');
             }
-            
-         
-           
         return view('user/page.productlist',compact('datajson1','data','result','result1','data4','resultPrice','time12','resultdatareview','countstar_5','countstar_4','countstar_3','countstar_2','countstar_1'));        
         }
        
         public function postProductTypeProductList(Request $req){
             $client1 = new \GuzzleHttp\Client();
-            $restime = $client1->request('GET','http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client1->request('GET','https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time12 =  $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
@@ -806,7 +807,7 @@
                 "amount" =>  $rounded
                 );
             $jsonData =json_encode($datajson);
-            $json_url = PageController::getUrl('checkouts/charge');
+            $json_url = PageController::getUrl('checkouts');
             $ch = curl_init( $json_url );
             $options = array(
                 CURLOPT_RETURNTRANSFER => true,
@@ -817,7 +818,8 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-            if($result1->outcome->seller_message = "Payment complete."){
+//            dd($result1);
+            if($result1->charge->status = "succeeded"){
                 $datajson=array([
                     "propName" =>  "orderState",
                     "value" =>  "5b9a17f3e747da371818fd9d"
@@ -861,7 +863,7 @@
                 
                 session()->forget('cart');
                 session()->forget('OrderId');
-                return redirect()->route('trang-chu')->with(['flag'=>'success','title'=>'Giao dịch thành công' ,'message'=>' ']);
+                return redirect()->route('trang-chu')->with(['flag'=>'success','title'=>'Giao dịch thành công!' ,'message'=>'Đơn đã được hiển thị trong thông tin đơn hàng ']);
             }else{
                 return redirect()->back()->with(['flag'=>'error','title'=>'Giao dịch thất bại' ,'message'=>' ']);
             }
@@ -1012,7 +1014,6 @@
 //
 
          return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Đơn hàng đã được hủy' ,'message'=>' ']);
-
         }
 
         public function postWriteReviewShop(Request $req){
@@ -1098,7 +1099,7 @@
             $resultreviewStore =  curl_exec($chreviewStore);
             $result1reviewStore =json_decode($resultreviewStore);
 
-         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Đánh giá thành công' ,'message'=>' ']);
+         return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Đánh giá đã được lưu thành công' ,'message'=>' ']);
 
         }
 
@@ -1120,9 +1121,9 @@
                 curl_setopt_array( $ch, $options );
                 $result =  curl_exec($ch);
                 $result1 =json_decode($result);
-                return redirect()->back()->with(['flag'=>'success','title'=>'đã lưu sản phẩm này' ,'message'=>' ']);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã lưu sản phẩm này' ,'message'=>' ']);
             }
-            return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để lưu sản phẩm này' ,'message'=>' ']);
+            return redirect()->back()->with(['flag'=>'info','title'=>'Đăng nhập để lưu sản phẩm này vào danh sách yêu thích' ,'message'=>' ']);
         }
 
         public function postFollow(Request $req){
@@ -1146,12 +1147,18 @@
                 $result1 =json_decode($result);
                 return redirect()->back()->with(['flag'=>'success','title'=>'Đã theo dõi gian hàng này' ,'message'=>' ']);
             }
-            return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để theo dõi gian hàng này' ,'message'=>' ']);
+            return redirect()->back()->with(['flag'=>'info','title'=>'Đăng nhập để theo dõi gian hàng này' ,'message'=>' ']);
         }
 
         public function postRegisterShop(Request $req){
+            $client = new \GuzzleHttp\Client();
             if(Session::has('keyuser')){
-                $datajson =array(
+                try {
+                    $res = $client->request('GET', PageController::getUrl('accounts/username/'.$req['username'].''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                     return redirect()->back()->with(['flag'=>'warning','title'=>'Thất bại' ,'message'=>'Tên tài khoản đã được sử dụng']);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                      $datajson =array(
                     "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
                     "storeName" =>  $req['namestore'],
                     "address" => $req['tinh-thanhpho'],
@@ -1159,23 +1166,24 @@
                     "email" => $req['email'],
                     "username" => $req['username'],
                     "password" => $req['pass1']
-                );
-                // dd($datajson);
-                $jsonData =json_encode($datajson);
-                $json_url = PageController::getUrl('registeredSales');
-                $ch = curl_init( $json_url );
-                $options = array(
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                    CURLOPT_CUSTOMREQUEST => "POST",
-                    CURLOPT_POSTFIELDS => $jsonData
-                );
-                curl_setopt_array( $ch, $options );
-                $result =  curl_exec($ch);
-                $result1 =json_decode($result);
-                return redirect()->back()->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
+                    );
+                    $jsonData =json_encode($datajson);
+                    $json_url = PageController::getUrl('registeredSales');
+                    $ch = curl_init( $json_url );
+                    $options = array(
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                        CURLOPT_CUSTOMREQUEST => "POST",
+                        CURLOPT_POSTFIELDS => $jsonData
+                    );
+                    curl_setopt_array( $ch, $options );
+                    $result =  curl_exec($ch);
+                    $result1 =json_decode($result);
+                    return redirect()->back()->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
+                }
+              
             }
-            return redirect()->back()->with(['flag'=>'info','title'=>'đăng nhập để thực hiện này' ,'message'=>' ']);
+            return redirect()->back()->with(['flag'=>'info','title'=>'Đăng nhập để thực hiện này' ,'message'=>' ']);
         }
  
 

@@ -29,7 +29,6 @@ $(document).ready(function()
 
 	setHeader();
 
-	initCustomDropdown();
 	initPageMenu();
 	initGoogleMap();
 

@@ -103,3 +103,6 @@ em{
 /*.sidebar .nav > li > a:hover, .sidebar .nav > li > a:focus, .sidebar .nav > li > a.active{
 	color: #000;
 }*/
+.form-control.error{
+    border: 1px solid #FA1111;
+}

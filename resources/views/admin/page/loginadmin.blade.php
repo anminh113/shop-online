@@ -52,7 +52,7 @@
 							<form class="form-auth-small" name="loginform" action="{{route('post-login-admin')}}" method="POST">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input type="text" class="form-control" id="signin-email" name="email" value="" placeholder="Email" required>
+									<input type="text" class="form-control" id="signin-email" name="email" value="" placeholder="Username" required>
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>

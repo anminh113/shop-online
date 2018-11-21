@@ -2,9 +2,10 @@
 @section('head')
 <link rel="stylesheet" type="text/css" href="source/user/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/shop_styles.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/shop_responsive.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
-<link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/star-rating-svg.css">
 
 
@@ -26,7 +27,7 @@
             <!-- Shop -->
             <div class="shop">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-3 col-md-12">
                         <div class="sidebar_section">
                             <div class="sidebar_title">Danh mục liên quan</div>
                             <ul id="accordion" class="accordiontext">
@@ -34,9 +35,7 @@
                                     <li>
                                         <div class="link">{{$data4[$time]['categoryName']}}<i class="fa fa-chevron-down"></i></div>
                                         <ul class="submenu">
-
                                         @foreach($item['productTypes'] as $text )
-                                        
                                         <li><label><input  type="checkbox" name="check[]" value=".{{$text['_id']}}" />   {{$text['productTypeName']}}</label></li>
                                         @endforeach
                                         </ul>
@@ -44,8 +43,6 @@
                                 @endforeach
                             </ul>       
                         </div>
-                        
-                        
                         <div class="sidebar_section filter_by_section">
                             <div class="sidebar_title">Giá</div>
                             <div class="filter_price">
@@ -57,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-9 col-md-12">
              
                         <!-- Shop Content -->
                         <div class="shop_content">
@@ -88,28 +85,26 @@
                                 <?php $i = 0?>
                                 @foreach ($data['products'] as $item )
                                 <!-- Product Item -->
-                             
                                 @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time12)
                                     <div class="product_item {{$item['productType']['_id']}}  discount">
                                         <div class="product_border"></div>
                                         <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                             @foreach ($result['datatext'] as $da )
-                                            @foreach ($da['imageList'] as $da1)
-                                            @if($item['_id'] == $da['productId'])
-                                            {{-- @foreach($da1['imageList'] as $da2) --}}
-                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
-                                            @break
-                                            {{-- @endforeach --}}
-                                            @endif
-                                            @endforeach
+                                                @foreach ($da['imageList'] as $da1)
+                                                    @if($item['_id'] == $da['productId'])
+                                                    {{-- @foreach($da1['imageList'] as $da2) --}}
+                                                    <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                    @break
+                                                    {{-- @endforeach --}}
+                                                    @endif
+                                                @endforeach
                                             @endforeach
                                         </div>
-
                                         <div class="product_content">
                                             <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
                                                 - ($item['price'] * $item['saleOff']['discount'])/100, 0, '',
-                                                '')}}@if( $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'], 0, '',
-                                                '')}}</span>@endif</div>
+                                                    '')}}@if( $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'], 0, '',
+                                                    '')}}</span>@endif</div>
                                             <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
                                                 - ($item['price'] *
                                                 $item['saleOff']['discount'])/100)}},000₫@if($item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
@@ -122,8 +117,6 @@
                                             </div>
                                             <div class="countreviewproduct" hidden>{{$data['0'][$i]['count']}}</div>
                                         </div>
-                                        
-
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
                                         </ul>
@@ -177,13 +170,13 @@
                                 @endforeach
                             </div>
                             <!-- Shop Page Navigation -->
-                            <div class="shop_page_nav d-flex flex-row">
+                            <div class="shop_page_nav d-flex flex-row" id="pagination">
                                 <div class="page_prev d-flex flex-column align-items-center justify-content-center" id="Previous">
-                                    <i class="fas fa-chevron-left"></i></div>
+                               </div>
                                 <ul class="page_nav d-flex flex-row" id="test">
                                 </ul>
                                 <div class="page_next d-flex flex-column align-items-center justify-content-center"  id="testnext">
-                                    <a href="javascript:void(0);" data-page="1"><i class="fas fa-chevron-right"></i></a></div>
+                                    </div>
                             </div>
 
                         </div>
@@ -218,7 +211,6 @@
     $checkboxes.change( function() {
     var inclusives = [];
     $checkboxes.each( function( i, elem ) {
-        // if checkbox, use value if checked
         if ( elem.checked ) {
         inclusives.push( elem.value );
         }
@@ -334,9 +326,7 @@
 
 <script src="source/user/styles/js/jquery.star-rating-svg.js"></script>
 <script src="source/user/js/pagination.js"></script>
-<script >
 
-</script>
 
 @endsection
 

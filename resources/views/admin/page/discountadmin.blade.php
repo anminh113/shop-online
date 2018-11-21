@@ -67,15 +67,19 @@
                 <div class="custom-tabs-line tabs-line-bottom left-aligned">
                     <ul class="nav" role="tablist">
                         @if (Session::has('HasSearchSaleOffId'))
-                        <li id="tab1" ><a href="{{route('discount-admin')}}" id="discount-admin" style="font-size: 20px">Thêm sản phẩm giảm
+                        <li id="tab1" ><a href="{{route('discount-admin')}}" id="discount-admin" style="font-size: 18px">Thêm sản phẩm giảm
                                 giá</a></li>
-                        <li id="tab2" class="active"><a href="#tab-bottom-left2" role="tab" data-toggle="tab" style="font-size: 20px">Các sự kiện đang giảm giá <span
+                        <li id="tab2" class="active"><a href="#tab-bottom-left2" role="tab" data-toggle="tab" style="font-size: 18px">Các sự kiện đang giảm giá <span
                                     class="badge" id="count"></span></a></li>
+                        <li id="tab3"><a href="#tab-bottom-left3" role="tab" data-toggle="tab" style="font-size: 18px">Danh sách sự kiện đang giảm giá <span
+                                            class="badge" id="count"></span></a></li>
                         @else 
-                        <li id="tab1" class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab" style="font-size: 20px">Thêm sản phẩm giảm
+                        <li id="tab1" class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab" style="font-size: 18px">Thêm sản phẩm giảm
                                 giá</a></li>
-                        <li id="tab2" ><a href="#tab-bottom-left2" role="tab" data-toggle="tab" style="font-size: 20px">Các sự kiện đang giảm giá <span
+                        <li id="tab2" ><a href="#tab-bottom-left2" role="tab" data-toggle="tab" style="font-size: 18px">Các sự kiện đang giảm giá <span
                                     class="badge" style="background-color: #00C9B8" id="count"></span></a></li>
+                        <li id="tab3" ><a href="#tab-bottom-left3" role="tab" data-toggle="tab" style="font-size: 18px">Danh sách sự kiện đang giảm giá <span
+                                            class="badge" id="count"></span></a></li>
                         @endif
                     </ul>
                 </div>
@@ -245,7 +249,7 @@
                                     </div>
                                     <div class="space10">&nbsp;</div>
                                 </div>
-                                <label>
+                                <label hidden>
                                     <div hidden>
                                         <input type="checkbox" id="product{{$item['_id']}}" name="DeleteProductDiscount[]"
                                             value="{{$item['_id']}}">
@@ -267,6 +271,62 @@
                             </div>
                             {{ csrf_field() }}
                         </form>
+                    </div>
+                    <div id="tab-bottom-left3" class="tab-pane fade ">
+                            <table class="table table-striped" >
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Phần trăm giảm giá</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="myTable">
+                                    <?php $i=1;?>
+                                    @foreach ($datatextdis['saleOffs'] as $item)
+                                        @if ($item['dateEnd'] > $time)
+                                        <tr data-toggle="modal" data-target="#accept{{$item['_id']}}">
+                                            <td><?php echo $i;?></td>
+                                            <td>{{$item['discount']}}</td>
+                                            <td><script>var dtstart = moment('{{$item['dateStart']}}').format('DD/MM/YYYY HH:mm'); document.write(dtstart);</script></td>
+                                            <td><script>var dtstart = moment('{{$item['dateEnd']}}').format('DD/MM/YYYY HH:mm'); document.write(dtstart);</script></td>
+                                        </tr>
+                                        <?php $i++;?>
+                                        <div class="modal fade" id="accept{{$item['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="exampleModalLongTitle">Cập nhật phần trăm giảm giá</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group">
+                                                            <form action="{{route('update-discount-admin')}}" method="post" id="updatedis">
+                                                                <input class="form-control" type="number"  required="required" name="DiscountNumber" min="1" value="{{$item['discount']}}"
+                                                                       max="99">
+                                                                <span class="input-group-addon">%</span>
+                                                                <input type="text" hidden name="id" value="{{$item['_id']}}">
+                                                                @method('PATCH')
+                                                                {{ csrf_field() }}
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                                                        <button type="submit" form="updatedis" class="btn btn-success">Lưu</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                        </div>
                     </div>
                  
                 </div>
@@ -295,21 +355,17 @@
             myDateStart = moment(new Date(data['saleOffs'][i]['dateStart'])).format("DD/MM/YYYY HH:mm");
             myDateEnd = moment(new Date(data['saleOffs'][i]['dateEnd'])).format("DD/MM/YYYY HH:mm");
             if (data['saleOffs'][i]['dateEnd'] > time) {
-                html += '<option value="' + data['saleOffs'][i]['_id'] + '">- ' + data['saleOffs'][i][
-                    'discount'
-                ] + '%: ' + myDateStart + ' | ' + myDateEnd + '</option>';
+                html += '<option value="' + data['saleOffs'][i]['_id'] + '">- ' + data['saleOffs'][i]['discount'] + '%: ' + myDateStart + ' | ' + myDateEnd + '</option>';
                 count++;
+
             }
         }
         $('#discount').append(html);
         $('#saleoff').append(html);
         $('#count').append(count);
-
     });
 
 </script>
-
-
 {{-- get data category where storeID --}}
 <script>
     var json_data_category = "{{$res1}}";
@@ -413,9 +469,9 @@
 
 <script>
     $.getJSON(
-        'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full',
+        'http://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh',
         function (data) {
-            var date = new Date(data['time']);
+            var date = new Date(data['formatted']);
             var day = date.getDate();
             var month = date.getMonth() + 1;
             var year = date.getFullYear();

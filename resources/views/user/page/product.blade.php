@@ -1,10 +1,11 @@
 @extends('user/master')
 @section('head')
 <link rel="stylesheet" type="text/css" href="source/user/styles/product_styles.css">
-<link rel="stylesheet" type="text/css" href="source/user/styles/product_responsive.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/product_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
+<link rel="stylesheet" type="text/css" href="source/user/styles/product_responsive.css">
+
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/lightgallery.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/star-rating-svg.css">
 

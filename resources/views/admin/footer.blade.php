@@ -35,7 +35,7 @@
 @endif	
 <footer>
     <div class="container-fluid">
-        <p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+        {{--<p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved.</p>--}}
     </div>
 </footer>
 
@@ -52,7 +52,7 @@
             showCancelButton: true,
             showLoaderOnConfirm: true,
             confirmButtonColor: '#008496',
-            cancelButtonColor: '#EE093D',
+            cancelButtonColor: '#FA5821',
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy'
         }).then((result) => {

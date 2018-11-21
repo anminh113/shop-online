@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="space20">&nbsp;</div>
                                     <div class="contact_form_text" style="padding-left: 5px;">
-                                        <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết:
+                                        <div style="color: #000;font-size: 14px;height: 150px; width:80%"> Đánh giá chi tiết:
                                             {{$item['review']}}</div>
                                         <div class="contact_form_text" style="margin-left: 10px"></div>
                                     </div>
@@ -153,7 +153,7 @@
                             </div>
                             <div class="contact_form_text" style="padding-left: 5px;">
                                 <div class="space20">&nbsp;</div>
-                                <div style="font-size: 14px; "> Đánh giá chi tiết: {{$item1['review']}}</div>
+                                <div style="font-size: 14px; height: 150px"> Đánh giá chi tiết: {{$item1['review']}}</div>
                             </div>
                             <hr>
                             @endforeach

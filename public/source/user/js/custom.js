@@ -43,7 +43,6 @@ $(document).ready(function()
 
 	setHeader();
 
-	// initCustomDropdown();
 	initPageMenu();
 	initDealsSlider();
 	initTabLines();
@@ -106,65 +105,9 @@ $(document).ready(function()
 
 	*/
 
-	// function initCustomDropdown()
-	// {
-	// 	if($('.custom_dropdown_placeholder').length && $('.custom_list').length)
-	// 	{
-	// 		var placeholder = $('.custom_dropdown_placeholder');
-	// 		var list = $('.custom_list');
-	// 	}
-
-	// 	placeholder.on('click', function (ev)
-	// 	{
-	// 		if(list.hasClass('active'))
-	// 		{
-	// 			list.removeClass('active');
-	// 		}
-	// 		else
-	// 		{
-	// 			list.addClass('active');
-	// 		}
-
-	// 		$(document).one('click', function closeForm(e)
-	// 		{
-	// 			if($(e.target).hasClass('clc'))
-	// 			{
-	// 				$(document).one('click', closeForm);
-	// 			}
-	// 			else
-	// 			{
-	// 				list.removeClass('active');
-	// 			}
-	// 		});
-
-	// 	});
-
-	// 	$('.custom_list a').on('click', function (ev)
-	// 	{
-	// 		ev.preventDefault();
-	// 		var index = $(this).parent().index();
-
-	// 		placeholder.text( $(this).text() ).css('opacity', '1');
-
-	// 		if(list.hasClass('active'))
-	// 		{
-	// 			list.removeClass('active');
-	// 		}
-	// 		else
-	// 		{
-	// 			list.addClass('active');
-	// 		}
-	// 	});
 
 
-	// 	// auto wtdhi select
-	// 	// $('select').on('change', function (e)
-	// 	// {
-	// 	// 	placeholder.text(this.value);
 
-	// 	// 	$(this).animate({width: placeholder.width() * '10' + 'px' });
-	// 	// });
-	// }
 
 	/* 
 
@@ -460,7 +403,7 @@ $(document).ready(function()
 				{
 					breakpoint:480, settings:
 					{
-						rows:1,
+						rows:8,
 						slidesToShow:1,
 						slidesToScroll:1,
 						dots:false
@@ -536,10 +479,10 @@ $(document).ready(function()
 				dots:false,
 				responsive:
 				{
-					0:{items:1},
-					575:{items:2},
-					640:{items:3},
-					768:{items:4},
+					0:{items:2},
+					575:{items:3},
+					640:{items:4},
+					768:{items:5},
 					991:{items:5}
 				}
 			});
@@ -670,7 +613,7 @@ $(document).ready(function()
 				{
 					breakpoint:480, settings:
 					{
-						rows:1,
+						rows:10,
 						slidesToShow:1,
 						slidesToScroll:1,
 						dots:false
@@ -763,7 +706,7 @@ $(document).ready(function()
 				{
 					breakpoint:575, settings:
 					{
-						rows:1,
+						rows:10,
 						slidesToShow:1,
 						slidesToScroll:1,
 						dots:false
@@ -878,11 +821,11 @@ $(document).ready(function()
 				dots:false,
 				responsive:
 				{
-					0:{items:1},
-					575:{items:2},
-					768:{items:3},
-					991:{items:4},
-					1199:{items:6}
+                    0:{items:2},
+                    575:{items:3},
+                    768:{items:3},
+                    991:{items:4},
+                    1199:{items:6}
 				}
 			});
 

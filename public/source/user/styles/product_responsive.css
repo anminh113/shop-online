@@ -380,6 +380,12 @@
 
 @media only screen and (max-width: 575px)
 {
+	.side {
+		width: 42%;
+	}
+	.middle {
+		width: 53%;
+	}
 	h2{font-size: 24px;}
 	p{font-size: 13px;}
 	.top_bar

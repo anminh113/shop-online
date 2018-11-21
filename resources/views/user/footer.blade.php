@@ -6,7 +6,7 @@
                 <div class="footer_column footer_contact">
                     <div class="logo_container">
                             <div class="logo">
-                                    <a href="index.html">
+                                    <a href="{{route('trang-chu')}}">
                                         <div class="img_logo">
                                             <img src="source/user/images/primary_transparent.png">
                                         </div>
@@ -96,7 +96,7 @@
             position: 'top',
             showCancelButton: true,
             confirmButtonColor: '#008496',
-            cancelButtonColor: '#EE093D',
+            cancelButtonColor: '#FA5821',
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy'
 
@@ -120,7 +120,7 @@
             position: 'top',
             showCancelButton: true,
             confirmButtonColor: '#008496',
-            cancelButtonColor: '#EE093D',
+            cancelButtonColor: '#FA5821',
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy'
         }).then((result) => {

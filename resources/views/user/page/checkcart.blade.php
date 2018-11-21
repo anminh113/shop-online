@@ -30,7 +30,7 @@
                                         alt=""></div>
                                 <div class="char_content">
                                     <div class="char_title">Tiêu chuẩn</div>
-                                    <div class="char_subtitle">Nhận hàng vào 1-4 thg 9 2018</div>
+                                    <div class="char_subtitle">Nhận hàng vào ngày <script>var dtstart = moment('{{$time}}').add(4, 'days').format('DD-MM-YYYY'); document.write(dtstart);</script></div>
                                     @foreach ($data['deliveryPrices'] as $item)
                                     @if($item['totalPriceMin'] <= Session::get('cart')->totalPrice && $item['totalPriceMax'] >= Session::get('cart')->totalPrice )
                                     <div class="char_title">{{$item['transportFee']}},000₫</div>
@@ -262,7 +262,7 @@
                                         <div class="order_cart_title " >
                                         <div class="order_cart_title order_cart_title_text"  style="margin-left: 20px">{{$item['paymentMethodName']}}</div>
                                         <label for="rdo-{{$item['_id']}}" class="btn-radio">
-                                        <input type="radio" required="required" id="rdo-{{$item['_id']}}" form="deliveryAddress" name="paymentMethod" value="{{$item['_id']}}">
+                                        <input type="radio" required id="rdo-{{$item['_id']}}" form="deliveryAddress" name="paymentMethod" value="{{$item['_id']}}">
                                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                                 <circle cx="10" cy="10" r="9"></circle>
                                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z"

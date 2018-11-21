@@ -10,7 +10,7 @@ use GuzzleHttp\Promise;
 use GuzzleHttp\Pool;
 use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Exception\RequestException;
-
+use Illuminate\Support\Collection ;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -99,9 +99,10 @@ class AppServiceProvider extends ServiceProvider
                         $data1['products'][$i]['image']= $datatext[$i]['imageList'][0]['imageURL'];
                     }
                 }
+//                $data2 = shuffle($data1);
+//                dd($data2);
                 $view->with(['data1'=>$data1]);
             }catch (\GuzzleHttp\Exception\ClientException $e) {
-                // return $e->getResponse()->getStatusCode();
                 $view->with(['data'=>'data1']);
             }
            

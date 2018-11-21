@@ -1761,6 +1761,7 @@ select option
 	border-bottom: 1px solid #eee;
   }
   .product .product-image {
+  	    padding: 5px 10px 5px 5px;
 	text-align: center;
   }
   .product .product-image img {

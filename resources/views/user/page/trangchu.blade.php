@@ -15,7 +15,7 @@
 
 <!-- Banner -->
 <div class="banner">
-    @foreach ($data['products'] as $item)
+    @foreach (array_reverse($data['products']) as $item)
     @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
     <div class="banner_background" style="background: #C9D6FF; background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF); background: linear-gradient(to right, #E2E2E2, #C9D6FF); "></div>
     <div class="container fill_height">
@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-    {{-- @continue --}}
+
     @break
     @endif
     @endforeach
@@ -63,9 +63,13 @@
             <div class="col">
                 <div class="tabbed_container">
                     <div class="tabs clearfix tabs-right">
-                        <div class="new_arrivals_title">Sản phẩm bán chạy</div>
+                        <div class="new_arrivals_title">Sản phẩm bán chạy
+
+
+                        </div>
                         <ul class="clearfix">
-                            <li class="active"><a href="#" style="color:#000">Xem thêm</a> </li>
+                            <li class="active"><a href="{{ route('danhsach-sanpham-custom','hot' )}}" style="color:#000" >Xem thêm</a> </li>
+
                         </ul>
                         <div class="tabs_line"><span></span></div>
                     </div>
@@ -76,7 +80,6 @@
                                 <div class="arrivals_slider slider">
                                         <?php $i = 0?>
                                     @foreach($resultproductPurchase['datatextproductPurchase'] as $item)
-                                 
                                     <!-- Slider Item -->
                                     <div class="arrivals_slider_item" style="height:350px; float: left">
                                         <div class="border_active"></div>
@@ -117,13 +120,11 @@
                                             </ul>
                                         </div>
                                     </div>
-
-                                    <!-- Slider Item -->
                                     <?php $i = $i + 1?>
+                                        @if($i>9)
+                                            @break
+                                        @endif
                                     @endforeach
-                               
-
-
                                 </div>
                                 <div class="arrivals_slider_dots_cover"></div>
                             </div>
@@ -155,7 +156,6 @@
                 <div class="popular_categories_slider_container">
                     <div class="owl-carousel owl-theme popular_categories_slider">
                         @foreach($dataproducttypes['productTypes'] as $item)
-                        <!-- Popular Categories Item -->
                         <div class="owl-item" >
                             <div class="popular_category d-flex flex-column align-items-center justify-content-center">
                                 <div class="popular_category_image"><img src="{{$item['imageURL']}}" width="50" height="60"  onclick="window.location='{{route('post-producttype-danhsach-sanpham',$item['_id'])}}';"></div>
@@ -181,7 +181,7 @@
                     <div class="deals_slider_container">
                         <!-- Deals Slider -->
                         <div class="owl-carousel owl-theme deals_slider">
-                            @foreach ($data['products'] as $item)
+                            @foreach (array_reverse($data['products']) as $item)
                             @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
                             <!-- Deals Item -->
                             <div class="owl-item deals_item">
@@ -242,10 +242,10 @@
                 <!-- Featured -->
                 <div class="featured">
                     <div class="tabbed_container">
-                        <div class="tabs ">
-                            <ul class="clearfix">
-                                <li class="active">Đang giảm giá</li>
-                              
+                        <div class="tabs clearfix tabs-right ">
+                            <ul class="clearfix " >
+                                {{--<li class="active" >Đang giảm giá</li>--}}
+                                <li class="active"><a href="{{ route('danhsach-sanpham-custom','sale' )}}" style="color:#000" >Xem thêm</a> </li>
                             </ul> 
                             <div class="tabs_line"><span></span></div>
                         </div>
@@ -254,45 +254,46 @@
                         <div class="product_panel panel active">
                             <div class="featured_slider slider">
                                 <!-- Slider Item -->
-                                @foreach ($data['products'] as $item )                              
-                                @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
-                                <!-- Slider Item -->
-                                <div class="featured_slider_item">
-                                    <div class="border_active"></div>
-                                    <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                            @foreach ($result['datatext'] as $da )
-                                            @foreach ($da['imageList'] as $da1)
-                                            @if($item['_id'] == $da['productId'])
-                                            {{-- @foreach($da1['imageList'] as $da2) --}}
-                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
-                                            @break
-                                            {{-- @endforeach --}}
-                                            @endif
-                                            @endforeach
-                                            @endforeach
-                                        </div>
-                                        <div class="product_content">
-                                            <div class="product_price discount">{{number_format($item['price'] -
-                                                ($item['price'] * $item['saleOff']['discount'])/100)}},000₫<span style="text-decoration:line-through">
-                                                    {{number_format($item['price'])}},000₫</span></div>
-                                            <div class="product_name">
-                                                <div><a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a></div>
+                                <?php $i = 1?>
+                                @foreach (array_reverse($data['products']) as $item )
+                                    @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time)
+                                        <div class="featured_slider_item">
+                                        <div class="border_active"></div>
+                                        <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center">
+                                                @foreach ($result['datatext'] as $da )
+                                                @foreach ($da['imageList'] as $da1)
+                                                @if($item['_id'] == $da['productId'])
+                                                {{-- @foreach($da1['imageList'] as $da2) --}}
+                                                <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                @break
+                                                {{-- @endforeach --}}
+                                                @endif
+                                                @endforeach
+                                                @endforeach
                                             </div>
-                                            <div class="product_extras">
-
-                                                <a href="{{route('gio-hang',$item['_id'])}}"><button class="product_cart_button">Thêm
-                                                        vào giỏ </button></a>
+                                            <div class="product_content">
+                                                <div class="product_price discount">{{number_format($item['price'] -
+                                                    ($item['price'] * $item['saleOff']['discount'])/100)}},000₫<span style="text-decoration:line-through">
+                                                        {{number_format($item['price'])}},000₫</span></div>
+                                                <div class="product_name">
+                                                    <div><a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a></div>
+                                                </div>
+                                                <div class="product_extras">
+                                                    <a href="{{route('gio-hang',$item['_id'])}}"><button class="product_cart_button">Thêm
+                                                            vào giỏ </button></a>
+                                                </div>
                                             </div>
+                                            <ul class="product_marks">
+                                                <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
+                                                <li class="product_mark product_new">new</li>
+                                            </ul>
                                         </div>
-                                        <ul class="product_marks">
-                                            <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
-                                            <li class="product_mark product_new">new</li>
-                                        </ul>
                                     </div>
-                                </div>
-                                @endif
-                               
+                                    @endif
+                                    @if($i>8)
+                                        @break
+                                    @endif
                                 @endforeach
 
                             </div>
@@ -316,7 +317,7 @@
                     <div class="tabs clearfix tabs-right">
                         <div class="new_arrivals_title">Gợi ý sản phẩm cho bạn</div>
                         <ul class="clearfix">
-                                <li class="active"><a href="#" style="color:#000">Xem thêm</a> </li>
+                                <li class="active" ><a href="{{ route('danhsach-sanpham' )}}" style="color:#000">Xem thêm</a> </li>
                         </ul>
                         <div class="tabs_line"><span></span></div>
                     </div>
@@ -400,7 +401,7 @@
                                 
                             </div>
                             @endif
-                                @if($i>11)
+                                @if($i>12)
                                 @break
                                 @endif
                                 <?php $j = $j + 1?>

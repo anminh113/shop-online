@@ -267,11 +267,13 @@
                             </div>
 
                             <!-- Shop Page Navigation -->
-                                <div class="shop_page_nav d-flex flex-row">
-                                    <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+                                <div class="shop_page_nav d-flex flex-row" id="pagination">
+                                    <div class="page_prev d-flex flex-column align-items-center justify-content-center" id="Previous">
+                                    </div>
                                     <ul class="page_nav d-flex flex-row" id="test">
                                     </ul>
-                                    <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+                                    <div class="page_next d-flex flex-column align-items-center justify-content-center"  id="testnext">
+                                    </div>
                                 </div>
                         </div>
 
@@ -279,7 +281,7 @@
                 </div>
             </div>
         </div>
-        <div id="hoso" class="tabcontent" style="display:none">
+            <div id="hoso" class="tabcontent" style="display:none">
             <div class="characteristics">
                 <div class="row">
                     <!-- Char. Item -->
@@ -377,7 +379,7 @@
                                             </div>
                                             <div class="middle">
                                                 <div class="bar-container">
-                                                    <div class="bar-bad" style=" width: {{number_format(($countstar_1 / $datareviewshop['count'])*100 , 0, '', '')}}%;"></div>
+                                                    <div class="bar-bad" style=" width: {{number_format(($countstar_3 / $datareviewshop['count'])*100 , 0, '', '')}}%;"></div>
                                                 </div>
                                             </div>
                                             <div class="side right">

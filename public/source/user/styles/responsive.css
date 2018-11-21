@@ -121,7 +121,9 @@
 
 @media only screen and (max-width: 1024px)
 {
-	
+	.footer_social{
+		width: 260px;
+	}
 }
 
 /************
@@ -292,7 +294,7 @@
 
 @media only screen and (max-width: 880px)
 {
-	
+
 }
 
 /************
@@ -301,7 +303,9 @@
 
 @media only screen and (max-width: 768px)
 {
-	
+	.img_logo{
+		width: 130px;
+	}
 }
 
 /************
@@ -310,6 +314,9 @@
 
 @media only screen and (max-width: 767px)
 {
+	.img_logo{
+		width: 130px;
+	}
 	.header_search
 	{
 		display: none;
@@ -383,6 +390,9 @@
 {
 	h2{font-size: 24px;}
 	p{font-size: 13px;}
+	.img_logo{
+		width: 130px;
+	}
 	.top_bar
 	{
 		display: none;
@@ -788,7 +798,15 @@
 
 @media only screen and (max-width: 539px)
 {
-	
+	.arrivals_slider_item{
+		height: 300px;
+	}
+	.bestsellers_slider .slick-slide > div{
+		margin-bottom: 30px;
+	}
+	.img_logo{
+		width: 130px;
+	}
 }
 
 /************

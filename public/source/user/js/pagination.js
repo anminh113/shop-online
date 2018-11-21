@@ -6,7 +6,7 @@ var $container = $('.product_grid').isotope({ itemSelector: itemSelector });
 
 //Ascending order
 var responsiveIsotope = [ [480, 4] , [720, 6] ];
-var itemsPerPageDefault = 2;
+var itemsPerPageDefault = 16;
 var itemsPerPage = defineItemsPerPage();
 var currentNumberPages = 1;
 var currentPage = 1;
@@ -118,7 +118,7 @@ function setPagination() {
 
                 var j = 1;
                 var test = 0;
-                var $pagernext = $('<a  href="javascript:void(0);" '+pageAttribute+'="'+2+'"><i class="fas fa-chevron-right"></i></a>') ;
+                var $pagernext = $('<a  href="javascript:void(0);" '+pageAttribute+'="'+(j+1)+'"><i class="fas fa-chevron-right"></i></a>') ;
                 $pagernext.click(function(){
                     if(test < currentNumberPages){
                         test +=(j);
@@ -127,9 +127,7 @@ function setPagination() {
                     }
                 });
                 $( '#testnext' ).html($pagernext);
-
-
-                var $pagerPrevious = $('<a  href="javascript:void(0);" '+pageAttribute+'="'+2+'"><i class="fas fa-chevron-left"></i></a>') ;
+                var $pagerPrevious = $('<a  href="javascript:void(0);" '+pageAttribute+'="'+(j+1)+'"><i class="fas fa-chevron-left"></i></a>') ;
                 $pagerPrevious.click(function(){
                     if(test > 1){
                         test -=(j);
@@ -139,7 +137,8 @@ function setPagination() {
                 });
                 $( '#Previous' ).html($pagerPrevious);
             }
-
+        }else{
+            $( '#pagination' ).html('');
         }
     }();
 }

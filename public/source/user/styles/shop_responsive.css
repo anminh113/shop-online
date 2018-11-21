@@ -22,7 +22,8 @@
 13. 400px
 
 ******************************/
-@media only screen and (max-width: 1920px) {
+@media only screen and (max-width: 1920px)
+{
 	 .home_shop {
         width: 30%;
         margin-left: 5%;
@@ -33,7 +34,8 @@
 1. 1600px
 ************/
 
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: 1600px)
+{
 	 .home_shop {
         width: 30%;
         margin-left: 5%;
@@ -45,7 +47,8 @@
 2. 1440px
 ************/
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1440px)
+{
 	 .home_shop {
         width: 30%;
         margin-left: 5%;
@@ -57,7 +60,8 @@
 3. 1380px
 ************/
 
-@media only screen and (max-width: 1380px) {
+@media only screen and (max-width: 1380px)
+{
 	 .home_shop {
         width: 30%;
         margin-left: 5%;
@@ -69,7 +73,8 @@
 3. 1280px
 ************/
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1280px)
+{
 	 .home_shop {
         width: 30%;
         margin-left: 5%;
@@ -81,7 +86,8 @@
 4. 1199px
 ************/
 
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 1199px)
+{
     .home_shop {
         width: 30%;
         margin-left: 5%;
@@ -109,7 +115,8 @@
 4. 1100px
 ************/
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1100px)
+{
 	 .home_shop {
         width: 30%;
         margin-left: 5%;
@@ -121,10 +128,14 @@
 5. 1024px
 ************/
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1024px)
+{
 	 .home_shop {
         width: 40%;
         margin-left: 5%;
+    }
+    .text2 {
+        width: 25px !important;
     }
 }
 
@@ -133,7 +144,8 @@
 6. 991px
 ************/
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991px)
+{
 	.home_shop {
         width: 50%;
         margin-left: 5%;
@@ -239,7 +251,8 @@
 7. 959px
 ************/
 
-@media only screen and (max-width: 959px) {
+@media only screen and (max-width: 959px)
+{
 	.home_shop {
         width: 50%;
         margin-left: 5%;
@@ -251,7 +264,8 @@
 8. 880px
 ************/
 
-@media only screen and (max-width: 880px) {
+@media only screen and (max-width: 880px)
+{
 	.home_shop {
         width: 50%;
         margin-left: 5%;
@@ -263,11 +277,13 @@
 9. 768px
 ************/
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px)
+{
 	.home_shop {
         width: 50%;
         margin-left: 5%;
     }
+
 }
 
 
@@ -275,7 +291,8 @@
 10. 767px
 ************/
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px)
+{
 	.home_shop {
         width: 70%;
         margin-left: 5%;
@@ -318,7 +335,11 @@
 11. 575px
 ************/
 
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 575px)
+{
+    .text2 {
+        width: 25px !important;
+    }
 	.home_shop {
         width: 65%;margin-left: 5%;
     }
@@ -466,6 +487,10 @@
         width: 30px;
     }
     .page_nav li {
+        width: 30px;
+        height: 40px;
+    }
+    .page_nav li a {
         width: 30px;
         height: 40px;
     }

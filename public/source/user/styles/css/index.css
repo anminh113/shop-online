@@ -127,3 +127,6 @@ em{
   animation-name: reveal;
   animation-direction: reverse;
 }
+.form-control .error{
+    border: 1px solid #FA1111;
+}

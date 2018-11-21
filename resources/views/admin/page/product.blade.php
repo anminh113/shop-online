@@ -18,17 +18,28 @@
             <div class="panel">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-lg-2 col-md-4">
-                            <button type="button" class="btn btn-outline- btn-save" onclick="window.location='{{route('them-chi-tiet-san-pham-admin',$store)}}';">Thêm sản phẩm</button>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="panel-title">
-                                <select class="form-control" id="category">
-                                        <option value="">- Chọn danh mục -</option>
-                                </select>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-3 col-md-6">
+                                <h4>Thêm sản phẩm:</h4>
+                            </div>
+                            <div class="col-lg-3 col-md-4">
+                                <button type="button" class="btn btn-outline- btn-save" onclick="window.location='{{route('them-chi-tiet-san-pham-admin',$store)}}';">Thêm sản phẩm</button>
                             </div>
                         </div>
-                        <form action="{{route('post-san-pham-admin')}}" method="POST">
+                        <div class="space10">&nbsp;<hr></div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-3 col-md-6">
+                                <h4>Tìm kiếm:</h4>
+                            </div>
+                            <div class="col-lg-3 col-md-4">
+                                <div class="panel-title">
+                                    <select class="form-control" id="category">
+                                            <option value="">- Chọn danh mục -</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <form action="{{route('post-san-pham-admin')}}" method="POST">
                             <div class="col-lg-4 col-md-4">
                                 <div class="panel-title">
                                     <select class="form-control" id="producttype">
@@ -40,13 +51,14 @@
                                 <button type="submit" class="btn btn-outline- btn-change" >Tìm kiếm</button>
                             </div>
                             {{ csrf_field() }}
-                        </form> 
+                        </form>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="product_grid_border"></div>
                     <div class="row">
-                        @foreach ($data['products'] as $item )
+                        @foreach (array_reverse($data['products']) as $item )
                             <div class="col-lg-3 col-md-6">
                                 <div class="product-type" onclick="window.location='{{route('chi-tiet-san-pham-admin',$item['_id'])}}';">
                                     <div class="product_border"></div>
@@ -63,7 +75,7 @@
                                         @endforeach
                                     </div>
                                     <div class="product_content">
-                                    <div class="product_price">{{$item['price']}}.000₫</div>
+                                    <div class="product_price">{{number_format($item['price'])}},000₫</div>
                                         <div class="product_name">
                                         <div style="width: 95%; margin-left: 2.5%"><a href="#" tabindex="0">{{$item['productName']}}</a></div>
                                         </div>

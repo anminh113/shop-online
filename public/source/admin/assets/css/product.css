@@ -83,7 +83,9 @@
 .char_icon {
     margin-right: 24px;
 }
-
+.form-control.error{
+    border: 1px solid #FA1111;
+}
 .char_content {
     transform: translate(-1px, 3px);
 }

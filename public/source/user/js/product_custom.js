@@ -241,8 +241,8 @@ $(document).ready(function()
 				dots:false,
 				responsive:
 				{
-					0:{items:1},
-					575:{items:2},
+					0:{items:2},
+					575:{items:3},
 					768:{items:3},
 					991:{items:4},
 					1199:{items:6}

@@ -13,7 +13,7 @@
                 <div class="viewed_slider_container">
                     <!-- Recently Viewed Slider -->
                     <div class="owl-carousel owl-theme viewed_slider">
-                            <?php $i = 1?>
+                        <?php $i = 1; shuffle($data1['products']);?>
                         @foreach ($data1['products'] as $item)
                         <?php $i = $i + 1?>
                         <div class="owl-item">

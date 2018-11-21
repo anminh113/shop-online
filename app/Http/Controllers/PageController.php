@@ -39,9 +39,10 @@ class PageController extends Controller
     public function getIndex()
     {
         $client1 = new \GuzzleHttp\Client();
-        $restime = $client1->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+        
+        $restime = $client1->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
         $datatime = json_decode($restime->getBody()->getContents(), true);
-        $todaytime = new DateTime($datatime['time']);
+        $todaytime = new DateTime($datatime['formatted']);
         $todaytime->setTimezone(new DateTimeZone('UTC'));
         $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
@@ -81,7 +82,6 @@ class PageController extends Controller
         $result = compact('datatext');
         $resultdatareview_guss = compact('datareview_guss');
         array_push($data, $datareview_guss);
-
         for ($i = 0; $i < count($resultdatareview_guss['datareview_guss']); $i++) {
             for ($j = 0; $j < count($resultdatareview_guss['datareview_guss'][$i]['reviewProducts']); $j++) {
                 $countstar_guss[] = $resultdatareview_guss['datareview_guss'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar'];
@@ -187,9 +187,9 @@ class PageController extends Controller
     public function getAddToCart(Request $req, $id)
     {
         $client = new \GuzzleHttp\Client();
-        $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+        $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
         $datatime = json_decode($restime->getBody()->getContents(), true);
-        $todaytime = new DateTime($datatime['time']);
+        $todaytime = new DateTime($datatime['formatted']);
         $todaytime->setTimezone(new DateTimeZone('UTC'));
         $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
@@ -199,7 +199,7 @@ class PageController extends Controller
         $cart->add($id, 1, $time);
         // $cart->add($data[0]['product'], $id,1, $datatext[0]['imageList'][0]['imageURL'], $time);
         $req->session()->put('cart', $cart);
-        return redirect()->back();
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm vào giỏ']);
     }
 
     public function getDelToCart($id)
@@ -209,7 +209,7 @@ class PageController extends Controller
         $cart->removeItem($id);
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
-            return redirect()->back();
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã xóa khỏi giỏ']);
         } else {
             Session::forget('cart');
             return redirect('productlist');
@@ -224,7 +224,7 @@ class PageController extends Controller
         $cart->reduceByOne($id);
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
-            return redirect()->back();
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã xóa khỏi giỏ']);
         } else {
             Session::forget('cart');
             return redirect('productlist');
@@ -243,12 +243,11 @@ class PageController extends Controller
         //get thong tin san pham
         $client = new \GuzzleHttp\Client();
 
-        $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+        $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
         $datatime = json_decode($restime->getBody()->getContents(), true);
-        $todaytime = new DateTime($datatime['time']);
+        $todaytime = new DateTime($datatime['formatted']);
         $todaytime->setTimezone(new DateTimeZone('UTC'));
         $timeend = $todaytime->format('Y-m-d\TH:i:s.u\Z');
-
 
         $res = $client->request('GET', PageController::getUrl('products/' . $req->id . ''));
         $data[] = json_decode($res->getBody()->getContents(), true);
@@ -315,9 +314,9 @@ class PageController extends Controller
     {
         //get json san pham theo gian hang
         $client1 = new \GuzzleHttp\Client();
-        $restime = $client1->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+        $restime = $client1->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
         $datatime = json_decode($restime->getBody()->getContents(), true);
-        $todaytime = new DateTime($datatime['time']);
+        $todaytime = new DateTime($datatime['formatted']);
         $todaytime->setTimezone(new DateTimeZone('UTC'));
         $time12 = $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
@@ -349,7 +348,6 @@ class PageController extends Controller
         $result = compact('datatext');
         $resultdatareview = compact('datareview');
         array_push($data, $datareview);
-
 
         for ($i = 0; $i < count($data['0']); $i++) {
             if (!empty($data['0'][$i])) {
@@ -404,6 +402,180 @@ class PageController extends Controller
         return view('user/page.productlist', compact('datajson1', 'data', 'result', 'result1', 'data4', 'resultPrice', 'time12', 'resultdatareview', 'countstar_5', 'countstar_4', 'countstar_3', 'countstar_2', 'countstar_1'));
     }
 
+    public function getProductListCustom(Request $req)
+    {
+        //get json san pham theo gian hang
+        $client1 = new \GuzzleHttp\Client();
+        $restime = $client1->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
+        $datatime = json_decode($restime->getBody()->getContents(), true);
+        $todaytime = new DateTime($datatime['formatted']);
+        $todaytime->setTimezone(new DateTimeZone('UTC'));
+        $time12 = $todaytime->format('Y-m-d\TH:i:s.u\Z');
+        if($req->id == "sale"){
+            $styleSearch = array(
+                "style" =>   'sale',
+            );
+
+            $datat = array();
+            $res = $client1->request('GET', PageController::getUrl('products'));
+            $data = json_decode($res->getBody()->getContents(), true);
+            for ($i = 0; $i < count($data['products']); $i++) {
+                if (!empty($data['products'][$i]['saleOff'])) {
+                    $datat[] = $data['products'][$i];
+                }
+            }
+            $countstar_5 = 0;
+            $countstar_4 = 0;
+            $countstar_3 = 0;
+            $countstar_2 = 0;
+            $countstar_1 = 0;
+            $datareview = array();
+            $datatext = array();
+            $countstar = array();
+
+            for ($i = 0; $i < count($data['products']); $i++) {
+                $data2 = $data['products'][$i]['_id'];
+                $res2 = $client1->request('GET', PageController::getUrl('productimages/product/' . $data2 . ''));
+                $datatext[] = json_decode($res2->getBody()->getContents(), true);
+                $res3 = $client1->request('GET', PageController::getUrl('reviewProducts/product/' . $data2 . ''));
+                $datareview[] = json_decode($res3->getBody()->getContents(), true);
+            }
+            $result = compact('datatext');
+            $resultdatareview = compact('datareview');
+            array_push($data, $datareview);
+
+            for ($i = 0; $i < count($data['0']); $i++) {
+                if (!empty($data['0'][$i])) {
+                    $countstar_5 = 0;
+                    $countstar_4 = 0;
+                    $countstar_3 = 0;
+                    $countstar_2 = 0;
+                    $countstar_1 = 0;
+                    $countstar = array();
+                    for ($j = 0; $j < count($data['0'][$i]['reviewProducts']); $j++) {
+                        $IDreview[] = $data['0'][$i]['reviewProducts'][$j]['product']['_id'];
+                        $countstar[] = $data['0'][$i]['reviewProducts'][$j]['ratingStar']['ratingStar'];
+                        switch ($countstar[$j]) {
+                            case "5":
+                                $countstar_5++;
+                                break;
+                            case "4":
+                                $countstar_4++;
+                                break;
+                            case "3":
+                                $countstar_3++;
+                                break;
+                            case "2":
+                                $countstar_2++;
+                                break;
+                            case "1":
+                                $countstar_1++;
+                                break;
+                        }
+                        if ($j == (count($data['0'][$i]['reviewProducts']) - 1)) {
+                            $text12 = number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1) / ($countstar_5 + $countstar_4 + $countstar_3 + $countstar_2 + $countstar_1), 1, '.', '');
+                            $datajson1['countsar'][] = array(
+                                "id" => array_pop($IDreview),
+                                "value" => ($text12)
+                            );
+                        }
+                    }
+                }
+            }
+
+            $res3 = $client1->request('GET', PageController::getUrl('categories'));
+            $data3 = json_decode($res3->getBody()->getContents(), true);
+            $data4 = $data3['categories'];
+            for ($i = 0; $i < count($data3['categories']); $i++) {
+                $res1 = $client1->request('GET', PageController::getUrl('producttypes/category/' . $data3['categories'][$i]['_id'] . ''));
+                $data1[] = json_decode($res1->getBody()->getContents(), true);
+            }
+            $result1 = compact('data1');
+            return view('user/page.searchproductlist', compact('datajson1', 'data','styleSearch', 'result', 'result1', 'data4', 'resultPrice', 'time12', 'resultdatareview', 'countstar_5', 'countstar_4', 'countstar_3', 'countstar_2', 'countstar_1'));
+
+        }
+        if($req->id == "hot"){
+            $styleSearch = array(
+                "style" =>   'hot',
+            );
+            $res = $client1->request('GET', PageController::getUrl('orderItems/productPurchase'));
+            $dataproductPurchase = json_decode($res->getBody()->getContents(), true);
+            for ($i = 0; $i < count($dataproductPurchase['productPurchases']); $i++) {
+                $dataproductPurchase1 = $dataproductPurchase['productPurchases'][$i]['_id'];
+                try {
+                    $res4 = $client1->request('GET', PageController::getUrl('products/' . $dataproductPurchase1 . ''));
+                    $datatextproductPurchase[] = json_decode($res4->getBody()->getContents(), true);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    continue;
+                }
+            }
+            $countstar_5 = 0;
+            $countstar_4 = 0;
+            $countstar_3 = 0;
+            $countstar_2 = 0;
+            $countstar_1 = 0;
+            for ($i = 0; $i < count($datatextproductPurchase); $i++) {
+                $res2 = $client1->request('GET', PageController::getUrl('productimages/product/' . $datatextproductPurchase[$i]['product']['_id'] . ''));
+                $datatext = json_decode($res2->getBody()->getContents(), true);
+                $datatextproductPurchase[$i]['product']['img'] = $datatext['imageList'][0]['imageURL'];
+                $res3 = $client1->request('GET', PageController::getUrl('reviewProducts/product/' . $datatextproductPurchase[$i]['product']['_id'] . ''));
+                $datareview = json_decode($res3->getBody()->getContents(), true);
+                $datatextproductPurchase[$i]['product']['datareview'] =  $datareview;
+            }
+//            dd($datatextproductPurchase);
+
+            for ($i = 0; $i < count($datatextproductPurchase); $i++) {
+                if ($datatextproductPurchase[$i]['product']['datareview']['count'] != 0) {
+                    $countstar_5 = 0;
+                    $countstar_4 = 0;
+                    $countstar_3 = 0;
+                    $countstar_2 = 0;
+                    $countstar_1 = 0;
+                    $countstar = array();
+                    for ($j = 0; $j < count($datatextproductPurchase[$i]['product']['datareview']['reviewProducts']); $j++) {
+                        $IDreview[] = $datatextproductPurchase[$i]['product']['_id'];
+                        $countstar[] = $datatextproductPurchase[$i]['product']['datareview']['reviewProducts'][$j]['ratingStar']['ratingStar'];
+                        switch ($countstar[$j]) {
+                            case "5":
+                                $countstar_5++;
+                                break;
+                            case "4":
+                                $countstar_4++;
+                                break;
+                            case "3":
+                                $countstar_3++;
+                                break;
+                            case "2":
+                                $countstar_2++;
+                                break;
+                            case "1":
+                                $countstar_1++;
+                                break;
+                        }
+                        if ($j == (count($datatextproductPurchase[$i]['product']['datareview']['reviewProducts']) - 1)) {
+                            $text12 = number_format((5 * $countstar_5 + 4 * $countstar_4 + 3 * $countstar_3 + 2 * $countstar_2 + 1 * $countstar_1) / ($countstar_5 + $countstar_4 + $countstar_3 + $countstar_2 + $countstar_1), 1, '.', '');
+                            $datajson1['countsar'][] = array(
+                                "id" => array_pop($IDreview),
+                                "value" => ($text12)
+                            );
+                        }
+                    }
+                }
+            }
+            $res3 = $client1->request('GET', PageController::getUrl('categories'));
+            $data3 = json_decode($res3->getBody()->getContents(), true);
+            $data4 = $data3['categories'];
+            for ($i = 0; $i < count($data3['categories']); $i++) {
+                $res1 = $client1->request('GET', PageController::getUrl('producttypes/category/' . $data3['categories'][$i]['_id'] . ''));
+                $data1[] = json_decode($res1->getBody()->getContents(), true);
+            }
+            $result1 = compact('data1');
+            return view('user/page.searchproductlist', compact('datajson1', 'data','styleSearch','datatextproductPurchase', 'result', 'result1', 'data4', 'resultPrice', 'time12', 'resultdatareview', 'countstar_5', 'countstar_4', 'countstar_3', 'countstar_2', 'countstar_1'));
+
+        }
+
+    }
+
     public function getRegister()
     {
         return view('user/page.register');
@@ -419,9 +591,9 @@ class PageController extends Controller
     {
         //get json san pham theo gian hang
         $client1 = new \GuzzleHttp\Client();
-        $restime = $client1->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+        $restime = $client1->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
         $datatime = json_decode($restime->getBody()->getContents(), true);
-        $todaytime = new DateTime($datatime['time']);
+        $todaytime = new DateTime($datatime['formatted']);
         $todaytime->setTimezone(new DateTimeZone('UTC'));
         $time12 = $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
@@ -558,9 +730,9 @@ class PageController extends Controller
         //get thong tin san pham
         if (Session::has('cart')) {
             $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
             $res = $client->request('GET', PageController::getUrl('deliveryprices'));
@@ -579,9 +751,9 @@ class PageController extends Controller
     {
         if (Session::has('Idaddress')) {
             $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
             $res = $client->request('GET', PageController::getUrl('deliveryprices'));
@@ -606,9 +778,9 @@ class PageController extends Controller
         }
         if (Session::has('keyuser')) {
             $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
             $res = $client->request('GET', PageController::getUrl('deliveryprices'));
@@ -624,7 +796,7 @@ class PageController extends Controller
 //            dd($dataaddress);
             return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataPaymentMethods'));
         } else {
-            return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập', 'message' => ' ']);
+            return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập để sử dụng chức năng', 'message' => ' ']);
         }
 
     }
@@ -634,9 +806,9 @@ class PageController extends Controller
         if (Session::has('keyuser')) {
 
             $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
             $res = $client->request('GET', PageController::getUrl('deliveryprices'));
@@ -650,7 +822,7 @@ class PageController extends Controller
             // dd($dataorder);
             return view('user/page.checkout', compact('product_cart', 'data', 'time', 'dataorder'));
         } else {
-            return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập', 'message' => ' ']);
+            return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập để sử dụng chức năng', 'message' => ' ']);
         }
     }
 
@@ -702,9 +874,9 @@ class PageController extends Controller
     {
         $client = new \GuzzleHttp\Client();
         try {
-            $restime = $client->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time12 = $todaytime->format('Y-m-d\TH:i:s.u\Z');
 
@@ -852,10 +1024,12 @@ class PageController extends Controller
                     $totalprice += ($resultProductOrder['dataProductOrder'][$i]['product']['price'] * $resultProductOrder['dataProductOrder'][$i]['quantity']);
                 }
                 //            CustomOrder
+
                 for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
                     $resOrder = $client->request('GET', PageController::getUrl('orders/' . $resultProductOrder['dataProductOrder'][$i]['orderId'] . ''));
                     $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
-                    if ($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
+
+                    if ($dataOrder[$i]['order']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
                         $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
                         $dataOrder[$i]['total'] = ($resultProductOrder['dataProductOrder'][$i]['product']['price'] * $resultProductOrder['dataProductOrder'][$i]['quantity']);
                         $resProductType = $client->request('GET', PageController::getUrl('products/' . $dataOrder[$i]['OrderItem']['product']['_id'] . ''));
@@ -866,8 +1040,11 @@ class PageController extends Controller
                         $dataOrder[$i]['OrderItem']['Category'] = $dataCategory['productType']['category'];
                     }
                 }
-
+//                array_reverse($dataOrder);
                 $resultOrder = compact('dataOrder');
+//                dd($resultOrder);
+//                $test123 =  array_reverse($resultOrder['dataOrder']);
+//                dd($test123);
                 $counttotal = array();
                 for ($i = 0; $i < count($dataOrder); $i++) {
                     for ($j = 0; $j < count($datacategorystore['store']['categories']); $j++) {
@@ -877,29 +1054,25 @@ class PageController extends Controller
                     }
                 }
                 $countcategory = array_count_values($counttotal);
-//
-//                $counttotalprice1 = array();
-//                $counttotalprice2 = array();
-//                $counttotalprice = array();
-//                for ($i = 0; $i < count($dataOrder); $i++) {
-////                    $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] = 0;
-//                    for ($j = 0; $j < count($datacategorystore['store']['categories']); $j++) {
-//
-//                        if (($j++)) {
-//                            $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] = 0;
-////                            $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] = ($dataOrder[$i]['total']);
-//                            $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']] += ($dataOrder[$i]['total']);
-//                            $counttotalprice[$dataOrder[$i]['OrderItem']['Category']['_id']] = $counttotalprice2[$dataOrder[$i]['OrderItem']['Category']['_id']];
-//                        }
-//                    }
-//                }
-////                array_push($counttotalprice,$counttotalprice2);
-////                $countcategoryprice = array_count_values(array_column($counttotalprice, 0));
-////                dd($counttotalprice);
+                $counts = array();
+                for ($i = 0; $i < count($dataOrder); $i++) {
+                    for ($j = 0; $j < count($datacategorystore['store']['categories']); $j++) {
+                        if (($j++)) {
+                            if( array_key_exists( $dataOrder[$i]['OrderItem']['Category']['_id'], $counts) === true){
+                                $counts[$dataOrder[$i]['OrderItem']['Category']['_id']] =$counts[$dataOrder[$i]['OrderItem']['Category']['_id']] + $dataOrder[$i]['total'];
+                            }else{
+                                $counts[$dataOrder[$i]['OrderItem']['Category']['_id']] = $dataOrder[$i]['total'];
+                            }
+                        }
+
+                    }
+                }
+
             }else{
                 $resultProductOrder['dataProductOrder'] = array();
                 $resultOrder['dataOrder'] = array();
                 $countcategory = array();
+                $counts = array();
             }
 //            reviewStore
             $resreviewshop = $client->request('GET', PageController::getUrl('reviewStores/store/' .$store. ''));
@@ -935,8 +1108,7 @@ class PageController extends Controller
             $datafollowStore = json_decode($resfollowStore->getBody()->getContents(), true);
 
 
-
-            return view('admin/page.trangchu',compact('resultProductOrder','countrating','datafollowStore','resultOrder','totalprice','datacategorystore','countcategory'));
+            return view('admin/page.trangchu',compact('resultProductOrder','counts','countrating','datafollowStore','resultOrder','totalprice','datacategorystore','countcategory'));
         }
         return redirect()->guest(route('login-admin'));
     }
@@ -1142,18 +1314,14 @@ class PageController extends Controller
     public function getDiscount()
     {
         if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản lý gian hàng') {
-
-
             $store = Session::get('key')[0]['store']['_id'];
             $client1 = new \GuzzleHttp\Client();
-            $restime = $client1->request('GET', 'http://api.geonames.org/timezoneJSON?formatted=true&lat=10.041791&lng=105.747099&username=cyberzone&style=full');
+            $restime = $client1->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
             $datatime = json_decode($restime->getBody()->getContents(), true);
 
-            $todaytime = new DateTime($datatime['time']);
+            $todaytime = new DateTime($datatime['formatted']);
             $todaytime->setTimezone(new DateTimeZone('UTC'));
             $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
-
-
             // dd($time);
             //get json san pham theo gian hang
 
@@ -1192,7 +1360,9 @@ class PageController extends Controller
                 $data_category = PageController::getUrl('categories');
                 $data_product_type = PageController::getUrl('producttypes/category');
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-                return view('admin/page.discountadmin', compact('time', 'data', 'result3', 'result2', 'resdis', 'result1', 'res1', 'result', 'data_category', 'data_product_type', 'data_product_type_specificationtypes'));
+                $resdis1 = $client1->request('GET', $resdis);
+                $datatextdis = json_decode($resdis1->getBody()->getContents(), true);
+                return view('admin/page.discountadmin', compact('datatextdis','time', 'data', 'result3', 'result2', 'resdis', 'result1', 'res1', 'result', 'data_category', 'data_product_type', 'data_product_type_specificationtypes'));
 
             } else if (Session::has('SearchSaleOffId')) {
                 $res = $client1->request('GET', PageController::getUrl('products/saleoff/' . Session::get('SearchSaleOffId') . ''));
@@ -1239,8 +1409,9 @@ class PageController extends Controller
                 $data_category = PageController::getUrl('categories');
                 $data_product_type = PageController::getUrl('producttypes/category');
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-
-                return view('admin/page.discountadmin', compact('time', 'data', 'result3', 'result2', 'resdis', 'result1', 'res1', 'result', 'data_category', 'data_product_type', 'data_product_type_specificationtypes'));
+                $resdis1 = $client1->request('GET', $resdis);
+                $datatextdis = json_decode($resdis1->getBody()->getContents(), true);
+                return view('admin/page.discountadmin', compact('datatextdis','time', 'data', 'result3', 'result2', 'resdis', 'result1', 'res1', 'result', 'data_category', 'data_product_type', 'data_product_type_specificationtypes'));
 
             } else {
                 $res = $client1->request('GET', PageController::getUrl('products/store/' . $store . ''));
@@ -1272,7 +1443,6 @@ class PageController extends Controller
                     }
                 }
                 $result = compact('datatext');
-
                 $datatext1 = array();
                 for ($i = 0; $i < count($data['products']); $i++) {
                     if (!empty($data['products'][$i]['saleOff']) && $data['products'][$i]['saleOff']['dateEnd'] > $time) {
@@ -1283,12 +1453,15 @@ class PageController extends Controller
                 }
                 $result3 = compact('datatext1');
                 // dd($result);
+
                 $resdis = PageController::getUrl('salesoff/store/' . $store . '');
                 $res1 = PageController::getUrl('stores/' . $store . '');
                 $data_category = PageController::getUrl('categories');
                 $data_product_type = PageController::getUrl('producttypes/category');
                 $data_product_type_specificationtypes = PageController::getUrl('specificationtypes/producttype');
-                return view('admin/page.discountadmin', compact('time', 'data', 'result3', 'result2', 'resdis', 'result1', 'res1', 'result', 'data_category', 'data_product_type', 'data_product_type_specificationtypes'));
+                $resdis1 = $client1->request('GET', $resdis);
+                $datatextdis = json_decode($resdis1->getBody()->getContents(), true);
+                return view('admin/page.discountadmin', compact('datatextdis','time', 'data', 'result3', 'result2', 'resdis', 'result1', 'res1', 'result', 'data_category', 'data_product_type', 'data_product_type_specificationtypes'));
             }
         }
         return redirect()->guest(route('login-admin', [], false));
@@ -1303,7 +1476,8 @@ class PageController extends Controller
             $store = Session::get('key')[0]['store']['_id'];
             $resOrderItems = $client1->request('GET', PageController::getUrl('orderItems/getByState/5b9a17f3e747da371818fd9d'));
             $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
-            for ($i = 0; $i < $dataOrderItems['count']; $i++) {
+
+            for ($i = 0; $i < count($dataOrderItems['orderItems']); $i++) {
                 $resProductStore = $client1->request('GET', PageController::getUrl('products/store/' . $store . ''));
                 $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
                 for ($j = 0; $j < count($dataProductStore['products']); $j++) {
@@ -1311,18 +1485,19 @@ class PageController extends Controller
                         $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
                     }
                 }
+//                dd($dataProductStore);
             }
             $resultProductOrder = compact('dataProductOrder');
             for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
                 $resOrder = $client1->request('GET', PageController::getUrl('orders/' . $resultProductOrder['dataProductOrder'][$i]['orderId'] . ''));
                 $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
-                if ($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
+                if ($dataOrder[$i]['order']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
                     $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
                 }
             }
 
-
             $resultOrder = compact('dataOrder');
+
             try {
                 $resOrderAll = $client1->request('GET', PageController::getUrl('orders/getByState/5b9a17f3e747da371818fd9d'));
                 $dataOrderAll = json_decode($resOrderAll->getBody()->getContents(), true);
@@ -1403,7 +1578,7 @@ class PageController extends Controller
             for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
                 $resOrder = $client1->request('GET', PageController::getUrl('orders/' . $resultProductOrder['dataProductOrder'][$i]['orderId'] . ''));
                 $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
-                if ($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
+                if ($dataOrder[$i]['order']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
                     $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
                 }
             }
@@ -1493,7 +1668,7 @@ class PageController extends Controller
             for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
                 $resOrder = $client1->request('GET', PageController::getUrl('orders/' . $resultProductOrder['dataProductOrder'][$i]['orderId'] . ''));
                 $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
-                if ($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
+                if ($dataOrder[$i]['order']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
                     $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
                 }
             }
@@ -1582,7 +1757,7 @@ class PageController extends Controller
             for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
                 $resOrder = $client1->request('GET', PageController::getUrl('orders/' . $resultProductOrder['dataProductOrder'][$i]['orderId'] . ''));
                 $dataOrder[] = json_decode($resOrder->getBody()->getContents(), true);
-                if ($dataOrder[$i]['product']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
+                if ($dataOrder[$i]['order']['_id'] == $resultProductOrder['dataProductOrder'][$i]['orderId']) {
                     $dataOrder[$i]['OrderItem'] = $dataProductOrder[$i];
                 }
             }
@@ -1602,11 +1777,6 @@ class PageController extends Controller
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET', PageController::getUrl('stores/' . $store . ''));
             $data = json_decode($res->getBody()->getContents(), true);
-
-            // $rescustomer = $client->request('GET',PageController::getUrl('customers/account/'.$data['store']['account']['_id'].'') );
-            // $datacustomer = json_decode($rescustomer->getBody()->getContents(), true);
-            // $data['store']['customers'] =  $datacustomer['customer'];
-
 
             $resstoreproduct = $client->request('GET', PageController::getUrl('products/store/' . $store . ''));
             $datastoreproduct = json_decode($resstoreproduct->getBody()->getContents(), true);
@@ -1639,6 +1809,7 @@ class PageController extends Controller
             } else {
                 $countrating = number_format((($countstar_2 + $countstar_1) / ($countstar_2 + $countstar_1 + $countstar_3)) * 100, 1, '.', '');
             }
+//            dd($data);
             return view('admin/page.profileshopadmin', compact('datareviewshop', 'countrating', 'timereviewshop', 'data', 'datastoreproduct'));
         }
         return redirect()->guest(route('login-admin'));
@@ -1705,7 +1876,6 @@ class PageController extends Controller
             $res = $client1->request('GET', PageController::getUrl('producttypes/category/' . $req->id . ''));
             $data1 = json_decode($res->getBody()->getContents(), true);
             // dd($data1);
-
             return view('admin/page.addproducttypeadmin', compact('data', 'data1'));
         }
         return redirect()->guest(route('login-admin', [], false));

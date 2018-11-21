@@ -73,55 +73,7 @@ $(document).ready(function() {
         }
     }
 
-    /*
 
-    3. Init Custom Dropdown
-
-    */
-
-    // function initCustomDropdown() {
-    //     if ($('.custom_dropdown_placeholder').length && $('.custom_list').length) {
-    //         var placeholder = $('.custom_dropdown_placeholder');
-    //         var list = $('.custom_list');
-    //     }
-
-    //     placeholder.on('click', function(ev) {
-    //         if (list.hasClass('active')) {
-    //             list.removeClass('active');
-    //         } else {
-    //             list.addClass('active');
-    //         }
-
-    //         $(document).one('click', function closeForm(e) {
-    //             if ($(e.target).hasClass('clc')) {
-    //                 $(document).one('click', closeForm);
-    //             } else {
-    //                 list.removeClass('active');
-    //             }
-    //         });
-
-    //     });
-
-    //     $('.custom_list a').on('click', function(ev) {
-    //         ev.preventDefault();
-    //         var index = $(this).parent().index();
-
-    //         placeholder.text($(this).text()).css('opacity', '1');
-
-    //         if (list.hasClass('active')) {
-    //             list.removeClass('active');
-    //         } else {
-    //             list.addClass('active');
-    //         }
-    //     });
-
-
-    //     // $('select').on('change', function(e) {
-    //     //     placeholder.text(this.value);
-
-    //     //     $(this).animate({ width: placeholder.width() + 'px' });
-    //     // });
-    // }
 
     /*
 
@@ -202,11 +154,11 @@ $(document).ready(function() {
                 nav: false,
                 dots: false,
                 responsive: {
-                    0: { items: 1 },
-                    575: { items: 2 },
-                    768: { items: 3 },
-                    991: { items: 4 },
-                    1199: { items: 6 }
+                    0:{items:2},
+                    575:{items:3},
+                    768:{items:3},
+                    991:{items:4},
+                    1199:{items:6}
                 }
             });
 
@@ -271,10 +223,6 @@ $(document).ready(function() {
 
 
     function initIsotope() {
-
-
-
-
         var sortingButtons = $('.shop_sorting_button');
         $('.product_grid').isotope({
             itemSelector: '.product_item',
@@ -288,7 +236,7 @@ $(document).ready(function() {
                 }
             },
             animationOptions: {
-                duration: 750,
+                duration: 100,
                 easing: 'linear',
                 queue: false
             }
@@ -298,7 +246,6 @@ $(document).ready(function() {
         sortingButtons.each(function() {
             $(this).on('click', function() {
                 $('.sorting_text').text($(this).text());
-                
                 var option = $(this).attr('data-isotope-option');
                 if (option == 'PriceIncrease') {
                     $('.product_grid').isotope('updateSortData').isotope();
@@ -316,6 +263,10 @@ $(document).ready(function() {
             });
         });
 
+
+
+
+
     }
 
 
@@ -331,19 +282,16 @@ $(document).ready(function() {
             $("#slider-range").slider({
                 range: true,
                 min: 0,
-                max: 15000,
-                values: [0, 900],
+                max: 60000,
+                values: [0, 9000],
                 slide: function(event, ui) {
                     $("#amount").val( ui.values[0]+ ",000₫ - " + ui.values[1]+",000₫");
                     $("#amount1").val( ui.values[0].toLocaleString()+ ",000₫ - " + ui.values[1].toLocaleString()+",000₫");
                 }
             });
-          
             $("#amount").val( $("#slider-range").slider("values", 0) + "000₫ - " + $("#slider-range").slider("values", 1)+"000₫");
             $("#amount1").val( $("#slider-range").slider("values", 0) + ",000₫ - " + $("#slider-range").slider("values", 1)+",000₫");
             $('.ui-slider-handle').on('mouseup', function() {
-                console.clear();
- 
                 $('.product_grid').isotope({
                     filter: function() {
                         var priceRange = $('#amount').val();
@@ -353,10 +301,9 @@ $(document).ready(function() {
                         var itemPrice = parseInt($(this).find('.product_price1').clone().children().remove().end().text().replace( '', '' ));
                         var isInHeightRange = (priceMin <= itemPrice && priceMax >= itemPrice);
                     return isInHeightRange;
-                        // return((itemPrice >= priceMin) && (itemPrice <= priceMax)) || (itemPrice >= priceMin) || (itemPrice <= priceMax)  ;
                     },
                     animationOptions: {
-                        duration: 750,
+                        duration: 100,
                         easing: 'linear',
                         queue: false
                     },

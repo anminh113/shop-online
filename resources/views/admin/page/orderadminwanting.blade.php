@@ -24,11 +24,11 @@
                         </div>
                     </div>
                     <!-- END RECENT PURCHASES -->
-                    @foreach ($resultOrder['dataOrder'] as $item)
+                    @foreach (array_reverse($resultOrder['dataOrder']) as $item)
                     <!-- PANEL WITH FOOTER -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Đơn hàng ngày: <script>var dtstart = moment('{{$item['product']['purchaseDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></h3>
+                            <h3 class="panel-title">Đơn hàng ngày: <script>var dtstart = moment('{{$item['order']['purchaseDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></h3>
                             <div class="right">
                                 <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                                 <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
@@ -38,11 +38,11 @@
                             <div class="row">
                                 <div class="col-lg-6" style="border-right:solid 1px #dadada;"> 
                                     <ul class="list-unstyled list-justify" >
-                                        <li>Tên người nhận:<span style="color:#212121">{{$item['product']['deliveryAddress']['presentation']}}</span></li>
-                                        <li>Số điện thoại:<span style="color:#212121">{{$item['product']['deliveryAddress']['phoneNumber']}}</span></li>
-                                        <li>Địa chỉ: <i style="color:#212121" > {{$item['product']['deliveryAddress']['address']}}</i><span></span></li>
+                                        <li>Tên người nhận:<span style="color:#212121">{{$item['order']['deliveryAddress']['presentation']}}</span></li>
+                                        <li>Số điện thoại:<span style="color:#212121">{{$item['order']['deliveryAddress']['phoneNumber']}}</span></li>
+                                        <li>Địa chỉ: <i style="color:#212121" > {{$item['order']['deliveryAddress']['address']}}</i><span></span></li>
                                        
-                                        <li>Thanh toán bằng hình thức:<span style="color:#212121">{{$item['product']['paymentMethod']['paymentMethodName']}}</span></li>
+                                        <li>Thanh toán bằng hình thức:<span style="color:#212121">{{$item['order']['paymentMethod']['paymentMethodName']}}</span></li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6"> 
@@ -51,7 +51,7 @@
                                         <li> <span style="padding: 10px 10px 10px 10px"><img src="{{$item['OrderItem']['product']['imageURL']}}" width="115" height="115"></span></li>
                                         <li>Giá sản phẩm:<span style="color:#212121">{{number_format(($item['OrderItem']['product']['price']))}},000₫</span></li>
                                         <li>Tạm tính ({{$item['OrderItem']['quantity']}} sản phẩm):<span style="color:#212121">{{number_format(($item['OrderItem']['product']['price'] * $item['OrderItem']['quantity']))}},000₫</span></li>
-                                        <li>Tổng cộng: <span style="color:#212121">{{number_format($item['OrderItem']['product']['price'] * $item['OrderItem']['quantity'] + $item['product']['deliveryPrice']['transportFee'])}},000₫</span></li>
+                                        <li>Tổng cộng: <span style="color:#212121">{{number_format($item['OrderItem']['product']['price'] * $item['OrderItem']['quantity'] + $item['order']['deliveryPrice']['transportFee'])}},000₫</span></li>
                                     </ul>
                                 </div>
                             </div>

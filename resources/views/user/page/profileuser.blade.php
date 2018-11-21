@@ -15,14 +15,14 @@
                 max-width: 1024px;
             }
         }
+        .form-control.error{
+            border: 1px solid #FA1111;
+        }
     </style>
 
 @endsection
 
 @section('content')
-
-
-
 
     <div class="container">
         <div class="row">
@@ -121,7 +121,7 @@
                                 <div class="space10">&nbsp;</div>
                             </div>
 
-                            @if(!empty($dataregisterstore))
+                            @if(!empty($dataregisterstore['registeredSales']))
                                 <div class="col-lg-12 col-md-12 char_col">
                                     <div class="char_item" style="height: auto">
                                         <div class="char_title_top"><b> Thông tin đăng ký gian hàng trên hệ thống </b>
@@ -422,7 +422,7 @@
                     </div>
                     <div class="modal-footer">
                         @if($orderitem['orderState']['orderStateName'] == "Đang chờ thanh toán" || $orderitem['orderState']['orderStateName'] == "Đang xử lý" && $orderitem['paymentMethod']['paymentMethodName'] != "Thanh toán trực tuyến" )
-                            <button type="submit" form="deleteOrder" class="btn btn-outline-warning btn-save">Hủy đơn hàng</button>
+                            <button type="submit" form="deleteOrder" onclick="archiveFunction()" class="btn btn-outline-warning btn-save">Hủy đơn hàng</button>
                             <form id="deleteOrder" action="{{route('post-profile-user')}}" method="POST">
                                 <input type="text" hidden name="orderId" value="{{$dataorder['orders'][$item]['_id']}}">
                                 {{ csrf_field() }}
@@ -465,6 +465,7 @@
                                    data-target="#informationuser{{$item['_id']}}">Chỉnh
                                     sửa</a>
                             </div>
+                            <hr>
                         @endforeach
                     </div>
                 </div>
@@ -486,7 +487,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('post-delivery-profile-user')}}" method="POST">
+                    <form action="{{route('post-delivery-profile-user')}}" method="POST" name="adddelivery">
                         <div class="row">
                             <div class="col-lg-6 order-lg-1 order-1">
                                 <div class="form-group">
@@ -499,7 +500,7 @@
                             <div class="col-lg-6 order-lg-2 order-4">
                                 <div class="form-group">
                                     <label for="">Tỉnh/ Thành phố</label>
-                                    <select name="tinh-thanhpho" id="tinh-thanhpho" class="form-control"
+                                    <select name="tinh-thanhpho" id="tinh-thanhpho" required="required" class="form-control"
                                             style="margin-left: 0px;"
                                             id="">
                                         <option value="">Chọn tỉnh thành</option>
@@ -515,7 +516,7 @@
                             <div class="col-lg-6 order-lg-4 order-5">
                                 <div class="form-group">
                                     <label for="">Quận/ Huyện</label>
-                                    <select name="quan-huyen" id="quan-huyen" class="form-control"
+                                    <select name="quan-huyen" id="quan-huyen" required="required" class="form-control"
                                             style="margin-left: 0px;"
                                             id="">
                                     </select>
@@ -530,7 +531,7 @@
                             <div class="col-lg-6 order-lg-6 order-6">
                                 <div class="form-group">
                                     <label>Phường/ Xã</label>
-                                    <select name="xa-phuong" id="xa-phuong" class="form-control"
+                                    <select name="xa-phuong" id="xa-phuong" required="required" class="form-control"
                                             style="margin-left: 0px;">
                                     </select>
                                 </div>
@@ -549,6 +550,16 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                $("form[name='adddelivery']").validate({
+                    errorElement: "em",
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
+            });
+        </script>
     </div>
 
     <div class="modal fade" id="informationuser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -564,7 +575,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form action="{{route('post-update-profile-user')}}" id="change" method="POST">
+                            <form action="{{route('post-update-profile-user')}}" id="change" name="change" method="POST">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="hoten">Họ Tên</label>
@@ -619,14 +630,26 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    @if(!empty(Session::get('keyuser')['account'][0]))
                     <button type="button" class="btn btn-outline-info btn-change"><a href="" data-dismiss="modal"
                                                                                      aria-label="Close"
                                                                                      data-toggle="modal"
                                                                                      data-target="#informationchangepass">Thay
                             đổi mật khẩu</a></button>
+                    @endif
                     <button type="submit" form="change" class="btn btn-outline-warning btn-save">Lưu thông tin</button>
                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
                 </div>
+                <script>
+                    $(document).ready(function() {
+                        $("form[name='change']").validate({
+                            errorElement: "em",
+                            submitHandler: function(form) {
+                                form.submit();
+                            }
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
@@ -644,8 +667,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{route('update-delivery-profile-user')}}" id="info{{$item['_id']}}"
-                              method="POST">
+                        <form action="{{route('update-delivery-profile-user')}}" id="info{{$item['_id']}}"  name="info{{$item['_id']}}" method="POST">
                             <div class="row">
                                 <div class="col-lg-6 order-lg-1 order-1">
                                     <div class="form-group">
@@ -701,7 +723,7 @@
                                 <div class="col-lg-4 order-lg-8 order-8">
                                     <!-- <div class="space15">&nbsp;</div> -->
                                     <div class="btn btn-outline-info btn-change">
-                                        <a id="delete" href="{{route('delete-delivery-profile-user',$item['_id'])}}" >Xóa địa chỉ</a></div>
+                                        <a id="delete{{$item['_id']}}" href="{{route('delete-delivery-profile-user',$item['_id'])}}" >Xóa địa chỉ</a></div>
                                     <button type="submit" form="info{{$item['_id']}}"
                                             class="btn btn-outline-warning btn-save text-right">Lưu thông tin
                                     </button>
@@ -709,6 +731,29 @@
                                     </button>
                                 </div>
                             </div>
+                            <script>
+                                $('#delete{{$item['_id']}}').click(function(e){
+                                    e.preventDefault();
+                                    var link = $(this).attr('href');
+                                    console.log(link);
+                                    swal({
+                                        title: 'Are you sure?',
+                                        text: "You won't be able to revert this!",
+                                        type: 'warning',
+                                        position: 'top',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#008496',
+                                        cancelButtonColor: '#FA5821',
+                                        confirmButtonText: 'Đồng ý',
+                                        cancelButtonText: 'Hủy'
+
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            window.location.href = link;
+                                        }
+                                    })
+                                });
+                            </script>
                             @method('PATCH')
                             {{ csrf_field() }}
                         </form>
@@ -716,7 +761,16 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            $(document).ready(function() {
+                $("form[name='info{{$item['_id']}}']").validate({
+                    errorElement: "em",
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
+            });
+        </script>
         <script>
             $(document).ready(function () {
                 load_json_data('tinh-thanhpho-user{{$item['_id']}}');
@@ -908,8 +962,6 @@
                 document.getElementById('diachi{{$item['_id']}}').value = html;
             }
         </script>
-
-
     @endforeach
 
     <div class="modal fade" id="informationchangepass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -923,7 +975,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('update-password-profile-user')}}" id="changepass" method="POST">
+                    <form action="{{route('update-password-profile-user')}}" id="changepass" method="POST" name="changepass">
                         <div class="row">
                             <div class="col-lg-12 order-lg-1 order-1">
                                 <div class="form-group">
@@ -957,6 +1009,16 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                $("form[name='changepass']").validate({
+                 errorElement: "em",
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
+            });
+        </script>
     </div>
 
 @endsection

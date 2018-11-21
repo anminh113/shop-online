@@ -230,7 +230,9 @@
                                 </div>
                                 <div class="order-item">
                                     <div class="row">
-                                        <?php $i = 1?>
+                                        <?php $i = 1;
+                                        shuffle($dataProductStore[$key]['products'] );
+                                        ?>
                                         @foreach ($dataProductStore[$key]['products'] as $key1 => $da)
                                             <?php $i = $i + 1?>
                                             <div class="col-lg-3">

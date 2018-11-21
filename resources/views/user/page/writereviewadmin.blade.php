@@ -6,7 +6,11 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/profileshop.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
-
+<style>
+    .text_field.contact_form_message.error{
+        border: 1px solid #FA1111;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -44,7 +48,7 @@
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
-                    <form id="fb-form" action="{{route('post-write-review-shop')}}" method="POST">
+                    <form id="fb-form" action="{{route('post-write-review-shop')}}" method="POST" name="review-shop-product">
                         <input type="text" hidden name="orderitemId" value="{{$OrderItemId}}">
                         <div class="row">
                             <div class="col-lg-7">
@@ -71,7 +75,7 @@
                                                 <input type="radio" id="star4" name="ratingproduct" value="4" form="fb-form" />
                                                 <label class="full" for="star4" data-toggle="tooltip" title="Khá tốt - 4 sao"></label>
 
-                                                <input type="radio" id="star3" name="ratingproduct" value="3" form="fb-form" />
+                                                <input type="radio" id="star3" name="ratingproduct" value="3" form="fb-form"  checked/>
                                                 <label class="full" for="star3" data-toggle="tooltip" title="Bình thường - 3 sao"></label>
 
                                                 <input type="radio" id="star2" name="ratingproduct" value="2" form="fb-form" />
@@ -98,7 +102,7 @@
                                 <div class="text123">
                                     <img alt="" class="filter__seller-rating" title="Rất tốt" src="source/user/images/icon-verygood.png"
                                         id="imgClickAndChangeVeryGood">
-                                    <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good.png"
+                                    <img alt="" class="filter__seller-rating" title="Tốt" src="source/user/images/icon-good-color.png"
                                         id="imgClickAndChangeGood">
                                     <img alt="" class="filter__seller-rating" title="Tệ" src="source/user/images/icon-bad.png"
                                         id="imgClickAndChangeBad">
@@ -119,6 +123,16 @@
                         <input type="text" hidden name="storeId" value="{{$resultdata['data'][0]['product']['store']['_id']}}">
                         {{ csrf_field() }}
                     </form>
+                    <script>
+                        $(document).ready(function() {
+                            $("form[name='review-shop-product']").validate({
+                                errorElement: "em",
+                                submitHandler: function(form) {
+                                    form.submit();
+                                }
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </div>

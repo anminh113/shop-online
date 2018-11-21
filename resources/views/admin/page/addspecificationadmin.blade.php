@@ -37,9 +37,10 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                <?php $i = 1;?>
                                     @foreach ($data['specificationType']['specificationTitle'] as $item)
                                     <tr>
-                                        <td><a href="#">1</a></td>
+                                        <td><a href="#"><?php echo $i;?></a></td>
                                         <td>{{$item['title']}}</td>
                                         <td><a data-toggle="modal" data-target="#update{{$item['_id']}}">
                                                 <span class="btn btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;&nbsp;
@@ -55,6 +56,7 @@
 
                                     @method('DELETE')
                                     {{ csrf_field() }}</form>
+                                    <?php $i++;?>
                                     @endforeach
 
                                 </tbody>
@@ -83,7 +85,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
-
                                     <tr>
                                         <td colspan="3" class="text-center">Không có dữ liệu</td>
                                     </tr>

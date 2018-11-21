@@ -1634,10 +1634,18 @@ select option
 	height: 100%;
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
+
 	cursor: pointer;
 }
-.page_prev i, 
-.page_next i
+.page_prev a i, .page_next a i {
+    width: 50px;
+    height: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 47%;
+}
+.page_prev a i,
+.page_next a i
 {
 	font-size: 12px;
 	color: #e5e5e5;
@@ -1647,8 +1655,8 @@ select option
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.page_prev:hover i, 
-.page_next:hover i
+.page_prev:hover a i,
+.page_next:hover a i
 {
 	color: #636363;
 }
@@ -1661,21 +1669,33 @@ select option
 }
 .page_nav li
 {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 50px;
-	height: 50px;
-	border-right: solid 1px #e5e5e5;
-	cursor: pointer;
+	/*display: -webkit-box;*/
+	/*display: -moz-box;*/
+	/*display: -ms-flexbox;*/
+	/*display: -webkit-flex;*/
+	/*display: flex;*/
+	/*flex-direction: column;*/
+	/*justify-content: center;*/
+	/*align-items: center;*/
+	/*width: 50px;*/
+	/*height: 50px;*/
+	/*border-right: solid 1px #e5e5e5;*/
+	/*cursor: pointer;*/
 }
 .page_nav li a
 {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-right: solid 1px #e5e5e5;
+    cursor: pointer;
 	font-weight: 500;
 	color: rgba(0,0,0,0.7);
 	-webkit-transition: all 200ms ease;
@@ -2433,6 +2453,9 @@ select option
 
 .rating > input {
 	display: none;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
 }
 
 .rating > label:before {
@@ -2489,7 +2512,7 @@ select option
 .accordiontext {
 	width: 100%;
 	max-width: 360px;
-	margin: 30px auto 20px;
+	margin: 30px 0px 20px;
 	background: #FFF;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;

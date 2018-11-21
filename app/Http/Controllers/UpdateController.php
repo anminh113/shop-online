@@ -55,9 +55,8 @@
             return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Mật khẩu xác nhận không chính xác!!! ']);
         
         }else if($req['newpass']==$req['checkpass']){
-            $res = $client->request('GET', PageController::getUrl('accounts/'.Session::get('keyuser')['username'].''));
+            $res = $client->request('GET', PageController::getUrl('accounts/'.Session::get('keyuser')['account'][0]['account']['_id'].''));
             $data = json_decode($res->getBody()->getContents(), true);
-
             if($data['account']['password'] == $req['oldpass']){
                 $datajson=array(
                     [
@@ -67,7 +66,7 @@
                 );
                 // dd($datajson);
                 $jsonData =json_encode($datajson);
-                $json_url = PageController::getUrl('accounts/'.Session::get('keyuser')['username'].'');
+                $json_url = PageController::getUrl('accounts/'.Session::get('keyuser')['account'][0]['account']['_id'].'');
                 $ch = curl_init( $json_url );
                 $options = array(
                     CURLOPT_RETURNTRANSFER => true,
@@ -369,6 +368,62 @@
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+    }
+
+    public function updateProfileShopAdmin(Request $req){
+
+        $datajson =array(
+            [
+                "propName" => "location",
+                "value" => $req['tinh-thanhpho']
+            ],
+            [
+                "propName" => "phoneNumber",
+                "value" => $req['sdt']
+            ],
+            [
+                "propName" => "email",
+                "value" => $req['email']
+            ]
+        );
+        $jsonData =json_encode($datajson);
+        $json_url = PageController::getUrl('stores/'.$req['storeId'].'');
+        $ch = curl_init( $json_url );
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+        $result1 =json_decode($result);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+    }
+
+    public function updateDiscount(Request $req){
+        // post data json
+        $datajson=array([
+            "propName" => "discount",
+            "value" => $req->DiscountNumber]
+        );
+        $jsonData =json_encode($datajson);
+        $json_url = PageController::getUrl('salesoff/'.$req->id.'');
+        $ch = curl_init( $json_url );
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => $jsonData
+        );
+        curl_setopt_array( $ch, $options );
+        $result =  curl_exec($ch);
+        // dd($result);
+        // exit();
+        Log::info($result);
+        curl_close($ch);
+        //end post json
         return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
     }
 

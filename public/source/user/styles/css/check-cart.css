@@ -107,7 +107,11 @@ a, a:hover{
   stroke-dashoffset: 57;
 }
 .btn-radio input {
-  display: none;
+  /*display: none;*/
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
 }
 .btn-radio input:checked + svg path {
   transition: all 0.4s ease;

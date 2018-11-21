@@ -68,9 +68,9 @@
                                                 <!--Example 2-->
                                                 <div class="cell example example2">
                                                 <form id="payment-form" >
-                                                        <input id="orderId" hidden  type="text" value="{{$dataorder['product']['_id']}}">
+                                                        <input id="orderId" hidden  type="text" value="{{$dataorder['order']['_id']}}">
                                                         <div class="viewed_title_register">
-                                                            <h3 class="viewed_title">Thanh toán trực tuyến qua Paypal/Visa</h3>
+                                                            <h3 class="viewed_title">Thanh toán trực tuyến</h3>
                                                         </div>
                                                         <div data-locale-reversible>
                                                             <div class="row">
@@ -142,7 +142,7 @@
                                     </div>
                                   
                                     <form action="{{route('post-check-out')}}" method="POST"  id="pay">
-                                            <input  hidden name="orderId"   type="text"  value="{{$dataorder['product']['_id']}}">
+                                            <input  hidden name="orderId"   type="text"  value="{{$dataorder['order']['_id']}}">
                                          
                                             {{ csrf_field() }}
 
@@ -169,10 +169,10 @@
                                         <div class="order_total_content ">
                                             <div class="row">
                                                 <div class="col-lg-7 col-md-7">
-                                                    <div class="order_cart_title ">Tạm tính ({{$dataorder['product']['totalQuantity']}} sản phẩm)</div>
+                                                    <div class="order_cart_title ">Tạm tính ({{$dataorder['order']['totalQuantity']}} sản phẩm)</div>
                                                 </div>
                                                 <div class="col-lg-5 col-md-5">
-                                                    <div class="order_cart_amount text-right">{{number_format($dataorder['product']['totalPrice'])}},000₫</div>
+                                                    <div class="order_cart_amount text-right">{{number_format($dataorder['order']['totalPrice'])}},000₫</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -183,10 +183,10 @@
                                                     <div class="order_cart_title ">Phí giao hàng</div>
                                                 </div>
                                                 <div class="col-lg-5 col-md-4">
-                                                    @if($dataorder['product']['deliveryPrice']['transportFee'] == 0)
+                                                    @if($dataorder['order']['deliveryPrice']['transportFee'] == 0)
                                                     <div class="order_cart_amount text-right" style="font-size: 12px; color:#5F6368 "> Miễn phí vận chuyển</div>
                                                     @else
-                                                    <div class="order_cart_amount text-right" >{{number_format($dataorder['product']['deliveryPrice']['transportFee'])}},000₫</div>
+                                                    <div class="order_cart_amount text-right" >{{number_format($dataorder['order']['deliveryPrice']['transportFee'])}},000₫</div>
                                                     @endif
                                                 </div>
                                             </div>
@@ -197,14 +197,14 @@
                                                     <div class="order_cart_title ">Tổng cộng</div>
                                                 </div>
                                                 <div class="col-lg-5 col-md-5">
-                                                     @if($dataorder['product']['deliveryPrice']['transportFee'] == 0)
+                                                     @if($dataorder['order']['deliveryPrice']['transportFee'] == 0)
 
-                                                    <div class="order_cart_amount text-right text-danger">{{number_format($dataorder['product']['totalPrice'])}},000₫</div>
-                                                    <input type="text" form="pay" hidden name="amount" value="{{$dataorder['product']['totalPrice']}}000">
+                                                    <div class="order_cart_amount text-right text-danger">{{number_format($dataorder['order']['totalPrice'])}},000₫</div>
+                                                    <input type="text" form="pay" hidden name="amount" value="{{$dataorder['order']['totalPrice']}}000">
 
                                                     @else
-                                                    <div class="order_cart_amount text-right text-danger">{{number_format($dataorder['product']['totalPrice'] + $dataorder['product']['deliveryPrice']['transportFee'])}},000₫</div>
-                                                    <input type="text" form="pay" hidden name="amount" value="{{$dataorder['product']['totalPrice']+ $dataorder['product']['deliveryPrice']['transportFee']}}000">
+                                                    <div class="order_cart_amount text-right text-danger">{{number_format($dataorder['order']['totalPrice'] + $dataorder['order']['deliveryPrice']['transportFee'])}},000₫</div>
+                                                    <input type="text" form="pay" hidden name="amount" value="{{$dataorder['order']['totalPrice']+ $dataorder['order']['deliveryPrice']['transportFee']}}000">
                                                     @endif
 
                                                 </div>

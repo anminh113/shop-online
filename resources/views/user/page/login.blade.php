@@ -16,7 +16,12 @@
     <link rel="stylesheet" type="text/css" href="source/user/styles/css/register.css">
     <link rel="stylesheet" type="text/css" href="source/user/styles/css/login.css">
     <!-- show menu when hover -->
+    <style type="text/css">
+        .form-control.error{
+            border: 1px solid #FA1111;
 
+        }
+    </style>
 @endsection
 
 @section('content')

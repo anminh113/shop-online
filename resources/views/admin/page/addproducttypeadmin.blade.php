@@ -39,13 +39,14 @@
                                     </tr>
                                 </thead>
                                 <tbody id="myTable">
+                                <?php $i = 1;?>
                                     @foreach ($data1['productTypes'] as $item)
                                     <form id="imgur">
                                         <input type="file" id="file-upload{{$item['_id']}}" class=" imgur btn btn-default btn-file"
                                             style="display:none" accept="image/*" data-max-size="5000" />
                                     </form>
                                     <tr>
-                                        <td><a href="#">1</a></td>
+                                        <td><a href="#"><?php echo $i;?></a></td>
                                         <td>
                                          <img  src={{$item['imageURL']}}width="50px" height="50">
                                         </td>
@@ -65,6 +66,7 @@
                                         @method('DELETE')
                                         {{ csrf_field() }}
                                     </form>
+                                    <?php $i++;?>
                                     @endforeach
 
                                 </tbody>

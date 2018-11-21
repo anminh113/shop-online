@@ -14,7 +14,10 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/header_css.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/register.css">
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/index.css">
-
+<style>
+.form-control.error{
+border: 1px solid #FA1111;
+}</style>
 @endsection
 @section('content')
 
@@ -22,50 +25,7 @@
 
 <!-- Characteristics -->
 <div class="characteristics">
-    <div class="container">
-        <div class="row">
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_1.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_2.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_3.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-            <!-- Char. Item -->
-            <div class="col-lg-3 col-md-6 char_col">
-                <div class="char_item d-flex flex-row align-items-center justify-content-start">
-                    <div class="char_icon"><img src="source/user/images/char_4.png" alt=""></div>
-                    <div class="char_content">
-                        <div class="char_title">Free Delivery</div>
-                        <div class="char_subtitle">from $50</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
 </div>
 <!-- register -->
 <div class="register">
@@ -81,7 +41,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <form action="{{route('post-register-shop')}}" id="registershop" method="POST" class="clearfix">
+                <form action="{{route('post-register-shop')}}" id="registershop" method="POST" class="clearfix" name="registershop">
                     <div class="form-group">
                         <label for="namestore" class="text-size">Tên Gian Hàng</label>
                         <input type="text" required="required" class="form-control" id="namestore" name="namestore" aria-describedby=""
@@ -104,7 +64,7 @@
                     <div class="space10">&nbsp;</div>
                     <div class="form-group">
                         <label for="" class="text-size">Địa chỉ kho</label>
-                        <select name="tinh-thanhpho" id="tinh-thanhpho" class="form-control" style="margin-left: 0px;"
+                        <select name="tinh-thanhpho" id="tinh-thanhpho" class="form-control" required="required" style="margin-left: 0px;"
                             id="">
                             <option value="">Chọn tỉnh thành</option>
                         </select>
@@ -173,11 +133,29 @@
                 });
                 $('#tinh-thanhpho').html(html_code);
             });
-
         }
-
     });
+</script>
 
+<script>
+        $(document).ready(function() {
+            $("form[name='registershop']").validate({
+                
+                rules: {
+                    pass1: {
+                        required: true,
+                        minlength: 5
+                    },
+                     pass2: {
+                        required: true,
+                        equalTo: "#pass1"
+                    }
+                },errorElement: "em",
+                submitHandler: function(form) {
+                form.submit();
+                }
+            });
+        });
 </script>
 
 @endsection

@@ -2289,7 +2289,7 @@ select option
 	-ms-transform: translateX(-50%);
 	-o-transform: translateX(-50%);
 	transform: translateX(-50%);
-	bottom: 50px;
+	bottom: 0px;
 }
 .arrivals_slider .slick-slide
 {

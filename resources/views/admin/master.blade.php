@@ -23,8 +23,8 @@
 					@if (Session::has('key'))
 						@if (Session::get('key')['role']['roleName'] == 'Quản trị viên')
 						{{-- Admin --}}	
-						<ul class="nav">
-							<li><a href="{{route('trang-chu-admin-he-thong')}}" id="admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
+						<ul class="nav" style="width: 285px;">
+							<li><a href="{{route('trang-chu-admin-he-thong')}}" id="admin" class=""><i class="lnr lnr-home"></i> <span>Quản lý đăng ký gian hàng</span></a></li>
 							<li><a href="{{route('danh-sach-shop-he-thong')}}" id="category-admin-shop" class=""><i class="lnr lnr-code"></i> <span>Danh sách gian hàng</span></a></li>
 							<li><a href="{{route('them-danh-muc-admin')}}" id="add-category-admin" class=""><i class="lnr lnr-code"></i> <span>Quản lý danh mục	</span></a></li>
 						</ul>

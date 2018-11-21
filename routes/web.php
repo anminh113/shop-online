@@ -54,6 +54,11 @@ Route::get('productlist', [
     'uses'=>'PageController@getProductList'
 ]);
 
+Route::get('search-productlist/{id}', [
+    'as'=>'danhsach-sanpham-custom',
+    'uses'=>'PageController@getProductListCustom'
+]);
+
 Route::post('productlist', [
     'as'=>'post-danhsach-sanpham',
     'uses'=>'PostController@postProductList'
@@ -323,6 +328,10 @@ Route::post('discount-admin', [
     'as'=>'post-discount-admin',
     'uses'=>'PostController@postDiscount'
 ]);
+Route::patch('discount-admin-update', [
+    'as'=>'update-discount-admin',
+    'uses'=>'UpdateController@updateDiscount'
+]);
 
 Route::post('search-discount-admin', [
     'as'=>'post-tim-kiem-discount-admin',
@@ -475,6 +484,10 @@ Route::patch('add-specification-admin', [
 Route::get('profile-shop', [
     'as'=>'profile-shop-admin',
     'uses'=>'PageController@getProfileShopAdmin'
+]);
+Route::patch('profile-shop', [
+    'as'=>'update-profile-shop-admin',
+    'uses'=>'UpdateController@updateProfileShopAdmin'
 ]);
 
 

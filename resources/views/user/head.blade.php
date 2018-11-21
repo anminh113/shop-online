@@ -14,6 +14,8 @@
 <script src="https://momentjs.com/downloads/moment.min.js"></script>
 <script src="source/user/js/jquery-3.3.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+<script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
+
 
 
 
