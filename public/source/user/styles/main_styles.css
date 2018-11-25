@@ -410,6 +410,44 @@ section
 {
 	color: #0e8ce4;
 }
+
+/*  */
+.standard_dropdown li li p
+{
+	display: block;
+	width: 100%;
+	border-bottom: solid 1px #f2f2f2;
+	font-size: 16px;
+}
+.standard_dropdown li:last-child p
+{
+	border-bottom: none;
+}
+.standard_dropdown li.hassubs > p i
+{
+	display: inline-block;
+	margin-left: 5px;
+}
+.standard_dropdown li p
+{
+	display: block;
+	position: relative;
+	font-size: 16px;
+	font-weight: 300;
+	color: #000000;
+	line-height: 56px;
+	white-space: nowrap;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.standard_dropdown li p:hover
+{
+	color: #0e8ce4;
+}
+/* */
 .standard_dropdown li a i
 {
 	display: none;

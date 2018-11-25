@@ -64,20 +64,17 @@
                         {{$item['product']['overviews'][0]['value']}} ...
                     </div>
                     <div class="space10">&nbsp;</div>
-                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn
-                        {{$item['product']['quantity']}} sản phẩm</label>
+                    @if($item['product']['quantity'] > 0 )
+                    <label style="margin-top: -12px;color: #9e9e9e;font-size: 12px;">còn {{$item['product']['quantity']}} sản phẩm</label>
                     <div class=" d-flex flex-row">
                         <form action="{{route('post-gio-hang')}}" id="add" method="post">
                             <div class="clearfix" style="z-index: 1000;">
                                 <input type="text" hidden name="productid" value="{{$item['product']['_id']}}">
                                 <!-- Product Quantity -->
-
                                 <div class="quantity">
                                     <span>Số Lượng: </span>
                                     <input type="number" name="qty" min="1" max="{{$item['product']['quantity']}}" step="1" value="1">
                                 </div>
-
-                             
                                 @if($datawl == '')
                                 <button type="submit" form="WL"  class="product_fav"  ><i class="fas fa-heart" ></i></button>
                                 @else
@@ -98,9 +95,36 @@
                         {{ csrf_field() }}
                     </form>
                     
-                    </div>
+                    </div><hr>
+                    @else
+                        <div class=" d-flex flex-row">
+                            <form action="" id="add" method="post">
+                                <div class="clearfix" style="z-index: 1000;">
+                                    <input type="text" hidden name="productid" value="{{$item['product']['_id']}}">
+                                    <!-- Product Quantity -->
+
+                                    @if($datawl == '')
+                                        <button type="submit" form="WL"  class="product_fav"  ><i class="fas fa-heart" ></i></button>
+                                    @else
+                                        <div class="product_fav active"  ><i class="fas fa-heart" ></i></div>
+                                    @endif
+
+                                </div>
+                                <div class="button_container">
+                                    <button type="button" class="btn btn-outline-save btn-save btn-buy1">
+                                        <div class="img-buy1"></div>Tạm hết hàng
+                                    </button>
+                                </div>
+                                {{ csrf_field() }}
+                            </form>
+                            <form action="{{route('post-wishList')}}" id="WL" method="post">
+                                <input type="text" hidden name="productId" value="{{$item['product']['_id']}}">
+                                {{ csrf_field() }}
+                            </form>
+
+                        </div>
                     <hr>
-              
+                    @endif
                         <div class="d-flex flex-row">
                             <div class="char_icon"><img style="width: 40px;height: 40px" src="https://png.icons8.com/ultraviolet/40/000000/small-business.png" alt=""></div>
                             <div class="char_content">

@@ -2190,3 +2190,18 @@ select option
 	width: 18px;
 	height: 18px;
 }
+
+
+
+.btn-buy1{
+	height: 50px;
+	font-size: 16px;
+	width: 100%;
+	bottom: 2px;
+	border-radius: 5px;
+	line-height: 40px;
+	overflow: hidden;
+	float: left;
+	margin-right: 30px;
+	margin-left: 30px;
+}

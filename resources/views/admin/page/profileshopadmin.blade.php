@@ -84,7 +84,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab-bottom-left1">
                                     @if($datareviewshop['count'] != 0)
-                                    @foreach(array_reverse($datareviewshop['reviewStores']) as $item => $timereview)
+                                    @foreach(array_reverse($datareviewshop['reviewStores'],true) as $item => $timereview)
                                 <ul class="list-unstyled activity-timeline">
                                     <li>
                                         @if($timereview['ratingLevel']['ratingLevel'] == 1)
@@ -131,10 +131,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="viewed_title" style="border-right:solid 1px #dadada;" id="exampleModalLabel">Cập nhật gian hàng&nbsp;</h4>&nbsp;
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h4 class="viewed_title" id="exampleModalLabel">Cập nhật gian hàng&nbsp;  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></h4>&nbsp;
+
             </div>
             <div class="modal-body">
                 <form action="{{route('update-profile-shop-admin')}}" method="POST" id="update" name="update">

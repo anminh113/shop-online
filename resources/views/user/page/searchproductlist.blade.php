@@ -124,8 +124,13 @@
                                                         <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
                                                     </ul>
 
-                                                    <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
-                                                       style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                                    @if($item['quantity'] > 0 )
+                                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                                           style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                                    @else
+                                                        <a href="" class="btn btn-outline-save btn-save"
+                                                           style="font-size: 12px; bottom: 2px;pointer-events: none;">Tạm hết hàng</a>
+                                                    @endif
                                                 </div>
                                             @endif
                                             <?php $i = $i + 1?>
@@ -159,8 +164,13 @@
                                                     <li class="product_mark product_new">Hot</li>
                                                 </ul>
 
-                                                <a href="{{route('gio-hang',$item['product']['_id'])}}" class="btn btn-outline-info btn-change"
-                                                   style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                                @if($item['product']['quantity'] > 0 )
+                                                    <a href="{{route('gio-hang',$item['product']['_id'])}}" class="btn btn-outline-info btn-change"
+                                                       style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                                @else
+                                                    <a href="" class="btn btn-outline-save btn-save"
+                                                       style="font-size: 12px; bottom: 2px;pointer-events: none;">Tạm hết hàng</a>
+                                                @endif
                                             </div>
                                             <?php $i = $i + 1?>
 

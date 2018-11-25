@@ -19,7 +19,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title"><b>Đơn hàng đang chờ xử lý </b> </h3>
                             <div class="right">
-                                <input type="text" id="myInput" placeholder="Tìm kiếm..">
+                                {{--<input type="text" id="myInput" placeholder="Tìm kiếm..">--}}
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                             <h3 class="panel-title">Đơn hàng ngày: <script>var dtstart = moment('{{$item['order']['purchaseDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></h3>
                             <div class="right">
                                 <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-                                <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                                {{--<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>--}}
                             </div>
                         </div>
                         <div class="panel-body">

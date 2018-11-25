@@ -181,6 +181,19 @@
                 return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>' ']);
             }
         }
+        public function deleteDiscount(Request $req){
+            //get json danh muc all
+
+            try {
+
+                $client1 = new \GuzzleHttp\Client();
+                $res = $client1->request('DELETE',PageController::getUrl('salesoff/'.$req->id.'') );
+                $data = json_decode($res->getBody()->getContents(), true);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Phải xóa thông số lỹ thuật trong loại sản phẩm trước']);
+            }
+        }
  
         
 

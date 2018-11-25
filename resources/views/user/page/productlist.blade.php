@@ -120,9 +120,13 @@
                                         <ul class="product_marks">
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
                                         </ul>
-                                    
+                                        @if($item['quantity'] > 0 )
                                         <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
                                             style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        @else
+                                        <a href="" class="btn btn-outline-save btn-save"
+                                               style="font-size: 12px; bottom: 2px;pointer-events: none;">Tạm hết hàng</a>
+                                        @endif
                                     </div>
                                 @endif
 
@@ -162,8 +166,13 @@
                                             <li class="product_mark product_new">new</li>
                                         </ul>
                                         @endif
-                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
-                                            style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        @if($item['quantity'] > 0 )
+                                            <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                               style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        @else
+                                            <a href="" class="btn btn-outline-save btn-save"
+                                               style="font-size: 12px; bottom: 2px;pointer-events: none;">Tạm hết hàng</a>
+                                        @endif
                                     </div>
                                 @endif
                                 <?php $i = $i + 1?>

@@ -35,7 +35,7 @@
 							<li><a href="{{ route('trang-chu-admin')}}" id="index-admin" class=""><i class="lnr lnr-home"></i> <span>Trang chủ</span></a></li>
 							<li><a href="{{ route('profile-shop-admin')}}" id="profile-shop-admin" class=""><i class="lnr lnr-user"></i> <span>Thông tin gian hàng</span></a></li>
 							<li><a href="{{route('danh-muc-admin')}}" id="category-admin" class=""><i class="lnr lnr-list"></i> <span>Danh mục</span></a></li>
-							<li><a href="{{route('san-pham-admin')}}" id="product-admin" class=""><i class="lnr lnr-book"></i> <span>Sản phẩm</span></a></li>
+							<li><a href="{{route('san-pham-admin')}}" id="product-admin" class=""><i class="lnr lnr-book"></i> <span>Quản lý sản phẩm</span></a></li>
 							{{--  <li><a href="{{route('xem-danh-gia')}}" id="review-admin" class=""><i class="lnr lnr-chart-bars"></i> <span>Nhận xét & đánh giá</span></a></li>  --}}
 							<li><a href="{{route('discount-admin')}}" id="discount-admin" class=""><i class="lnr lnr-bookmark"></i> <span>Sự kiện giảm giá </span></a></li>
 							<li>

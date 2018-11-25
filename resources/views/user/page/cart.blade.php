@@ -31,6 +31,8 @@
                     <?php $i =0 ?>
                     @foreach ($product_cart as $item)
                     <?php $i=$i+1?>
+
+                     @if($item['item']['quantity'] >0)
                     <div class="product">
                         <div class="product-image">
                                 <img src="{{$item['img']}}" alt="">
@@ -68,11 +70,90 @@
                                 {{number_format($item['qty'] * ($item['item']['price'] - ($item['item']['price'] *$item['item']['saleOff']['discount'])/100))}},000₫
                             @endif
                         </div>
+
                         <div class="product-removal">
-                            <a href="{{Route('xoa-gio-hang',$item['item']['_id'])}}" style="color:#5F6368"><i class="fas fa-trash"></i></a>
+                            <a id="delete{{$item['item']['_id']}}" href="{{Route('xoa-gio-hang',$item['item']['_id'])}}" style="color:#5F6368"><i class="fas fa-trash"></i></a>
                         </div>
                         <input hidden type="text" form="add" name="productid[]" value="{{$item['item']['_id']}}">
                     </div>
+                        <script>
+                            $('#delete{{$item['item']['_id']}}').click(function(e){
+                                e.preventDefault();
+                                var link = $(this).attr('href');
+                                console.log(link);
+                                swal({
+                                    title: 'Xác nhận?',
+                                    text: "Bạn có muốn thực hiện hành động này",
+                                    type: 'warning',
+                                    position: 'top',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#008496',
+                                    cancelButtonColor: '#FA5821',
+                                    confirmButtonText: 'Đồng ý',
+                                    cancelButtonText: 'Hủy'
+
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.href = link;
+                                    }
+                                })
+                            });
+                        </script>
+                    @else
+                            <div class="product">
+                                <div class="product-image">
+                                    <img src="{{$item['img']}}" alt="">
+                                </div>
+                                <div class="product-details">
+                                    <div class="product-title">{{$item['item']['productName']}}</div>
+                                </div>
+                                <div class="product-price">
+                                    @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
+                                        {{number_format($item['item']['price'])}},000₫
+                                    @else
+                                        {{number_format($item['item']['price'] - ($item['item']['price'] *$item['item']['saleOff']['discount'])/100)}},000₫
+                                    @endif
+                                </div>
+
+                                <div class="product-quantity">
+                                        <div class="product-title"><i>Sản phẩm tạm hết hàng</i></div>
+                                </div>
+                                <div class="product-line-price">
+                                    @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
+                                        {{number_format($item['qty'] * $item['item']['price'])}},000₫
+                                    @else
+                                        {{number_format($item['qty'] * ($item['item']['price'] - ($item['item']['price'] *$item['item']['saleOff']['discount'])/100))}},000₫
+                                    @endif
+                                </div>
+
+                                <div class="product-removal">
+                                    <a id="delete{{$item['item']['_id']}}" href="{{Route('xoa-gio-hang',$item['item']['_id'])}}" style="color:#5F6368"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </div>
+                            <script>
+                                $('#delete{{$item['item']['_id']}}').click(function(e){
+                                    e.preventDefault();
+                                    var link = $(this).attr('href');
+                                    console.log(link);
+                                    swal({
+                                        title: 'Xác nhận?',
+                                        text: "Bạn có muốn thực hiện hành động này",
+                                        type: 'warning',
+                                        position: 'top',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#008496',
+                                        cancelButtonColor: '#FA5821',
+                                        confirmButtonText: 'Đồng ý',
+                                        cancelButtonText: 'Hủy'
+
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            window.location.href = link;
+                                        }
+                                    })
+                                });
+                            </script>
+                    @endif
 
                     @endforeach
                     @endif

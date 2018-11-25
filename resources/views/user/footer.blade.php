@@ -51,9 +51,10 @@
         </div>
     </div>
 </div>
+<script src="source/user/styles/js/iziToast.min.js"></script>
+
 @if(Session::has('flag'))
 <button class="form-control"  id="test" onclick="myAlertTop_warning()" style="display: none;">{{Session::get('message')}}</button>
-
 <script>
     var test1 = '{{Session::get('message')}}';
     if (test1 != '') {
@@ -90,8 +91,8 @@
         var link = $(this).attr('href');
         console.log(link);
         swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Xác nhận?',
+            text: "Bạn có muốn thực hiện hành động này",
             type: 'warning',
             position: 'top',
             showCancelButton: true,
@@ -115,7 +116,7 @@
         console.log(form);
         swal({
             title: 'Xác nhận?',
-            text: "",
+            text: "Bạn có muốn thực hiện hành động này",
             type: 'warning',
             position: 'top',
             showCancelButton: true,

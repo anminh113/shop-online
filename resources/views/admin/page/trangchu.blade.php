@@ -72,7 +72,7 @@
                                 <span class="icon"><i class="fa fa-eye"></i></span>
                                 <p>
                                     <span class="number">{{$datafollowStore['count']}}</span>
-                                    <span class="title">Lượt theo dỏi</span>
+                                    <span class="title">Lượt theo dõi</span>
                                 </p>
                             </div>
                         </div>

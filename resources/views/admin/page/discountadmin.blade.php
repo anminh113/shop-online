@@ -21,13 +21,11 @@
                         <div class="col-lg-3 col-md-4">
                             <h4>Thêm sự kiện giảm giá:</h4>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <form action="{{route('post-discount-admin')}}" method="POST">
+                        <form action="{{route('post-discount-admin')}}" name="adddiscount1" method="POST">
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">% giảm giá:</label>
                                 <div class="input-group">
@@ -35,27 +33,51 @@
                                         max="99">
                                     <span class="input-group-addon">%</span>
                                 </div>
+                                <div id="errorname1"></div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">Ngày bắt đầu:</label>
                                 <div class="input-group">
                                     <input class="form-control"  required="required" name="startdate" id="stardate" type="datetime-local">
                                 </div>
+                                <div id="errorname2"></div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">Ngày kết thúc:</label>
                                 <div class="input-group">
                                     <input class="form-control"  required="required" name="enddate" id="enddate" type="datetime-local">
                                 </div>
+                                <div id="errorname3"></div>
                             </div>
                             <div class="col-lg-1 col-md-4">
                                 <label for="basic">&nbsp;&nbsp;</label>
                                 <div class="input-group">
-                                    <button type="submit" class="btn btn-outline- btn-save" style="min-width:150px;">Thêm</button>
+                                    <button type="submit" onclick=""  class="btn btn-outline- btn-save" style="min-width:150px;">Thêm</button>
                                 </div>
                             </div>
                             {{ csrf_field() }}
                         </form>
+                        <script>
+                            $(document).ready(function() {
+                                $("form[name='adddiscount1']").validate({
+                                    errorPlacement: function(error, element) {
+                                        if (element.attr("name") == "DiscountNumber") {
+                                            error.insertAfter("#errorname1");
+                                        } else if (element.attr("name") == "startdate") {
+                                            error.insertAfter("#errorname2");
+                                        } else if (element.attr("name") == "enddate") {
+                                            error.insertAfter("#errorname3");
+                                        }else {
+                                            error.insertAfter(element);
+                                        }
+                                    },
+                                    errorElement: "em",
+                                    submitHandler: function(form) {
+                                        form.submit();
+                                    }
+                                });
+                            });
+                        </script>
                     </div>
                     <div class="space10">&nbsp;</div>
                 </div>
@@ -98,7 +120,7 @@
 
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <button type="submit" form="adddiscount" class="btn btn-outline- btn-save" style="min-width:150px;">Thêm vào đợt giảm giá </button>
+                                <button type="submit" onclick="archiveFunction()" form="adddiscount" class="btn btn-outline- btn-save" style="min-width:150px;">Thêm vào đợt giảm giá </button>
                             </div>
                         </div>
                         <hr>
@@ -159,7 +181,7 @@
                                                 @endforeach
                                             </div>
                                             <div class="product_content">
-                                                <div class="product_price">{{$item['price']}} VND</div>
+                                                <div class="product_price"></div>
                                                 <div class="product_name">
                                                     <div><a href="{{route('chi-tiet-san-pham-admin',$item['_id'])}}" tabindex="0">{{$item['productName']}}</a></div>
                                                 </div>
@@ -239,7 +261,7 @@
                                                 @endforeach
                                             </div>
                                             <div class="product_content">
-                                                <div class="product_price">{{$item['price']}} VND</div>
+                                                <div class="product_price"></div>
                                                 <div class="product_name">
                                                     <div><a href="{{route('chi-tiet-san-pham-admin',$item['_id'])}}"
                                                             tabindex="0">{{$item['productName']}}</a></div>
@@ -267,7 +289,7 @@
 
                             </div>
                             <div class="input-group">
-                                <button type="submit" class="btn btn-outline- btn-save" style="min-width:150px;">Xóa khỏi đợt giảm giá </button>
+                                <button type="submit" onclick="archiveFunction()" class="btn btn-outline- btn-save" style="min-width:150px;">Xóa khỏi đợt giảm giá </button>
                             </div>
                             {{ csrf_field() }}
                         </form>
@@ -280,17 +302,19 @@
                                         <th>Phần trăm giảm giá</th>
                                         <th>Ngày bắt đầu</th>
                                         <th>Ngày kết thúc</th>
+                                        <th>Xóa</th>
                                     </tr>
                                     </thead>
                                     <tbody id="myTable">
                                     <?php $i=1;?>
                                     @foreach ($datatextdis['saleOffs'] as $item)
                                         @if ($item['dateEnd'] > $time)
-                                        <tr data-toggle="modal" data-target="#accept{{$item['_id']}}">
-                                            <td><?php echo $i;?></td>
-                                            <td>{{$item['discount']}}</td>
-                                            <td><script>var dtstart = moment('{{$item['dateStart']}}').format('DD/MM/YYYY HH:mm'); document.write(dtstart);</script></td>
-                                            <td><script>var dtstart = moment('{{$item['dateEnd']}}').format('DD/MM/YYYY HH:mm'); document.write(dtstart);</script></td>
+                                        <tr >
+                                            <td data-toggle="modal" data-target="#accept{{$item['_id']}}"><?php echo $i;?></td>
+                                            <td data-toggle="modal" data-target="#accept{{$item['_id']}}">{{$item['discount']}}%</td>
+                                            <td data-toggle="modal" data-target="#accept{{$item['_id']}}"><script>var dtstart = moment('{{$item['dateStart']}}').format('DD/MM/YYYY HH:mm'); document.write(dtstart);</script></td>
+                                            <td data-toggle="modal" data-target="#accept{{$item['_id']}}"><script>var dtstart = moment('{{$item['dateEnd']}}').format('DD/MM/YYYY HH:mm'); document.write(dtstart);</script></td>
+                                            <td><div><a id="delete{{$item['_id']}}" href="{{route('delete-discount-admin',$item['_id'])}}" >Xóa đợt giảm giá</a></div></td>
                                         </tr>
                                         <?php $i++;?>
                                         <div class="modal fade" id="accept{{$item['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

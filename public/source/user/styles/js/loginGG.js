@@ -4,7 +4,7 @@
             // Retrieve the singleton for the GoogleAuth library and set up the client.
             auth2 = gapi.auth2.init({
 
-                'client_id': '981798466996-2gmgpq22iitri14mbqigmq2srrcp55co.apps.googleusercontent.com',
+                'client_id': '981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com',
                 'cookiepolicy': 'single_host_origin',
                 'redirect_uri': ['http://localhost.com'],
                 'response_type': 'token',
@@ -63,6 +63,12 @@
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
 };
+ function signOutGG(){
+     var auth2 = gapi.auth2.getAuthInstance();
+     auth2.signOut().then(function () {
+         window.location = "https://localhost/shop-online/public/login";
+     });
+ };
 
 
 

@@ -20,8 +20,6 @@ class Cart
 		$client = new \GuzzleHttp\Client();
 		$res = $client->request('GET',PageController::getUrl('products/'.$id.'') );
         $data = json_decode($res->getBody()->getContents(), true);
-		// dd($data['product']);
-
 		$resimg = $client->request('GET',PageController::getUrl('productimages/product/'.$id.''));
         $dataimg = json_decode($resimg->getBody()->getContents(), true);
 		

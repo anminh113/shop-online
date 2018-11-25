@@ -56,7 +56,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('user/header', function($view){
-           
             try {
                 $data1 = array();
                 $client = new \GuzzleHttp\Client();

@@ -333,6 +333,11 @@ Route::patch('discount-admin-update', [
     'uses'=>'UpdateController@updateDiscount'
 ]);
 
+Route::get('discount-admin-delete/{id}', [
+    'as'=>'delete-discount-admin',
+    'uses'=>'DeleteController@deleteDiscount'
+]);
+
 Route::post('search-discount-admin', [
     'as'=>'post-tim-kiem-discount-admin',
     'uses'=>'PostController@postSearchDiscount'

@@ -101,7 +101,7 @@
                             <div class="space10">&nbsp;</div>
                             <label for="basic" style="font-size: 19px">Giá sản phẩm: </label>
                             <div id="giasp">
-                                <span style="font-size: 20px" id="price">{{$item['product']['price']}},000₫</span>
+                                <span style="font-size: 20px" id="price">{{number_format($item['product']['price'])}},000₫</span>
                                 <br>
                                 @if(!empty($item['product']['saleOff']))
                                 <span style="font-size: 18px; text-decoration: line-through;">{{number_format($item['product']['price'])}},000₫</span>
@@ -158,11 +158,10 @@
                             <div class="space10">&nbsp;</div>
                             <button type="button" class="btn btn-change" onclick="window.location='{{route('sua-chi-tiet-san-pham-admin',$item['product']['_id'])}}';">Cập
                                 nhật</button>
-                            <button type="submit" form="deleteproduct" class="btn btn-save">Xóa</button>
+                            <button type="submit" form="deleteproduct" onclick="archiveFunction()" class="btn btn-save">Xóa sản phẩm</button>
                         </div>
                         <form hidden id="deleteproduct" action="{{route('delete-san-pham-admin')}}" method="post">
                         <input type="text" hidden name="productId" value="{{$item['product']['_id']}}">
-
                         @method('DELETE')
                         {{ csrf_field() }}</form>
                     </div>

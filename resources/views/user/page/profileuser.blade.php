@@ -195,7 +195,7 @@
                                     <span><i> {{$dataorder['orders'][$item]['orderState']['orderStateName']}}</i></span>
                                     @if($dataorder['orders'][$item]['orderState']['orderStateName'] == "Đang chờ thanh toán")
                                         <span><a href="{{route('check-out',$dataorder['orders'][$item]['_id'])}}"
-                                                 class="btn btn-outline-warning btn-save" style="height: 36px;">Thanh Toán</a></span>
+                                                 class="btn btn-outline-warning btn-save" style="height: 36px; margin-left: 5%">Thanh Toán</a></span>
                                     @endif
 
                                 </div>
@@ -218,7 +218,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
-                                                <div class="item-quantity" style=" width: 100%; "><span><span
+                                                <div class="item-quantity" style=" width: 100%; "><span
                                                                 class="text desc info multiply">Số lượng:&nbsp;{{$text['quantity']}}</span>
                                                 </div>
                                             </div>
@@ -228,7 +228,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
-                                                <div class="item-info">
+                                                <div class="item-status item-capsule">
+                                                    <p class="capsule">Ngày đặt hàng: <script>var dtstart = moment('{{$dataorder['orders'][$item]['purchaseDate']}}').format('DD/MM/YYYY'); document.write(dtstart);</script></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -737,8 +738,8 @@
                                     var link = $(this).attr('href');
                                     console.log(link);
                                     swal({
-                                        title: 'Are you sure?',
-                                        text: "You won't be able to revert this!",
+                                        title: 'Xác nhận?',
+                                        text: "Bạn có muốn thực hiện hành động này",
                                         type: 'warning',
                                         position: 'top',
                                         showCancelButton: true,

@@ -59,15 +59,15 @@
                         </div>
                         @if($datafollow == '')
                         <div class="char_icon" style="margin-left: 20px">
-                            <button type="submit" form="Follow" style="border-radius: 50%;">
-                                <img src="https://png.icons8.com/linen/80/1abc9c/add.png" style="width: 45px" alt="">
+                            <button type="submit" form="Follow" style="border-radius: 53%;border: none">
+                                <img src="source/user/images/icons8-plus-64.png" style="width: 65px; " alt="">
                             </button>
-                            <div class="char_subtitle">Theo dõi</div>
+                            <div class="char_subtitle" style="text-align: center">Theo dõi</div>
                         </div>
                        @else
                         <div class="char_icon" style="margin-left: 20px">
-                            <button type="submit" form="FollowDelete" style="border-radius: 50%;">
-                                <img src="https://png.icons8.com/linen/80/000000/delete-sign.png" style="width: 45px" alt="">
+                            <button type="submit" form="FollowDelete" style="border-radius: 53%;border: none">
+                                <img src="source/user/images/icons8-cancel-64.png" style="width: 65px" alt="">
                             </button>
                             <div class="char_subtitle" style="text-align: center">Bỏ theo dõi</div>
                         </div>
@@ -212,8 +212,13 @@
                                             <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>
                                         </ul>
 
-                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
-                                            style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        @if($item['quantity'] > 0 )
+                                            <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                               style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                        @else
+                                            <a href="" class="btn btn-outline-save btn-save"
+                                               style="font-size: 12px; bottom: 2px;pointer-events: none;">Tạm hết hàng</a>
+                                        @endif
                                     </div>
                                     @endif
 
@@ -256,8 +261,13 @@
                                             <li class="product_mark product_new">new</li>
                                         </ul>
                                         @endif
-                                        <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
-                                            style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                            @if($item['quantity'] > 0 )
+                                                <a href="{{route('gio-hang',$item['_id'])}}" class="btn btn-outline-info btn-change"
+                                                   style="font-size: 12px; bottom: 2px">Thêm vào giỏ</a>
+                                            @else
+                                                <a href="" class="btn btn-outline-save btn-save"
+                                                   style="font-size: 12px; bottom: 2px;pointer-events: none;">Tạm hết hàng</a>
+                                            @endif
                                 </div>
                                 @endif
 
@@ -436,7 +446,7 @@
                         <div class="section-title"> Nhận xét và đánh giá nhà bán hàng ({{$datareviewshop['count']}})</div>
                         <div class="sis-seller-reviews">
                             @if($datareviewshop['count'] != 0)
-                            @foreach($datareviewshop['reviewStores'] as $item => $timereview)
+                            @foreach(array_reverse($datareviewshop['reviewStores'],true) as $item => $timereview)
                             <div class="seller-review-item">
                                 <div class="row rate">
                                     @if($timereview['ratingLevel']['ratingLevel'] == 1)

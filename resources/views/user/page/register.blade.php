@@ -35,7 +35,7 @@
             <h3 class="viewed_title">Tạo tài khoản CyberZone</h3>
         </div>
         <div class="space15">&nbsp;</div>
-        <form action="{{route('post-dang-ky')}}" id="dangky" method="POST" name="dangky">
+        <form action="{{route('post-dang-ky')}}" id="dangky" method="POST" name="dangky1">
         <div class="row">
                     <div class="col-lg-6">
 
@@ -122,20 +122,19 @@
                         </div>
                         <small id="text" class="form-text text-muted">Hoặc Đăng kí với</small>
                         <br>
-
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div id="gSignInWrapper">
                                         <div id="customBtn" class="customGPlusSignIn">
-                                            <button onclick="startApp()" title="Google" data-onsuccess="onSignIn" class="btn btn-googleplus btn-lg"
+                                            <button onclick="startApp()" type="button"  title="Google" data-onsuccess="onSignIn" class="btn btn-googleplus btn-lg"
                                                 style="border-radius: 5px; "><i class="fab fa-google"></i> Google</button>
                                         </div>
                                     </div>
                                     <div id="name"></div>
-                                    <div class="space5">&nbsp;</div>
+                                    <div class="space5">&nbsp</div>
                                 </div>
-                                <div class="col-lg-6 col-md-6"> <button onclick="login()" title="Facebook" class="btn btn-facebook btn-lg"
+                                <div class="col-lg-6 col-md-6"> <button onclick="login()" type="button" title="Facebook" class="btn btn-facebook btn-lg"
                                         style="border-radius: 5px; "><i class="fab fa-facebook-f"></i> Facebook</button></div>
                             </div>
                             <div class="space10">&nbsp;</div>
@@ -146,7 +145,7 @@
         </div>
             {{ csrf_field() }}
         </form>
-        <form id="postggfb" action="{{route('post-google-facebook-dang-ky')}}" method="POST">
+        <form id="postggfb" action="{{route('post-google-facebook-dang-ky')}}" method="POST" >
             {{ csrf_field() }}
         </form>
     </div>
@@ -161,7 +160,7 @@
 <script src="source/user/styles/js/register.js"></script>
 <script>
     $(document).ready(function () {
-        var validator = $("#dangky").validate({
+        $("form[name='dangky1']").validate({
             rules: {
                 hoten: {
                     required: true,
@@ -222,11 +221,11 @@
                     required: "Vui lòng nhập mật khẩu",
                 }
             },
+            errorElement: "em",
             submitHandler: function (form) {
                 form.submit();
             }
         });
-        // validator.element( "#user" );
     });
 </script>
 @endsection

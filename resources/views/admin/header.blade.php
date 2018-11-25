@@ -12,8 +12,8 @@
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span>{{ $name }}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('profile-shop-admin')}}" id="profile-shop-admin"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-                    <li><a href="{{route('login-admin')}}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                        <li><a href="{{ route('profile-shop-admin')}}" id="profile-shop-admin"><i class="lnr lnr-user"></i> <span>Thông tin gian hàng</span></a></li>
+                    <li><a href="{{route('login-admin')}}"><i class="lnr lnr-exit"></i> <span>Đăng xuất</span></a></li>
                     </ul>
                 </li>
                

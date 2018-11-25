@@ -51,7 +51,7 @@
                     <form id="fb-form" action="{{route('post-write-review-shop')}}" method="POST" name="review-shop-product">
                         <input type="text" hidden name="orderitemId" value="{{$OrderItemId}}">
                         <div class="row">
-                            <div class="col-lg-7">
+                            <div class="col-lg-7" style="margin-top: 15px">
                                 <div style="padding-left: 5px;font-size: 15px; padding-bottom: 10px;">Nhận xét và đánh giá sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
                                 <div class="row" style="padding-left: 5px;">
                                     <div class="col-lg-2">
@@ -87,8 +87,8 @@
                                         </span>
                                         <br>
                                         <div class="space10">&nbsp;</div>
-                                        <div class="contact_form_text" style="padding-left: 5px;">
-                                            <div style="color: #000;font-size: 14px; "> Đánh giá chi tiết</div>
+                                        <div class="contact_form_text" style="padding-left: 5px;margin-top: 34px">
+                                            <div style="color: #757575;font-size: 14px; "> Đánh giá chi tiết</div>
                                             <textarea id="contact_form_message" data-autoresize class="text_field contact_form_message"
                                                 name="reviewProduct" rows="7" placeholder="Đánh giá..." required="required"
                                                 data-error="Please, write us a message."></textarea>

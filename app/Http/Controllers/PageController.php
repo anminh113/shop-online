@@ -39,7 +39,6 @@ class PageController extends Controller
     public function getIndex()
     {
         $client1 = new \GuzzleHttp\Client();
-        
         $restime = $client1->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
         $datatime = json_decode($restime->getBody()->getContents(), true);
         $todaytime = new DateTime($datatime['formatted']);
@@ -197,7 +196,6 @@ class PageController extends Controller
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($id, 1, $time);
-        // $cart->add($data[0]['product'], $id,1, $datatext[0]['imageList'][0]['imageURL'], $time);
         $req->session()->put('cart', $cart);
         return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm vào giỏ']);
     }
@@ -301,10 +299,7 @@ class PageController extends Controller
                 $datawl = json_decode($reswl->getBody()->getContents(), true);
                 // dd($datawl);
             } catch (\GuzzleHttp\Exception\RequestException $e) {
-
             }
-
-
         }
 
         return view('user/page.product', compact('datawl', 'timeend', 'resultdata', 'resultimg', 'datareview', 'timereview', 'countstar_5', 'countstar_4', 'countstar_3', 'countstar_2', 'countstar_1'));
@@ -737,9 +732,31 @@ class PageController extends Controller
             $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
             $res = $client->request('GET', PageController::getUrl('deliveryprices'));
             $data = json_decode($res->getBody()->getContents(), true);
+
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
-            $product_cart = $cart->items;
+
+              if (count($cart->items) > 0) {
+                  $product_cart = $cart->items;
+                  $oldCart1 = Session::get('cart');
+                  $cart1 = new Cart($oldCart1);
+                  foreach ($product_cart as $key => $value) {
+                      $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
+                      $data1 = json_decode($res1->getBody()->getContents(), true);
+                      if ($data1['product']['quantity'] == 0) {
+                          $cart1->removeItem($value['item']['_id']);
+                          if (count($cart1->items) > 0) {
+                              Session::put('cart', $cart1);
+                          } else {
+                              Session::forget('cart');
+                          }
+                      }
+                      $cart1->add($value['item']['_id'], 0, $time);
+                      Session::put('cart', $cart1);
+
+                  }
+                  $product_cart = $cart1->items;
+              }
             return view('user/page.cart', compact('product_cart', 'data', 'time'));
         } else {
             return redirect()->back()->with(['flag'=>'info','title'=>'Thông báo' ,'message'=>'Chưa có sản phẩm trong giỏ hàng']);
@@ -1478,14 +1495,9 @@ class PageController extends Controller
             $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
 
             for ($i = 0; $i < count($dataOrderItems['orderItems']); $i++) {
-                $resProductStore = $client1->request('GET', PageController::getUrl('products/store/' . $store . ''));
-                $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
-                for ($j = 0; $j < count($dataProductStore['products']); $j++) {
-                    if ($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']) {
-                        $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
-                    }
+                if ($store == $dataOrderItems['orderItems'][$i]['product']['store']['_id']) {
+                    $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
                 }
-//                dd($dataProductStore);
             }
             $resultProductOrder = compact('dataProductOrder');
             for ($i = 0; $i < count($resultProductOrder['dataProductOrder']); $i++) {
@@ -1497,7 +1509,7 @@ class PageController extends Controller
             }
 
             $resultOrder = compact('dataOrder');
-
+//            dd($resultOrder);
             try {
                 $resOrderAll = $client1->request('GET', PageController::getUrl('orders/getByState/5b9a17f3e747da371818fd9d'));
                 $dataOrderAll = json_decode($resOrderAll->getBody()->getContents(), true);
@@ -1565,13 +1577,9 @@ class PageController extends Controller
             // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
             $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
             // dd($dataOrderItems);
-            for ($i = 0; $i < $dataOrderItems['count']; $i++) {
-                $resProductStore = $client1->request('GET', PageController::getUrl('products/store/' . $store . ''));
-                $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
-                for ($j = 0; $j < count($dataProductStore['products']); $j++) {
-                    if ($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']) {
-                        $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
-                    }
+            for ($i = 0; $i < count($dataOrderItems['orderItems']); $i++) {
+                if ($store == $dataOrderItems['orderItems'][$i]['product']['store']['_id']) {
+                    $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
                 }
             }
             $resultProductOrder = compact('dataProductOrder');
@@ -1655,13 +1663,9 @@ class PageController extends Controller
             // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
             $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
             // dd($dataOrderItems);
-            for ($i = 0; $i < $dataOrderItems['count']; $i++) {
-                $resProductStore = $client1->request('GET', PageController::getUrl('products/store/' . $store . ''));
-                $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
-                for ($j = 0; $j < count($dataProductStore['products']); $j++) {
-                    if ($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']) {
-                        $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
-                    }
+            for ($i = 0; $i < count($dataOrderItems['orderItems']); $i++) {
+                if ($store == $dataOrderItems['orderItems'][$i]['product']['store']['_id']) {
+                    $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
                 }
             }
             $resultProductOrder = compact('dataProductOrder');
@@ -1744,13 +1748,9 @@ class PageController extends Controller
             // $resOrderItems = $client1->request('GET',PageController::getUrl('orderItems'));
             $dataOrderItems = json_decode($resOrderItems->getBody()->getContents(), true);
             // dd($dataOrderItems);
-            for ($i = 0; $i < $dataOrderItems['count']; $i++) {
-                $resProductStore = $client1->request('GET', PageController::getUrl('products/store/' . $store . ''));
-                $dataProductStore = json_decode($resProductStore->getBody()->getContents(), true);
-                for ($j = 0; $j < count($dataProductStore['products']); $j++) {
-                    if ($dataOrderItems['orderItems'][$i]['product']['_id'] == $dataProductStore['products'][$j]['_id']) {
-                        $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
-                    }
+            for ($i = 0; $i < count($dataOrderItems['orderItems']); $i++) {
+                if ($store == $dataOrderItems['orderItems'][$i]['product']['store']['_id']) {
+                    $dataProductOrder[] = $dataOrderItems['orderItems'][$i];
                 }
             }
             $resultProductOrder = compact('dataProductOrder');

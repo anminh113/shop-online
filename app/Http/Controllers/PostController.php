@@ -357,29 +357,32 @@
             $dtend = new DateTime($req->enddate);
             $dtend->setTimezone(new DateTimeZone('UTC'));
             $end =  $dtend->format('Y-m-d\TH:i:s.u\Z');
-
-            $datajson=array(
-                "storeId" =>  $store,
-                "discount" => $req->DiscountNumber,
-                "dateStart" => $start,
-                "dateEnd" => $end
+            if($end > $start) {
+                $datajson = array(
+                    "storeId" => $store,
+                    "discount" => $req->DiscountNumber,
+                    "dateStart" => $start,
+                    "dateEnd" => $end
                 );
-            $jsonData =json_encode($datajson);
-            $json_url = PageController::getUrl('salesoff');
-            $ch = curl_init( $json_url );
-            $options = array(
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => $jsonData
-            );
-            curl_setopt_array( $ch, $options );
-            $result =  curl_exec($ch);
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                $jsonData = json_encode($datajson);
+                $json_url = PageController::getUrl('salesoff');
+                $ch = curl_init($json_url);
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array($ch, $options);
+                $result = curl_exec($ch);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+            }
+        return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Ngày kết thúc phải lớn hơn ngày bắt đầu!!!']);
         }
 
         public function postAddDiscount(Request $req){
             $quantities = Input::get('productDiscount');
+
             if($req->discount != null && $quantities != null){
                 for($i=0; $i< count($quantities); $i++){
                     $datajson=array([
@@ -398,8 +401,9 @@
                     );
                     curl_setopt_array( $ch, $options );
                     $result =  curl_exec($ch);
-                    return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+
                 }
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
             }else{
                 return redirect()->back()->with(['flag'=>'warning','title'=>'Thông báo' ,'message'=>'Bạn phải chọn sản phẩm và sự kiện giảm giá!!!']);
             }
@@ -424,8 +428,9 @@
                     );
                     curl_setopt_array( $ch, $options );
                     $result =  curl_exec($ch);
-                    return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã xóa khỏi sự kiện']);
+
                 }
+                 return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã xóa khỏi sự kiện']);
              }else{
                  return redirect()->back()->with(['flag'=>'warning','title'=>'Thông báo' ,'message'=>'Bạn phải chọn sản phẩm!!!']);
 
@@ -917,6 +922,10 @@
                             "_id" => $key,
                             "productName" => $value['item']['productName'],
                             "price" => $value['price'],
+                            "store" => array(
+                                "_id" => $value['item']['store']['_id'],
+                                "storeName" => $value['item']['store']['storeName']
+                            ),
                             "imageURL" => $value['img']
                         ),
                         "quantity" =>  $value['qty'],

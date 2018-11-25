@@ -16,8 +16,8 @@
                         <?php $i = 1; shuffle($data1['products']);?>
                         @foreach ($data1['products'] as $item)
                         <?php $i = $i + 1?>
-                        <div class="owl-item">
-                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="owl-item" >
+                            <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center" style="height: 320px">
                                 <div class="viewed_image"><img src="{{$item['image']}}"
                                         width="115" height="115" alt=""></div>
                                 <div class="viewed_content text-center">

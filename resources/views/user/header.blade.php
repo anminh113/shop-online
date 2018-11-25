@@ -1,5 +1,10 @@
 <!-- Header -->
 <header class="header">
+    <script src="source/user/styles/js/CheckLoginFB.js"></script>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com">
+    <script src="source/user/styles/js/CheckLoginGG.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <!-- Top Bar -->
     <div class="top_bar">
         <div class="container">
@@ -8,6 +13,7 @@
                     <div class="top_bar_contact_item">
                         +84 39 718 6707</div>
                     <div class="top_bar_contact_item">
+
                         <a href="mailto:anminh113@gmail.com">cyberzone@gmail.com</a></div>
                     <div class="top_bar_content ml-auto">
                         {{-- <div class="top_bar_contact_item">+84 169 718 6707</div> --}}
@@ -29,7 +35,7 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <a class="fix" href="login">Đăng xuất</a>
+                                    <p class="fix"  onclick="facebookLogout();signOut();" style="cursor: pointer; ">Đăng xuất</p>
                                 </li>
                             </ul>
                         </div>
@@ -56,6 +62,7 @@
             </div>
         </div>
     </div>
+
     <!-- Header Main -->
     <div class="header_main">
         <div class="container">

@@ -109,10 +109,17 @@
                                                     <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$resultproductPurchase['0'][$i]['count']}})</div> </div>
                                                     </div>
                                                 </div>
-                                                <div class="product_extras">
-                                                    <a href="{{route('gio-hang',$item['product']['_id'])}}"><button
-                                                        class="product_cart_button">Thêm vào giỏ</button></a>
-                                                </div>
+                                                    @if($item['product']['quantity'] > 0 )
+                                                        <div class="product_extras">
+                                                            <a href="{{route('gio-hang',$item['product']['_id'])}}"><button
+                                                                        class="product_cart_button">Thêm vào giỏ</button></a>
+                                                        </div>
+                                                    @else
+                                                        <div class="product_extras">
+                                                            <a href="" style="pointer-events: none;"><button class="product_cart_button" style="background-color: #EA5900">Tạm hết hàng</button></a>
+                                                        </div>
+                                                    @endif
+
                                             </div>
                                             <ul class="product_marks">
                                                 <li class="product_mark product_discount">-25%</li>
@@ -279,10 +286,16 @@
                                                 <div class="product_name">
                                                     <div><a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a></div>
                                                 </div>
-                                                <div class="product_extras">
-                                                    <a href="{{route('gio-hang',$item['_id'])}}"><button class="product_cart_button">Thêm
-                                                            vào giỏ </button></a>
-                                                </div>
+                                                @if($item['quantity'] > 0 )
+                                                    <div class="product_extras">
+                                                        <a href="{{route('gio-hang',$item['_id'])}}"><button
+                                                                    class="product_cart_button">Thêm vào giỏ</button></a>
+                                                    </div>
+                                                @else
+                                                    <div class="product_extras">
+                                                        <a href="" style="pointer-events: none;"><button class="product_cart_button" style="background-color: #EA5900">Tạm hết hàng</button></a>
+                                                    </div>
+                                                @endif
                                             </div>
                                             <ul class="product_marks">
                                                 <li class="product_mark product_discount">-{{$item['saleOff']['discount']}}%</li>

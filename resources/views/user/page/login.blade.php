@@ -4,9 +4,12 @@
     <!-- login in google -->
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id"
-          content="981798466996-2gmgpq22iitri14mbqigmq2srrcp55co.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+          content="981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com">
+    {{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
+
     <script src="source/user/styles/js/CheckLoginGG.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <!-- login in fb -->
     <script src="source/user/styles/js/CheckLoginFB.js"></script>
 
@@ -22,6 +25,10 @@
 
         }
     </style>
+
+
+
+
 @endsection
 
 @section('content')
@@ -30,12 +37,14 @@
 
 
     <!-- register -->
-    <div class="login" style="margin-top: 70px">
+    <div class="login" style="margin-top: 70px" >
 
 
         <div class="container">
             <div class="viewed_title_register">
                 <h3 class="viewed_title">Chào mừng đến với CyberZone!</h3>
+
+
             </div>
             <div class="space15">&nbsp;</div>
             @if(count($errors) > 0)
@@ -54,6 +63,7 @@
                             <div class="content">
                                 <div class="header">
                                     <p class="lead">Đăng Nhập</p>
+
                                 </div>
                                 <form id="demoForm" name="demoForm" action="{{route('post-dang-nhap')}}" method="POST"
                                       accept-charset="utf-8">
@@ -150,5 +160,7 @@
             });
         });
     </script>
+
+
 @endsection
 

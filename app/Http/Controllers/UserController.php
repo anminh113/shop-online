@@ -89,7 +89,7 @@ class UserController extends Controller
             session()->push('keyuser.account', $datatest);
             return redirect()->route('trang-chu')->with(['flag'=>'info','title'=>'Xin chào!!!' ,'message'=>' ','role'=>'Khách hàng']);
         }catch (\GuzzleHttp\Exception\RequestException $e) {
-            return redirect()->route('dang-nhap')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
+            return redirect()->route('dang-ky')->with(['flag'=>'info','title'=>'Thông báo!','message'=>'Tài khoản chưa đăng ký trên hệ thống']);
         }
     }
 

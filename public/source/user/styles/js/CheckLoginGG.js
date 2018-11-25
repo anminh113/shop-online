@@ -4,7 +4,7 @@ var startApp = function() {
         // Retrieve the singleton for the GoogleAuth library and set up the client.
         auth2 = gapi.auth2.init({
 
-            'client_id': '981798466996-2gmgpq22iitri14mbqigmq2srrcp55co.apps.googleusercontent.com',
+            'client_id': '981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com',
             'cookiepolicy': 'single_host_origin',
             'scope': 'https://www.googleapis.com/auth/user.phonenumbers.read',
            
@@ -71,11 +71,29 @@ function onSignIn(googleUser) {
     form.appendChild(hiddenInputTypeFB);
     document.body.appendChild(form);   
     form.submit();
-
-
-
    
-};
+}
+
+var test = function(){
+    gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+            'client_id': '981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com',
+            'cookiepolicy': 'single_host_origin',
+
+        });
+    });
+}
+
+function signOut(){
+    gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init(  {'client_id': '981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com',
+            'cookiepolicy': 'single_host_origin'});
+        auth2.signOut().then(function () {
+            auth2.disconnect();
+            window.location = "https://localhost/shop-online/public/login";
+        });
+    });
+}
 
 
 
