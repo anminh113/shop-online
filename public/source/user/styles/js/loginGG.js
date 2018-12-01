@@ -1,9 +1,7 @@
  var googleUser = {};
     var startApp = function() {
         gapi.load('auth2', function() {
-            // Retrieve the singleton for the GoogleAuth library and set up the client.
             auth2 = gapi.auth2.init({
-
                 'client_id': '981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com',
                 'cookiepolicy': 'single_host_origin',
                 'redirect_uri': ['http://localhost.com'],
@@ -59,17 +57,9 @@
         console.log('Family Name: ' + profile.getFamilyName());
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
-        // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
 };
- function signOutGG(){
-     var auth2 = gapi.auth2.getAuthInstance();
-     auth2.signOut().then(function () {
-         window.location = "https://localhost/shop-online/public/login";
-     });
- };
-
 
 
 

@@ -96,7 +96,6 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div id="name"></div>
                                             <div class="space5">&nbsp;</div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -111,7 +110,7 @@
                                       accept-charset="utf-8">
                                     {{ csrf_field() }}
                                 </form>
-                                <div id="status"></div>
+                                <div hidden id="name"></div>
                                 <div class="space10">&nbsp;</div>
                             </div>
                         </div>

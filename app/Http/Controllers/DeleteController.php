@@ -185,13 +185,29 @@
             //get json danh muc all
 
             try {
-
                 $client1 = new \GuzzleHttp\Client();
-                $res = $client1->request('DELETE',PageController::getUrl('salesoff/'.$req->id.'') );
-                $data = json_decode($res->getBody()->getContents(), true);
-                return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
+                $datatest = array();
+                $resproduct = $client1->request('GET',PageController::getUrl('products'));
+                $dataproduct = json_decode($resproduct->getBody()->getContents(), true);
+                $count = 0;
+                for ($i=0; $i<count($dataproduct['products']);$i++){
+                    if($dataproduct['products'][$i]['saleOff'] != null){
+                        if($req->id == $dataproduct['products'][$i]['saleOff']['_id']){
+                            $count++;
+                        }
+                    }
+                }
+                if($count == 0){
+                    $res = $client1->request('DELETE',PageController::getUrl('salesoff/'.$req->id.'') );
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
+                }else{
+                    return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Phải xóa sản phẩm ra khỏi sự kiện!!']);
+
+                }
+
             } catch (\GuzzleHttp\Exception\RequestException $e) {
-                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Phải xóa thông số lỹ thuật trong loại sản phẩm trước']);
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Phải xóa sản phẩm ra khỏi sự kiện!!']);
             }
         }
  

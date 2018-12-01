@@ -27,6 +27,8 @@
 							<li><a href="{{route('trang-chu-admin-he-thong')}}" id="admin" class=""><i class="lnr lnr-home"></i> <span>Quản lý đăng ký gian hàng</span></a></li>
 							<li><a href="{{route('danh-sach-shop-he-thong')}}" id="category-admin-shop" class=""><i class="lnr lnr-code"></i> <span>Danh sách gian hàng</span></a></li>
 							<li><a href="{{route('them-danh-muc-admin')}}" id="add-category-admin" class=""><i class="lnr lnr-code"></i> <span>Quản lý danh mục	</span></a></li>
+							<li><a href="{{route('all-order-admin')}}" id="all-order-admin" class=""><i class="lnr lnr-code"></i> <span>Danh sách đơn hàng</span></a></li>
+
 						</ul>
 						@endif
 						@if (Session::get('key')['role']['roleName'] == 'Quản lý gian hàng')

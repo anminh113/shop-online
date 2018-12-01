@@ -169,6 +169,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                <button type="button"  class="btn btn-outline-change btn-change text-right"  data-toggle="modal"
+                        data-target="#informationchangepass" class="btn btn-primary">Đổi mật khẩu
+                </button>
                 <button type="submit" form="update" class="btn btn-outline-warning btn-save text-right">Lưu thông tin
                 </button>
             </div>
@@ -186,6 +189,61 @@
     </script>
 </div>
 
+<div class="modal fade" id="informationchangepass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="viewed_title" id="exampleModalLabel">Cập nhật gian hàng&nbsp;  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></h4>&nbsp;
+
+            </div>
+            <div class="modal-body">
+                <form action="{{route('update-profile-shop-admin-pass')}}" method="POST" id="updatepass" name="updatepass">
+                    <div class="row">
+                        <div class="col-lg-6 order-lg-3 order-2">
+                            <div class="form-group">
+                                <label for="">Mật khẩu cũ</label>
+                                <input type="password" required="required" class="form-control" name="oldpass">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-3 order-2">
+                            <div class="form-group">
+                                <label for="">Mật khẩu mới</label>
+                                <input type="password" required="required" class="form-control" name="newpass">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-3 order-2">
+                            <div class="form-group">
+                                <label for="">Xác nhận mật khẩu mới</label>
+                                <input type="password" required="required" class="form-control" name="checkpass">
+                            </div>
+                        </div>
+                        <input type="text" hidden value="{{$data['store']['_id']}}" name="storeId">
+                    </div>
+                    @method('PATCH')
+                    {{ csrf_field() }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                <button type="submit" form="updatepass" class="btn btn-outline-warning btn-save text-right">Lưu thông tin
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("form[name='updatepass']").validate({
+                errorElement: "em",
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</div>
 
 @endsection
 

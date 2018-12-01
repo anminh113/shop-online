@@ -95,19 +95,18 @@
                 <div class="characteristics">
                     <div class="row">
                         <div class="col-lg-7">
-                            @foreach($datareviewproduct['reviewProducts'] as $key => $item)
+                                @foreach($datareviewproduct['reviewProducts'] as $key => $item)
                             <div style="padding-left: 5px;font-size: 13px; padding-bottom: 12px;">Nhận xét và đánh giá sản phẩm đã mua (5 sao: Rất Tốt - 1 sao: Rất Tệ)</div>
                                 <div class="row" style="padding-left: 5px;">
                                 <div class="col-lg-12">
-                                    <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;"><a href="{{ route('san-pham',$item['product']['_id'] )}}"
-                                            tabindex="0">{{$item['product']['productName']}}</a></div>
+                                    <div style="padding-left: 5px;font-size: 14px; padding-bottom: 10px;">{{$item['product']['productName']}}</div>
                                     <div style="color: #757575;"> Nhận xét và đánh giá sản phẩm:</div>       
                                     <div class="rating_r rating_r_{{$item['ratingStar']['ratingStar']}} product_rating">
                                         <i></i><i></i><i></i><i></i><i></i>
                                     </div>
                                     <div class="space20">&nbsp;</div>
                                     <div class="contact_form_text" style="padding-left: 5px;">
-                                        <div style="color: #000;font-size: 14px;height: 150px; width:80%"> Đánh giá chi tiết:
+                                        <div style="color: #000;font-size: 14px;height: 150px; width:80%">
                                             {{$item['review']}}</div>
                                         <div class="contact_form_text" style="margin-left: 10px"></div>
                                     </div>
@@ -119,8 +118,6 @@
                             <hr>
                             @endforeach
                         </div>
-                      
-                      
                         <div class="col-lg-5">
                                 @foreach($datareviewshop['reviewStores'] as $key1 => $item1)
                             <div class="section-title" style="font-size:16px"> Bán bởi <a href="{{route('profileshop',$item1['store']['_id'])}}">{{$item1['store']['storeName']}}</a>
@@ -153,7 +150,7 @@
                             </div>
                             <div class="contact_form_text" style="padding-left: 5px;">
                                 <div class="space20">&nbsp;</div>
-                                <div style="font-size: 14px; height: 150px"> Đánh giá chi tiết: {{$item1['review']}}</div>
+                                <div style="font-size: 14px; height: 150px"> {{$item1['review']}}</div>
                             </div>
                             <hr>
                             @endforeach

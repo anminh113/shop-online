@@ -48,7 +48,7 @@
              Log::info($result);
              curl_close($ch);
              //end post json
-             return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+             return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm danh mục']);
         }
 
         public function postAddProductTypeAdmin(Request $req){
@@ -195,7 +195,7 @@
 
             }
 
-            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã tạo gian hàng']);
         }
 
         //Admin gian hàng
@@ -267,7 +267,7 @@
                 curl_setopt_array( $ch1, $options1 );
                 $result2 =  curl_exec($ch1);
 
-                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                return redirect()->route('san-pham-admin')->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm sản phẩm thành công']);
             }
            
         }
@@ -309,7 +309,7 @@
                 curl_setopt_array( $ch, $options );
                 $result =  curl_exec($ch);
                 
-            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm danh mục']);
             }   elseif($count == 0){
                 $value1 =(["category" => $req->categoryId]);
                 $datajson=array([
@@ -330,7 +330,7 @@
                 $result =  curl_exec($ch);
                 $result1 =json_decode($result);
                 // dd($result1);
-                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm danh mục']);
             }
           
             return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Thêm danh mục không thành công']);
@@ -375,7 +375,7 @@
                 );
                 curl_setopt_array($ch, $options);
                 $result = curl_exec($ch);
-                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm sự kiện']);
             }
         return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Ngày kết thúc phải lớn hơn ngày bắt đầu!!!']);
         }
@@ -403,7 +403,7 @@
                     $result =  curl_exec($ch);
 
                 }
-                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm sản phẩm vào sự kiện']);
             }else{
                 return redirect()->back()->with(['flag'=>'warning','title'=>'Thông báo' ,'message'=>'Bạn phải chọn sản phẩm và sự kiện giảm giá!!!']);
             }
@@ -509,11 +509,11 @@
                 );
                 curl_setopt_array( $ch1, $options1 );
                 $result =  curl_exec($ch1);
-                  return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+                  return redirect()->route('dang-nhap')->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đăng ký thành công']);
             }else{
                 return redirect()->back()->with(['flag'=>'warning','title'=>'Thất bại' ,'message'=>'Tên tài khoản đã được sử dụng']);
             }
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        return redirect()->route('dang-nhap')->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đăng ký thành công']);
         }
 
         public function postRegisterGoogleFacebook(Request $req){
@@ -576,7 +576,7 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm thông tin']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã cập nhật thông tin']);
         }
 
         public function postDeliveryProfileUser(Request $req){
@@ -1188,7 +1188,7 @@
                     curl_setopt_array( $ch, $options );
                     $result =  curl_exec($ch);
                     $result1 =json_decode($result);
-                    return redirect()->back()->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
+                    return redirect()->route('trang-chu')->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
                 }
               
             }

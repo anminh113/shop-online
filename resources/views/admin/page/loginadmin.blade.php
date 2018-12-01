@@ -21,6 +21,8 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="source/admin/assets/img/icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="source/admin/assets/img/icon.png">
+	<link href="{{ URL::asset('source/admin/assets/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" >
+
 	<style type="text/css">
 		.auth-box .left:before{
 			     height: auto; 
@@ -41,11 +43,7 @@
 					<div class="left">
 						<div class="content">
 							<div class="header">
-									@if(Session::has('flag'))
-										<div class="alert alert-{{Session::get('flag')}}">
-											{{Session::get('message')}}
-										</div>
-									@endif	
+
 								<div class="logo text-center"><img src="source/admin/assets/img/primary_transparent.png" alt="CyberZone Logo"></div>
 								<p class="lead">Login to your account</p>
 							</div>
@@ -78,6 +76,7 @@
 	</div>
 	<!-- END WRAPPER -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js" type="text/javascript"></script>
+	<script src="source/user/styles/js/iziToast.min.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -121,6 +120,37 @@
 			});
 		});
 	</script>
+
+	@if(Session::has('flag'))
+		<button class="form-control"  id="test" onclick="myAlertTop_warning()" style="display: none;">{{Session::get('message')}}</button>
+		<script>
+            var test1 = '{{Session::get('message')}}';
+            if (test1 != '') {
+                setTimeout(function() {
+                    document.getElementById('test').click();
+                }, 100);
+            }
+		</script>
+		<script>
+            iziToast.settings({
+                timeout: 3000,
+                resetOnHover: true,
+                transitionIn: 'flipInX',
+                transitionOut: 'flipOutX',
+                position: 'topCenter',
+                theme: 'light',
+            });
+		</script>
+
+		<script>
+            function myAlertTop_warning() {
+                iziToast.{{Session::get('flag')}} ({
+                    title: '{{Session::get('title')}}',
+                    message: '{{Session::get('message')}}',
+                });
+            }
+		</script>
+	@endif
 </body>
 
 </html>

@@ -15,7 +15,22 @@
 <script src="source/user/js/jquery-3.3.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 <script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
-
+<style>
+    .standard_dropdown li p {
+        display: block;
+        position: relative;
+        font-size: 16px;
+        font-weight: 300;
+        color: #000000;
+        line-height: 56px;
+        white-space: nowrap;
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -ms-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease;
+    }
+</style>
 
 
 

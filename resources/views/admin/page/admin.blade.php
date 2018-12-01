@@ -55,7 +55,7 @@
                                         <td>{{$item['customer']['name']}}</td>
                                         <td>{{$item['phoneNumber']}}</td>
                                         <td><script>var dtstart = moment('{{$item['registeredDate']}}').format('MM/DD/YYYY'); document.write(dtstart);</script></td>
-                                        <td ><span class="label label-danger">Đã hủy đăng ký</span></td>
+                                        <td ><span class="label label-danger">Đã từ chối đơn đăng ký</span></td>
                                     </tr>
                                     <?php $i++;?>
                                     @elseif($item['isApprove'] === true )
@@ -102,8 +102,9 @@
                 <input type="text" hidden value="{{$item['_id']}}" name="registeredSalesId">
             </div>
             <div class="modal-footer">
-                <button type="submit" form="deny{{$item['_id']}}" class="btn btn-danger">Từ Chối</button>
-                <button type="submit" class="btn btn-success">Chấp Nhận</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
+                <button type="submit" form="deny{{$item['_id']}}" class="btn btn-change">Từ Chối</button>
+                <button type="submit" class="btn btn-save">Chấp Nhận</button>
             </div>
             {{ csrf_field() }}
         </form>
@@ -119,6 +120,7 @@
 @endsection
 
 @section('footer')
+    <script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/ddtf.js') }}"></script>
 
 <script>
     var element = document.getElementById("admin");

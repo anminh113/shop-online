@@ -9,6 +9,8 @@
     use GuzzleHttp\Pool;
     use Illuminate\Support\Facades\Log;
     use GuzzleHttp\Exception\RequestException;
+use DateTime;
+use DateTimeZone;
 
  
     class UpdateController extends Controller{
@@ -44,7 +46,7 @@
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
       
-        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã cập nhật thành công']);
     }
 
     public function updatePasswordProfileUser(Request $req){
@@ -204,7 +206,7 @@
         curl_setopt_array( $ch2, $options2 );
         $result2 =  curl_exec($ch2);
         $result12 =json_decode($result2);
-        return redirect()->back()->with(['flag'=>'error','title'=>'Đã từ chối' ,'message'=>' ']);
+        return redirect()->back()->with(['flag'=>'error','title'=>'Đã từ chối đơn đăng ký tạo gian hàng' ,'message'=>' ']);
     }
 
     // Admin gian hàng
@@ -300,7 +302,7 @@
             curl_setopt_array( $ch1, $options1 );
             $result2 =  curl_exec($ch1);
             // dd($result2);
-            return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+            return redirect()->route('san-pham-admin')->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
         }
                     
     
@@ -328,7 +330,7 @@
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
-        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
     }
 
     public function updateOrderAdminWatning(Request $req){
@@ -348,7 +350,7 @@
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
-        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
     }
 
     public function updateOrderAdminShipping(Request $req){
@@ -368,7 +370,7 @@
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
-        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
     }
 
     public function updateProfileShopAdmin(Request $req){
@@ -404,10 +406,30 @@
 
     public function updateDiscount(Request $req){
         // post data json
-        $datajson=array([
+        $dtstart = new DateTime($req->startdateupdate);
+        $dtstart->setTimezone(new DateTimeZone('UTC'));
+        $start =  $dtstart->format('Y-m-d\TH:i:s.u\Z');
+
+        $dtend = new DateTime($req->enddateupdate);
+        $dtend->setTimezone(new DateTimeZone('UTC'));
+        $end =  $dtend->format('Y-m-d\TH:i:s.u\Z');
+//        dd($req);
+         if($end > $start) {
+        $datajson=array(
+            [
             "propName" => "discount",
-            "value" => $req->DiscountNumber]
+            "value" => $req->DiscountNumber
+            ],
+            [
+                "propName" => "dateStart",
+                "value" => $start
+            ],
+            [
+                "propName" => "dateEnd",
+                "value" => $end
+            ]
         );
+
         $jsonData =json_encode($datajson);
         $json_url = PageController::getUrl('salesoff/'.$req->id.'');
         $ch = curl_init( $json_url );
@@ -425,6 +447,47 @@
         curl_close($ch);
         //end post json
         return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật thành công' ,'message'=>' ']);
+         }else{
+             return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Ngày kết thúc phải lớn hơn ngày bắt đầu!!!']);
+
+         }
+    }
+
+    public function updateProfileShopAdminPass(Request $req){
+         $client = new \GuzzleHttp\Client();
+        // post data json
+        if(($req['newpass'] != $req['checkpass']) ) {
+
+            return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Mật khẩu xác nhận không chính xác!!! ']);
+
+        }else if($req['newpass']==$req['checkpass']){
+            $res = $client->request('GET', PageController::getUrl('accounts/'.Session::get('key')['_id'].''));
+            $data = json_decode($res->getBody()->getContents(), true);
+            if($data['account']['password'] == $req['oldpass']){
+                $datajson=array(
+                    [
+                        "propName" => "password",
+                        "value" => $req['newpass']
+                    ]
+                );
+                // dd($datajson);
+                $jsonData =json_encode($datajson);
+                $json_url = PageController::getUrl('accounts/'.Session::get('key')['_id'].'');
+                $ch = curl_init( $json_url );
+                $options = array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                    CURLOPT_CUSTOMREQUEST => "PATCH",
+                    CURLOPT_POSTFIELDS => $jsonData
+                );
+                curl_setopt_array( $ch, $options );
+                $result =  curl_exec($ch);
+            }else{
+                return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Mật khẩu cũ không chính xác!!! ']);
+            }
+            return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã cập nhật']);
+            //end post json
+        }
     }
 
     }

@@ -38,7 +38,6 @@
         <form action="{{route('post-dang-ky')}}" id="dangky" method="POST" name="dangky1">
         <div class="row">
                     <div class="col-lg-6">
-
                         <div class="space10">&nbsp;</div>
                         <div class="form-group">
                             <label for="hoten">Họ Tên</label>
@@ -80,7 +79,7 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-4 col-md-4">
-                                            <select class="form-control" id="years" name="year">
+                                            <select class="form-control" name="year" id="years" >
                                                 <option>Năm</option>
                                             </select>
                                         </div>
@@ -131,15 +130,16 @@
                                                 style="border-radius: 5px; "><i class="fab fa-google"></i> Google</button>
                                         </div>
                                     </div>
-                                    <div id="name"></div>
+                                    <div hidden id="name"></div>
+
                                     <div class="space5">&nbsp</div>
                                 </div>
                                 <div class="col-lg-6 col-md-6"> <button onclick="login()" type="button" title="Facebook" class="btn btn-facebook btn-lg"
                                         style="border-radius: 5px; "><i class="fab fa-facebook-f"></i> Facebook</button></div>
                             </div>
+
                             <div class="space10">&nbsp;</div>
                         </div>
-                        <div id="status"></div>
 
                     </div>
         </div>

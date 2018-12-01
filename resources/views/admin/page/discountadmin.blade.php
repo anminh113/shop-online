@@ -316,36 +316,93 @@
                                             <td data-toggle="modal" data-target="#accept{{$item['_id']}}"><script>var dtstart = moment('{{$item['dateEnd']}}').format('DD/MM/YYYY HH:mm'); document.write(dtstart);</script></td>
                                             <td><div><a id="delete{{$item['_id']}}" href="{{route('delete-discount-admin',$item['_id'])}}" >Xóa đợt giảm giá</a></div></td>
                                         </tr>
+                                        <script>
+                                            $('#delete{{$item['_id']}}').click(function(e){
+                                                e.preventDefault();
+                                                var link = $(this).attr('href');
+                                                console.log(link);
+                                                swal({
+                                                    title: 'Xác nhận?',
+                                                    text: "Bạn có muốn thực hiện hành động này",
+                                                    type: 'warning',
+                                                    position: 'top',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#008496',
+                                                    cancelButtonColor: '#FA5821',
+                                                    confirmButtonText: 'Đồng ý',
+                                                    cancelButtonText: 'Hủy'
+
+                                                }).then((result) => {
+                                                    if (result.value) {
+                                                        window.location.href = link;
+                                                    }
+                                                })
+                                            });
+                                        </script>
                                         <?php $i++;?>
                                         <div class="modal fade" id="accept{{$item['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title" id="exampleModalLongTitle">Cập nhật phần trăm giảm giá</h4>
+                                                        <h4 class="modal-title" id="exampleModalLongTitle">Cập nhật sự kiện giảm giá</h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <div class="input-group">
-                                                            <form action="{{route('update-discount-admin')}}" method="post" id="updatedis">
-                                                                <input class="form-control" type="number"  required="required" name="DiscountNumber" min="1" value="{{$item['discount']}}"
-                                                                       max="99">
-                                                                <span class="input-group-addon">%</span>
-                                                                <input type="text" hidden name="id" value="{{$item['_id']}}">
-                                                                @method('PATCH')
-                                                                {{ csrf_field() }}
-                                                            </form>
-                                                        </div>
-                                                    </div>
 
+
+                                                    <div class="modal-body">
+                                                        <form action="{{route('update-discount-admin')}}" method="post" id="updatedis{{$item['_id']}}" name="addtypeproduct{{$item['_id']}}">
+
+                                                        <div class="row">
+                                                                <div class="col-lg-12 col-md-6">
+                                                                    <label for="basic">Phần trăm giảm giá:</label>
+                                                                    <div class="input-group" style="width: 41%" >
+                                                                        <input class="form-control" type="number"  required="required" name="DiscountNumber" min="1" value="{{$item['discount']}}"
+                                                                               max="99">
+                                                                        <input type="text" hidden name="id" value="{{$item['_id']}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 col-md-6">
+                                                                    <label for="basic">Ngày bắt đầu:</label>
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="datetime-local"  required="required"  name="startdateupdate" id="stardate1{{$item['_id']}}" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12 col-md-6">
+                                                                    <label for="basic">Ngày kết thúc:</label>
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="datetime-local"  required="required" name="enddateupdate" id="enddate1{{$item['_id']}}" >
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                            @method('PATCH')
+                                                            {{ csrf_field() }}
+                                                        </form>
+
+                                                    </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
-                                                        <button type="submit" form="updatedis" class="btn btn-success">Lưu</button>
+                                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Thoát</button>
+                                                        <button type="submit" form="updatedis{{$item['_id']}}" class="btn btn-save">Lưu</button>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <script>
+                                                var date = new Date('{{$time}}');
+                                                var day = date.getDate();
+                                                var month = date.getMonth() + 1;
+                                                var year = date.getFullYear();
+                                                if (month < 10) month = "0" + month;
+                                                if (day < 10) day = "0" + day;
+                                                var today = year + "-" + month + "-" + day;
+                                                document.getElementById("stardate1{{$item['_id']}}").min = today + 'T00:00';
+                                                document.getElementById("enddate1{{$item['_id']}}").min = today + 'T00:00';
+                                            </script>
                                         </div>
+
+
                                         @endif
                                     @endforeach
                                     </tbody>
@@ -492,10 +549,8 @@
 </script>
 
 <script>
-    $.getJSON(
-        'http://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh',
-        function (data) {
-            var date = new Date(data['formatted']);
+
+            var date = new Date('{{$time}}');
             var day = date.getDate();
             var month = date.getMonth() + 1;
             var year = date.getFullYear();
@@ -504,9 +559,10 @@
             var today = year + "-" + month + "-" + day;
             document.getElementById("stardate").min = today + 'T00:00';
             document.getElementById("enddate").min = today + 'T00:00';
-        });
+
 
 </script>
+
 
 
 @endsection

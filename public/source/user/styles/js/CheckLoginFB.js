@@ -75,24 +75,3 @@ function getInfo() {
     });
 }
 
-function facebookLogout() {
-    FB.init({
-        appId : "2193459764274637",
-        cookie: true,
-        status: true,
-        xfbml : true,
-        oauth : true,
-        version: 'v3.1'
-    });
-    FB.getLoginStatus(function(response) {
-        if (response.authResponse) {
-            FB.logout(function() {
-                window.location = "https://localhost/shop-online/public/login";
-            });
-            return false;
-        } else {
-            window.location = "https://localhost/shop-online/public/login";
-            return false;
-        }
-    });
-}

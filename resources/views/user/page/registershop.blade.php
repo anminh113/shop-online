@@ -47,7 +47,6 @@ border: 1px solid #FA1111;
                         <input type="text" required="required" class="form-control" id="namestore" name="namestore" aria-describedby=""
                             placeholder="">
                     </div>
-                   
                     <div class="space10">&nbsp;</div>
                     <div class="form-group">
                         <label for="email" class="text-size">Email</label>

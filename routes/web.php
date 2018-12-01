@@ -495,5 +495,13 @@ Route::patch('profile-shop', [
     'uses'=>'UpdateController@updateProfileShopAdmin'
 ]);
 
+Route::patch('profile-shop-pass', [
+    'as'=>'update-profile-shop-admin-pass',
+    'uses'=>'UpdateController@updateProfileShopAdminPass'
+]);
 
+Route::get('all-order-admin', [
+    'as'=>'all-order-admin',
+    'uses'=>'PageController@getAllOrderAdmin'
+]);
 

@@ -942,7 +942,11 @@ class PageController extends Controller
 
     public function getRegisterShop()
     {
-        return view('user/page.registershop');
+        if(Session::has('keyuser')){
+            return view('user/page.registershop');
+        }else{
+            return redirect()->route('dang-nhap');
+        }
     }
 
     public function getReviewShop(Request $req)
@@ -1908,6 +1912,31 @@ class PageController extends Controller
 
 
     }
+
+    public function getAllOrderAdmin()
+    {
+        if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên') {
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET', PageController::getUrl('orders'));
+            $data = json_decode($res->getBody()->getContents(), true);
+
+            for ($i = 0; $i < $data['count']; $i++) {
+                $resProductOrder = $client->request('GET', PageController::getUrl('orderItems/order/' . $data['orders'][$i]['_id'] . ''));
+                $dataProductorderAll[] = json_decode($resProductOrder->getBody()->getContents(), true);
+                for ($j = 0; $j < count($dataProductorderAll[$i]['orderItems']); $j++) {
+                    if ($data['orders'][$i]['_id'] == $dataProductorderAll[$i]['orderItems'][$j]['orderId']) {
+                        $data['orders'][$i]['OrderItem'] = $dataProductorderAll[$i]['orderItems'];
+                    }
+                }
+            }
+//            dd($data);
+            return view('admin/page.allorderadmin',compact('data'));
+        }
+        return redirect()->guest(route('login-admin', [], false));
+
+
+    }
+
 
 }
 

@@ -3,8 +3,40 @@
     <script src="source/user/styles/js/CheckLoginFB.js"></script>
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com">
-    <script src="source/user/styles/js/CheckLoginGG.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script>
+        function signOut(){
+            gapi.load('auth2', function() {
+                auth2 = gapi.auth2.init(  {'client_id': '981798466996-o7ffbpavqm598cap9ems9fungt4juob1.apps.googleusercontent.com',
+                    'cookiepolicy': 'single_host_origin'});
+                auth2.signOut().then(function () {
+                    auth2.disconnect();
+                    window.location = "https://localhost/shop-online/public/login";
+                });
+            });
+        }
+        function facebookLogout() {
+            FB.init({
+                appId : "2193459764274637",
+                cookie: true,
+                status: true,
+                xfbml : true,
+                oauth : true,
+                version: 'v3.1'
+            });
+            FB.getLoginStatus(function(response) {
+                if (response.authResponse) {
+                    FB.logout(function() {
+                        window.location = "https://localhost/shop-online/public/login";
+                    });
+                    return false;
+                } else {
+                    window.location = "https://localhost/shop-online/public/login";
+                    return false;
+                }
+            });
+        }
+    </script>
     <!-- Top Bar -->
     <div class="top_bar">
         <div class="container">
@@ -35,7 +67,7 @@
                         <div class="top_bar_menu">
                             <ul class="standard_dropdown top_bar_dropdown">
                                 <li>
-                                    <p class="fix"  onclick="facebookLogout();signOut();" style="cursor: pointer; ">Đăng xuất</p>
+                                    <p class="fix"  onclick="facebookLogout();signOut();" style="cursor: pointer; color: #000000 ">Đăng xuất</p>
                                 </li>
                             </ul>
                         </div>

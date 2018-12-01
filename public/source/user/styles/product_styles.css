@@ -2192,7 +2192,6 @@ select option
 }
 
 
-
 .btn-buy1{
 	height: 50px;
 	font-size: 16px;
@@ -2204,4 +2203,18 @@ select option
 	float: left;
 	margin-right: 30px;
 	margin-left: 30px;
+}
+.standard_dropdown li p {
+	display: block;
+	position: relative;
+	font-size: 16px;
+	font-weight: 300;
+	color: #000000;
+	line-height: 56px;
+	white-space: nowrap;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
 }
