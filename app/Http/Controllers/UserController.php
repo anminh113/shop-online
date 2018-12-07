@@ -46,6 +46,8 @@ class UserController extends Controller
                 {
                     $req->session()->put('key',$data['account'] );
                     return redirect()->route('trang-chu-admin-he-thong')->with(['flag'=>'info','title'=>'Xin chào!!!' ,'message'=>'','role'=>'Quản trị viên']);
+                }else{
+                    return redirect()->route('login-admin')->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);
                 }
             }else{
                 return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại!','message'=>'Đăng nhập không thành công']);

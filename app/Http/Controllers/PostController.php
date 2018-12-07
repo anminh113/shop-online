@@ -824,7 +824,6 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-            dd($result1);
             if($result1->charge->status == "succeeded"){
                 $datajson=array([
                     "propName" =>  "orderState",

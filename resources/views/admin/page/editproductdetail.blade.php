@@ -13,12 +13,7 @@
 
 <!-- MAIN -->
 <div class="main">
-    <ul class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Pictures</a></li>
-        <li><a href="#">Summer 15</a></li>
-        <li>Italy</li>
-    </ul>
+
     <form id="imgur" class="upload">
         <input hidden type="file" id="file-upload1" class=" imgur btn btn-default btn-file" accept="image/*"
             data-max-size="5000" />
