@@ -40,7 +40,7 @@
                         <div class="product-details">
                             <div class="product-title">{{$item['item']['productName']}}</div>
                         </div>
-                        <div class="product-price">
+                        <div class="product-price" style="color: #F00026;">
                             @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time) 
                                 {{number_format($item['item']['price'])}},000₫ 
                             @else
@@ -63,7 +63,7 @@
                                 </div>
                             </span>
                         </div>
-                        <div class="product-line-price">
+                        <div class="product-line-price" style="color: #F00026;">
                             @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                 {{number_format($item['qty'] * $item['item']['price'])}},000₫
                             @else
@@ -107,7 +107,7 @@
                                 <div class="product-details">
                                     <div class="product-title">{{$item['item']['productName']}}</div>
                                 </div>
-                                <div class="product-price">
+                                <div class="product-price" style="color: #F00026;">
                                     @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                         {{number_format($item['item']['price'])}},000₫
                                     @else
@@ -118,7 +118,7 @@
                                 <div class="product-quantity">
                                         <div class="product-title"><i>Sản phẩm tạm hết hàng</i></div>
                                 </div>
-                                <div class="product-line-price">
+                                <div class="product-line-price" style="color: #F00026;">
                                     @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                         {{number_format($item['qty'] * $item['item']['price'])}},000₫
                                     @else
@@ -168,7 +168,7 @@
                             <div class="col-lg-6">
                                 <div class="order_total_content text-letf">
                                     <div class="order_total_title text-letf">Tạm tính:</div>
-                                    <div class="order_total_amount">
+                                    <div class="order_total_amount" style="color: #F00026;">
                                         {{number_format(Session::get('cart')->totalPrice)}},000₫
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="order_total_content text-left">
                                     <div class="order_total_title text-letf">Thành Tiền:</div>
-                                    <div class="order_total_amount"> {{number_format(Session::get('cart')->totalPrice) + $item['transportFee']}},000₫</div>
+                                    <div class="order_total_amount" style="color: #F00026;"> {{number_format(Session::get('cart')->totalPrice) + $item['transportFee']}},000₫</div>
                                 </div>
                                 @break
                                 @elseif($item['totalPriceMax'] == null)
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="order_total_content text-left">
                                         <div class="order_total_title text-letf">Thành Tiền:</div>
-                                        <div class="order_total_amount"> {{number_format(Session::get('cart')->totalPrice) }},000₫</div>
+                                        <div class="order_total_amount" style="color: #F00026;"> {{number_format(Session::get('cart')->totalPrice) }},000₫</div>
                                     </div>
                                     @break
                                 @endif

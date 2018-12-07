@@ -138,14 +138,18 @@
                                         {{$datawl}}
                                     </span></div>
                             </div>
-                          
+                            @else
+                                <div class="wishlist_icon" >
+                                    <img src="source/user/images/heart.png" alt="">
+
+                                </div>
                             @endif
                         </div>
                         <!-- Cart -->
-                        <div class="cart" onclick="window.location='cart';">
+                        <div class="cart" >
                             <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                 @if(Session::has('cart'))
-                                <div class="cart_icon">
+                                <div class="cart_icon" onclick="window.location='cart';">
                                     <img src="source/user/images/cart.png" alt="">
                                     <div class="cart_count"><span>
                                             {{Session('cart')->totalQty}}
@@ -155,6 +159,17 @@
                                     {{-- <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div>
                                     --}}
                                 </div>
+                                    @else
+                                    <div class="cart_icon">
+                                        <img src="source/user/images/cart.png" alt="">
+                                        <div class="cart_count"><span>
+0
+                                    </span></div>
+                                    </div>
+                                    <div class="cart_content">
+                                        {{-- <div class="cart_price">{{number_format(Session('cart')->totalPrice, 3)}}.000₫</div>
+                                        --}}
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -192,8 +207,6 @@
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a href="index">Trang Chủ<i class="fas fa-chevron-down"></i></a></li>
-
-                                <li><a href="contact">Liên hệ <i class="fas fa-chevron-down"></i></a></li>
                             </ul>
                         </div>
                         <!-- Menu Trigger -->
@@ -218,18 +231,14 @@
                     <div class="page_menu_content">
                         <div class="page_menu_search">
                             <form action="{{route('post-danhsach-sanpham')}}" method="POST">
-
                                 <input type="search" required="required" name="search" class="page_menu_search_input" placeholder="Tìm kiếm sản phẩm...">
                                 {{ csrf_field() }}
                             </form>
                         </div>
                         <ul class="page_menu_nav">
-
                             <li class="page_menu_item">
                                 <a href="index">Trang chủ<i class="fa fa-angle-down"></i></a>
                             </li>
-
-                            <li class="page_menu_item"><a href="contact">Liên hệ<i class="fa fa-angle-down"></i></a></li>
                         </ul>
 
                     </div>

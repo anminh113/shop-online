@@ -108,7 +108,7 @@
                                                     - ($item['price'] * $item['saleOff']['discount'])/100, 0, '',
                                                         '')}}@if( $item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'], 0, '',
                                                         '')}}</span>@endif</div>
-                                                        <div class="product_price" style="font-size: 16px" id="price{{$item['_id']}}">{{number_format($item['price']
+                                                        <div class="product_price" style="font-size: 16px;color: #F00026;" id="price{{$item['_id']}}">{{number_format($item['price']
                                                     - ($item['price'] *
                                                     $item['saleOff']['discount'])/100)}},000₫@if($item['saleOff']['dateEnd'] > $time)<span>{{number_format($item['price'])}},000₫</span>@endif</div>
                                                         <div class="product_name">
@@ -148,7 +148,7 @@
                                                     <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['product']['_id']}}">{{number_format($item['product']['price'],0, '', '')}}<span>{{number_format($item['product']['price'], 0, '',
                                                 '')}}</span></div>
 
-                                                    <div class="product_price" style="font-size: 16px" id="price{{$item['product']['_id']}}">{{number_format($item['product']['price'])}},000₫</div>
+                                                    <div class="product_price" style="font-size: 16px;color: #F00026;" id="price{{$item['product']['_id']}}">{{number_format($item['product']['price'])}},000₫</div>
 
                                                     <div class="product_name">
                                                         <div><a href="{{ route('san-pham',$item['product']['_id'] )}}" tabindex="0">{{$item['product']['productName']}}</a></div>

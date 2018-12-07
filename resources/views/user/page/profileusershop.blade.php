@@ -118,7 +118,7 @@
                                                             @if(!empty($item['product']['saleOff']) &&
                                                             $item['product']['saleOff']['dateEnd'] >
                                                             $time12)
-                                                                <div class="price"><span class="currPrice">{{number_format($item['product']['price']
+                                                                <div class="price"><span class="currPrice"  >{{number_format($item['product']['price']
                                                 - ($item['product']['price'] *
                                                 $item['product']['saleOff']['discount'])/100)}},000₫</span>
                                                                     <div class="originPrice">

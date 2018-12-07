@@ -134,11 +134,11 @@ function registerElements(elements, exampleName) {
         hiddenInputToken.setAttribute('name', 'stripeToken');
         hiddenInputToken.setAttribute('value', result.token.id);
 
-        var hiddenValueEmail = document.getElementById('example2-address').value;
-        var hiddenInputEmail = document.createElement('input');
-        hiddenInputEmail.setAttribute('type', 'hidden');
-        hiddenInputEmail.setAttribute('name', 'email');
-        hiddenInputEmail.setAttribute('value', hiddenValueEmail);
+        // var hiddenValueEmail = document.getElementById('example2-address').value;
+        // var hiddenInputEmail = document.createElement('input');
+        // hiddenInputEmail.setAttribute('type', 'hidden');
+        // hiddenInputEmail.setAttribute('name', 'email');
+        // hiddenInputEmail.setAttribute('value', hiddenValueEmail);
 
     
         
@@ -148,8 +148,7 @@ function registerElements(elements, exampleName) {
 
 
         form.appendChild(hiddenInputToken);
-        form.appendChild(hiddenInputEmail);
-        document.body.appendChild(form);   
+        document.body.appendChild(form);
         // form.setAttribute('{{ csrf_field() }}');
         form.submit();
         

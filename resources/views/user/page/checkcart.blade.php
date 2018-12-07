@@ -69,7 +69,7 @@
                         <div class="product-details">
                             <div class="product-title">{{$item['item']['productName']}}</div>
                         </div>
-                        <div class="product-price">
+                        <div class="product-price" style="color: #F00026;">
                             @if(empty($item['item']['saleOff']) || $item['item']['saleOff']['dateEnd'] < $time)
                                 {{number_format($item['item']['price'])}},000₫ @else
                                 {{number_format($item['item']['price'] - ($item['item']['price'] *$item['item']['saleOff']['discount'])/100)}},000₫ @endif </div> 
@@ -77,7 +77,7 @@
                                 {{$item['qty']}}
                                 </div>
 
-                        <div class="product-line-price"> @if(empty($item['item']['saleOff']) ||
+                        <div class="product-line-price" style="color: #F00026;"> @if(empty($item['item']['saleOff']) ||
                             $item['item']['saleOff']['dateEnd']
                             < $time) {{number_format($item['qty'] * $item['item']['price'])}},000₫ @else
                                 {{number_format($item['qty'] * ($item['item']['price'] -($item['item']['price'] *$item['item']['saleOff']['discount'])/100))}},000₫ @endif </div> 
@@ -179,7 +179,7 @@
                                         <input type="text" hidden form="deliveryAddress" name="totalQuantity" value="{{Session('cart')->totalQty}}">
                                     </div>
                                     <div class="col-lg-5 col-md-6">
-                                        <div class="order_cart_amount text-right">{{number_format(Session::get('cart')->totalPrice)}},000₫</div>
+                                        <div class="order_cart_amount text-right" style="color: #F00026;">{{number_format(Session::get('cart')->totalPrice)}},000₫</div>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                                         <div class="order_cart_title ">Tổng cộng</div>
                                     </div>
                                     <div class="col-lg-5 col-md-5">
-                                        <div class="order_cart_amount text-right text-danger">{{number_format(Session::get('cart')->totalPrice) + $item['transportFee']}},000₫</div>
+                                        <div class="order_cart_amount text-right text-danger" style="color: #F00026;">{{number_format(Session::get('cart')->totalPrice) + $item['transportFee']}},000₫</div>
                                         <input type="text" form="deliveryAddress" hidden name="totalPrice" value="{{Session::get('cart')->totalPrice + $item['transportFee']}}">
                                     </div>
                                     <div class="col-lg-12">
@@ -229,7 +229,7 @@
                                         <div class="order_cart_title ">Tổng cộng</div>
                                     </div>
                                     <div class="col-lg-5 col-md-5">
-                                        <div class="order_cart_amount text-right text-danger">{{number_format(Session::get('cart')->totalPrice)}},000₫</div>
+                                        <div class="order_cart_amount text-right text-danger" style="color: #F00026;">{{number_format(Session::get('cart')->totalPrice)}},000₫</div>
                                         <input type="text" form="deliveryAddress" hidden name="totalPrice" value="{{Session::get('cart')->totalPrice}}">
 
                                     </div>

@@ -798,19 +798,20 @@
         public function postCheckOut(Request $req){
             $client1 = new \GuzzleHttp\Client();
             $amount= $req['amount'];
-            $from="VND";
-            $to="USD";
+            $from="USD";
+            $to="VND";
             $url = file_get_contents('https://free.currencyconverterapi.com/api/v5/convert?q=' . $from . '_' . $to . '&compact=ultra');
             $json = json_decode($url, true);
             $rate = implode(" ",$json);
-            $total = $rate * $amount * 100;
-            $rounded = round($total); 
+            $total =  ($amount / ($rate /1000)) ;
+            $rounded = round($total);
             $datajson=array(
-                "email" =>   $req['email'],
+                "email" =>   Session::get('keyuser')['customer']['email'],
                 "order" =>  $req['orderId'],
                 "source" =>  $req['stripeToken'],
-                "amount" =>  $rounded
+                "amount" =>  $rounded * 100
                 );
+//            dd($datajson);
             $jsonData =json_encode($datajson);
             $json_url = PageController::getUrl('checkouts');
             $ch = curl_init( $json_url );
@@ -823,8 +824,8 @@
             curl_setopt_array( $ch, $options );
             $result =  curl_exec($ch);
             $result1 =json_decode($result);
-//            dd($result1);
-            if($result1->charge->status = "succeeded"){
+            dd($result1);
+            if($result1->charge->status == "succeeded"){
                 $datajson=array([
                     "propName" =>  "orderState",
                     "value" =>  "5b9a17f3e747da371818fd9d"

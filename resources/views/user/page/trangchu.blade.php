@@ -100,7 +100,7 @@
                                                     - ($item['product']['price'] *
                                                     $item['product']['saleOff']['discount'])/100)}},000₫<span style="text-decoration:line-through">{{number_format($item['product']['price'])}},000₫</span></div>
                                                 @else
-                                                <div class="product_price" style=" color:#000; ">{{number_format($item['product']['price'])}},000₫</div>
+                                                <div class="product_price" style="color: #F00026;">{{number_format($item['product']['price'])}},000₫</div>
                                                 @endif
                                                 <div class="product_name">
                                                     <div><a href="{{ route('san-pham',$item['product']['_id'] )}}" tabindex="0">{{$item['product']['productName']}}</a></div>
@@ -350,10 +350,8 @@
                                             @foreach ($result['datatext'] as $da )
                                             @foreach ($da['imageList'] as $da1)
                                             @if($item['_id'] == $da['productId'])
-                                            {{-- @foreach($da1['imageList'] as $da2) --}}
                                             <img src={{$da1['imageURL']}} width="115" height="115" alt="">
                                             @break
-                                            {{-- @endforeach --}}
                                             @endif
                                             @endforeach
                                             @endforeach</div>
@@ -366,7 +364,7 @@
                                             <div class="text1 "><div class="my-rating-{{$item['_id']}}" style="margin-right: 0px;display: inline-block;vertical-align: middle;"></div></div>
                                             <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$j]['count']}})</div> </div>
                                         </div>
-                                        <div class="bestsellers_price discount">
+                                        <div class="bestsellers_price "style="color: #F00026;">
                                              @if(empty($item['saleOff']) || $item['saleOff']['dateEnd'] > $time)
                                                 {{number_format($item['price'] - ($item['price'] * $item['saleOff']['discount'])/100)}},000₫<span>{{number_format($item['price'])}},000₫</span>
                                                 @else
@@ -391,10 +389,8 @@
                                             @foreach ($result['datatext'] as $da )
                                             @foreach ($da['imageList'] as $da1)
                                             @if($item['_id'] == $da['productId'])
-                                            {{-- @foreach($da1['imageList'] as $da2) --}}
                                             <img src={{$da1['imageURL']}} width="115" height="115" alt="">
                                             @break
-                                            {{-- @endforeach --}}
                                             @endif
                                             @endforeach
                                             @endforeach</div>
@@ -407,11 +403,10 @@
                                                     <div class="text2"> <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$j]['count']}})</div> </div>
                                                 </div>
                                         </div>
-                                        <div class="bestsellers_price "> {{number_format($item['price'])}},000₫</div>
+                                        <div class="bestsellers_price " style="color: #F00026;">{{number_format($item['price'])}},000₫</div>
                                     </div>
                                 </div>
                                 <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
-                                
                             </div>
                             @endif
                                 @if($i>12)

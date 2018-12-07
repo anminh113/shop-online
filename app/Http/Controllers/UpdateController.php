@@ -354,10 +354,12 @@ use DateTimeZone;
     }
 
     public function updateOrderAdminShipping(Request $req){
+
         $datajson=array([
             "propName" =>  "orderItemState",
             "value" =>  "5b9a1a1bffed2b1e60a5d783"
         ]);
+//        dd($datajson);
         $jsonData =json_encode($datajson);
         $json_url = PageController::getUrl('orderItems/'.$req['orderId'].'');
         $ch = curl_init( $json_url );

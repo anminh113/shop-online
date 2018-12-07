@@ -122,24 +122,31 @@
                         $value[]= (["category" => $data3['store']['categories'][$i]['category']['_id'],]);
                     }
                 }
-                $datajson=array([
-                    "propName" => "categories",
-                    "value" => $value
-                ]);
-                // dd($datajson);
-                $jsonData =json_encode($datajson);
-                $json_url = PageController::getUrl('stores/'.$store.'');
-                $ch = curl_init( $json_url );
-                $options = array(
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                    CURLOPT_CUSTOMREQUEST => "PATCH",
-                    CURLOPT_POSTFIELDS => $jsonData
-                );
-                curl_setopt_array( $ch, $options );
-                $result =  curl_exec($ch);
-                // dd($result);
-                return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
+                if(!empty($value)){
+                    $datajson=array([
+                        "propName" => "categories",
+                        "value" => $value
+                    ]);
+                    // dd($datajson);
+                    $jsonData =json_encode($datajson);
+                    $json_url = PageController::getUrl('stores/'.$store.'');
+                    $ch = curl_init( $json_url );
+                    $options = array(
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                        CURLOPT_CUSTOMREQUEST => "PATCH",
+                        CURLOPT_POSTFIELDS => $jsonData
+                    );
+                    curl_setopt_array( $ch, $options );
+                    $result =  curl_exec($ch);
+                    // dd($result);
+                    return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
+                }else{
+
+                    return redirect()->back()->with(['flag'=>'error','title'=>'Thất bại' ,'message'=>'Gian hàng cần tối thiểu một danh mục sản phẩm']);
+
+                }
+
             }
 
             return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);

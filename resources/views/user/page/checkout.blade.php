@@ -72,17 +72,16 @@
                                                         <div class="viewed_title_register">
                                                             <h3 class="viewed_title">Thanh toán trực tuyến</h3>
                                                         </div>
-                                                        <div data-locale-reversible>
-                                                            <div class="row">
-                                                                <div class="field">
-                                                                    <input id="example2-address"   data-tid="elements_examples.form.address_placeholder" class="input empty" type="text" placeholder="Huynh Khac Duy" required="" autocomplete="address-line1" autofocus="">
-                                                                 
-                                                                    <label for="example2-address" data-tid="elements_examples.form.address_label">Tên trên thẻ</label>
-                                                                    <div class="baseline"></div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                        </div>
+                                                        {{--<div data-locale-reversible>--}}
+                                                            {{--<div class="row" hidden>--}}
+                                                                {{--<div class="field">--}}
+                                                                    {{--<input id="example2-address"   data-tid="elements_examples.form.address_placeholder" class="input empty" type="text" placeholder="Huynh Khac Duy" required="" autocomplete="address-line1" autofocus="">--}}
+                                                                    {{--<label for="example2-address" data-tid="elements_examples.form.address_label">Tên trên thẻ</label>--}}
+                                                                    {{--<div class="baseline"></div>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                            {{----}}
+                                                        {{--</div>--}}
                                                         <div class="row">
                                                             <div class="field">
                                                                 <div id="example2-card-number" class="input empty"></div>

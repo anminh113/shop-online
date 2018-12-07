@@ -67,6 +67,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <hr>
                     <div class="row">
                         <table id="table_format" class="table table-striped">
                             <thead>

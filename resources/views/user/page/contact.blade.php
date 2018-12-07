@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="contact_form_container">
-                        <div class="contact_form_title">Liên hệ với CybeZone</div>
+                        <div class="contact_form_title">Liên hệ với CyberZone</div>
                        Bạn đang cần hỗ trợ, cần giải pháp cho vấn đề của mình, hay cần đóng góp ý kiến cho Bộ Phận Chăm Sóc Khách Hàng? Hãy liên hệ với CybeZone qua Tổng đài hotline chăm sóc khách hàng hoặc dịch vụ Chat Trực Tuyến miễn phí. Chúng tôi sẽ cung cấp giải pháp để xử lí vấn đề của bạn nhanh nhất có thể!
                     </div>
                 </div>

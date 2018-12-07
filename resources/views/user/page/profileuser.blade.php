@@ -286,7 +286,7 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="item-status item-capsule">
-                                        <p class="capsule">{{ number_format($text['product']['price'])}},000₫</p>
+                                        <p class="capsule" style="color: #F00026;">{{ number_format($text['product']['price'])}},000₫</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-2">
