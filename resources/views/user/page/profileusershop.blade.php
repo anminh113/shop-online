@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="home">
-                    <div class="home_background "
+                    <div class="home_background"
                          style="background: #12c2e9;background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); "></div>
                     <div class="home_overlay"></div>
                     <div class="home_content d-flex flex-column align-items-left justify-content-center">

@@ -38,14 +38,14 @@
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">Ngày bắt đầu:</label>
                                 <div class="input-group">
-                                    <input class="form-control"  required="required" name="startdate" id="stardate" type="datetime-local">
+                                    <input class="form-control"  required="required" name="startdate1" id="stardate" type="datetime-local">
                                 </div>
                                 <div id="errorname2"></div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <label for="basic">Ngày kết thúc:</label>
                                 <div class="input-group">
-                                    <input class="form-control"  required="required" name="enddate" id="enddate" type="datetime-local">
+                                    <input class="form-control"  required="required" name="enddate1" id="enddate" type="datetime-local">
                                 </div>
                                 <div id="errorname3"></div>
                             </div>

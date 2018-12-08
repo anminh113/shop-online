@@ -136,8 +136,8 @@
                                     var link = $(this).attr('href');
                                     console.log(link);
                                     swal({
-                                        title: 'Xác nhận?',
-                                        text: "Bạn có muốn thực hiện hành động này",
+                                        title: 'Xác nhận',
+                                        text: "Bạn có muốn thực hiện hành động này?",
                                         type: 'warning',
                                         position: 'top',
                                         showCancelButton: true,

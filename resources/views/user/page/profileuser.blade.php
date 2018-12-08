@@ -166,7 +166,7 @@
                                                                 @if($item['isApprove'] === true)
                                                                     <li class="char_title"
                                                                         style="padding-bottom: 7px; font-size: 15px">
-                                                                        <span><a href="{{route('trang-chu-admin')}}">Đến trang quản lý gian hàng </a></span>
+                                                                        <span><a href="{{route('login-admin')}}">Đến trang quản lý gian hàng </a></span>
                                                                     </li>
                                                                 @endif
                                                             </ul>
@@ -336,8 +336,7 @@
                                                             </div>
                                                             <div class="col-lg-5 col-md-5">
                                                                 @if($orderitem['deliveryPrice']['transportFee'] == 0)
-                                                                    <div class="order_cart_amount text-right">Miễn phí
-                                                                        vận chuyển
+                                                                    <div class="order_cart_amount text-right">Miễn phí vận chuyển
                                                                     </div>
                                                                 @else
                                                                     <div class="order_cart_amount text-right">{{number_format($orderitem['deliveryPrice']['transportFee'])}},000₫

@@ -87,8 +87,6 @@
                                     </div>
                                 </div>
                                 <div class="space10">&nbsp;</div>
-
-
                     @endforeach
                     @else
                         <label class="comments" style="color: #9e9e9e;font-size: 16px;">Hiện chưa có nhận xét nào cho sản phẩm và gian hàng.</label>

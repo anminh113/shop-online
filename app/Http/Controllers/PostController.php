@@ -10,20 +10,14 @@
     use Illuminate\Support\Facades\Log;
     use GuzzleHttp\Exception\RequestException;
     use Illuminate\Support\Facades;
-    // use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Validator;
     use Hash;
     use Illuminate\Support\Facades\Auth;
     use DateTime;
     use DateTimeZone;
-    // use Illuminate\Support\Facades\Request;
 
  
     class PostController extends Controller{
-        
-        
-
-    
 
         // Đăng nhập
 
@@ -350,11 +344,11 @@
         public function postDiscount(Request $req){
             $store = Session::get('key')[0]['store']['_id'];
 
-            $dtstart = new DateTime($req->start);
+            $dtstart = new DateTime($req->startdate1);
             $dtstart->setTimezone(new DateTimeZone('UTC'));
             $start =  $dtstart->format('Y-m-d\TH:i:s.u\Z');
 
-            $dtend = new DateTime($req->enddate);
+            $dtend = new DateTime($req->enddate1);
             $dtend->setTimezone(new DateTimeZone('UTC'));
             $end =  $dtend->format('Y-m-d\TH:i:s.u\Z');
             if($end > $start) {
@@ -364,6 +358,7 @@
                     "dateStart" => $start,
                     "dateEnd" => $end
                 );
+                dd($datajson);
                 $jsonData = json_encode($datajson);
                 $json_url = PageController::getUrl('salesoff');
                 $ch = curl_init($json_url);
@@ -464,7 +459,7 @@
                 $cart->add($req->productid, $req->qty ,$time);
                 $req->session()->put('cart', $cart);
             }
-        return redirect()->route('cart');
+        return redirect()->route('cart')->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã thêm vào giỏ']);
         }
 
         public function postRegister(Request $req){
