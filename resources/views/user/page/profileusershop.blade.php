@@ -59,6 +59,7 @@
             <div class="col-lg-12">
                 <div id="sanpham" class="tabcontent" style="display: block;">
                     <div class="characteristics">
+                        @if(!empty($datawl['wishList']))
                         @foreach ($datawl['wishList'] as $key1 => $item1)
                             @if($item1['product'] === null)
                                 <div class="order">
@@ -210,12 +211,16 @@
                             @endif
                                 @break
                         @endforeach
+                        @else
+                            <label class="comments" style="color: #9e9e9e;font-size: 16px;">Hiện chưa có sản phẩm yêu thích nào.</label>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div id="hoso" class="tabcontent" style="display:none">
                     <div class="characteristics">
+                        @if(!empty($resultStore['dataStore']))
                         @foreach ($resultStore['dataStore'] as $key =>$item)
                             <div class="order">
                                 <div class="order-info">
@@ -264,6 +269,9 @@
                             </div>
                             <div class="space10">&nbsp;</div>
                         @endforeach
+                        @else
+                            <label class="comments" style="color: #9e9e9e;font-size: 16px;">Hiện chưa có gian hàng theo dỏi nào.</label>
+                        @endif
                     </div>
                 </div>
             </div>

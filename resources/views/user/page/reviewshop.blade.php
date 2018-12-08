@@ -45,6 +45,7 @@
         <div class="col-lg-12">
             <div id="sanpham" class="tabcontent" style="display: block;">
                 <div class="characteristics">
+                    @if(!empty($dataproduct))
                     @foreach($dataproduct as $item)
                                 <div class="order">
                                     <div class="accordion order-info">Đơn hàng {{$item['_id']}}
@@ -89,10 +90,14 @@
 
 
                     @endforeach
+                    @else
+                        <label class="comments" style="color: #9e9e9e;font-size: 16px;">Hiện chưa có nhận xét nào cho sản phẩm và gian hàng.</label>
+                    @endif
                 </div>
             </div>
             <div id="hoso" class="tabcontent" style="display:none">
                 <div class="characteristics">
+                    @if(!empty($datareviewproduct['reviewProducts']))
                     <div class="row">
                         <div class="col-lg-7">
                                 @foreach($datareviewproduct['reviewProducts'] as $key => $item)
@@ -156,6 +161,9 @@
                             @endforeach
                         </div>
                     </div>
+                    @else
+                        <label class="comments" style="color: #9e9e9e;font-size: 16px;">Hiện chưa có nhận xét nào cho sản phẩm và gian hàng.</label>
+                    @endif
                 </div>
             </div>
         </div>

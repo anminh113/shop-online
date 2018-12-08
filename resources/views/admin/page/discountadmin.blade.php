@@ -363,13 +363,13 @@
                                                                         <input type="text" hidden name="id" value="{{$item['_id']}}">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-12 col-md-6">
+                                                                <div class="col-lg-6 col-md-6">
                                                                     <label for="basic">Ngày bắt đầu:</label>
                                                                     <div class="input-group">
                                                                         <input class="form-control" type="datetime-local"  required="required"  name="startdateupdate" id="stardate1{{$item['_id']}}" >
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-12 col-md-6">
+                                                                <div class="col-lg-6 col-md-6">
                                                                     <label for="basic">Ngày kết thúc:</label>
                                                                     <div class="input-group">
                                                                         <input class="form-control" type="datetime-local"  required="required" name="enddateupdate" id="enddate1{{$item['_id']}}" >
