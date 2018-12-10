@@ -79,7 +79,7 @@
                                 </div>
                             </div>
 
-
+                            @if(!empty($data['products']))
                             <div class="product_grid" >
                                 <div class="product_grid_border"></div>
                                 <?php $i = 0?>
@@ -187,7 +187,9 @@
                                 <div class="page_next d-flex flex-column align-items-center justify-content-center"  id="testnext">
                                     </div>
                             </div>
-
+                            @else
+                                <label class="comments" style="color: #9e9e9e;font-size: 16px;">Không có sản phẩm cần tìm.</label>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -720,7 +720,6 @@ class PageController extends Controller
 
     public function getCart()
     {
-        //get thong tin san pham
         if (Session::has('cart')) {
             $client = new \GuzzleHttp\Client();
             $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
@@ -733,14 +732,15 @@ class PageController extends Controller
 
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
-
               if (count($cart->items) > 0) {
+                  $dataproduct = array();
                   $product_cart = $cart->items;
                   $oldCart1 = Session::get('cart');
                   $cart1 = new Cart($oldCart1);
                   foreach ($product_cart as $key => $value) {
                       $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
                       $data1 = json_decode($res1->getBody()->getContents(), true);
+                      $dataproduct[$data1['product']['_id']] = $data1;
                       if ($data1['product']['quantity'] == 0) {
                           $cart1->removeItem($value['item']['_id']);
                           if (count($cart1->items) > 0) {
@@ -748,14 +748,24 @@ class PageController extends Controller
                           } else {
                               Session::forget('cart');
                           }
+                          $cart1->add($value['item']['_id'], 0, $time);
+                          Session::put('cart', $cart1);
                       }
-                      $cart1->add($value['item']['_id'], 0, $time);
-                      Session::put('cart', $cart1);
-
+                      if ($data1['product']['quantity'] < $value['qty']) {
+                          $cart1->removeItem($value['item']['_id']);
+                          if (count($cart1->items) > 0) {
+                              Session::put('cart', $cart1);
+                          } else {
+                              Session::forget('cart');
+                          }
+                          $cart1->add($value['item']['_id'], $data1['product']['quantity'], $time);
+                          Session::put('cart', $cart1);
+                      }
                   }
                   $product_cart = $cart1->items;
+//                  dd($dataproduct);
               }
-            return view('user/page.cart', compact('product_cart', 'data', 'time'));
+            return view('user/page.cart', compact('product_cart', 'data', 'time','dataproduct'));
         } else {
             return redirect()->back()->with(['flag'=>'info','title'=>'Thông báo' ,'message'=>'Chưa có sản phẩm trong giỏ hàng']);
         }
@@ -775,10 +785,41 @@ class PageController extends Controller
             $data = json_decode($res->getBody()->getContents(), true);
 
             $oldCart = Session::get('cart');
-            // dd($oldCart);
             $cart = new Cart($oldCart);
-            $product_cart = $cart->items;
-            // dd(Session::get('keyuser'));
+            if (count($cart->items) > 0) {
+                $product_cart = $cart->items;
+                $oldCart1 = Session::get('cart');
+//                  dd($oldCart1);
+                $cart1 = new Cart($oldCart1);
+                foreach ($product_cart as $key => $value) {
+                    $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
+                    $data1 = json_decode($res1->getBody()->getContents(), true);
+                    if ($data1['product']['quantity'] == 0) {
+                        $cart1->removeItem($value['item']['_id']);
+                        if (count($cart1->items) > 0) {
+                            Session::put('cart', $cart1);
+                        } else {
+                            Session::forget('cart');
+                        }
+                        $cart1->add($value['item']['_id'], 0, $time);
+                        Session::put('cart', $cart1);
+                    }
+                    if ($data1['product']['quantity'] < $value['qty']) {
+                        $cart1->removeItem($value['item']['_id']);
+                        if (count($cart1->items) > 0) {
+                            Session::put('cart', $cart1);
+                        } else {
+                            Session::forget('cart');
+                        }
+                        $cart1->add($value['item']['_id'], $data1['product']['quantity'], $time);
+                        Session::put('cart', $cart1);
+                    }
+                }
+                $product_cart = $cart1->items;
+            }
+//            $product_cart = $cart->items;
+
+
 
             $resPaymentMethods = $client->request('GET', PageController::getUrl('PaymentMethods'));
             $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
@@ -800,15 +841,49 @@ class PageController extends Controller
             $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
             $res = $client->request('GET', PageController::getUrl('deliveryprices'));
             $data = json_decode($res->getBody()->getContents(), true);
+
+
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
-            $product_cart = $cart->items;
+            if (count($cart->items) > 0) {
+                $product_cart = $cart->items;
+                $oldCart1 = Session::get('cart');
+//                  dd($oldCart1);
+                $cart1 = new Cart($oldCart1);
+                foreach ($product_cart as $key => $value) {
+                    $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
+                    $data1 = json_decode($res1->getBody()->getContents(), true);
+                    if ($data1['product']['quantity'] == 0) {
+                        $cart1->removeItem($value['item']['_id']);
+                        if (count($cart1->items) > 0) {
+                            Session::put('cart', $cart1);
+                        } else {
+                            Session::forget('cart');
+                        }
+                        $cart1->add($value['item']['_id'], 0, $time);
+                        Session::put('cart', $cart1);
+                    }
+                    if ($data1['product']['quantity'] < $value['qty']) {
+                        $cart1->removeItem($value['item']['_id']);
+                        if (count($cart1->items) > 0) {
+                            Session::put('cart', $cart1);
+                        } else {
+                            Session::forget('cart');
+                        }
+                        $cart1->add($value['item']['_id'], $data1['product']['quantity'], $time);
+                        Session::put('cart', $cart1);
+                    }
+                }
+                $product_cart = $cart1->items;
+            }
+//            $product_cart = $cart->items;
+
+
             $resPaymentMethods = $client->request('GET', PageController::getUrl('PaymentMethods'));
             $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
 
             $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
             $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
-//            dd($dataaddress);
             return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataPaymentMethods'));
         } else {
             return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập để sử dụng chức năng', 'message' => ' ']);

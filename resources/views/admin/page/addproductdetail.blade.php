@@ -87,7 +87,7 @@
                             <div class="space15">&nbsp;</div>
                             <label for="basic">Số lượng nhập kho:</label>
                             <div class="input-group">
-                                <input class="form-control" name="quantity" type="number">
+                                <input class="form-control" name="quantity" type="number" min="0">
                                 <span class="input-group-addon">Chiếc</span>
                             </div>
                             <div id="errorquantity"></div>

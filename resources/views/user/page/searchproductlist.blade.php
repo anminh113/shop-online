@@ -86,6 +86,7 @@
                                     <div class="product_grid_border"></div>
                                 <?php $i = 0?>
                                     @if( $styleSearch['style'] == 'sale')
+                                        @if(!empty($data['products']))
                                         @foreach ($data['products'] as $item )
                                             <!-- Product Item -->
                                             @if(!empty($item['saleOff']) && $item['saleOff']['dateEnd'] > $time12)
@@ -135,8 +136,12 @@
                                             @endif
                                             <?php $i = $i + 1?>
                                         @endforeach
+                                        @else
+                                            <label class="comments" style="color: #9e9e9e;font-size: 16px;">Không có sản phẩm cần tìm.</label>
+                                        @endif
                                     @endif
                                     @if( $styleSearch['style'] == 'hot')
+                                        @if(!empty($datatextproductPurchase))
                                         @foreach($datatextproductPurchase as $item)
                                         <!-- Slider Item -->
                                             <div class="product_item {{$item['product']['productType']['_id']}}  is_new">
@@ -175,6 +180,9 @@
                                             <?php $i = $i + 1?>
 
                                         @endforeach
+                                        @else
+                                            <label class="comments" style="color: #9e9e9e;font-size: 16px;">Không có sản phẩm cần tìm.</label>
+                                        @endif
                                     @endif
                                 </div>
                                 <!-- Shop Page Navigation -->

@@ -29,10 +29,10 @@
                     </div>
                     @if(Session::has('cart'))
                     <?php $i =0 ?>
-                    @foreach ($product_cart as $item)
+                    @foreach ($product_cart as  $key => $item)
                     <?php $i=$i+1?>
-
-                     @if($item['item']['quantity'] >0)
+                        {{--@foreach ($dataproduct[$key] as  $item1)--}}
+                        @if($item['item']['quantity'] >0)
                     <div class="product">
                         <div class="product-image">
                                 <img src="{{$item['img']}}" alt="">
@@ -55,7 +55,7 @@
                                 </div>
                             </span>
                             <input  type="number" form="add" name="qty[]" class="form-control input-number text-center"
-                                min="1" max="{{$item['item']['quantity']}}" step="1" value="{{$item['qty']}}"
+                                min="1" max="{{$dataproduct[$key]['product']['quantity']}}" step="1" value="{{$item['qty']}}"
                                  style="background-color: #fff; " required  readonly>
                             <span class="input-group-btn btn-count-price">
                                 <div class="btn  btn-number quantity_dec">
@@ -154,7 +154,7 @@
                                 });
                             </script>
                     @endif
-
+                        {{--@endforeach--}}
                     @endforeach
                     @endif
 

@@ -87,7 +87,7 @@
                                 <div class="space15">&nbsp;</div>
                                 <label for="basic">Số lượng nhập kho:</label>
                                 <div class="input-group">
-                                    <input class="form-control" name="quantity" type="number" value="{{$item['product']['quantity']}}">
+                                    <input class="form-control" name="quantity" type="number" min="0" value="{{$item['product']['quantity']}}">
                                     <span class="input-group-addon">Chiếc</span>
                                 </div>
                                 <div class="space15">&nbsp;</div>
