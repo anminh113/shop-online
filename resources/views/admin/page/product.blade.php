@@ -19,7 +19,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-3 col-md-4">
                                 <h4>Thêm sản phẩm:</h4>
                             </div>
                             <div class="col-lg-3 col-md-4">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="space10">&nbsp;<hr></div>
                         <div class="col-lg-12">
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-2 col-md-2">
                                 <h4>Tìm kiếm:</h4>
                             </div>
                             <div class="col-lg-3 col-md-4">
@@ -47,7 +47,7 @@
                                 </div>
                                 <div hidden id="producttype1"></div>
                             </div>
-                            <div class="col-lg-2 col-md-4">
+                            <div class="col-lg-2 col-md-2">
                                 <button type="submit" class="btn btn-outline- btn-change" >Tìm kiếm</button>
                             </div>
                             {{ csrf_field() }}
@@ -59,7 +59,7 @@
                     <div class="product_grid_border"></div>
                     <div class="row">
                         @foreach (array_reverse($data['products']) as $item )
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-3 col-md-4">
                                 <div class="product-type" onclick="window.location='{{route('chi-tiet-san-pham-admin',$item['_id'])}}';">
                                     <div class="product_border"></div>
                                     @if($item['quantity']<=0)

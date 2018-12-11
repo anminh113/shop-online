@@ -32,7 +32,7 @@
                                         <th>Giá </th>
                                         <th>Số lượng</th>
                                         <th id="th_format1">Tên gian hàng</th>
-                                        <th id="th_format">Trạng thái đơn hàng</th>
+                                        <th id="th_format">Trạng thái</th>
                                     </tr>
                                     </thead>
                                     <tbody id="myTable">
