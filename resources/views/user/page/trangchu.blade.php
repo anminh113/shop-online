@@ -25,7 +25,7 @@
                 @foreach ($da['imageList'] as $da1)
                 @if($item['_id'] == $da['productId'])
                 {{-- @foreach($da1['imageList'] as $da2) --}}
-                <img src={{$da1['imageURL']}} class="rounded float-right" width="400" alt="">
+                            <img class="lazy" data-src="{{$da1['imageURL']}}"  width="400" alt="">
                 @break
                 {{-- @endforeach --}}
                 @endif
@@ -88,7 +88,8 @@
                                                 @foreach ($resultproductPurchaseImage['datatextproductPurchaseImage'] as $da )
                                                 @foreach ($da['imageList'] as $da1)
                                                 @if($item['product']['_id'] == $da['productId'])
-                                                <img src={{$da1['imageURL']}} class="rounded float-right" width="120" height="120" alt="">
+                                                            <img class="lazy" data-src="{{$da1['imageURL']}}" width="120" height="120"/>
+                                                {{--<img src={{$da1['imageURL']}} class="rounded float-right" width="120" height="120" alt="">--}}
                                                 @break
                                                 @endif
                                                 @endforeach
@@ -128,7 +129,7 @@
                                         </div>
                                     </div>
                                     <?php $i = $i + 1?>
-                                        @if($i>9)
+                                        @if($i>7)
                                             @break
                                         @endif
                                     @endforeach
@@ -165,7 +166,10 @@
                         @foreach($dataproducttypes['productTypes'] as $item)
                         <div class="owl-item" >
                             <div class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                <div class="popular_category_image"><img src="{{$item['imageURL']}}" width="50" height="60"  onclick="window.location='{{route('post-producttype-danhsach-sanpham',$item['_id'])}}';"></div>
+                                <div class="popular_category_image">
+                                    <img class="lazy" data-src="{{$item['imageURL']}}" width="50" height="60"  onclick="window.location='{{route('post-producttype-danhsach-sanpham',$item['_id'])}}';"/>
+                                    {{--<img src="{{$item['imageURL']}}" width="50" height="60"  onclick="window.location='{{route('post-producttype-danhsach-sanpham',$item['_id'])}}';">--}}
+                                </div>
                                 <div class="popular_category_text"  onclick="window.location='{{route('post-producttype-danhsach-sanpham',$item['_id'])}}';">{{$item['productTypeName']}}</div>
                             </div>
                         </div>
@@ -197,7 +201,8 @@
                                     @foreach ($da['imageList'] as $da1)
                                     @if($item['_id'] == $da['productId'])
                                     {{-- @foreach($da1['imageList'] as $da2) --}}
-                                    <img src={{$da1['imageURL']}} alt="">
+                                                <img class="lazy" data-src="{{$da1['imageURL']}}"/>
+                                    {{--<img src={{$da1['imageURL']}} alt="">--}}
                                     @break
                                     {{-- @endforeach --}}
                                     @endif
@@ -216,7 +221,6 @@
                                             ($item['price'] * $item['saleOff']['discount'])/100)}},000₫</div>
                                     </div>
                                     <div class="deals_timer d-flex flex-row align-items-center justify-content-start">
-
                                         <div class="deals_timer_content ml-auto">
                                             <div class="deals_timer_box clearfix" data-target-time="{{$item['saleOff']['dateEnd']}}">
                                                 <div class="deals_timer_unit">
@@ -272,7 +276,8 @@
                                                 @foreach ($da['imageList'] as $da1)
                                                 @if($item['_id'] == $da['productId'])
                                                 {{-- @foreach($da1['imageList'] as $da2) --}}
-                                                <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                    <img class="lazy" data-src="{{$da1['imageURL']}}"width="115" height="115" alt="" />
+                                                {{--<img src={{$da1['imageURL']}} width="115" height="115" alt="">--}}
                                                 @break
                                                 {{-- @endforeach --}}
                                                 @endif
@@ -350,7 +355,8 @@
                                             @foreach ($result['datatext'] as $da )
                                             @foreach ($da['imageList'] as $da1)
                                             @if($item['_id'] == $da['productId'])
-                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                    <img class="lazy" data-src="{{$da1['imageURL']}}"width="115" height="115" alt="" />
+{{--                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">--}}
                                             @break
                                             @endif
                                             @endforeach
@@ -389,7 +395,7 @@
                                             @foreach ($result['datatext'] as $da )
                                             @foreach ($da['imageList'] as $da1)
                                             @if($item['_id'] == $da['productId'])
-                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                    <img class="lazy" data-src="{{$da1['imageURL']}}"width="115" height="115" alt="" />
                                             @break
                                             @endif
                                             @endforeach
@@ -409,7 +415,7 @@
                                 <div class="bestsellers_fav"><i class="fas fa-heart"></i></div>
                             </div>
                             @endif
-                                @if($i>12)
+                                @if($i>10)
                                 @break
                                 @endif
                                 <?php $j = $j + 1?>

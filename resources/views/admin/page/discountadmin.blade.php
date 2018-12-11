@@ -174,7 +174,7 @@
                                                 @foreach ($result['datatext'] as $da )
                                                 @foreach ($da['imageList'] as $da1)
                                                 @if($item['_id']== $da['productId'])
-                                                <img src={{$da1["imageURL"]}} width="215" height="215" alt="">
+                                                    <img class="lazy" data-src="{{$da1["imageURL"]}}" width="215" height="215" alt="">
                                                 @break
                                                 @endif
                                                 @endforeach
@@ -254,7 +254,7 @@
                                                 @foreach ($result3['datatext1'] as $da )
                                                 @foreach ($da['imageList'] as $da1)
                                                 @if($item['_id']== $da['productId'])
-                                                <img src={{$da1["imageURL"]}} width="215" height="215" alt="">
+                                                    <img class="lazy" data-src="{{$da1["imageURL"]}}" width="215" height="215" alt="">
                                                 @break
                                                 @endif
                                                 @endforeach

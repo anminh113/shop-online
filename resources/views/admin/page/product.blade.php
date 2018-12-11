@@ -62,12 +62,15 @@
                             <div class="col-lg-3 col-md-6">
                                 <div class="product-type" onclick="window.location='{{route('chi-tiet-san-pham-admin',$item['_id'])}}';">
                                     <div class="product_border"></div>
+                                    @if($item['quantity']<=0)
+                                        <span class="label label-warning" style="font-size: 13px">Đã hết hàng</span>
+                                    @endif
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                         @foreach ($result['datatext'] as $da )
                                             @foreach ($da['imageList'] as $da1)   
                                                 {{-- @foreach ($da1['imageList'] as $da2)    --}}
-                                                @if($item['_id']== $da['productId']) 
-                                                    <img src= {{$da1["imageURL"]}}  width="215" height="215" alt="">
+                                                @if($item['_id']== $da['productId'])
+                                                    <img class="lazy" data-src="{{$da1["imageURL"]}}"  width="215" height="215" alt="">
                                                     @break
                                                 @endif
                                                 {{-- @endforeach  --}}
@@ -80,6 +83,7 @@
                                         <div style="width: 95%; margin-left: 2.5%"><a href="#" tabindex="0">{{$item['productName']}}</a></div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="space10">&nbsp;</div>
                             </div>

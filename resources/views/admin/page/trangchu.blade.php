@@ -62,7 +62,7 @@
                                 <span class="icon" ><i class="fa fa-truck"></i></span>
                                 <p>
                                     <span class="number">{{count($resultProductOrder['dataProductOrder'])}}</span>
-                                    <span class="title">Số sản phẩm bán ra</span>
+                                    <span class="title">Sản phẩm đã bán</span>
                                 </p>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                             <h3 class="panel-title">Khách hàng mua gần đây</h3>
                             <div class="right">
                                 <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-                                <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                                {{--<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>--}}
                             </div>
                         </div>
                         <div class="panel-body no-padding">

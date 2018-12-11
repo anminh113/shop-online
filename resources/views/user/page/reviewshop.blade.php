@@ -53,7 +53,7 @@
                                     <div class="panel order-item">
                                         <div class="row">
                                             <div class="col-lg-2">
-                                                <div class="item-pic"><img src="{{$item['product']['imageURL']}}" width="115"
+                                                <div class="item-pic"> <img class="lazy" data-src="{{$item['product']['imageURL']}}" width="115"
                                                         height="115"> </div>
                                             </div>
                                             <div class="col-lg-3">
@@ -114,7 +114,7 @@
                                         <div class="contact_form_text" style="margin-left: 10px"></div>
                                     </div>
                                     <div class="item-pic" style="float: right;margin-top:-150px">
-                                        <img src="{{$item['product']['imageURL']}}" width="115" height="115">
+                                        <img class="lazy" data-src="{{$item['product']['imageURL']}}" width="115" height="115">
                                     </div>
                                 </div>
                             </div>

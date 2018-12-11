@@ -11,10 +11,16 @@
  <script src="source/user/styles/js/changemess.js"></script>
 {{-- https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/localization/messages_vi.js --}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>--}}
+<script type="text/javascript" src="{{ URL::asset('source/admin/assets/scripts/jquery.lazy.min.js') }}"></script>
+
 <script src="https://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
 
 <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
-
+<script>
+    $(function() {
+        $('.lazy').lazy();
+    });
+</script>
 
 
 

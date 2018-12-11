@@ -97,7 +97,9 @@
                                                             @foreach ($da['imageList'] as $da1)
                                                                 @if($item['_id'] == $da['productId'])
                                                                     {{-- @foreach($da1['imageList'] as $da2) --}}
-                                                                    <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                                    <img class="lazy" data-src="{{$da1['imageURL']}}"width="115" height="115" alt="" />
+
+{{--                                                                    <img src={{$da1['imageURL']}} width="115" height="115" alt="">--}}
                                                                     @break
                                                                     {{-- @endforeach --}}
                                                                 @endif
@@ -147,7 +149,9 @@
                                             <div class="product_item {{$item['product']['productType']['_id']}}  is_new">
                                                 <div class="product_border"></div>
                                                 <div class="product_image d-flex flex-column align-items-center justify-content-center">
-                                                    <img src={{$item['product']['img']}} width="115" height="115" alt="">
+{{--                                                    <img src={{$item['product']['img']}} width="115" height="115" alt="">--}}
+                                                    <img class="lazy" data-src="{{$item['product']['img']}}"width="115" height="115" alt="" />
+
                                                 </div>
                                                 <div class="product_content">
                                                     <div class="product_price1" hidden style="font-size: 16px" id="price{{$item['product']['_id']}}">{{number_format($item['product']['price'],0, '', '')}}<span>{{number_format($item['product']['price'], 0, '',

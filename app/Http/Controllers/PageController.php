@@ -71,11 +71,8 @@ class PageController extends Controller
             $data2 = $data['products'][$i]['_id'];
             $res2 = $client1->request('GET', PageController::getUrl('productimages/product/' . $data2 . ''));
             $datatext[] = json_decode($res2->getBody()->getContents(), true);
-
             $res_guss = $client1->request('GET', PageController::getUrl('reviewProducts/product/' . $data2 . ''));
             $datareview_guss[] = json_decode($res_guss->getBody()->getContents(), true);
-
-
         }
 
         $result = compact('datatext');
@@ -380,8 +377,6 @@ class PageController extends Controller
                 }
             }
         }
-
-
         $res3 = $client1->request('GET', PageController::getUrl('categories'));
         $data3 = json_decode($res3->getBody()->getContents(), true);
         $data4 = $data3['categories'];
@@ -390,8 +385,6 @@ class PageController extends Controller
             $data1[] = json_decode($res1->getBody()->getContents(), true);
         }
         $result1 = compact('data1');
-
-
         return view('user/page.productlist', compact('datajson1', 'data', 'result', 'result1', 'data4', 'resultPrice', 'time12', 'resultdatareview', 'countstar_5', 'countstar_4', 'countstar_3', 'countstar_2', 'countstar_1'));
     }
 
@@ -774,121 +767,124 @@ class PageController extends Controller
 
     public function getCheckCart()
     {
-        if (Session::has('Idaddress')) {
-            $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
-            $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['formatted']);
-            $todaytime->setTimezone(new DateTimeZone('UTC'));
-            $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
-            $res = $client->request('GET', PageController::getUrl('deliveryprices'));
-            $data = json_decode($res->getBody()->getContents(), true);
+         if (Session::has('cart')) {
+             if (Session::has('Idaddress')) {
+                 $client = new \GuzzleHttp\Client();
+                 $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
+                 $datatime = json_decode($restime->getBody()->getContents(), true);
+                 $todaytime = new DateTime($datatime['formatted']);
+                 $todaytime->setTimezone(new DateTimeZone('UTC'));
+                 $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
+                 $res = $client->request('GET', PageController::getUrl('deliveryprices'));
+                 $data = json_decode($res->getBody()->getContents(), true);
 
-            $oldCart = Session::get('cart');
-            $cart = new Cart($oldCart);
-            if (count($cart->items) > 0) {
-                $product_cart = $cart->items;
-                $oldCart1 = Session::get('cart');
+                 $oldCart = Session::get('cart');
+                 $cart = new Cart($oldCart);
+                 if (count($cart->items) > 0) {
+                     $product_cart = $cart->items;
+                     $oldCart1 = Session::get('cart');
 //                  dd($oldCart1);
-                $cart1 = new Cart($oldCart1);
-                foreach ($product_cart as $key => $value) {
-                    $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
-                    $data1 = json_decode($res1->getBody()->getContents(), true);
-                    if ($data1['product']['quantity'] == 0) {
-                        $cart1->removeItem($value['item']['_id']);
-                        if (count($cart1->items) > 0) {
-                            Session::put('cart', $cart1);
-                        } else {
-                            Session::forget('cart');
-                        }
-                        $cart1->add($value['item']['_id'], 0, $time);
-                        Session::put('cart', $cart1);
-                    }
-                    if ($data1['product']['quantity'] < $value['qty']) {
-                        $cart1->removeItem($value['item']['_id']);
-                        if (count($cart1->items) > 0) {
-                            Session::put('cart', $cart1);
-                        } else {
-                            Session::forget('cart');
-                        }
-                        $cart1->add($value['item']['_id'], $data1['product']['quantity'], $time);
-                        Session::put('cart', $cart1);
-                    }
-                }
-                $product_cart = $cart1->items;
-            }
+                     $cart1 = new Cart($oldCart1);
+                     foreach ($product_cart as $key => $value) {
+                         $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
+                         $data1 = json_decode($res1->getBody()->getContents(), true);
+                         if ($data1['product']['quantity'] == 0) {
+                             $cart1->removeItem($value['item']['_id']);
+                             if (count($cart1->items) > 0) {
+                                 Session::put('cart', $cart1);
+                             } else {
+                                 Session::forget('cart');
+                             }
+                             $cart1->add($value['item']['_id'], 0, $time);
+                             Session::put('cart', $cart1);
+                         }
+                         if ($data1['product']['quantity'] < $value['qty']) {
+                             $cart1->removeItem($value['item']['_id']);
+                             if (count($cart1->items) > 0) {
+                                 Session::put('cart', $cart1);
+                             } else {
+                                 Session::forget('cart');
+                             }
+                             $cart1->add($value['item']['_id'], $data1['product']['quantity'], $time);
+                             Session::put('cart', $cart1);
+                         }
+                     }
+                     $product_cart = $cart1->items;
+                 }
 //            $product_cart = $cart->items;
 
 
+                 $resPaymentMethods = $client->request('GET', PageController::getUrl('PaymentMethods'));
+                 $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
 
-            $resPaymentMethods = $client->request('GET', PageController::getUrl('PaymentMethods'));
-            $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
+                 $resaddressone = $client->request('GET', PageController::getUrl('deliveryAddresses/' . Session::get('Idaddress') . ''));
+                 $dataaddressone = json_decode($resaddressone->getBody()->getContents(), true);
 
-            $resaddressone = $client->request('GET', PageController::getUrl('deliveryAddresses/' . Session::get('Idaddress') . ''));
-            $dataaddressone = json_decode($resaddressone->getBody()->getContents(), true);
+                 $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
+                 $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
 
-            $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
-            $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
-
-            return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataaddressone', 'dataPaymentMethods'));
-        }
-        if (Session::has('keyuser')) {
-            $client = new \GuzzleHttp\Client();
-            $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
-            $datatime = json_decode($restime->getBody()->getContents(), true);
-            $todaytime = new DateTime($datatime['formatted']);
-            $todaytime->setTimezone(new DateTimeZone('UTC'));
-            $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
-            $res = $client->request('GET', PageController::getUrl('deliveryprices'));
-            $data = json_decode($res->getBody()->getContents(), true);
+                 return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataaddressone', 'dataPaymentMethods'));
+             }
+             if (Session::has('keyuser')) {
+                 $client = new \GuzzleHttp\Client();
+                 $restime = $client->request('GET', 'https://api.timezonedb.com/v2.1/get-time-zone?key=BSPXCELRM0KP&format=json&by=zone&zone=Asia/Ho_Chi_Minh');
+                 $datatime = json_decode($restime->getBody()->getContents(), true);
+                 $todaytime = new DateTime($datatime['formatted']);
+                 $todaytime->setTimezone(new DateTimeZone('UTC'));
+                 $time = $todaytime->format('Y-m-d\TH:i:s.u\Z');
+                 $res = $client->request('GET', PageController::getUrl('deliveryprices'));
+                 $data = json_decode($res->getBody()->getContents(), true);
 
 
-            $oldCart = Session::get('cart');
-            $cart = new Cart($oldCart);
-            if (count($cart->items) > 0) {
-                $product_cart = $cart->items;
-                $oldCart1 = Session::get('cart');
+                 $oldCart = Session::get('cart');
+                 $cart = new Cart($oldCart);
+                 if (count($cart->items) > 0) {
+                     $product_cart = $cart->items;
+                     $oldCart1 = Session::get('cart');
 //                  dd($oldCart1);
-                $cart1 = new Cart($oldCart1);
-                foreach ($product_cart as $key => $value) {
-                    $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
-                    $data1 = json_decode($res1->getBody()->getContents(), true);
-                    if ($data1['product']['quantity'] == 0) {
-                        $cart1->removeItem($value['item']['_id']);
-                        if (count($cart1->items) > 0) {
-                            Session::put('cart', $cart1);
-                        } else {
-                            Session::forget('cart');
-                        }
-                        $cart1->add($value['item']['_id'], 0, $time);
-                        Session::put('cart', $cart1);
-                    }
-                    if ($data1['product']['quantity'] < $value['qty']) {
-                        $cart1->removeItem($value['item']['_id']);
-                        if (count($cart1->items) > 0) {
-                            Session::put('cart', $cart1);
-                        } else {
-                            Session::forget('cart');
-                        }
-                        $cart1->add($value['item']['_id'], $data1['product']['quantity'], $time);
-                        Session::put('cart', $cart1);
-                    }
-                }
-                $product_cart = $cart1->items;
-            }
+                     $cart1 = new Cart($oldCart1);
+                     foreach ($product_cart as $key => $value) {
+                         $res1 = $client->request('GET', PageController::getUrl('products/' . $value['item']['_id'] . ''));
+                         $data1 = json_decode($res1->getBody()->getContents(), true);
+                         if ($data1['product']['quantity'] == 0) {
+                             $cart1->removeItem($value['item']['_id']);
+                             if (count($cart1->items) > 0) {
+                                 Session::put('cart', $cart1);
+                             } else {
+                                 Session::forget('cart');
+                             }
+                             $cart1->add($value['item']['_id'], 0, $time);
+                             Session::put('cart', $cart1);
+                         }
+                         if ($data1['product']['quantity'] < $value['qty']) {
+                             $cart1->removeItem($value['item']['_id']);
+                             if (count($cart1->items) > 0) {
+                                 Session::put('cart', $cart1);
+                             } else {
+                                 Session::forget('cart');
+                             }
+                             $cart1->add($value['item']['_id'], $data1['product']['quantity'], $time);
+                             Session::put('cart', $cart1);
+                         }
+                     }
+                     $product_cart = $cart1->items;
+                 }
 //            $product_cart = $cart->items;
 
 
-            $resPaymentMethods = $client->request('GET', PageController::getUrl('PaymentMethods'));
-            $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
+                 $resPaymentMethods = $client->request('GET', PageController::getUrl('PaymentMethods'));
+                 $dataPaymentMethods = json_decode($resPaymentMethods->getBody()->getContents(), true);
 
-            $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
-            $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
-            return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataPaymentMethods'));
-        } else {
-            return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập để sử dụng chức năng', 'message' => ' ']);
+                 $resaddress = $client->request('GET', PageController::getUrl('deliveryaddresses/customer/' . Session::get('keyuser')['info'][0]['customer']['_id'] . ''));
+                 $dataaddress = json_decode($resaddress->getBody()->getContents(), true);
+                 return view('user/page.checkcart', compact('product_cart', 'data', 'time', 'dataaddress', 'dataPaymentMethods'));
+             } else {
+                 return redirect()->route('dang-nhap')->with(['flag' => 'info', 'title' => 'Cần đăng nhập để sử dụng chức năng', 'message' => ' ']);
+             }
+
+         }else {
+            return redirect()->back()->with(['flag'=>'info','title'=>'Thông báo' ,'message'=>'Chưa có sản phẩm trong giỏ hàng']);
         }
-
     }
 
     public function getCheckOut(Request $req)
@@ -2023,10 +2019,10 @@ class PageController extends Controller
     {
         if (Session::has('key') && Session::get('key')['role']['roleName'] == 'Quản trị viên') {
             $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET', PageController::getUrl('orders'));
+            $res = $client->request('GET', PageController::getUrl('orders/getByState/5b9a1a1bffed2b1e60a5d783'));
             $data = json_decode($res->getBody()->getContents(), true);
 
-            for ($i = 0; $i < $data['count']; $i++) {
+            for ($i = 0; $i < (count($data['orders'])); $i++) {
                 $resProductOrder = $client->request('GET', PageController::getUrl('orderItems/order/' . $data['orders'][$i]['_id'] . ''));
                 $dataProductorderAll[] = json_decode($resProductOrder->getBody()->getContents(), true);
                 for ($j = 0; $j < count($dataProductorderAll[$i]['orderItems']); $j++) {
@@ -2035,7 +2031,6 @@ class PageController extends Controller
                     }
                 }
             }
-//            dd($data);
             return view('admin/page.allorderadmin',compact('data'));
         }
         return redirect()->guest(route('login-admin', [], false));

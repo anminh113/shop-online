@@ -40,7 +40,7 @@
                                         @foreach($data['orders'][$item]['OrderItem'] as $text )
                                         <tr >
                                                 <td>{{$data['orders'][$item]['_id']}}</td>
-                                                <td><img src="{{$text['product']['imageURL']}}" width="50" height="50"></td>
+                                                <td><img class="lazy" data-src="{{$text['product']['imageURL']}}" width="50" height="50"></td>
                                                 <td>{{$text['product']['productName']}}</td>
                                                 <td>{{number_format($text['product']['price'],3 ,'.', '.')}}₫</td>
                                                 <td>{{$text['quantity']}}</td>

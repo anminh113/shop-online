@@ -146,7 +146,7 @@
                                         <span>Sắp xếp theo:</span>
                                         <ul>
                                             <li>
-                                                <span class="sorting_text">Độ phổ biến <i class="fas fa-chevron-down"></span></i>
+                                                <span class="sorting_text">Độ phổ biến <i class="fas fa-chevron-down"></i></span>
                                                 <ul>
                                                     <li class="shop_sorting_button" data-isotope-option='original-order'>Độ
                                                         phổ biến</li>
@@ -154,8 +154,6 @@
                                                         tăng dần</li>
                                                     <li class="shop_sorting_button" data-isotope-option='PriceReduction'>Giá
                                                         giảm dần</li>
-                                                    <li class="shop_sorting_button" data-isotope-option='name'>name</li>
-                                                    <!-- <li class="shop_sorting_button" data-filter="numberGreater">300 > number > 5000</li> -->
                                                 </ul>
                                             </li>
                                         </ul>
@@ -177,7 +175,7 @@
                                             @foreach ($da['imageList'] as $da1)
                                             @if($item['_id'] == $da['productId'])
                                             {{-- @foreach($da1['imageList'] as $da2) --}}
-                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                        <img class="lazy" data-src="{{$da1['imageURL']}}"width="115" height="115" alt="" />
                                             @break
                                             {{-- @endforeach --}}
                                             @endif
@@ -203,6 +201,7 @@
                                                     <div class="text2">
                                                         <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div>
                                                     </div>
+                                                    <div class="countreviewproduct" hidden>{{$data['0'][$i]['count']}}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,7 +228,7 @@
                                             @foreach ($da['imageList'] as $da1)
                                             @if($item['_id'] == $da['productId'])
                                             {{-- @foreach($da1['imageList'] as $da2) --}}
-                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                        <img class="lazy" data-src="{{$da1['imageURL']}}"width="115" height="115" alt="" />
                                             @break
                                             {{-- @endforeach --}}
                                             @endif
@@ -252,6 +251,7 @@
                                                     <div class="text2">
                                                         <div style="color: #9e9e9e;font-size: 12px;display: -webkit-inline-box;vertical-align: middle;">({{$data['0'][$i]['count']}})</div>
                                                     </div>
+                                                    <div class="countreviewproduct" hidden>{{$data['0'][$i]['count']}}</div>
                                                 </div>
                                             </div>
                                         </div>

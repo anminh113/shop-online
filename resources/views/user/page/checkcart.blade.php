@@ -64,7 +64,7 @@
                     <?php $i=$i+1?>
                     <div class="product">
                         <div class="product-image">
-                            <img src="{{$item['img']}}" alt="">
+                            <img class="lazy" data-src="{{$item['img']}}" alt="">
                         </div>
                         <div class="product-details">
                             <div class="product-title">{{$item['item']['productName']}}</div>

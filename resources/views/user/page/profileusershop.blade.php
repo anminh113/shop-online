@@ -98,8 +98,7 @@
                                             <div class="order-item">
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                        <div class="item-pic"><img
-                                                                    src="{{$dataproductimgae[$key]['imageList'][0]['imageURL']}}"
+                                                        <div class="item-pic"> <img class="lazy" data-src="{{$dataproductimgae[$key]['imageList'][0]['imageURL']}}"
                                                                     width="115" height="115"></div>
                                                     </div>
                                                     <div class="col-lg-5">
@@ -246,7 +245,7 @@
                                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                                         @foreach ($dataimgproduct as $item1)
                                                             @if($item1['productId'] == $da['_id'] )
-                                                                <img src="{{$item1['imageList'][0]['imageURL']}}"
+                                                                <img class="lazy" data-src="{{$item1['imageList'][0]['imageURL']}}"
                                                                      alt="" width="115" height="115">
                                                             @endif
                                                         @endforeach

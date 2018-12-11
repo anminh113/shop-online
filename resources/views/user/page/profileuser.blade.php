@@ -203,7 +203,8 @@
                                     @foreach($resultorderitem['dataorderitem'][$item]['orderItems'] as $text )
                                         <div class="row">
                                             <div class="col-lg-2">
-                                                <div class="item-pic"><img src="{{$text['product']['imageURL']}}"
+                                                <div class="item-pic">
+                                                    <img class="lazy" data-src="{{$text['product']['imageURL']}}"
                                                                            width="115" height="115"></div>
                                             </div>
                                             <div class="col-lg-3">
@@ -265,8 +266,10 @@
                         @foreach($resultorderitem['dataorderitem'][$item]['orderItems'] as $text )
                             <div class="row">
                                 <div class="col-lg-2">
-                                    <div class="item-pic"><img src="{{$text['product']['imageURL']}}" width="115"
-                                                               height="115"></div>
+                                    <div class="item-pic">
+                                        <img class="lazy" data-src="{{$text['product']['imageURL']}}" width="115" height="115">
+
+                                    </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="item-main item-main-mini">

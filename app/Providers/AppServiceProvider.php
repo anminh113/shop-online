@@ -67,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
                     $data1[] = json_decode($res1->getBody()->getContents(), true);
                 }
                 $result1 = compact('data1');
+
                 $datawl['count'] = 0;
                 try {
                     $reswl = $client->request('GET',AppServiceProvider::getUrl('wishList/customer/'.Session::get('keyuser')['info'][0]['customer']['_id'].''));

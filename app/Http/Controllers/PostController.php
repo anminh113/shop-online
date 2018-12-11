@@ -358,7 +358,6 @@
                     "dateStart" => $start,
                     "dateEnd" => $end
                 );
-                dd($datajson);
                 $jsonData = json_encode($datajson);
                 $json_url = PageController::getUrl('salesoff');
                 $ch = curl_init($json_url);
@@ -863,7 +862,7 @@
                 
                 session()->forget('cart');
                 session()->forget('OrderId');
-                return redirect()->route('trang-chu')->with(['flag'=>'success','title'=>'Giao dịch thành công!' ,'message'=>'Đơn đã được hiển thị trong thông tin đơn hàng ']);
+                return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Giao dịch thành công!' ,'message'=>'Đơn đã được hiển thị trong thông tin đơn hàng ']);
             }else{
                 return redirect()->back()->with(['flag'=>'error','title'=>'Giao dịch thất bại' ,'message'=>' ']);
             }
@@ -1203,7 +1202,7 @@
                     $result =  curl_exec($ch);
                     $result1 =json_decode($result);
 
-                    return redirect()->route('trang-chu')->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
+                    return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
                 }
 
 

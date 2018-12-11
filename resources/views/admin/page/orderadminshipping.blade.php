@@ -48,10 +48,10 @@
                                 <div class="col-lg-6"> 
                                     <ul class="list-unstyled list-justify">
                                         <li>Tên sản phẩm: <i style="color:#212121"> {{$item['OrderItem']['product']['productName']}}</i><span></span></li>
-                                        <li> <span style="padding: 10px 10px 10px 10px"><img src="{{$item['OrderItem']['product']['imageURL']}}" width="115" height="115"></span></li>
+                                        <li> <span style="padding: 10px 10px 10px 10px"><img class="lazy" data-src="{{$item['OrderItem']['product']['imageURL']}}" width="115" height="115"></span></li>
                                         <li>Giá sản phẩm:<span style="color:#212121">{{number_format(($item['OrderItem']['product']['price']))}},000₫</span></li>
                                         <li>Tạm tính ({{$item['OrderItem']['quantity']}} sản phẩm):<span style="color:#212121">{{number_format(($item['OrderItem']['product']['price'] * $item['OrderItem']['quantity']))}},000₫</span></li>
-                                        <li>Tổng cộng: <span style="color:#212121">{{number_format($item['OrderItem']['product']['price'] * $item['OrderItem']['quantity'] + $item['order']['deliveryPrice']['transportFee'])}},000₫</span></li>
+                                        <li>Tổng cộng: <span style="color:#212121">{{number_format(($item['OrderItem']['product']['price'] * $item['OrderItem']['quantity']) + $item['order']['deliveryPrice']['transportFee'])}},000₫</span></li>
                                     </ul>
                                 </div>
                             </div>

@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="source/user/styles/css/star-rating-svg.css">
 
 
+
 @endsection
 @section('content')
 
@@ -93,7 +94,8 @@
                                                 @foreach ($da['imageList'] as $da1)
                                                     @if($item['_id'] == $da['productId'])
                                                     {{-- @foreach($da1['imageList'] as $da2) --}}
-                                                    <img src={{$da1['imageURL']}} width="115" height="115" alt="">
+                                                        {{--src={{$da1['imageURL']}} width="115" height="115" alt=""--}}
+                                                    <img class="lazy" data-src="{{$da1['imageURL']}}"width="115" height="115" alt="" />
                                                     @break
                                                     {{-- @endforeach --}}
                                                     @endif
@@ -138,8 +140,10 @@
                                             @foreach ($da['imageList'] as $da1)
                                             @if($item['_id'] == $da['productId'])
                                             {{-- @foreach($da1['imageList'] as $da2) --}}
-                                            <img src={{$da1['imageURL']}} width="115" height="115" alt="">
-                                            @break
+                                            {{--<img src={{$da1['imageURL']}} width="115" height="115" alt="">--}}
+                                                        <img class="lazy" data-src="{{$da1['imageURL']}}" width="115" height="115" alt=""/>
+
+                                                        @break
                                             {{-- @endforeach --}}
                                             @endif
                                             @endforeach

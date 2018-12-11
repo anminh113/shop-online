@@ -18,8 +18,10 @@
                         <?php $i = $i + 1?>
                         <div class="owl-item" >
                             <div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center" style="height: 320px">
-                                <div class="viewed_image"><img src="{{$item['image']}}"
-                                        width="115" height="115" alt=""></div>
+                                <div class="viewed_image">
+                                    <img src="{{$item['image']}}" width="115" height="115" alt="">
+                                    {{--<img class="lazy" data-src="{{$item['image']}}"width="115" height="115" alt="" />--}}
+                                </div>
                                 <div class="viewed_content text-center">
                                     <div class="viewed_name"><a href="{{ route('san-pham',$item['_id'] )}}">{{$item['productName']}}</a></div>
                                 </div>
@@ -29,7 +31,7 @@
                                 </ul>
                             </div>
                         </div>
-                        @if($i>6)
+                        @if($i>7)
                         @break
                         @endif
                         @endforeach

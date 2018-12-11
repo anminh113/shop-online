@@ -10,6 +10,14 @@
     <script src="source/user/plugins/easing/easing.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js" type="text/javascript"></script>
     <script src="source/user/styles/js/changemess.js"></script>
+    <script src="source/user/styles/js/jquery.lazy.min.js"></script>
+
+    <script>
+        $(function() {
+            $('.lazy').lazy();
+        });
+    </script>
+
 
 
 
