@@ -14,16 +14,13 @@
     
  
     class DeleteController extends Controller{
-        
+
         //User
-
-
         public function deleteDeliveryProfileUser(Request $req){
             //get json danh muc all
             $client1 = new \GuzzleHttp\Client();
             $res = $client1->request('DELETE',PageController::getUrl('deliveryaddresses/'.$req->id.'') );
             $data = json_decode($res->getBody()->getContents(), true);
-
             return redirect()->back()->with(['flag'=>'success','title'=>'Đã xóa thành công' ,'message'=>' ']);
         }
 

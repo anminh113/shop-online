@@ -1157,57 +1157,85 @@
             $client = new \GuzzleHttp\Client();
             if(Session::has('keyuser')){
                 try {
-                    try {
-                        $res = $client->request('GET', PageController::getUrl('accounts/username/'.$req['username'].''));
-                        $data = json_decode($res->getBody()->getContents(), true);
-                        $datajson=array(
-                            "name" =>  $req['namestore']
+                    $res = $client->request('GET', PageController::getUrl('accounts/username/'.$req['username'].''));
+                    $data = json_decode($res->getBody()->getContents(), true);
+                    return redirect()->back()->with(['flag'=>'warning','title'=>'Thất bại' ,'message'=>'Tên tài khoản đã được sử dụng']);
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                    if(empty($data)){
+
+                            $datajson=array(
+                                "name" =>  $req['namestore']
+                            );
+                            $jsonData =json_encode($datajson);
+                            $json_url = PageController::getUrl('stores/findByName');
+                            $ch = curl_init( $json_url );
+                            $options = array(
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+                                CURLOPT_CUSTOMREQUEST => "POST",
+                                CURLOPT_POSTFIELDS => $jsonData
+                            );
+                            curl_setopt_array( $ch, $options );
+                            $result =  curl_exec($ch);
+                            $result1 =json_decode($result);
+                            if(!empty($result1->message)){
+                                $datajson = array(
+                                    "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
+                                    "storeName" => $req['namestore'],
+                                    "address" => $req['tinh-thanhpho'],
+                                    "phoneNumber" => $req['sdt'],
+                                    "email" => $req['email'],
+                                    "username" => $req['username'],
+                                    "password" => $req['pass1']
+                                );
+                                $jsonData = json_encode($datajson);
+                                $json_url = PageController::getUrl('registeredSales');
+                                $ch = curl_init($json_url);
+                                $options = array(
+                                    CURLOPT_RETURNTRANSFER => true,
+                                    CURLOPT_HTTPHEADER => array('Content-type: application/json'),
+                                    CURLOPT_CUSTOMREQUEST => "POST",
+                                    CURLOPT_POSTFIELDS => $jsonData
+                                );
+                                curl_setopt_array($ch, $options);
+                                $result = curl_exec($ch);
+                                $result1 = json_decode($result);
+                                return redirect()->route('profile-user', Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag' => 'success', 'title' => 'Đã đăng ký tạo gian hàng trên hệ thống', 'message' => ' ']);
+
+                            }else{
+                                return redirect()->back()->with(['flag'=>'warning','title'=>'Thất bại' ,'message'=>'Tên gian hàng đã được sử dụng']);
+                            }
+
+                    }else {
+                        $datajson = array(
+                            "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
+                            "storeName" => $req['namestore'],
+                            "address" => $req['tinh-thanhpho'],
+                            "phoneNumber" => $req['sdt'],
+                            "email" => $req['email'],
+                            "username" => $req['username'],
+                            "password" => $req['pass1']
                         );
-                        $jsonData =json_encode($datajson);
-                        $json_url = PageController::getUrl('stores/findByName');
-                        $ch = curl_init( $json_url );
+                        $jsonData = json_encode($datajson);
+                        $json_url = PageController::getUrl('registeredSales');
+                        $ch = curl_init($json_url);
                         $options = array(
                             CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
+                            CURLOPT_HTTPHEADER => array('Content-type: application/json'),
                             CURLOPT_CUSTOMREQUEST => "POST",
                             CURLOPT_POSTFIELDS => $jsonData
                         );
-                        curl_setopt_array( $ch, $options );
-                        $result =  curl_exec($ch);
-                        $result1 =json_decode($result);
-                    } catch (\GuzzleHttp\Exception\RequestException $e) {
-                        return redirect()->back()->with(['flag'=>'warning','title'=>'Thất bại' ,'message'=>'Tên gian hàng đã được sử dụng']);
-                    }
-                    return redirect()->back()->with(['flag'=>'warning','title'=>'Thất bại' ,'message'=>'Tên tài khoản đã được sử dụng']);
-                } catch (\GuzzleHttp\Exception\RequestException $e) {
-                      $datajson =array(
-                        "customerId" => Session::get('keyuser')['info'][0]['customer']['_id'],
-                        "storeName" =>  $req['namestore'],
-                        "address" => $req['tinh-thanhpho'],
-                        "phoneNumber" => $req['sdt'],
-                        "email" => $req['email'],
-                        "username" => $req['username'],
-                        "password" => $req['pass1']
-                        );
-                    $jsonData =json_encode($datajson);
-                    $json_url = PageController::getUrl('registeredSales');
-                    $ch = curl_init( $json_url );
-                    $options = array(
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_HTTPHEADER => array('Content-type: application/json') ,
-                        CURLOPT_CUSTOMREQUEST => "POST",
-                        CURLOPT_POSTFIELDS => $jsonData
-                    );
-                    curl_setopt_array( $ch, $options );
-                    $result =  curl_exec($ch);
-                    $result1 =json_decode($result);
+                        curl_setopt_array($ch, $options);
+                        $result = curl_exec($ch);
+                        $result1 = json_decode($result);
+                        return redirect()->route('profile-user', Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag' => 'success', 'title' => 'Đã đăng ký tạo gian hàng trên hệ thống', 'message' => ' ']);
 
-                    return redirect()->route('profile-user',Session::get('keyuser')['info'][0]['customer']['_id'])->with(['flag'=>'success','title'=>'Đã đăng ký tạo gian hàng trên hệ thống' ,'message'=>' ']);
+                    }
                 }
 
 
 
-              
+
             }
             return redirect()->back()->with(['flag'=>'info','title'=>'Đăng nhập để thực hiện này' ,'message'=>' ']);
         }

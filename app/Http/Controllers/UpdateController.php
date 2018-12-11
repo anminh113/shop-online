@@ -330,7 +330,7 @@ use DateTimeZone;
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
-        return redirect()->route('order-admin-watning')->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
     }
 
     public function updateOrderAdminWatning(Request $req){
@@ -350,7 +350,7 @@ use DateTimeZone;
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
-        return redirect()->route('order-admin-shipping')->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
     }
 
     public function updateOrderAdminShipping(Request $req){
@@ -372,7 +372,7 @@ use DateTimeZone;
         curl_setopt_array( $ch, $options );
         $result =  curl_exec($ch);
         $result1 =json_decode($result);
-        return redirect()->route('order-admin-done')->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
+        return redirect()->back()->with(['flag'=>'success','title'=>'Cập nhật trạng thái thành công' ,'message'=>' ']);
     }
 
     public function updateProfileShopAdmin(Request $req){

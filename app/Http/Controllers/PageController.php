@@ -205,7 +205,7 @@ class PageController extends Controller
             return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã xóa khỏi giỏ']);
         } else {
             Session::forget('cart');
-            return redirect('productlist');
+            return redirect('index');
         }
 
     }
@@ -220,7 +220,7 @@ class PageController extends Controller
             return redirect()->back()->with(['flag'=>'success','title'=>'Thành công' ,'message'=>'Đã xóa khỏi giỏ']);
         } else {
             Session::forget('cart');
-            return redirect('productlist');
+            return redirect('index');
         }
 
     }
